@@ -18,17 +18,25 @@
     <AndroidClassParser>class-parse</AndroidClassParser>
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-    <PackageId>Xamarin.Android.Zoom</PackageId>
-    <PackageVersion>1.0</PackageVersion>
-    <Authors>stntz</Authors>
-    <Copyright>Copyright 2020</Copyright>
-    <Owners>Syndew Tech</Owners>
+    <PackageId>VisualService.Xamarin.Android.ZoomSDK</PackageId>
+    <Version>5.9.6.4777</Version>
+    <PackageOutputPath>bin/$(Configuration)</PackageOutputPath>
+    <Authors>Adam Diament</Authors>
+    <Copyright>Copyright 2022</Copyright>
+    <Owners>Adam Diament, Visual Service</Owners>
+    <Company>Visual Service</Company>
     <PackageProjectUrl>https://github.com/stntz/Xamarin.ZoomBinding</PackageProjectUrl>
-    <Summary>Xamarin.Android.Zoom binding</Summary>
+    <Summary>VisualService.Xamarin.Android.ZoomSDK binding</Summary>
     <PackageTags>Xamarin.Android, Zoom</PackageTags>
     <Title>Xamarin.Android.Zoom</Title>
     <Description>Zoom Android SDK binding for Xamarin. AndroidX version of the SDK</Description>
+    <IsPackable>True</IsPackable>
   </PropertyGroup>
+  <ItemGroup>
+      <!-- ... -->
+      <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.2.0"/>
+      <!-- ... -->
+  </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
@@ -37,6 +45,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
@@ -45,6 +54,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
