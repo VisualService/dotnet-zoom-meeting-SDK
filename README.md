@@ -14,9 +14,9 @@
  
 ## Installation and integration - Android
  
-1. Grab the package from nuget ```Install-Package VisualService.Xamarin.Android.ZoomSDK```
+1. Grab the package from nuget ```Install-Package VisualService.Xamarin.Android.ZoomSDK``` and install it as a dependency to your Xamarin.Android platform project
 
-2. Add the two linked dummy resource files to your android resources. [This one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/src/Droid/shim-files/exo_layout_polyfill.xml) in layout and [this one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/src/Droid/shim-files/exo_values_polyfill.xml) in the values folder.
+2. Add the two linked dummy resource files to your android resources in your Xamarin.Android project. [This one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/src/Droid/shim-files/exo_layout_polyfill.xml) in layout and [this one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/src/Droid/shim-files/exo_values_polyfill.xml) in the values folder.
 
 3. Implement a IZoomSDKInitializeListener singleton somewhere in your application
 
