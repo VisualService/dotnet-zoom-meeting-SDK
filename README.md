@@ -1,15 +1,16 @@
 ﻿# Xamarin.ZoomSDKBinding
  
- Current Zoom Android Meeting SDK Version: 5.9.6.4777
+ * Android: Meeting SDK Version: 5.9.6.4777
  
- ## Buyer beware
+ * iOS: No support for iOS yet. PRs welcome!
  
- * No support for iOS yet. PRs welcome!
+ ## Buyer beware - Android
+ 
  * Requires your android app to compile for Android 12
  * Only tested with Zoom Custom UI. Default UI may work, but it is not tested.
  * Requires adding two dummy resource files in the Android Resources folders to compensate for the lack of a compatible version of the exoplayer binding library for xamarin. They are seeking open source contributions at [their repo](https://github.com/Baseflow/ExoPlayerXamarin) for the upgrade on [this issue](https://github.com/Baseflow/ExoPlayerXamarin/issues/116#issuecomment-884687316), which would remove the need for the dummy resource files.
  
-## Installation and integration
+## Installation and integration - Android
  
 1. Grab the package from nuget ```Install-Package VisualService.Xamarin.Android.ZoomSDK```
 
@@ -80,5 +81,20 @@
  
  7. In your implementation of IInMeetingServiceListener you passed to the init, listen for successfully having joined a meeting, and start your activity for custom ui. You can follow instructions in[ the documentation](https://marketplace.zoom.us/docs/sdk/native-sdks/android/) for custom UI on the Android Zoom meeting SDK for further details
 
+## Contributing
 
-Base originally upon https://github.com/stntz/Xamarin.ZoomBinding
+You are welcome to raise issues. PRs are particularly welcome, as the maintainers primary focus is a commercial product which only uses certain limited feature of the zoom sdk. Therefore time to spend on fixing issues not directly related to features we require will be limited.
+
+## Building locally
+
+If you download a fresh android sdk .aar file to upgrade the version, before it will build, it needs to go through a manual process to strip out incorrectly formatted placeholder characters present in the source resource files. Instructions are below. A PR to automate this process further is welcome.
+
+Instructions for recompilation:
+
+
+TBD
+
+
+
+
+Based originally upon https://github.com/stntz/Xamarin.ZoomBinding
