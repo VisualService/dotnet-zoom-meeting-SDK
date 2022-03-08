@@ -16,7 +16,7 @@
  
 1. Grab the package from nuget ```Install-Package VisualService.Xamarin.Android.ZoomSDK```
 
-2. Add the two linked dummy resource files to your android resources. [This one](TBC) in layout and [this one](TBC) in the values folder.
+2. Add the two linked dummy resource files to your android resources. [This one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/shim-files/android/exo_layout_polyfill.xml) in layout and [this one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/shim-files/android/exo_values_polyfill.xml) in the values folder.
 
 3. Implement a IZoomSDKInitializeListener singleton somewhere in your application
 
