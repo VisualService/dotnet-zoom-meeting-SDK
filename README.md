@@ -4,7 +4,7 @@
  
  * iOS: No support for iOS yet. PRs welcome!
 
- * Originally based on [this repo](Based originally upon https://github.com/stntz/Xamarin.ZoomBinding)
+ * Originally based on [this repo](https://github.com/stntz/Xamarin.ZoomBinding)
  
  ## Buyer beware - Android
  
