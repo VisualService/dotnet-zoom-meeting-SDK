@@ -81,7 +81,7 @@
                     }).ConfigureAwait(false);
  ```
  
- 7. In your implementation of IInMeetingServiceListener you passed to the init, listen for successfully having joined a meeting, and start your activity for custom ui. You can follow instructions in[ the documentation](https://marketplace.zoom.us/docs/sdk/native-sdks/android/) for custom UI on the Android Zoom meeting SDK for further details
+ 7. In your implementation of IInMeetingServiceListener you passed to the init, listen for successfully having joined a meeting, and start your activity for custom ui. You can follow instructions in [the documentation](https://marketplace.zoom.us/docs/sdk/native-sdks/android/) for custom UI on the Android Zoom meeting SDK for further details
 
 ## Contributing
 
@@ -89,9 +89,11 @@ You are welcome to raise issues. PRs are particularly welcome, as the maintainer
 
 ## Building locally
 
-If you download a fresh android sdk .aar file to upgrade the version, before it will build, it needs to go through a manual process to strip out incorrectly formatted placeholder characters present in the source resource files. Instructions are below. A PR to automate this process further is welcome.
+If you download a fresh android sdk .aar file to upgrade the version, before it will build, it needs to go through a manual process to strip out incorrectly formatted placeholder characters present in the source resource files. Basically %s and %d characters need replacing with their positional alternatives %1$s and %2$d etc. There are hundreds of resource files, so I am including a replace utility console app in the src. Instructions for use are below. A PR to automate this process further is welcome. I also raised [an issue in the zoom developer forums](https://devforum.zoom.us/t/2-multiple-substitutions-still-specified-in-non-positional-format/63243) to fix this at their end, but there is no sign of a fix yet.
 
-Instructions for recompilation:
-
-
-TBD
+1. Download the latest zoom sdk
+2. Inside the mobile RTC folder, find the file called mobilertc.aar and rename it to mobilertc.zip
+3. Extract the contents of the folder.
+4. Run the replace utility console app, located in src/Droid/, making sure to point to the extracted folder
+5. Recompile the mobilertc.aar file with this command ```jar cvf mobilertc.aar -C theExtractedFolderName/ .```
+6. Your mobilertc.aar file will now be suitable to use in the binding project.
