@@ -2,11 +2,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_iOS", "src\MobileRTC_iOS\MobileRTC_iOS.csproj", "{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_iOS", "src\iOS\MobileRTC_iOS\MobileRTC_iOS.csproj", "{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_Droid", "src\MobileRTC_Droid\MobileRTC_Droid.csproj", "{DE93193F-342D-4284-8FCD-8360F6DDB99A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_Droid", "src\Droid\MobileRTC_Droid\MobileRTC_Droid.csproj", "{DE93193F-342D-4284-8FCD-8360F6DDB99A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomCommonLib", "src\ZoomCommonLib\ZoomCommonLib.csproj", "{8F896C4F-56FE-4237-9373-D47F564D7065}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomCommonLib", "src\Droid\ZoomCommonLib\ZoomCommonLib.csproj", "{8F896C4F-56FE-4237-9373-D47F564D7065}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{6751B512-6F43-4520-BEEB-FA86C4FD88E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{904AECEA-8685-40A1-AA36-E4CDE0926F08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceBrokenPlaceholdersUtility", "src\Droid\ReplaceBrokenPlaceholdersUtility\ReplaceBrokenPlaceholdersUtility.csproj", "{5C1E463F-C18D-4D43-A405-779D38558FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,9 +60,27 @@ Global
 		{8F896C4F-56FE-4237-9373-D47F564D7065}.Release|iPhone.Build.0 = Release|Any CPU
 		{8F896C4F-56FE-4237-9373-D47F564D7065}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{8F896C4F-56FE-4237-9373-D47F564D7065}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Release|iPhone.Build.0 = Release|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{5C1E463F-C18D-4D43-A405-779D38558FB0}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0} = {904AECEA-8685-40A1-AA36-E4CDE0926F08}
+		{DE93193F-342D-4284-8FCD-8360F6DDB99A} = {6751B512-6F43-4520-BEEB-FA86C4FD88E2}
+		{8F896C4F-56FE-4237-9373-D47F564D7065} = {6751B512-6F43-4520-BEEB-FA86C4FD88E2}
+		{5C1E463F-C18D-4D43-A405-779D38558FB0} = {6751B512-6F43-4520-BEEB-FA86C4FD88E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F0C09EAD-FEBC-4FED-BA6D-44DB7D3BCAA8}
