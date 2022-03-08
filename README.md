@@ -8,7 +8,7 @@
  
  * Requires your android app to compile for Android 12
  * Only tested with Zoom Custom UI. Default UI may work, but it is not tested.
- * Requires adding two dummy resource files in the Android Resources folders to compensate for the lack of a compatible version of the exoplayer binding library for xamarin. They are seeking open source contributions at [their repo](https://github.com/Baseflow/ExoPlayerXamarin) for the upgrade on [this issue](https://github.com/Baseflow/ExoPlayerXamarin/issues/116#issuecomment-884687316), which would remove the need for the dummy resource files.
+ * Requires adding two dummy resource files in the Android Resources folders to compensate for the lack of a compatible version of the exoplayer binding library for xamarin. They are seeking open source contributions at [their repo](https://github.com/Baseflow/ExoPlayerXamarin) for the upgrade on [this issue](https://github.com/Baseflow/ExoPlayerXamarin/issues/116#issuecomment-884687316), which would remove the need for the dummy resource files. The missing resources do not affect apps running the custom ui, but if you are attempting to use the default UI, you might conceivably run into problems. (Did I mention defaul UI is not tested?!)
  
 ## Installation and integration - Android
  
