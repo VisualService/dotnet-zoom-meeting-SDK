@@ -18,7 +18,7 @@
 
 3. Implement a IZoomSDKInitializeListener singleton somewhere in your application
 
-4. Initialise the SDK in the IZoomSDKInitializeListener.
+4. Initialise the SDK in the IZoomSDKInitializeListener. Note the main thread access in this step and all the way down. It's needed.
 
 ```
                 var zoomInitParams = new ZoomSDKInitParams
