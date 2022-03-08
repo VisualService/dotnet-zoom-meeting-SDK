@@ -81,7 +81,8 @@
                     }).ConfigureAwait(false);
  ```
  
- 7. In your implementation of IInMeetingServiceListener you passed to the init, listen for successfully having joined a meeting, and start your activity for custom ui. You can follow instructions in [the documentation](https://marketplace.zoom.us/docs/sdk/native-sdks/android/) for custom UI on the Android Zoom meeting SDK for further details
+ 7. At this point, if you are using default UI, zoom will launch an activity containing the call and you can switch on video etc. You're off to the races. Although I think I heard a rumour somewhere that default UI with this library was untested, it could be nothing though.
+ 8. If using custom ui, in your implementation of IInMeetingServiceListener you passed to the init, listen for the successsfully joined call event, and then start your activity for custom ui. You can follow instructions in [the documentation](https://marketplace.zoom.us/docs/sdk/native-sdks/android/) for custom UI on the Android Zoom meeting SDK for further details
 
 ## Contributing
 
