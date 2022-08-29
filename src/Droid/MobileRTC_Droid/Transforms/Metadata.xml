@@ -139,6 +139,15 @@
     <attr path="/api/package[@name='com.zipow.videobox.view.schedule']/class[@name='ZMBaseMeetingOptionLayout']/method[@name='p' and count(parameter)=0]" name="managedName">NewP</attr>
     <attr path="/api/package[@name='com.zipow.videobox.view.schedule']/class[@name='ZMBaseMeetingOptionLayout']/method[@name='n' and count(parameter)=0]" name="managedName">NewN</attr>
     <attr path="/api/package[@name='com.zipow.videobox.view.schedule']/class[@name='ZMBaseMeetingOptionLayout']/method[@name='m' and count(parameter)=0]" name="managedName">NewM</attr>
-
+<attr path="/api/package[@name='us.zoom.uicommon.widget.view']/class[@name='ZMHorizontalListView']/method[@name='getAdapter' and count(parameter)=0]" name="managedOverride">virtual</attr>
+<attr path="/api/package[@name='com.zipow.videobox']/class[@name='ConfActivity']/method[@name='onClickLeave' and count(parameter)=0]" name="visibility">protected</attr>
+    <attr path="/api/package[@name='com.zipow.annotate']/class[@name='AnnoNoteView']/method[@name='onLayout' and count(parameter)=5 and parameter[1][@type='boolean'] and parameter[2][@type='int'] and parameter[3][@type='int'] and parameter[4][@type='int'] and parameter[5][@type='int']]" name="visibility">protected</attr>
+    <attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.scene.uservideo']/class[@name='ZmScrollableGalleryItemView']/method[@name='getDisplayUsers' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]" name="visibility">protected</attr>
+    <remove-node path="/api/package[@name='com.zipow.videobox.confapp.meeting.scene.uservideo']/class[@name='ZmScrollableGalleryRecyclerAdapter']"/>
+    <remove-node path="/api/package[@name='com.zipow.videobox.confapp.meeting.videoeffects.avatar3d']"/>
+    <remove-node path="/api/package[@name='com.zipow.videobox.fragment.settings.ringtone']/class[@name='SelectContactAdapter']"/>
+    <remove-node path="/api/package[@name='com.zipow.videobox.view.sip.voicemail.forward']/class[@name='PBXVoicemailForwardSelectAdapter']"/>
+    <remove-node path="/api/package[@name='us.zoom.uicommon.adapter']/class[@name='ZMLocalFileListAdapter']"/>
+<remove-node path="/api/package[@name='us.zoom.uicommon.widget.view']/class[@name='ZMHorizontalListView']"/>
 
 </metadata>
