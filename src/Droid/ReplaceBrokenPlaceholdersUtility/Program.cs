@@ -17,7 +17,10 @@ void Main()
     var placeholders = new []{ "s", "d" };
 
     //change your res folder to where you extracted the mobile rtc
-    var resFolder = @"C:\Users\adam_\Downloads\zoom feb 22\zoom-sdk-android-5.9.6.4777\mobilertc\res";
+    //var resFolder = @"C:\Users\adam_\Downloads\zoom-sdk-android-5.11.3.7251\zoom-sdk-android-5.11.3.7251\mobilertc-android-studio\mobilertc\mobilertc\res";
+    var resFolder =
+        @"C:\Users\adam_\Downloads\zoom-sdk-android-5.11.3.7251\zoom-sdk-android-5.11.3.7251\mobilertc-android-studio\commonlib\commonlib\res";
+
     var allFiles = Directory.GetFiles(resFolder, "**.xml", SearchOption.AllDirectories).Select(x => x.ToLowerInvariant()).Where(x => x.Contains("values"));
     foreach (var file in allFiles)
     {
