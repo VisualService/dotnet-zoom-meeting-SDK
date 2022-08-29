@@ -95,6 +95,12 @@ If you download a fresh android sdk .aar file to upgrade the version, before it 
 1. Download the latest zoom sdk
 2. Inside the mobile RTC folder, find the file called mobilertc.aar and rename it to mobilertc.zip
 3. Extract the contents of the folder.
-4. Run the replace utility console app, located in src/Droid/, making sure to point to the extracted folder
+4. Run the replace utility console app, located in src/Droid/, making sure to point to the res folder inside the extracted folder
 5. Recompile the mobilertc.aar file with this command ```jar cvf mobilertc.aar -C theExtractedFolderName/ .```
 6. Your mobilertc.aar file will now be suitable to use in the binding project.
+
+To create the nuget package
+
+1. Change the Version node in the file MobileRTC_Droid.csproj to the latest version
+2. Build in release mode
+3. The nuget package will appear in the bin/Release folder
