@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Additions\EmojiComparetor.extend.cs" />
     <Compile Include="Additions\HashMapComparator.cs" />
     <Compile Include="Additions\ZmBaseNodeAdapter.extend.cs" />
     <Compile Include="Additions\ZmMutableLiveDataComparator.cs" />

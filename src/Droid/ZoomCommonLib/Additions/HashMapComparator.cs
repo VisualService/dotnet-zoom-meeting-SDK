@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace US.Zoom.Androidlib.Util
+namespace US.Zoom.Core.Model
 {
     public partial class HashMapComparator
     {
