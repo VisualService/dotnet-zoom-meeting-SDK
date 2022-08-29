@@ -133,4 +133,12 @@
     <attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onCreateViewHolder' and count(parameter)=2 and parameter[1][@type='android.view.ViewGroup'] and parameter[2][@type='int']]" name="managedReturn">Java.Lang.Object</attr>
     <attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]" name="managedReturn">void</attr>
     <attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onCreateViewHolder' and count(parameter)=2 and parameter[1][@type='android.view.ViewGroup'] and parameter[2][@type='int']]" name="managedReturn">AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder</attr>
+
+    <attr path="/api/package[@name='us.zoom.libtools.utils']/class[@name='ZmMimeTypeUtils']/method[@name='a' and count(parameter)=2 and parameter[1][@type='android.content.Context'] and parameter[2][@type='java.lang.String']]" name="managedName">NewA</attr>
+    <attr path="/api/package[@name='com.zipow.videobox.view.schedule']/class[@name='ZMBaseMeetingOptionLayout']/method[@name='r' and count(parameter)=0]" name="managedName">NewR</attr>
+    <attr path="/api/package[@name='com.zipow.videobox.view.schedule']/class[@name='ZMBaseMeetingOptionLayout']/method[@name='p' and count(parameter)=0]" name="managedName">NewP</attr>
+    <attr path="/api/package[@name='com.zipow.videobox.view.schedule']/class[@name='ZMBaseMeetingOptionLayout']/method[@name='n' and count(parameter)=0]" name="managedName">NewN</attr>
+    <attr path="/api/package[@name='com.zipow.videobox.view.schedule']/class[@name='ZMBaseMeetingOptionLayout']/method[@name='m' and count(parameter)=0]" name="managedName">NewM</attr>
+
+
 </metadata>
