@@ -12,31 +12,19 @@ Main();
 Console.WriteLine("Finished");
 Console.ReadLine();
 
-
-void Test()
-{
-    string toReplace = "Hello %s my name is %d yes %1d yes %2d %d %s %d";
-    var regex = new Regex("%(s|d)|%([0-9]+d)");
-    var matches = regex.Matches(toReplace);
-    var i = 1;
-    Console.WriteLine("Original String: "+toReplace);
-    while (matches.Any())
-    {
-        //var letter = matches[0].Value[1];
-        var letter = "[REPL]";
-        toReplace = regex.Replace(toReplace, $"%{i}${letter}", 1);
-        i++;
-        matches =  regex.Matches(toReplace);
-    }
-    Console.WriteLine("Final String: "+toReplace);
-}
-
+// Download the latest zoom sdk
+// Inside the mobile RTC folder, find the file called mobilertc.aar and rename it to mobilertc.zip
+// Extract the contents of the folder.
+// Run this method making sure to point to the res folder inside the extracted folder
+// Recompile the mobilertc.aar file with this command ```jar cvf mobilertc.aar -C theExtractedFolderName/ .```
+// Your mobilertc.aar file will now be suitable to use in the binding project.
+// Do the same with the commonlib.aar file. ```jar cvf ZoomCommonLib.aar -C theExtractedFolderName/ .```
 void Main()
 {
     var regex = new Regex("%(s|d)|%([0-9]+d)");
-    //change your res folder to where you extracted the mobile rtc and then the common lib
+    //change your res folder to where you extracted the mobile rtc and then the common lib e.g C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\commonlib\res
     var resFolder =
-        @"C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\mobilertc\res";
+        @"C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\commonlib\res";
 
     //var resFolder = @"C:\Users\adam_\Downloads\test";
 
