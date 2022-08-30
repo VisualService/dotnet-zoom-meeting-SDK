@@ -1,6 +1,6 @@
 ﻿# Xamarin.ZoomSDKBinding
  
- * Android: Meeting SDK Version: 5.9.6.4777
+ * Android: Meeting SDK Version: 5.11.3.7251
  
  * iOS: No support for iOS yet. PRs welcome!
 
@@ -15,6 +15,8 @@
 ## Installation and integration - Android
  
 1. Grab the package from nuget ```Install-Package VisualService.Xamarin.Android.ZoomSDK``` and install it as a dependency to your Xamarin.Android platform project. [Package link](https://www.nuget.org/packages/VisualService.Xamarin.Android.ZoomSDK/).
+
+Make sure you tick to include pre-releases - the latest version of the package is 5.11.3.7251-beta
 
 2. Add the two linked dummy resource files to your android resources in your Xamarin.Android project. [This one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/src/Droid/shim-files/exo_layout_polyfill.xml) in layout and [this one](https://github.com/VisualService/Xamarin.ZoomSDKBinding/blob/main/src/Droid/shim-files/exo_values_polyfill.xml) in the values folder.
 
