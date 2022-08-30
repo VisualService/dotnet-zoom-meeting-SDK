@@ -19,7 +19,7 @@
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackageId>VisualService.Xamarin.Android.ZoomSDK</PackageId>
-    <Version>5.11.3.7251-alpha</Version>
+    <Version>5.11.3.7251-beta</Version>
     <PackageOutputPath>bin/$(Configuration)</PackageOutputPath>
     <Authors>Adam Diament</Authors>
     <Copyright>Copyright 2022</Copyright>
