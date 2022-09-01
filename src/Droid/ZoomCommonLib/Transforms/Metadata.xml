@@ -104,5 +104,6 @@
 	<attr path="/api/package[@name='us.zoom.androidlib.widget.recyclerview.provider']/class[@name='ZMBaseMultiProviderAdapter']/method[@name='convert']" name="managedOverride">override</attr>
 	<remove-node path="/api/package[@name='us.zoom.androidlib.widget.recyclerview']/class[@name='ZMBaseRecyclerViewAdapter']/method[@name='onCreateViewHolder']"></remove-node>
 	
-
+	<attr path="/api/package[@name='us.zoom.core.model']/class[@name='BuildTarget']/field[@name='BUILD_TARGET']" name="managedName">NewBuildTarget</attr>
+    <remove-node path="/api/package[@name='us.zoom.core.model']/class[@name='ZMAsyncURLDownloadFile']"/>
 </metadata>

@@ -5,19 +5,51 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+var regex = new Regex("%(s|d)|%([0-9]+d)|%([0-9]+s)");
+
 Console.WriteLine("Started");
 
 Main();
+//var theLine = "%1s, %2s of %3s, selected";
+//ProcessLine(ref theLine);
 
+//Console.WriteLine(theLine);
 Console.WriteLine("Finished");
-Console.ReadLine();
 
+void ProcessLine(ref string line)
+{
+    var matches = regex.Matches(line);
+    if (matches.Any())
+    {
+        Console.WriteLine($"Found problem in line: {line}");
+        var position = 1;
+        while (matches.Any())
+        {
+            var letter = matches[0].Value.Contains("d") ? "d" : "s";
+            line =  regex.Replace(line, $"%{position}${letter}", 1);
+            position++;
+            matches =  regex.Matches(line);
+        }
+        Console.WriteLine($"Corrected line to: {line}");
+    }
+}
+
+// Download the latest zoom sdk
+// Inside the mobile RTC folder, find the file called mobilertc.aar and rename it to mobilertc.zip
+// Extract the contents of the folder.
+// Run this method making sure to point to the res folder inside the extracted folder
+// Recompile the mobilertc.aar file with this command ```jar cvf mobilertc.aar -C theExtractedFolderName/ .```
+// Your mobilertc.aar file will now be suitable to use in the binding project.
+// Do the same with the commonlib.aar file. ```jar cvf ZoomCommonLib.aar -C "C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\commonlib\/" .```
 void Main()
 {
-    var placeholders = new []{ "s", "d" };
 
-    //change your res folder to where you extracted the mobile rtc
-    var resFolder = @"C:\Users\adam_\Downloads\zoom feb 22\zoom-sdk-android-5.9.6.4777\mobilertc\res";
+    //change your res folder to where you extracted the mobile rtc and then the common lib e.g C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\commonlib\res
+    var resFolder =
+        @"C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\mobilertc\res";
+
+    //var resFolder = @"C:\Users\adam_\Downloads\test";
+
     var allFiles = Directory.GetFiles(resFolder, "**.xml", SearchOption.AllDirectories).Select(x => x.ToLowerInvariant()).Where(x => x.Contains("values"));
     foreach (var file in allFiles)
     {
@@ -26,33 +58,7 @@ void Main()
         {
             for (var j = 0; j < allLines.Length; j++)
             {
-                var line = allLines[j];
-                
-                //todo for lines with both a d and an s, we will end up with %1$s %1$d when we want $1$s %2$d.
-                foreach (var placeholder in placeholders)
-                {
-                    var countOfPosition = Regex.Matches(line, $"%{placeholder}").Count;
-                    if (countOfPosition >= 1)
-                    {
-                        Console.WriteLine($"Found problem in line: {line}");
-                        var newLine = line;
-                        var reconstructedLine = string.Empty;
-                        var allBlock = newLine.Split(new[] { $"%{placeholder}" }, StringSplitOptions.None);
-                        for (var i = 1; i <= allBlock.Length; i++)
-                        {
-                            if (i == allBlock.Length)
-                            {
-                                reconstructedLine += allBlock[i - 1];
-                            }
-                            else
-                            {
-                                reconstructedLine += allBlock[i - 1] + $"%{i}${placeholder}";
-                            }
-                        }
-                        allLines[j] = reconstructedLine;
-                        Console.WriteLine($"Reconstructed the line to: {reconstructedLine}");
-                    }
-                }
+                ProcessLine(ref allLines[j]);
             }
             File.WriteAllLines(file, allLines);
         }

@@ -8,10 +8,10 @@ namespace US.Zoom.Androidlib.Mvvm.Data {
 
     public partial class ZmMutableLiveDataComparator
     {
-        public int Compare(Object? o1, Object? o2)
-        {
-            return Compare((ZmMutableLiveData)o1, (ZmMutableLiveData)o2);
-        }
+        //public int Compare(Object? o1, Object? o2)
+        //{
+        //    return Compare((ZmMutableLiveData)o1, (ZmMutableLiveData)o2);
+        //}
     }
 
 }
