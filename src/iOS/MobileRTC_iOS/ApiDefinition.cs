@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using CoreGraphics;
 using CoreVideo;
 using Foundation;
@@ -9,7 +10,6 @@ namespace Zoomios
 {
     // @interface MobileRTCAuthService : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCAuthService
     {
         [Wrap("WeakDelegate")]
@@ -38,19 +38,20 @@ namespace Zoomios
 
         // -(BOOL)isLoggedIn;
         [Export("isLoggedIn")]
-        bool IsLoggedIn { get; }
+        bool IsLoggedIn();
 
         // -(MobileRTCUserType)getUserType;
         [Export("getUserType")]
-        MobileRTCUserType UserType { get; }
+        MobileRTCUserType UserType();
 
-        // -(BOOL)loginWithEmail:(NSString * _Nonnull)email password:(NSString * _Nonnull)password rememberMe:(BOOL)rememberMe;
-        [Export("loginWithEmail:password:rememberMe:")]
-        bool LoginWithEmail(string email, string password, bool rememberMe);
+        // -(NSString * _Nullable)generateSSOLoginWebURL:(NSString * _Nonnull)vanityUrl;
+        [Export("generateSSOLoginWebURL:")]
+        [return: NullAllowed]
+        string GenerateSSOLoginWebURL(string vanityUrl);
 
-        // -(BOOL)loginWithSSOToken:(NSString * _Nonnull)token rememberMe:(BOOL)rememberMe;
-        [Export("loginWithSSOToken:rememberMe:")]
-        bool LoginWithSSOToken(string token, bool rememberMe);
+        // -(MobileRTCLoginFailReason)ssoLoginWithWebUriProtocol:(NSString * _Nonnull)uriProtocol;
+        [Export("ssoLoginWithWebUriProtocol:")]
+        MobileRTCLoginFailReason SsoLoginWithWebUriProtocol(string uriProtocol);
 
         // -(BOOL)logoutRTC;
         [Export("logoutRTC")]
@@ -58,7 +59,7 @@ namespace Zoomios
 
         // -(MobileRTCAccountInfo * _Nullable)getAccountInfo;
         [NullAllowed, Export("getAccountInfo")]
-        MobileRTCAccountInfo AccountInfo { get; }
+        MobileRTCAccountInfo AccountInfo();
     }
 
     // @protocol MobileRTCAuthDelegate <NSObject>
@@ -75,9 +76,9 @@ namespace Zoomios
         [Export("onMobileRTCAuthExpired")]
         void OnMobileRTCAuthExpired();
 
-        // @optional -(void)onMobileRTCLoginReturn:(NSInteger)returnValue;
-        [Export("onMobileRTCLoginReturn:")]
-        void OnMobileRTCLoginReturn(nint returnValue);
+        // @optional -(void)onMobileRTCLoginResult:(MobileRTCLoginFailReason)resultValue;
+        [Export("onMobileRTCLoginResult:")]
+        void OnMobileRTCLoginResult(MobileRTCLoginFailReason resultValue);
 
         // @optional -(void)onMobileRTCLogoutReturn:(NSInteger)returnValue;
         [Export("onMobileRTCLogoutReturn:")]
@@ -86,68 +87,80 @@ namespace Zoomios
 
     // @interface MobileRTCAccountInfo : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCAccountInfo
     {
         // -(NSString * _Nullable)getEmailAddress;
         [NullAllowed, Export("getEmailAddress")]
-        string EmailAddress { get; }
+        string EmailAddress();
 
         // -(NSString * _Nullable)getUserName;
         [NullAllowed, Export("getUserName")]
-        string UserName { get; }
+        string UserName();
 
         // -(NSString * _Nullable)getPMIVanityURL;
         [NullAllowed, Export("getPMIVanityURL")]
+
         string PMIVanityURL { get; }
 
         // -(BOOL)isTelephoneOnlySupported;
         [Export("isTelephoneOnlySupported")]
+
         bool IsTelephoneOnlySupported { get; }
 
         // -(BOOL)isTelephoneAndVoipSupported;
         [Export("isTelephoneAndVoipSupported")]
+
         bool IsTelephoneAndVoipSupported { get; }
 
         // -(BOOL)is3rdPartyAudioSupported;
         [Export("is3rdPartyAudioSupported")]
+
         bool Is3rdPartyAudioSupported { get; }
 
         // -(NSString * _Nullable)get3rdPartyAudioInfo;
         [NullAllowed, Export("get3rdPartyAudioInfo")]
-        string ThirdPartyAudioInfo { get; }
+
+        string Get3rdPartyAudioInfo { get; }
 
         // -(MobileRTCMeetingItemAudioType)getDefaultAudioInfo;
         [Export("getDefaultAudioInfo")]
+
         MobileRTCMeetingItemAudioType DefaultAudioInfo { get; }
 
         // -(BOOL)onlyAllowSignedInUserJoinMeeting;
         [Export("onlyAllowSignedInUserJoinMeeting")]
+
         bool OnlyAllowSignedInUserJoinMeeting { get; }
 
-        // -(NSArray * _Nullable)getCanScheduleForUsersList;
+        // -(NSArray<MobileRTCAlternativeHost *> * _Nullable)getCanScheduleForUsersList;
         [NullAllowed, Export("getCanScheduleForUsersList")]
-        NSObject[] CanScheduleForUsersList { get; }
+
+        MobileRTCAlternativeHost[] CanScheduleForUsersList { get; }
 
         // -(BOOL)isLocalRecordingSupported;
         [Export("isLocalRecordingSupported")]
+
         bool IsLocalRecordingSupported { get; }
 
         // -(BOOL)isCloudRecordingSupported;
         [Export("isCloudRecordingSupported")]
+
         bool IsCloudRecordingSupported { get; }
 
         // -(MobileRTCMeetingItemRecordType)getDefaultAutoRecordType;
         [Export("getDefaultAutoRecordType")]
+
         MobileRTCMeetingItemRecordType DefaultAutoRecordType { get; }
 
         // -(BOOL)isSpecifiedDomainCanJoinFeatureOn;
         [Export("isSpecifiedDomainCanJoinFeatureOn")]
+
         bool IsSpecifiedDomainCanJoinFeatureOn { get; }
 
-        // -(NSArray * _Nullable)getDefaultCanJoinUserSpecifiedDomains;
+        // -(NSArray<NSString *> * _Nullable)getDefaultCanJoinUserSpecifiedDomains;
         [NullAllowed, Export("getDefaultCanJoinUserSpecifiedDomains")]
-        NSString[] DefaultCanJoinUserSpecifiedDomains { get; }
+
+        string[] DefaultCanJoinUserSpecifiedDomains { get; }
     }
 
     // @interface MobileRTCAlternativeHost : NSObject
@@ -172,25 +185,24 @@ namespace Zoomios
 
         // -(id _Nonnull)initWithEmailAddress:(NSString * _Nonnull)emailAddress firstname:(NSString * _Nonnull)firstName lastName:(NSString * _Nonnull)lastName PMI:(unsigned long long)PMINumber;
         [Export("initWithEmailAddress:firstname:lastName:PMI:")]
-        IntPtr Constructor(string emailAddress, string firstName, string lastName, ulong PMINumber);
+        System.IntPtr Constructor(string emailAddress, string firstName, string lastName, ulong PMINumber);
     }
 
     // @interface MobileRTCVideoRawData : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCVideoRawData
     {
         // @property (assign, nonatomic) char * yBuffer;
         [Export("yBuffer", ArgumentSemantic.Assign)]
-        unsafe sbyte YBuffer { get; set; }
+        unsafe IntPtr YBuffer { get; set; }
 
         // @property (assign, nonatomic) char * uBuffer;
         [Export("uBuffer", ArgumentSemantic.Assign)]
-        unsafe sbyte UBuffer { get; set; }
+        unsafe IntPtr UBuffer { get; set; }
 
         // @property (assign, nonatomic) char * vBuffer;
         [Export("vBuffer", ArgumentSemantic.Assign)]
-        unsafe sbyte VBuffer { get; set; }
+        unsafe IntPtr VBuffer { get; set; }
 
         // @property (assign, nonatomic) CGSize size;
         [Export("size", ArgumentSemantic.Assign)]
@@ -206,25 +218,27 @@ namespace Zoomios
 
         // -(BOOL)canAddRef;
         [Export("canAddRef")]
+
         bool CanAddRef { get; }
 
         // -(BOOL)addRef;
         [Export("addRef")]
+
         bool AddRef { get; }
 
         // -(NSInteger)releaseRef;
         [Export("releaseRef")]
+
         nint ReleaseRef { get; }
     }
 
     // @interface MobileRTCAudioRawData : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCAudioRawData
     {
         // @property (assign, nonatomic) char * buffer;
         [Export("buffer", ArgumentSemantic.Assign)]
-        unsafe sbyte Buffer { get; set; }
+        unsafe IntPtr Buffer { get; set; }
 
         // @property (assign, nonatomic) NSInteger bufferLen;
         [Export("bufferLen")]
@@ -240,46 +254,52 @@ namespace Zoomios
 
         // -(BOOL)canAddRef;
         [Export("canAddRef")]
+
         bool CanAddRef { get; }
 
         // -(BOOL)addRef;
         [Export("addRef")]
+
         bool AddRef { get; }
 
         // -(NSInteger)releaseRef;
         [Export("releaseRef")]
+
         nint ReleaseRef { get; }
     }
 
     // @interface MobileRTCBOUser : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCBOUser
     {
         // -(NSString * _Nullable)getUserId;
         [NullAllowed, Export("getUserId")]
+
         string UserId { get; }
 
         // -(NSString * _Nullable)getUserName;
         [NullAllowed, Export("getUserName")]
+
         string UserName { get; }
 
         // -(MobileRTCBOUserStatus)getUserStatus;
         [Export("getUserStatus")]
+
         MobileRTCBOUserStatus UserStatus { get; }
     }
 
     // @interface MobileRTCBOMeeting : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCBOMeeting
     {
         // -(NSString * _Nullable)getBOMeetingId;
         [NullAllowed, Export("getBOMeetingId")]
+
         string BOMeetingId { get; }
 
         // -(NSString * _Nullable)getBOMeetingName;
         [NullAllowed, Export("getBOMeetingName")]
+
         string BOMeetingName { get; }
 
         // -(NSArray * _Nullable)getBOMeetingUserList;
@@ -287,118 +307,321 @@ namespace Zoomios
         NSObject[] BOMeetingUserList { get; }
     }
 
+    // @interface MobileRTCBOOption : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCBOOption
+    {
+        // @property (assign, nonatomic) MobileRTCBOStopCountDown countdownSeconds;
+        [Export("countdownSeconds", ArgumentSemantic.Assign)]
+        MobileRTCBOStopCountDown CountdownSeconds { get; set; }
+
+        // @property (assign, nonatomic) BOOL isParticipantCanChooseBO;
+        [Export("isParticipantCanChooseBO")]
+        bool IsParticipantCanChooseBO { get; set; }
+
+        // @property (assign, nonatomic) BOOL isParticipantCanReturnToMainSessionAtAnyTime;
+        [Export("isParticipantCanReturnToMainSessionAtAnyTime")]
+        bool IsParticipantCanReturnToMainSessionAtAnyTime { get; set; }
+
+        // @property (assign, nonatomic) BOOL isAutoMoveAllAssignedParticipantsEnabled;
+        [Export("isAutoMoveAllAssignedParticipantsEnabled")]
+        bool IsAutoMoveAllAssignedParticipantsEnabled { get; set; }
+
+        // @property (assign, nonatomic) BOOL isBOTimerEnabled;
+        [Export("isBOTimerEnabled")]
+        bool IsBOTimerEnabled { get; set; }
+
+        // @property (assign, nonatomic) BOOL isTimerAutoStopBOEnabled;
+        [Export("isTimerAutoStopBOEnabled")]
+        bool IsTimerAutoStopBOEnabled { get; set; }
+
+        // @property (assign, nonatomic) NSInteger timerDuration;
+        [Export("timerDuration")]
+        nint TimerDuration { get; set; }
+    }
+
     // @interface MobileRTCBOCreator : NSObject
     [BaseType(typeof(NSObject))]
     interface MobileRTCBOCreator
     {
-        // -(NSString * _Nullable)createBO:(NSString * _Nullable)boName;
+        // -(NSString * _Nullable)createBO:(NSString * _Nonnull)boName;
         [Export("createBO:")]
         [return: NullAllowed]
-        string CreateBO([NullAllowed] string boName);
+        string CreateBO(string boName);
 
-        // -(BOOL)updateBO:(NSString * _Nullable)boId name:(NSString * _Nullable)boName;
+        // -(BOOL)createGroupBO:(NSArray<NSString *> * _Nonnull)boNameList;
+        [Export("createGroupBO:")]
+        bool CreateGroupBO(string[] boNameList);
+
+        // -(BOOL)updateBO:(NSString * _Nonnull)boId name:(NSString * _Nonnull)boName;
         [Export("updateBO:name:")]
-        bool UpdateBO([NullAllowed] string boId, [NullAllowed] string boName);
+        bool UpdateBO(string boId, string boName);
 
-        // -(BOOL)removeBO:(NSString * _Nullable)boId;
+        // -(BOOL)removeBO:(NSString * _Nonnull)boId;
         [Export("removeBO:")]
-        bool RemoveBO([NullAllowed] string boId);
+        bool RemoveBO(string boId);
 
-        // -(BOOL)assignUser:(NSString * _Nullable)boUserId toBO:(NSString * _Nullable)boId;
+        // -(BOOL)assignUser:(NSString * _Nonnull)boUserId toBO:(NSString * _Nonnull)boId;
         [Export("assignUser:toBO:")]
-        bool AssignUser([NullAllowed] string boUserId, [NullAllowed] string boId);
+        bool AssignUser(string boUserId, string boId);
 
-        // -(BOOL)removeUser:(NSString * _Nullable)boUserId fromBO:(NSString * _Nullable)boId;
+        // -(BOOL)removeUser:(NSString * _Nonnull)boUserId fromBO:(NSString * _Nonnull)boId;
         [Export("removeUser:fromBO:")]
-        bool RemoveUser([NullAllowed] string boUserId, [NullAllowed] string boId);
+        bool RemoveUser(string boUserId, string boId);
+
+        // -(BOOL)setBOOption:(MobileRTCBOOption * _Nonnull)option;
+        [Export("setBOOption:")]
+        bool SetBOOption(MobileRTCBOOption option);
+
+        // -(MobileRTCBOOption * _Nullable)getBOOption;
+        [NullAllowed, Export("getBOOption")]
+
+        MobileRTCBOOption BOOption { get; }
     }
 
     // @interface MobileRTCBOAdmin : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCBOAdmin
     {
         // -(BOOL)startBO;
         [Export("startBO")]
-        bool StartBO();
+
+        bool StartBO { get; }
 
         // -(BOOL)stopBO;
         [Export("stopBO")]
-        bool StopBO();
 
-        // -(BOOL)assignNewUser:(NSString * _Nullable)boUserId toRunningBO:(NSString * _Nullable)boId;
+        bool StopBO { get; }
+
+        // -(BOOL)assignNewUser:(NSString * _Nonnull)boUserId toRunningBO:(NSString * _Nonnull)boId;
         [Export("assignNewUser:toRunningBO:")]
-        bool AssignNewUser([NullAllowed] string boUserId, [NullAllowed] string boId);
+        bool AssignNewUser(string boUserId, string boId);
 
-        // -(BOOL)switchUser:(NSString * _Nullable)boUserId toRunningBO:(NSString * _Nullable)boId;
+        // -(BOOL)switchUser:(NSString * _Nonnull)boUserId toRunningBO:(NSString * _Nonnull)boId;
         [Export("switchUser:toRunningBO:")]
-        bool SwitchUser([NullAllowed] string boUserId, [NullAllowed] string boId);
+        bool SwitchUser(string boUserId, string boId);
 
         // -(BOOL)canStartBO;
         [Export("canStartBO")]
+
         bool CanStartBO { get; }
+
+        // -(BOOL)joinBOByUserRequest:(NSString * _Nonnull)boUserId;
+        [Export("joinBOByUserRequest:")]
+        bool JoinBOByUserRequest(string boUserId);
+
+        // -(BOOL)ignoreUserHelpRequest:(NSString * _Nonnull)boUserId;
+        [Export("ignoreUserHelpRequest:")]
+        bool IgnoreUserHelpRequest(string boUserId);
+
+        // -(BOOL)broadcastMessage:(NSString * _Nonnull)strMsg;
+        [Export("broadcastMessage:")]
+        bool BroadcastMessage(string strMsg);
+
+        // -(BOOL)inviteBOUserReturnToMainSession:(NSString * _Nonnull)boUserId;
+        [Export("inviteBOUserReturnToMainSession:")]
+        bool InviteBOUserReturnToMainSession(string boUserId);
     }
 
     // @interface MobileRTCBOAssistant : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCBOAssistant
     {
-        // -(BOOL)joinBO:(NSString * _Nullable)boId;
+        // -(BOOL)joinBO:(NSString * _Nonnull)boId;
         [Export("joinBO:")]
-        bool JoinBO([NullAllowed] string boId);
+        bool JoinBO(string boId);
 
         // -(BOOL)leaveBO;
         [Export("leaveBO")]
-        bool LeaveBO();
+
+        bool LeaveBO { get; }
     }
 
     // @interface MobileRTCBOAttendee : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCBOAttendee
     {
         // -(BOOL)joinBO;
         [Export("joinBO")]
-        bool JoinBO();
+
+        bool JoinBO { get; }
 
         // -(BOOL)leaveBO;
         [Export("leaveBO")]
-        bool LeaveBO();
+
+        bool LeaveBO { get; }
 
         // -(NSString * _Nullable)getBOName;
         [NullAllowed, Export("getBOName")]
+
         string BOName { get; }
+
+        // -(BOOL)requestForHelp;
+        [Export("requestForHelp")]
+
+        bool RequestForHelp { get; }
+
+        // -(BOOL)isHostInThisBO;
+        [Export("isHostInThisBO")]
+
+        bool IsHostInThisBO { get; }
+
+        // -(BOOL)isCanReturnMainSession;
+        [Export("isCanReturnMainSession")]
+
+        bool IsCanReturnMainSession { get; }
     }
 
     // @interface MobileRTCBOData : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCBOData
     {
         // -(NSArray * _Nullable)getUnassignedUserList;
         [NullAllowed, Export("getUnassignedUserList")]
+
         NSObject[] UnassignedUserList { get; }
 
         // -(NSArray * _Nullable)getBOMeetingIDList;
         [NullAllowed, Export("getBOMeetingIDList")]
+
         NSObject[] BOMeetingIDList { get; }
 
-        // -(MobileRTCBOUser * _Nullable)getBOUserByUserID:(NSString * _Nullable)userId;
+        // -(MobileRTCBOUser * _Nullable)getBOUserByUserID:(NSString * _Nonnull)userId;
         [Export("getBOUserByUserID:")]
         [return: NullAllowed]
-        MobileRTCBOUser GetBOUserByUserID([NullAllowed] string userId);
+        MobileRTCBOUser GetBOUserByUserID(string userId);
 
-        // -(MobileRTCBOMeeting * _Nullable)getBOMeetingByID:(NSString * _Nullable)boId;
+        // -(MobileRTCBOMeeting * _Nullable)getBOMeetingByID:(NSString * _Nonnull)boId;
         [Export("getBOMeetingByID:")]
         [return: NullAllowed]
-        MobileRTCBOMeeting GetBOMeetingByID([NullAllowed] string boId);
+        MobileRTCBOMeeting GetBOMeetingByID(string boId);
+
+        // -(NSString * _Nullable)getCurrentBOName;
+        [NullAllowed, Export("getCurrentBOName")]
+
+        string CurrentBOName { get; }
+
+        // -(BOOL)isBOUserMyself:(NSString * _Nonnull)boUserId;
+        [Export("isBOUserMyself:")]
+        bool IsBOUserMyself(string boUserId);
+    }
+
+    // @interface MobileRTCReturnToMainSessionHandler : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCReturnToMainSessionHandler
+    {
+        // -(BOOL)returnToMainSession;
+        [Export("returnToMainSession")]
+
+        bool ReturnToMainSession { get; }
+
+        // -(void)ignore;
+        [Export("ignore")]
+        void Ignore();
+    }
+
+    // @interface MobileRTCPreProcessRawData : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCPreProcessRawData
+    {
+        // @property (assign, nonatomic) CGSize size;
+        [Export("size", ArgumentSemantic.Assign)]
+        CGSize Size { get; set; }
+
+        // @property (assign, nonatomic) int yStride;
+        [Export("yStride")]
+        int YStride { get; set; }
+
+        // @property (assign, nonatomic) int uStride;
+        [Export("uStride")]
+        int UStride { get; set; }
+
+        // @property (assign, nonatomic) int vStride;
+        [Export("vStride")]
+        int VStride { get; set; }
+
+        // -(char *)getYBuffer:(int)lineNum;
+        [Export("getYBuffer:")]
+        unsafe IntPtr GetYBuffer(int lineNum);
+
+        // -(char *)getUBuffer:(int)lineNum;
+        [Export("getUBuffer:")]
+        unsafe IntPtr GetUBuffer(int lineNum);
+
+        // -(char *)getVBuffer:(int)lineNum;
+        [Export("getVBuffer:")]
+        unsafe IntPtr GetVBuffer(int lineNum);
+
+        // @property (assign, nonatomic) MobileRTCVideoRawDataFormat format;
+        [Export("format", ArgumentSemantic.Assign)]
+        MobileRTCVideoRawDataFormat Format { get; set; }
+
+        // @property (assign, nonatomic) MobileRTCVideoRawDataRotation rotation;
+        [Export("rotation", ArgumentSemantic.Assign)]
+        MobileRTCVideoRawDataRotation Rotation { get; set; }
+    }
+
+    // @interface MobileRTCAudioSender : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCAudioSender
+    {
+        // -(MobileRTCRawDataError)send:(char *)data dataLength:(unsigned int)length sampleRate:(int)rate;
+        [Export("send:dataLength:sampleRate:")]
+        unsafe MobileRTCRawDataError Send(IntPtr data, uint length, int rate);
+    }
+
+    // @interface MobileRTCVideoSender : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCVideoSender
+    {
+        // -(void)sendVideoFrame:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height dataLength:(NSUInteger)dataLength rotation:(MobileRTCVideoRawDataRotation)rotation;
+        [Export("sendVideoFrame:width:height:dataLength:rotation:")]
+        unsafe void SendVideoFrame(IntPtr  frameBuffer, nuint width, nuint height, nuint dataLength, MobileRTCVideoRawDataRotation rotation);
+    }
+
+    // @interface MobileRTCShareSender : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCShareSender
+    {
+        // -(void)sendShareFrameBuffer:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height frameLength:(NSUInteger)dataLength;
+        [Export("sendShareFrameBuffer:width:height:frameLength:")]
+        unsafe void SendShareFrameBuffer(IntPtr  frameBuffer, nuint width, nuint height, nuint dataLength);
+    }
+
+    // @interface MobileRTCVideoCapabilityItem : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCVideoCapabilityItem
+    {
+        // @property (assign, nonatomic) int width;
+        [Export("width")]
+        int Width { get; set; }
+
+        // @property (assign, nonatomic) int height;
+        [Export("height")]
+        int Height { get; set; }
+
+        // @property (assign, nonatomic) int videoFrame;
+        [Export("videoFrame")]
+        int VideoFrame { get; set; }
+    }
+
+    // @interface MobileRTCLiveTranscriptionLanguage : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCLiveTranscriptionLanguage
+    {
+        // @property (readonly, assign, nonatomic) NSInteger languageID;
+        [Export("languageID")]
+        nint LanguageID { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull languageName;
+        [Export("languageName")]
+        string LanguageName { get; }
     }
 
     // @protocol MobileRTCMeetingServiceDelegate <NSObject>
     [Protocol, Model(AutoGeneratedName = true)]
     [BaseType(typeof(NSObject))]
-    interface MobileRTCMeetingServiceDelegate
+    interface IMobileRTCMeetingServiceDelegate
     {
         // @optional -(void)onMeetingError:(MobileRTCMeetError)error message:(NSString * _Nullable)message;
         [Export("onMeetingError:message:")]
@@ -407,6 +630,10 @@ namespace Zoomios
         // @optional -(void)onMeetingStateChange:(MobileRTCMeetingState)state;
         [Export("onMeetingStateChange:")]
         void OnMeetingStateChange(MobileRTCMeetingState state);
+
+        // @optional -(void)onMeetingParameterNotification:(MobileRTCMeetingParameter * _Nullable)meetingParam;
+        [Export("onMeetingParameterNotification:")]
+        void OnMeetingParameterNotification([NullAllowed] MobileRTCMeetingParameter meetingParam);
 
         // @optional -(void)onJoinMeetingConfirmed;
         [Export("onJoinMeetingConfirmed")]
@@ -423,6 +650,14 @@ namespace Zoomios
         // @optional -(void)onCheckCMRPrivilege:(MobileRTCCMRError)result;
         [Export("onCheckCMRPrivilege:")]
         void OnCheckCMRPrivilege(MobileRTCCMRError result);
+
+        // @optional -(void)onRecordingStatus:(MobileRTCRecordingStatus)status;
+        [Export("onRecordingStatus:")]
+        void OnRecordingStatus(MobileRTCRecordingStatus status);
+
+        // @optional -(void)onLocalRecordingStatus:(NSInteger)userId status:(MobileRTCRecordingStatus)status;
+        [Export("onLocalRecordingStatus:status:")]
+        void OnLocalRecordingStatus(nint userId, MobileRTCRecordingStatus status);
 
         // @optional -(void)onMeetingEndedReason:(MobileRTCMeetingEndReason)reason;
         [Export("onMeetingEndedReason:")]
@@ -456,7 +691,7 @@ namespace Zoomios
         [Export("onCameraNoPrivilege")]
         void OnCameraNoPrivilege();
 
-        // @optional -(void)onFreeMeetingReminder:(BOOL)host canFreeUpgrade:(BOOL)freeUpgrade isFirstGift:(BOOL)first completion:(void (^ _Nonnull)(BOOL))completion;
+        // @optional -(void)onFreeMeetingReminder:(BOOL)host canFreeUpgrade:(BOOL)freeUpgrade isFirstGift:(BOOL)first completion:(void (^ _Nonnull)(BOOL))completion __attribute__((deprecated("")));
         [Export("onFreeMeetingReminder:canFreeUpgrade:isFirstGift:completion:")]
         void OnFreeMeetingReminder(bool host, bool freeUpgrade, bool first, Action<bool> completion);
 
@@ -464,9 +699,25 @@ namespace Zoomios
         [Export("onUpgradeFreeMeetingResult:")]
         void OnUpgradeFreeMeetingResult(nuint result);
 
-        // @optional -(BOOL)onClickedInviteButton:(UIViewController * _Nonnull)parentVC addInviteActionItem:(NSMutableArray * _Nonnull)array;
+        // @optional -(void)onFreeMeetingNeedToUpgrade:(FreeMeetingNeedUpgradeType)type giftUpgradeURL:(NSString * _Nullable)giftURL;
+        [Export("onFreeMeetingNeedToUpgrade:giftUpgradeURL:")]
+        void OnFreeMeetingNeedToUpgrade(FreeMeetingNeedUpgradeType type, [NullAllowed] string giftURL);
+
+        // @optional -(void)onFreeMeetingUpgradeToGiftFreeTrialStart;
+        [Export("onFreeMeetingUpgradeToGiftFreeTrialStart")]
+        void OnFreeMeetingUpgradeToGiftFreeTrialStart();
+
+        // @optional -(void)onFreeMeetingUpgradeToGiftFreeTrialStop;
+        [Export("onFreeMeetingUpgradeToGiftFreeTrialStop")]
+        void OnFreeMeetingUpgradeToGiftFreeTrialStop();
+
+        // @optional -(void)onFreeMeetingUpgradedToProMeeting;
+        [Export("onFreeMeetingUpgradedToProMeeting")]
+        void OnFreeMeetingUpgradedToProMeeting();
+
+        // @optional -(BOOL)onClickedInviteButton:(UIViewController * _Nonnull)parentVC addInviteActionItem:(NSMutableArray * _Nullable)array;
         [Export("onClickedInviteButton:addInviteActionItem:")]
-        bool OnClickedInviteButton(UIViewController parentVC, NSMutableArray array);
+        bool OnClickedInviteButton(UIViewController parentVC, [NullAllowed] NSMutableArray array);
 
         // @optional -(BOOL)onClickedAudioButton:(UIViewController * _Nonnull)parentVC;
         [Export("onClickedAudioButton:")]
@@ -508,9 +759,9 @@ namespace Zoomios
         [Export("onInMeetingChat:")]
         void OnInMeetingChat(string messageID);
 
-        // @optional -(void)onWaitExternalSessionKey:(NSData * _Nonnull)key;
-        [Export("onWaitExternalSessionKey:")]
-        void OnWaitExternalSessionKey(NSData key);
+        // @optional -(void)onChatMsgDeleteNotification:(NSString * _Nonnull)msgID deleteBy:(MobileRTCChatMessageDeleteType)deleteBy;
+        [Export("onChatMsgDeleteNotification:deleteBy:")]
+        void OnChatMsgDeleteNotification(string msgID, MobileRTCChatMessageDeleteType deleteBy);
 
         // @optional -(void)onLiveStreamStatusChange:(MobileRTCLiveStreamStatus)liveStreamStatus;
         [Export("onLiveStreamStatusChange:")]
@@ -524,9 +775,9 @@ namespace Zoomios
         [Export("onClickShareScreen:")]
         void OnClickShareScreen(UIViewController parentVC);
 
-        // @optional -(void)onClosedCaptionReceived:(NSString * _Nonnull)message;
-        [Export("onClosedCaptionReceived:")]
-        void OnClosedCaptionReceived(string message);
+        // @optional -(void)onClosedCaptionReceived:(NSString * _Nonnull)message speakerId:(NSUInteger)speakerID msgTime:(NSDate * _Nullable)msgTime;
+        [Export("onClosedCaptionReceived:speakerId:msgTime:")]
+        void OnClosedCaptionReceived(string message, nuint speakerID, [NullAllowed] NSDate msgTime);
 
         // @optional -(void)onWaitingRoomStatusChange:(BOOL)needWaiting;
         [Export("onWaitingRoomStatusChange:")]
@@ -535,11 +786,19 @@ namespace Zoomios
         // @optional -(void)onSinkAttendeeChatPriviledgeChanged:(MobileRTCMeetingChatPriviledgeType)currentPrivilege;
         [Export("onSinkAttendeeChatPriviledgeChanged:")]
         void OnSinkAttendeeChatPriviledgeChanged(MobileRTCMeetingChatPriviledgeType currentPrivilege);
+
+        // @optional -(void)onSinkPanelistChatPrivilegeChanged:(MobileRTCPanelistChatPrivilegeType)privilege;
+        [Export("onSinkPanelistChatPrivilegeChanged:")]
+        void OnSinkPanelistChatPrivilegeChanged(MobileRTCPanelistChatPrivilegeType privilege);
+
+        // @optional -(void)onSubscribeUserFail:(MobileRTCSubscribeFailReason)errorCode size:(NSInteger)size userId:(NSUInteger)userId;
+        [Export("onSubscribeUserFail:size:userId:")]
+        void OnSubscribeUserFail(MobileRTCSubscribeFailReason errorCode, nint size, nuint userId);
     }
 
     // @protocol MobileRTCAudioServiceDelegate <MobileRTCMeetingServiceDelegate>
     [Protocol, Model(AutoGeneratedName = true)]
-    interface MobileRTCAudioServiceDelegate : MobileRTCMeetingServiceDelegate
+    interface MobileRTCAudioServiceDelegate : IMobileRTCMeetingServiceDelegate
     {
         // @required -(void)onSinkMeetingAudioStatusChange:(NSUInteger)userID;
         [Abstract]
@@ -550,6 +809,16 @@ namespace Zoomios
         [Abstract]
         [Export("onSinkMeetingMyAudioTypeChange")]
         void OnSinkMeetingMyAudioTypeChange();
+
+        // @required -(void)onSinkMeetingAudioTypeChange:(NSUInteger)userID;
+        [Abstract]
+        [Export("onSinkMeetingAudioTypeChange:")]
+        void OnSinkMeetingAudioTypeChange(nuint userID);
+
+        // @required -(void)onSinkMeetingAudioStatusChange:(NSUInteger)userID audioStatus:(MobileRTC_AudioStatus)audioStatus;
+        [Abstract]
+        [Export("onSinkMeetingAudioStatusChange:audioStatus:")]
+        void OnSinkMeetingAudioStatusChange(nuint userID, MobileRTC_AudioStatus audioStatus);
 
         // @required -(void)onAudioOutputChange;
         [Abstract]
@@ -569,7 +838,7 @@ namespace Zoomios
 
     // @protocol MobileRTCVideoServiceDelegate <MobileRTCMeetingServiceDelegate>
     [Protocol, Model(AutoGeneratedName = true)]
-    interface MobileRTCVideoServiceDelegate : MobileRTCMeetingServiceDelegate
+    interface MobileRTCVideoServiceDelegate : IMobileRTCMeetingServiceDelegate
     {
         // @required -(void)onSinkMeetingActiveVideo:(NSUInteger)userID;
         [Abstract]
@@ -586,10 +855,20 @@ namespace Zoomios
         [Export("onMyVideoStateChange")]
         void OnMyVideoStateChange();
 
+        // @required -(void)onSinkMeetingVideoStatusChange:(NSUInteger)userID videoStatus:(MobileRTC_VideoStatus)videoStatus;
+        [Abstract]
+        [Export("onSinkMeetingVideoStatusChange:videoStatus:")]
+        void OnSinkMeetingVideoStatusChange(nuint userID, MobileRTC_VideoStatus videoStatus);
+
         // @required -(void)onSpotlightVideoChange:(BOOL)on;
         [Abstract]
         [Export("onSpotlightVideoChange:")]
         void OnSpotlightVideoChange(bool on);
+
+        // @required -(void)onSpotlightVideoUserChange:(NSArray<NSNumber *> * _Nonnull)spotlightedUserList;
+        [Abstract]
+        [Export("onSpotlightVideoUserChange:")]
+        void OnSpotlightVideoUserChange(NSNumber[] spotlightedUserList);
 
         // @required -(void)onSinkMeetingPreviewStopped;
         [Abstract]
@@ -601,10 +880,10 @@ namespace Zoomios
         [Export("onSinkMeetingActiveVideoForDeck:")]
         void OnSinkMeetingActiveVideoForDeck(nuint userID);
 
-        // @required -(void)onSinkMeetingVideoQualityChanged:(MobileRTCNetworkQuality)qality userID:(NSUInteger)userID;
+        // @required -(void)onSinkMeetingVideoQualityChanged:(MobileRTCVideoQuality)qality userID:(NSUInteger)userID;
         [Abstract]
         [Export("onSinkMeetingVideoQualityChanged:userID:")]
-        void OnSinkMeetingVideoQualityChanged(MobileRTCNetworkQuality qality, nuint userID);
+        void OnSinkMeetingVideoQualityChanged(MobileRTCVideoQuality qality, nuint userID);
 
         // @required -(void)onSinkMeetingVideoRequestUnmuteByHost:(void (^ _Nonnull)(BOOL))completion;
         [Abstract]
@@ -615,11 +894,26 @@ namespace Zoomios
         [Abstract]
         [Export("onSinkMeetingShowMinimizeMeetingOrBackZoomUI:")]
         void OnSinkMeetingShowMinimizeMeetingOrBackZoomUI(MobileRTCMinimizeMeetingState state);
+
+        // @required -(void)onHostVideoOrderUpdated:(NSArray<NSNumber *> * _Nullable)orderArr;
+        [Abstract]
+        [Export("onHostVideoOrderUpdated:")]
+        void OnHostVideoOrderUpdated([NullAllowed] NSNumber[] orderArr);
+
+        // @required -(void)onLocalVideoOrderUpdated:(NSArray<NSNumber *> * _Nullable)localOrderArr;
+        [Abstract]
+        [Export("onLocalVideoOrderUpdated:")]
+        void OnLocalVideoOrderUpdated([NullAllowed] NSNumber[] localOrderArr);
+
+        // @required -(void)onFollowHostVideoOrderChanged:(BOOL)follow;
+        [Abstract]
+        [Export("onFollowHostVideoOrderChanged:")]
+        void OnFollowHostVideoOrderChanged(bool follow);
     }
 
     // @protocol MobileRTCUserServiceDelegate <MobileRTCMeetingServiceDelegate>
     [Protocol, Model(AutoGeneratedName = true)]
-    interface MobileRTCUserServiceDelegate : MobileRTCMeetingServiceDelegate
+    interface MobileRTCUserServiceDelegate : IMobileRTCMeetingServiceDelegate
     {
         // @required -(void)onMyHandStateChange;
         [Abstract]
@@ -651,15 +945,30 @@ namespace Zoomios
         [Export("onSinkMeetingUserLowerHand:")]
         void OnSinkMeetingUserLowerHand(nuint userID);
 
+        // @required -(void)onSinkLowerAllHands;
+        [Abstract]
+        [Export("onSinkLowerAllHands")]
+        void OnSinkLowerAllHands();
+
+        // @required -(void)onSinkUserNameChanged:(NSUInteger)userID userName:(NSString * _Nonnull)userName __attribute__((deprecated("")));
+        [Abstract]
+        [Export("onSinkUserNameChanged:userName:")]
+        void OnSinkUserNameChanged(nuint userID, string userName);
+
+        // @required -(void)onSinkUserNameChanged:(NSArray<NSNumber *> * _Nullable)userNameChangedArr;
+        [Abstract]
+        [Export("onSinkUserNameChanged:")]
+        void OnSinkUserNameChanged([NullAllowed] NSNumber[] userNameChangedArr);
+
         // @required -(void)onMeetingHostChange:(NSUInteger)hostId;
         [Abstract]
         [Export("onMeetingHostChange:")]
         void OnMeetingHostChange(nuint hostId);
 
-        // @required -(void)onMeetingCoHostChange:(NSUInteger)cohostId;
+        // @required -(void)onMeetingCoHostChange:(NSUInteger)userID isCoHost:(BOOL)isCoHost;
         [Abstract]
-        [Export("onMeetingCoHostChange:")]
-        void OnMeetingCoHostChange(nuint cohostId);
+        [Export("onMeetingCoHostChange:isCoHost:")]
+        void OnMeetingCoHostChange(nuint userID, bool isCoHost);
 
         // @required -(void)onClaimHostResult:(MobileRTCClaimHostError)error;
         [Abstract]
@@ -669,22 +978,32 @@ namespace Zoomios
 
     // @protocol MobileRTCShareServiceDelegate <MobileRTCMeetingServiceDelegate>
     [Protocol, Model(AutoGeneratedName = true)]
-    interface MobileRTCShareServiceDelegate : MobileRTCMeetingServiceDelegate
+    interface MobileRTCShareServiceDelegate : IMobileRTCMeetingServiceDelegate
     {
         // @required -(void)onAppShareSplash;
         [Abstract]
         [Export("onAppShareSplash")]
         void OnAppShareSplash();
 
-        // @required -(void)onSinkMeetingActiveShare:(NSUInteger)userID;
+        // @required -(void)onSinkMeetingActiveShare:(NSUInteger)userID __attribute__((deprecated("")));
         [Abstract]
         [Export("onSinkMeetingActiveShare:")]
         void OnSinkMeetingActiveShare(nuint userID);
 
-        // @required -(void)onSinkMeetingShareReceiving:(NSUInteger)userID;
+        // @required -(void)onSinkMeetingShareReceiving:(NSUInteger)userID __attribute__((deprecated("")));
         [Abstract]
         [Export("onSinkMeetingShareReceiving:")]
         void OnSinkMeetingShareReceiving(nuint userID);
+
+        // @required -(void)onSinkSharingStatus:(MobileRTCSharingStatus)status userID:(NSUInteger)userID;
+        [Abstract]
+        [Export("onSinkSharingStatus:userID:")]
+        void OnSinkSharingStatus(MobileRTCSharingStatus status, nuint userID);
+
+        // @required -(void)onSinkShareSettingTypeChanged:(MobileRTCShareSettingType)shareSettingType;
+        [Abstract]
+        [Export("onSinkShareSettingTypeChanged:")]
+        void OnSinkShareSettingTypeChanged(MobileRTCShareSettingType shareSettingType);
 
         // @required -(void)onSinkShareSizeChange:(NSUInteger)userID;
         [Abstract]
@@ -692,9 +1011,46 @@ namespace Zoomios
         void OnSinkShareSizeChange(nuint userID);
     }
 
+    // @protocol MobileRTCInterpretationServiceDelegate <MobileRTCMeetingServiceDelegate>
+    [Protocol, Model(AutoGeneratedName = true)]
+    interface MobileRTCInterpretationServiceDelegate : IMobileRTCMeetingServiceDelegate
+    {
+        // @optional -(void)onInterpretationStart;
+        [Export("onInterpretationStart")]
+        void OnInterpretationStart();
+
+        // @optional -(void)onInterpretationStop;
+        [Export("onInterpretationStop")]
+        void OnInterpretationStop();
+
+        // @optional -(void)onInterpreterListChanged;
+        [Export("onInterpreterListChanged")]
+        void OnInterpreterListChanged();
+
+        // @optional -(void)onInterpreterRoleChanged:(NSUInteger)userID isInterpreter:(BOOL)isInterpreter;
+        [Export("onInterpreterRoleChanged:isInterpreter:")]
+        void OnInterpreterRoleChanged(nuint userID, bool isInterpreter);
+
+        // @optional -(void)onInterpreterActiveLanguageChanged:(NSInteger)userID activeLanguageId:(NSInteger)activeLanID;
+        [Export("onInterpreterActiveLanguageChanged:activeLanguageId:")]
+        void OnInterpreterActiveLanguageChanged(nint userID, nint activeLanID);
+
+        // @optional -(void)onInterpreterLanguageChanged:(NSInteger)lanID1 andLanguage2:(NSInteger)lanID2;
+        [Export("onInterpreterLanguageChanged:andLanguage2:")]
+        void OnInterpreterLanguageChanged(nint lanID1, nint lanID2);
+
+        // @optional -(void)onAvailableLanguageListUpdated:(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)availableLanguageList;
+        [Export("onAvailableLanguageListUpdated:")]
+        void OnAvailableLanguageListUpdated([NullAllowed] MobileRTCInterpretationLanguage[] availableLanguageList);
+
+        // @optional -(void)onInterpreterLanguagesUpdated:(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)availableLanguages;
+        [Export("onInterpreterLanguagesUpdated:")]
+        void OnInterpreterLanguagesUpdated([NullAllowed] MobileRTCInterpretationLanguage[] availableLanguages);
+    }
+
     // @protocol MobileRTCWebinarServiceDelegate <MobileRTCMeetingServiceDelegate>
     [Protocol, Model(AutoGeneratedName = true)]
-    interface MobileRTCWebinarServiceDelegate : MobileRTCMeetingServiceDelegate
+    interface MobileRTCWebinarServiceDelegate : IMobileRTCMeetingServiceDelegate
     {
         // @required -(void)onSinkQAConnectStarted;
         [Abstract]
@@ -705,11 +1061,6 @@ namespace Zoomios
         [Abstract]
         [Export("onSinkQAConnected:")]
         void OnSinkQAConnected(bool connected);
-
-        // @required -(void)OnRefreshQAData;
-        [Abstract]
-        [Export("OnRefreshQAData")]
-        void OnRefreshQAData();
 
         // @required -(void)onSinkQAOpenQuestionChanged:(NSInteger)count;
         [Abstract]
@@ -766,6 +1117,17 @@ namespace Zoomios
         [Export("onSinkRevokeVoteupQuestion:orderChanged:")]
         void OnSinkRevokeVoteupQuestion(string questionID, bool orderChanged);
 
+        // @required -(void)onSinkDeleteQuestion:(NSArray * _Nonnull)questionIDArray;
+        [Abstract]
+        [Export("onSinkDeleteQuestion:")]
+        void OnSinkDeleteQuestion(NSObject[] questionIDArray);
+
+        // @required -(void)onSinkDeleteAnswer:(NSArray * _Nonnull)answerIDArray;
+        [Abstract]
+        [Export("onSinkDeleteAnswer:")]
+
+        void OnSinkDeleteAnswer(NSObject[] answerIDArray);
+
         // @required -(void)onSinkQAAllowAskQuestionAnonymouslyNotification:(BOOL)beAllowed;
         [Abstract]
         [Export("onSinkQAAllowAskQuestionAnonymouslyNotification:")]
@@ -815,6 +1177,42 @@ namespace Zoomios
         [Abstract]
         [Export("onSinkAllowAttendeeChatNotification:")]
         void OnSinkAllowAttendeeChatNotification(MobileRTCChatAllowAttendeeChat currentPrivilege);
+
+        // @required -(void)onSinkAttendeePromoteConfirmResult:(BOOL)agree userId:(NSUInteger)userId;
+        [Abstract]
+        [Export("onSinkAttendeePromoteConfirmResult:userId:")]
+        void OnSinkAttendeePromoteConfirmResult(bool agree, nuint userId);
+
+        // @required -(void)onSinkSelfAllowTalkNotification;
+        [Abstract]
+        [Export("onSinkSelfAllowTalkNotification")]
+        void OnSinkSelfAllowTalkNotification();
+
+        // @required -(void)onSinkSelfDisallowTalkNotification;
+        [Abstract]
+        [Export("onSinkSelfDisallowTalkNotification")]
+        void OnSinkSelfDisallowTalkNotification();
+    }
+
+    // @protocol MobileRTCLiveTranscriptionServiceDelegate <MobileRTCMeetingServiceDelegate>
+    [Protocol, Model(AutoGeneratedName = true)]
+    interface MobileRTCLiveTranscriptionServiceDelegate : IMobileRTCMeetingServiceDelegate
+    {
+        // @optional -(void)onSinkLiveTranscriptionStatus:(MobileRTCLiveTranscriptionStatus)status;
+        [Export("onSinkLiveTranscriptionStatus:")]
+        void OnSinkLiveTranscriptionStatus(MobileRTCLiveTranscriptionStatus status);
+
+        // @optional -(void)onSinkLiveTranscriptionMsgReceived:(NSString * _Nonnull)msg speakerId:(NSUInteger)speakerId type:(MobileRTCLiveTranscriptionOperationType)type;
+        [Export("onSinkLiveTranscriptionMsgReceived:speakerId:type:")]
+        void OnSinkLiveTranscriptionMsgReceived(string msg, nuint speakerId, MobileRTCLiveTranscriptionOperationType type);
+
+        // @optional -(void)onLiveTranscriptionMsgError:(MobileRTCLiveTranscriptionLanguage * _Nullable)speakLanguage transcriptLanguage:(MobileRTCLiveTranscriptionLanguage * _Nullable)transcriptLanguage;
+        [Export("onLiveTranscriptionMsgError:transcriptLanguage:")]
+        void OnLiveTranscriptionMsgError([NullAllowed] MobileRTCLiveTranscriptionLanguage speakLanguage, [NullAllowed] MobileRTCLiveTranscriptionLanguage transcriptLanguage);
+
+        // @optional -(void)onSinkRequestForLiveTranscriptReceived:(NSUInteger)requesterUserId bAnonymous:(BOOL)bAnonymous;
+        [Export("onSinkRequestForLiveTranscriptReceived:bAnonymous:")]
+        void OnSinkRequestForLiveTranscriptReceived(nuint requesterUserId, bool bAnonymous);
     }
 
     // @protocol MobileRTCCustomizedUIMeetingDelegate <NSObject>
@@ -840,7 +1238,7 @@ namespace Zoomios
     {
         // @optional -(void)onMobileRTCRender:(MobileRTCRenderer * _Nonnull)renderer framePixelBuffer:(CVPixelBufferRef _Nullable)pixelBuffer rotation:(MobileRTCVideoRawDataRotation)rotation;
         [Export("onMobileRTCRender:framePixelBuffer:rotation:")]
-        unsafe void FramePixelBuffer(MobileRTCRenderer renderer, [NullAllowed] CVPixelBuffer pixelBuffer, MobileRTCVideoRawDataRotation rotation);
+        void FramePixelBuffer(MobileRTCRenderer renderer, [NullAllowed] CVPixelBuffer pixelBuffer, MobileRTCVideoRawDataRotation rotation);
 
         // @optional -(void)onMobileRTCRender:(MobileRTCRenderer * _Nonnull)renderer frameRawData:(MobileRTCVideoRawData * _Nonnull)rawData;
         [Export("onMobileRTCRender:frameRawData:")]
@@ -865,6 +1263,80 @@ namespace Zoomios
         void OnMobileRTCOneWayAudioAudioRawData(MobileRTCAudioRawData rawData, nuint userId);
     }
 
+    // @protocol MobileRTCAudioSourceDelegate <NSObject>
+    [Protocol, Model(AutoGeneratedName = true)]
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCAudioSourceDelegate
+    {
+        // @optional -(void)onDeviceInitialize:(MobileRTCAudioSender * _Nonnull)rawdataSender;
+        [Export("onDeviceInitialize:")]
+        void OnDeviceInitialize(MobileRTCAudioSender rawdataSender);
+
+        // @optional -(void)onStartSendData;
+        [Export("onStartSendData")]
+        void OnStartSendData();
+
+        // @optional -(void)onStopSendData;
+        [Export("onStopSendData")]
+        void OnStopSendData();
+
+        // @optional -(void)onDeviceUninitialize;
+        [Export("onDeviceUninitialize")]
+        void OnDeviceUninitialize();
+    }
+
+    // @protocol MobileRTCPreProcessorDelegate <NSObject>
+    [Protocol, Model(AutoGeneratedName = true)]
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCPreProcessorDelegate
+    {
+        // @optional -(void)onPreProcessRawData:(MobileRTCPreProcessRawData * _Nonnull)rawData;
+        [Export("onPreProcessRawData:")]
+        void OnPreProcessRawData(MobileRTCPreProcessRawData rawData);
+    }
+
+    // @protocol MobileRTCVideoSourceDelegate <NSObject>
+    [Protocol, Model(AutoGeneratedName = true)]
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCVideoSourceDelegate
+    {
+        // @optional -(void)onInitialize:(MobileRTCVideoSender * _Nonnull)rawDataSender supportCapabilityArray:(NSArray * _Nonnull)supportCapabilityArray suggestCapabilityItem:(MobileRTCVideoCapabilityItem * _Nonnull)suggestCapabilityItem;
+        [Export("onInitialize:supportCapabilityArray:suggestCapabilityItem:")]
+
+        void OnInitialize(MobileRTCVideoSender rawDataSender, NSObject[] supportCapabilityArray, MobileRTCVideoCapabilityItem suggestCapabilityItem);
+
+        // @optional -(void)onPropertyChange:(NSArray * _Nonnull)supportCapabilityArray suggestCapabilityItem:(MobileRTCVideoCapabilityItem * _Nonnull)suggestCapabilityItem;
+        [Export("onPropertyChange:suggestCapabilityItem:")]
+
+        void OnPropertyChange(NSObject[] supportCapabilityArray, MobileRTCVideoCapabilityItem suggestCapabilityItem);
+
+        // @optional -(void)onStartSend;
+        [Export("onStartSend")]
+        void OnStartSend();
+
+        // @optional -(void)onStopSend;
+        [Export("onStopSend")]
+        void OnStopSend();
+
+        // @optional -(void)onUninitialized;
+        [Export("onUninitialized")]
+        void OnUninitialized();
+    }
+
+    // @protocol MobileRTCShareSourceDelegate <NSObject>
+    [Protocol, Model(AutoGeneratedName = true)]
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCShareSourceDelegate
+    {
+        // @optional -(void)onStartSend:(MobileRTCShareSender * _Nonnull)sender;
+        [Export("onStartSend:")]
+        void OnStartSend(MobileRTCShareSender sender);
+
+        // @optional -(void)onStopSend;
+        [Export("onStopSend")]
+        void OnStopSend();
+    }
+
     // @protocol MobileRTCSMSServiceDelegate <NSObject>
     [Protocol, Model(AutoGeneratedName = true)]
     [BaseType(typeof(NSObject))]
@@ -874,18 +1346,18 @@ namespace Zoomios
         [Export("onNeedRealNameAuth:privacyURL:retrieveHandle:")]
         void OnNeedRealNameAuth(MobileRTCRealNameCountryInfo[] supportCountryList, string privacyUrl, MobileRTCRetrieveSMSHandler handle);
 
-        // @optional -(void)onRetrieveSMSVerificationCodeResultNotification:(MobileRTCSMSServiceErr)result verifyHandle:(MobileRTCVerifySMSHandler * _Nonnull)handler;
+        // @optional -(void)onRetrieveSMSVerificationCodeResultNotification:(MobileRTCSMSRetrieveResult)result verifyHandle:(MobileRTCVerifySMSHandler * _Nonnull)handler;
         [Export("onRetrieveSMSVerificationCodeResultNotification:verifyHandle:")]
-        void OnRetrieveSMSVerificationCodeResultNotification(MobileRTCSMSServiceErr result, MobileRTCVerifySMSHandler handler);
+        void OnRetrieveSMSVerificationCodeResultNotification(MobileRTCSMSRetrieveResult result, MobileRTCVerifySMSHandler handler);
 
-        // @optional -(void)onVerifySMSVerificationCodeResultNotification:(MobileRTCSMSServiceErr)result;
+        // @optional -(void)onVerifySMSVerificationCodeResultNotification:(MobileRTCSMSVerifyResult)result;
         [Export("onVerifySMSVerificationCodeResultNotification:")]
-        void OnVerifySMSVerificationCodeResultNotification(MobileRTCSMSServiceErr result);
+        void OnVerifySMSVerificationCodeResultNotification(MobileRTCSMSVerifyResult result);
     }
 
     // @protocol MobileRTCBOServiceDelegate <MobileRTCMeetingServiceDelegate>
     [Protocol, Model(AutoGeneratedName = true)]
-    interface MobileRTCBOServiceDelegate : MobileRTCMeetingServiceDelegate
+    interface MobileRTCBOServiceDelegate : IMobileRTCMeetingServiceDelegate
     {
         // @optional -(void)onHasCreatorRightsNotification:(MobileRTCBOCreator * _Nonnull)creator;
         [Export("onHasCreatorRightsNotification:")]
@@ -926,11 +1398,40 @@ namespace Zoomios
         // @optional -(void)onLostDataHelperRightsNotification;
         [Export("onLostDataHelperRightsNotification")]
         void OnLostDataHelperRightsNotification();
+
+        // @optional -(void)onNewBroadcastMessageReceived:(NSString * _Nullable)broadcastMsg senderID:(NSUInteger)senderID;
+        [Export("onNewBroadcastMessageReceived:senderID:")]
+        void OnNewBroadcastMessageReceived([NullAllowed] string broadcastMsg, nuint senderID);
+
+        // @optional -(void)onBOStopCountDown:(NSUInteger)seconds;
+        [Export("onBOStopCountDown:")]
+        void OnBOStopCountDown(nuint seconds);
+
+        // @optional -(void)onHostInviteReturnToMainSession:(NSString * _Nullable)hostName replyHandler:(MobileRTCReturnToMainSessionHandler * _Nullable)replyHandler;
+        [Export("onHostInviteReturnToMainSession:replyHandler:")]
+        void OnHostInviteReturnToMainSession([NullAllowed] string hostName, [NullAllowed] MobileRTCReturnToMainSessionHandler replyHandler);
+
+        // @optional -(void)onBOStatusChanged:(MobileRTCBOStatus)status;
+        [Export("onBOStatusChanged:")]
+        void OnBOStatusChanged(MobileRTCBOStatus status);
+    }
+
+    // @protocol MobileRTCReactionServiceDelegate <MobileRTCMeetingServiceDelegate>
+    [Protocol, Model(AutoGeneratedName = true)]
+    interface MobileRTCReactionServiceDelegate : IMobileRTCMeetingServiceDelegate
+    {
+        // @optional -(void)onEmojiReactionReceived:(NSUInteger)userId reactionType:(MobileRTCEmojiReactionType)type reactionSkinTone:(MobileRTCEmojiReactionSkinTone)skinTone;
+        [Export("onEmojiReactionReceived:reactionType:reactionSkinTone:")]
+        void OnEmojiReactionReceived(nuint userId, MobileRTCEmojiReactionType type, MobileRTCEmojiReactionSkinTone skinTone);
+
+        // @optional -(void)onEmojiReactionReceivedInWebinar:(MobileRTCEmojiReactionType)type;
+        [Export("onEmojiReactionReceivedInWebinar:")]
+        void OnEmojiReactionReceivedInWebinar(MobileRTCEmojiReactionType type);
     }
 
     // @protocol MobileRTCBODataDelegate <MobileRTCMeetingServiceDelegate>
     [Protocol, Model(AutoGeneratedName = true)]
-    interface MobileRTCBODataDelegate : MobileRTCMeetingServiceDelegate
+    interface MobileRTCBODataDelegate : IMobileRTCMeetingServiceDelegate
     {
         // @required -(void)onBOInfoUpdated:(NSString * _Nullable)boId;
         [Abstract]
@@ -943,61 +1444,58 @@ namespace Zoomios
         void OnUnAssignedUserUpdated();
     }
 
-    [Static]
-    partial interface Constants
+    // @protocol MobileRTCBOAdminDelegate <MobileRTCMeetingServiceDelegate>
+    [Protocol, Model(AutoGeneratedName = true)]
+    interface MobileRTCBOAdminDelegate : IMobileRTCMeetingServiceDelegate
     {
-        // extern NSString * _Nonnull kMeetingParam_UserID;
-        [Field("kMeetingParam_UserID", "__Internal")]
-        NSString kMeetingParam_UserID { get; }
+        // @required -(void)onHelpRequestReceived:(NSString * _Nullable)strUserID;
+        [Abstract]
+        [Export("onHelpRequestReceived:")]
+        void OnHelpRequestReceived([NullAllowed] string strUserID);
 
-        // extern NSString * _Nonnull kMeetingParam_UserToken;
-        [Field("kMeetingParam_UserToken", "__Internal")]
-        NSString kMeetingParam_UserToken { get; }
+        // @required -(void)onStartBOError:(MobileRTCBOControllerError)errType;
+        [Abstract]
+        [Export("onStartBOError:")]
+        void OnStartBOError(MobileRTCBOControllerError errType);
 
-        // extern NSString * _Nonnull kMeetingParam_UserType;
-        [Field("kMeetingParam_UserType", "__Internal")]
-        NSString kMeetingParam_UserType { get; }
+        // @required -(void)onBOEndTimerUpdated:(NSUInteger)remaining isTimesUpNotice:(BOOL)isTimesUpNotice;
+        [Abstract]
+        [Export("onBOEndTimerUpdated:isTimesUpNotice:")]
+        void OnBOEndTimerUpdated(nuint remaining, bool isTimesUpNotice);
+    }
 
-        // extern NSString * _Nonnull kMeetingParam_Username;
-        [Field("kMeetingParam_Username", "__Internal")]
-        NSString kMeetingParam_Username { get; }
+    // @protocol MobileRTCBOAttendeeDelegate <MobileRTCMeetingServiceDelegate>
+    [Protocol, Model(AutoGeneratedName = true)]
+    interface MobileRTCBOAttendeeDelegate : IMobileRTCMeetingServiceDelegate
+    {
+        // @required -(void)onHelpRequestHandleResultReceived:(MobileRTCBOHelpReply)eResult;
+        [Abstract]
+        [Export("onHelpRequestHandleResultReceived:")]
+        void OnHelpRequestHandleResultReceived(MobileRTCBOHelpReply eResult);
 
-        // extern NSString * _Nonnull kMeetingParam_MeetingNumber;
-        [Field("kMeetingParam_MeetingNumber", "__Internal")]
-        NSString kMeetingParam_MeetingNumber { get; }
+        // @required -(void)onHostJoinedThisBOMeeting;
+        [Abstract]
+        [Export("onHostJoinedThisBOMeeting")]
+        void OnHostJoinedThisBOMeeting();
 
-        // extern NSString * _Nonnull kMeetingParam_MeetingPassword;
-        [Field("kMeetingParam_MeetingPassword", "__Internal")]
-        NSString kMeetingParam_MeetingPassword { get; }
+        // @required -(void)onHostLeaveThisBOMeeting;
+        [Abstract]
+        [Export("onHostLeaveThisBOMeeting")]
+        void OnHostLeaveThisBOMeeting();
+    }
 
-        // extern NSString * _Nonnull kMeetingParam_ParticipantID;
-        [Field("kMeetingParam_ParticipantID", "__Internal")]
-        NSString kMeetingParam_ParticipantID { get; }
-
-        // extern NSString * _Nonnull kMeetingParam_IsAppShare;
-        [Field("kMeetingParam_IsAppShare", "__Internal")]
-        NSString kMeetingParam_IsAppShare { get; }
-
-        // extern NSString * _Nonnull kMeetingParam_WebinarToken;
-        [Field("kMeetingParam_WebinarToken", "__Internal")]
-        NSString kMeetingParam_WebinarToken { get; }
-
-        // extern NSString * _Nonnull kMeetingParam_NoAudio;
-        [Field("kMeetingParam_NoAudio", "__Internal")]
-        NSString kMeetingParam_NoAudio { get; }
-
-        // extern NSString * _Nonnull kMeetingParam_NoVideo;
-        [Field("kMeetingParam_NoVideo", "__Internal")]
-        NSString kMeetingParam_NoVideo { get; }
-
-        // extern NSString * _Nonnull kMeetingParam_VanityID;
-        [Field("kMeetingParam_VanityID", "__Internal")]
-        NSString kMeetingParam_VanityID { get; }
+    // @protocol MobileRTCBOCreatorDelegate <MobileRTCMeetingServiceDelegate>
+    [Protocol, Model(AutoGeneratedName = true)]
+    interface MobileRTCBOCreatorDelegate : IMobileRTCMeetingServiceDelegate
+    {
+        // @required -(void)onBOCreateSuccess:(NSString * _Nullable)BOID;
+        [Abstract]
+        [Export("onBOCreateSuccess:")]
+        void OnBOCreateSuccess([NullAllowed] string BOID);
     }
 
     // @interface MobileRTCMeetingStartParam : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingStartParam
     {
         // @property (assign, readwrite, nonatomic) BOOL isAppShare;
@@ -1012,9 +1510,9 @@ namespace Zoomios
         [Export("noVideo")]
         bool NoVideo { get; set; }
 
-        // @property (readwrite, retain, nonatomic) NSString * _Nullable participantID;
-        [NullAllowed, Export("participantID", ArgumentSemantic.Retain)]
-        string ParticipantID { get; set; }
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable customerKey;
+        [NullAllowed, Export("customerKey", ArgumentSemantic.Retain)]
+        string CustomerKey { get; set; }
 
         // @property (readwrite, retain, nonatomic) NSString * _Nullable vanityID;
         [NullAllowed, Export("vanityID", ArgumentSemantic.Retain)]
@@ -1027,27 +1525,21 @@ namespace Zoomios
 
     // @interface MobileRTCMeetingStartParam4LoginlUser : MobileRTCMeetingStartParam
     [BaseType(typeof(MobileRTCMeetingStartParam))]
-    [Protocol]
     interface MobileRTCMeetingStartParam4LoginlUser
     {
     }
 
     // @interface MobileRTCMeetingStartParam4WithoutLoginUser : MobileRTCMeetingStartParam
     [BaseType(typeof(MobileRTCMeetingStartParam))]
-    [Protocol]
     interface MobileRTCMeetingStartParam4WithoutLoginUser
     {
         // @property (assign, readwrite, nonatomic) MobileRTCUserType userType;
         [Export("userType", ArgumentSemantic.Assign)]
         MobileRTCUserType UserType { get; set; }
 
-        // @property (readwrite, retain, nonatomic) NSString * _Nonnull userName;
-        [Export("userName", ArgumentSemantic.Retain)]
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable userName;
+        [NullAllowed, Export("userName", ArgumentSemantic.Retain)]
         string UserName { get; set; }
-
-        // @property (readwrite, retain, nonatomic) NSString * _Nonnull userToken;
-        [Export("userToken", ArgumentSemantic.Retain)]
-        string UserToken { get; set; }
 
         // @property (readwrite, retain, nonatomic) NSString * _Nonnull userID;
         [Export("userID", ArgumentSemantic.Retain)]
@@ -1058,14 +1550,116 @@ namespace Zoomios
         string Zak { get; set; }
     }
 
+    // @interface MobileRTCMeetingJoinParam : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCMeetingJoinParam
+    {
+        // @property (assign, readwrite, nonatomic) BOOL noAudio;
+        [Export("noAudio")]
+        bool NoAudio { get; set; }
+
+        // @property (assign, readwrite, nonatomic) BOOL noVideo;
+        [Export("noVideo")]
+        bool NoVideo { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable customerKey;
+        [NullAllowed, Export("customerKey", ArgumentSemantic.Retain)]
+        string CustomerKey { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable vanityID;
+        [NullAllowed, Export("vanityID", ArgumentSemantic.Retain)]
+        string VanityID { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable meetingNumber;
+        [NullAllowed, Export("meetingNumber", ArgumentSemantic.Retain)]
+        string MeetingNumber { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable userName;
+        [NullAllowed, Export("userName", ArgumentSemantic.Retain)]
+        string UserName { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable password;
+        [NullAllowed, Export("password", ArgumentSemantic.Retain)]
+        string Password { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable webinarToken;
+        [NullAllowed, Export("webinarToken", ArgumentSemantic.Retain)]
+        string WebinarToken { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable zak;
+        [NullAllowed, Export("zak", ArgumentSemantic.Retain)]
+        string Zak { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable appPrivilegeToken;
+        [NullAllowed, Export("appPrivilegeToken", ArgumentSemantic.Retain)]
+        string AppPrivilegeToken { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable join_token;
+        [NullAllowed, Export("join_token", ArgumentSemantic.Retain)]
+        string Join_token { get; set; }
+    }
+
+    // @interface MobileRTCWebinarRegistLegalNoticeContent : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCWebinarRegistLegalNoticeContent
+    {
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable formattedHtmlContent;
+        [NullAllowed, Export("formattedHtmlContent", ArgumentSemantic.Retain)]
+        string FormattedHtmlContent { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable accountOwnerUrl;
+        [NullAllowed, Export("accountOwnerUrl", ArgumentSemantic.Retain)]
+        string AccountOwnerUrl { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable termsUrl;
+        [NullAllowed, Export("termsUrl", ArgumentSemantic.Retain)]
+        string TermsUrl { get; set; }
+
+        // @property (readwrite, retain, nonatomic) NSString * _Nullable privacyPolicyUrl;
+        [NullAllowed, Export("privacyPolicyUrl", ArgumentSemantic.Retain)]
+        string PrivacyPolicyUrl { get; set; }
+    }
+
+    // @interface MobileRTCMeetingParameter : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCMeetingParameter
+    {
+        // @property (assign, nonatomic) MobileRTCMeetingType meetingType;
+        [Export("meetingType", ArgumentSemantic.Assign)]
+        MobileRTCMeetingType MeetingType { get; set; }
+
+        // @property (assign, nonatomic) BOOL isViewOnly;
+        [Export("isViewOnly")]
+        bool IsViewOnly { get; set; }
+
+        // @property (assign, nonatomic) BOOL isAutoRecordingLocal;
+        [Export("isAutoRecordingLocal")]
+        bool IsAutoRecordingLocal { get; set; }
+
+        // @property (assign, nonatomic) BOOL isAutoRecordingCloud;
+        [Export("isAutoRecordingCloud")]
+        bool IsAutoRecordingCloud { get; set; }
+
+        // @property (assign, nonatomic) unsigned long long meetingNumber;
+        [Export("meetingNumber")]
+        ulong MeetingNumber { get; set; }
+
+        // @property (retain, nonatomic) NSString * _Nullable meetingTopic;
+        [NullAllowed, Export("meetingTopic", ArgumentSemantic.Retain)]
+        string MeetingTopic { get; set; }
+
+        // @property (retain, nonatomic) NSString * _Nullable meetingHost;
+        [NullAllowed, Export("meetingHost", ArgumentSemantic.Retain)]
+        string MeetingHost { get; set; }
+    }
+
     // @interface MobileRTCMeetingService : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingService
     {
         [Wrap("WeakDelegate")]
         [NullAllowed]
-        MobileRTCMeetingServiceDelegate Delegate { get; set; }
+        IMobileRTCMeetingServiceDelegate Delegate { get; set; }
 
         // @property (assign, nonatomic) id<MobileRTCMeetingServiceDelegate> _Nullable delegate;
         [NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
@@ -1079,17 +1673,13 @@ namespace Zoomios
         [NullAllowed, Export("customizedUImeetingDelegate", ArgumentSemantic.Assign)]
         NSObject WeakCustomizedUImeetingDelegate { get; set; }
 
-        // -(MobileRTCMeetError)startMeetingWithDictionary:(NSDictionary * _Nonnull)dict;
-        [Export("startMeetingWithDictionary:")]
-        MobileRTCMeetError StartMeetingWithDictionary(NSDictionary dict);
-
         // -(MobileRTCMeetError)startMeetingWithStartParam:(MobileRTCMeetingStartParam * _Nonnull)param;
         [Export("startMeetingWithStartParam:")]
         MobileRTCMeetError StartMeetingWithStartParam(MobileRTCMeetingStartParam param);
 
-        // -(MobileRTCMeetError)joinMeetingWithDictionary:(NSDictionary * _Nonnull)dict;
-        [Export("joinMeetingWithDictionary:")]
-        MobileRTCMeetError JoinMeetingWithDictionary(NSDictionary dict);
+        // -(MobileRTCMeetError)joinMeetingWithJoinParam:(MobileRTCMeetingJoinParam * _Nonnull)param;
+        [Export("joinMeetingWithJoinParam:")]
+        MobileRTCMeetError JoinMeetingWithJoinParam(MobileRTCMeetingJoinParam param);
 
         // -(MobileRTCMeetError)handZoomWebUrl:(NSString * _Nonnull)meetingUrl;
         [Export("handZoomWebUrl:")]
@@ -1097,6 +1687,7 @@ namespace Zoomios
 
         // -(MobileRTCMeetingState)getMeetingState;
         [Export("getMeetingState")]
+
         MobileRTCMeetingState MeetingState { get; }
 
         // -(void)leaveMeetingWithCmd:(LeaveMeetingCmd)cmd;
@@ -1105,7 +1696,22 @@ namespace Zoomios
 
         // -(UIView * _Nullable)meetingView;
         [NullAllowed, Export("meetingView")]
+
         UIView MeetingView { get; }
+
+        // -(BOOL)setCustomizedInvitationDomain:(NSString * _Nonnull)invitationDomain;
+        [Export("setCustomizedInvitationDomain:")]
+        bool SetCustomizedInvitationDomain(string invitationDomain);
+
+        // -(NSString * _Nullable)getWebinarRegistrationLegalNoticesPrompt;
+        [NullAllowed, Export("getWebinarRegistrationLegalNoticesPrompt")]
+
+        string WebinarRegistrationLegalNoticesPrompt { get; }
+
+        // -(MobileRTCWebinarRegistLegalNoticeContent * _Nullable)getWebinarRegistrationLegalNoticesExplained;
+        [NullAllowed, Export("getWebinarRegistrationLegalNoticesExplained")]
+
+        MobileRTCWebinarRegistLegalNoticeContent WebinarRegistrationLegalNoticesExplained { get; }
     }
 
     // @interface AppShare (MobileRTCMeetingService)
@@ -1120,10 +1726,6 @@ namespace Zoomios
         // -(void)appShareWithView:(id _Nonnull)view;
         [Export("appShareWithView:")]
         void AppShareWithView(NSObject view);
-
-        // -(void)appShareWithReplayKit __attribute__((deprecated("")));
-        [Export("appShareWithReplayKit")]
-        void AppShareWithReplayKit();
 
         // -(BOOL)startAppShare;
         [Export("startAppShare")]
@@ -1148,10 +1750,21 @@ namespace Zoomios
         // -(BOOL)suspendSharing:(BOOL)suspend;
         [Export("suspendSharing:")]
         bool SuspendSharing(bool suspend);
+
+        // -(BOOL)isWhiteboardLegalNoticeAvailable;
+        [Export("isWhiteboardLegalNoticeAvailable")]
+        bool IsWhiteboardLegalNoticeAvailable();
+
+        // -(NSString * _Nullable)getWhiteboardLegalNoticesPrompt;
+        [NullAllowed, Export("getWhiteboardLegalNoticesPrompt")]
+        string WhiteboardLegalNoticesPrompt();
+
+        // -(NSString * _Nullable)getWhiteboardLegalNoticesExplained;
+        [NullAllowed, Export("getWhiteboardLegalNoticesExplained")]
+        string WhiteboardLegalNoticesExplained();
     }
 
     // @interface MobileRTCVideoStatus : NSObject
-    [Protocol]
     [BaseType(typeof(NSObject))]
     interface MobileRTCVideoStatus
     {
@@ -1169,7 +1782,6 @@ namespace Zoomios
     }
 
     // @interface MobileRTCAudioStatus : NSObject
-    [Protocol]
     [BaseType(typeof(NSObject))]
     interface MobileRTCAudioStatus
     {
@@ -1188,17 +1800,28 @@ namespace Zoomios
 
     // @interface MobileRTCMeetingUserInfo : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingUserInfo
     {
         // @property (assign, nonatomic) NSUInteger userID;
         [Export("userID")]
         nuint UserID { get; set; }
 
+        // @property (retain, nonatomic) NSString * _Nullable persistentId;
+        [NullAllowed, Export("persistentId", ArgumentSemantic.Retain)]
+        string PersistentId { get; set; }
+
+        // @property (assign, nonatomic) BOOL isMySelf;
+        [Export("isMySelf")]
+        bool IsMySelf { get; set; }
+
+        // @property (retain, nonatomic) NSString * _Nullable customerKey;
+        [NullAllowed, Export("customerKey", ArgumentSemantic.Retain)]
+        string CustomerKey { get; set; }
+
         // @property (retain, nonatomic) NSString * _Nonnull userName;
         [Export("userName", ArgumentSemantic.Retain)]
         string UserName { get; set; }
-        
+
         // @property (retain, nonatomic) NSString * _Nonnull avatarPath;
         [Export("avatarPath", ArgumentSemantic.Retain)]
         string AvatarPath { get; set; }
@@ -1219,9 +1842,9 @@ namespace Zoomios
         [Export("handRaised")]
         bool HandRaised { get; set; }
 
-        // @property (assign, nonatomic) BOOL inSilentMode;
-        [Export("inSilentMode")]
-        bool InSilentMode { get; set; }
+        // @property (assign, nonatomic) BOOL inWaitingRoom;
+        [Export("inWaitingRoom")]
+        bool InWaitingRoom { get; set; }
 
         // @property (assign, nonatomic) BOOL isCohost;
         [Export("isCohost")]
@@ -1246,29 +1869,55 @@ namespace Zoomios
         // @property (assign, nonatomic) MobileRTCFeedbackType feedbackType;
         [Export("feedbackType", ArgumentSemantic.Assign)]
         MobileRTCFeedbackType FeedbackType { get; set; }
+
+        // @property (assign, nonatomic) MobileRTCUserRole userRole;
+        [Export("userRole", ArgumentSemantic.Assign)]
+        MobileRTCUserRole UserRole { get; set; }
+
+        // @property (assign, nonatomic) BOOL isInterpreter;
+        [Export("isInterpreter")]
+        bool IsInterpreter { get; set; }
+
+        // @property (retain, nonatomic) NSString * _Nullable interpreterActiveLanguage;
+        [NullAllowed, Export("interpreterActiveLanguage", ArgumentSemantic.Retain)]
+        string InterpreterActiveLanguage { get; set; }
     }
 
     // @interface MobileRTCMeetingWebinarAttendeeInfo : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingWebinarAttendeeInfo
     {
         // @property (assign, nonatomic) NSUInteger userID;
         [Export("userID")]
         nuint UserID { get; set; }
 
+        // @property (assign, nonatomic) BOOL isMySelf;
+        [Export("isMySelf")]
+        bool IsMySelf { get; set; }
+
         // @property (retain, nonatomic) NSString * _Nullable userName;
         [NullAllowed, Export("userName", ArgumentSemantic.Retain)]
         string UserName { get; set; }
 
-        // @property (retain, nonatomic) NSString * _Nullable emailAddress;
-        [NullAllowed, Export("emailAddress", ArgumentSemantic.Retain)]
-        string EmailAddress { get; set; }
+        // @property (assign, nonatomic) MobileRTCUserRole userRole;
+        [Export("userRole", ArgumentSemantic.Assign)]
+        MobileRTCUserRole UserRole { get; set; }
+
+        // @property (assign, nonatomic) BOOL handRaised;
+        [Export("handRaised")]
+        bool HandRaised { get; set; }
+
+        // @property (assign, nonatomic) BOOL isAttendeeCanTalk;
+        [Export("isAttendeeCanTalk")]
+        bool IsAttendeeCanTalk { get; set; }
+
+        // @property (retain, nonatomic) MobileRTCAudioStatus * _Nonnull audioStatus;
+        [Export("audioStatus", ArgumentSemantic.Retain)]
+        MobileRTCAudioStatus AudioStatus { get; set; }
     }
 
     // @interface MobileRTCMeetingChat : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingChat
     {
         // @property (readwrite, retain, nonatomic) NSString * _Nullable chatId;
@@ -1299,6 +1948,10 @@ namespace Zoomios
         [NullAllowed, Export("date", ArgumentSemantic.Retain)]
         NSDate Date { get; set; }
 
+        // @property (readwrite, nonatomic) MobileRTCChatMessageType chatMessageType;
+        [Export("chatMessageType", ArgumentSemantic.Assign)]
+        MobileRTCChatMessageType ChatMessageType { get; set; }
+
         // @property (readwrite, nonatomic) BOOL isMyself;
         [Export("isMyself")]
         bool IsMyself { get; set; }
@@ -1306,6 +1959,18 @@ namespace Zoomios
         // @property (readwrite, nonatomic) BOOL isPrivate;
         [Export("isPrivate")]
         bool IsPrivate { get; set; }
+
+        // @property (readwrite, nonatomic) BOOL isChatToAll;
+        [Export("isChatToAll")]
+        bool IsChatToAll { get; set; }
+
+        // @property (readwrite, nonatomic) BOOL isChatToAllPanelist;
+        [Export("isChatToAllPanelist")]
+        bool IsChatToAllPanelist { get; set; }
+
+        // @property (readwrite, nonatomic) BOOL isChatToWaitingroom;
+        [Export("isChatToWaitingroom")]
+        bool IsChatToWaitingroom { get; set; }
     }
 
     // @interface InMeeting (MobileRTCMeetingService)
@@ -1357,21 +2022,17 @@ namespace Zoomios
         [Export("turnOnCMR:")]
         void TurnOnCMR(bool on);
 
-        // -(BOOL)handleE2EMeetingKey:(NSArray * _Nonnull)keyArray withLeaveMeeting:(BOOL)leave;
-        [Export("handleE2EMeetingKey:withLeaveMeeting:")]
-        bool HandleE2EMeetingKey(NSObject[] keyArray, bool leave);
-
-        // -(BOOL)isExternalMeeting;
-        [Export("isExternalMeeting")]
-        bool IsExternalMeeting();
-
-        // -(BOOL)isInternalMeeting;
-        [Export("isInternalMeeting")]
-        bool IsInternalMeeting();
+        // -(MobileRTCRecordingStatus)getCloudRecordingStatus;
+        [Export("getCloudRecordingStatus")]
+        MobileRTCRecordingStatus CloudRecordingStatus();
 
         // -(BOOL)isFailoverMeeting;
         [Export("isFailoverMeeting")]
         bool IsFailoverMeeting();
+
+        // -(MobileRTCMeetingType)getMeetingType;
+        [Export("getMeetingType")]
+        MobileRTCMeetingType MeetingType();
 
         // -(BOOL)isWebinarMeeting;
         [Export("isWebinarMeeting")]
@@ -1401,10 +2062,6 @@ namespace Zoomios
         [Export("configDSCPWithAudioValue:VideoValue:")]
         bool ConfigDSCPWithAudioValue(nuint audioValue, nuint videoValue);
 
-        // -(BOOL)hideFullPhoneNumberForPureCallInUser:(BOOL)bHide;
-        [Export("hideFullPhoneNumberForPureCallInUser:")]
-        bool HideFullPhoneNumberForPureCallInUser(bool bHide);
-
         // -(BOOL)startLiveStreamWithStreamingURL:(NSString * _Nonnull)streamingURL StreamingKey:(NSString * _Nonnull)key BroadcastURL:(NSString * _Nonnull)broadcastURL;
         [Export("startLiveStreamWithStreamingURL:StreamingKey:BroadcastURL:")]
         bool StartLiveStreamWithStreamingURL(string streamingURL, string key, string broadcastURL);
@@ -1417,6 +2074,14 @@ namespace Zoomios
         [Export("stopLiveStream")]
         bool StopLiveStream();
 
+        // -(BOOL)startRawLiveStream:(NSString * _Nonnull)broadcastURL;
+        [Export("startRawLiveStream:")]
+        bool StartRawLiveStream(string broadcastURL);
+
+        // -(BOOL)stopRawLiveStream;
+        [Export("stopRawLiveStream")]
+        bool StopRawLiveStream();
+
         // -(BOOL)showMobileRTCMeeting:(void (^ _Nonnull)(void))completion;
         [Export("showMobileRTCMeeting:")]
         bool ShowMobileRTCMeeting(Action completion);
@@ -1428,6 +2093,26 @@ namespace Zoomios
         // -(void)showMeetingControlBar;
         [Export("showMeetingControlBar")]
         void ShowMeetingControlBar();
+
+        // -(void)switchToActiveSpeaker;
+        [Export("switchToActiveSpeaker")]
+        void SwitchToActiveSpeaker();
+
+        // -(void)switchToVideoWall;
+        [Export("switchToVideoWall")]
+        void SwitchToVideoWall();
+
+        // -(void)switchToDriveScene;
+        [Export("switchToDriveScene")]
+        void SwitchToDriveScene();
+
+        // -(MobileRTCANNError)showAANPanelInView:(UIView * _Nullable)containerView originPoint:(CGPoint)originXY;
+        [Export("showAANPanelInView:originPoint:")]
+        MobileRTCANNError ShowAANPanelInView([NullAllowed] UIView containerView, CGPoint originXY);
+
+        // -(MobileRTCANNError)hideAANPanel;
+        [Export("hideAANPanel")]
+        MobileRTCANNError HideAANPanel();
 
         // -(BOOL)isQAEnabled;
         [Export("isQAEnabled")]
@@ -1447,12 +2132,40 @@ namespace Zoomios
 
         // -(BOOL)backZoomUIMeetingFromMinimizeMeeting;
         [Export("backZoomUIMeetingFromMinimizeMeeting")]
+
         bool BackZoomUIMeetingFromMinimizeMeeting();
+
+        // -(BOOL)isParticipantsRenameAllowed;
+        [Export("isParticipantsRenameAllowed")]
+        bool IsParticipantsRenameAllowed();
+
+        // -(void)allowParticipantsToRename:(BOOL)allow;
+        [Export("allowParticipantsToRename:")]
+        void AllowParticipantsToRename(bool allow);
+
+        // -(BOOL)isParticipantsUnmuteSelfAllowed;
+        [Export("isParticipantsUnmuteSelfAllowed")]
+        bool IsParticipantsUnmuteSelfAllowed();
+
+        // -(void)allowParticipantsToUnmuteSelf:(BOOL)allow;
+        [Export("allowParticipantsToUnmuteSelf:")]
+        void AllowParticipantsToUnmuteSelf(bool allow);
+
+        // -(BOOL)isLiveTranscriptLegalNoticeAvailable;
+        [Export("isLiveTranscriptLegalNoticeAvailable")]
+        bool IsLiveTranscriptLegalNoticeAvailable();
+
+        // -(NSString * _Nullable)getLiveTranscriptLegalNoticesPrompt;
+        [NullAllowed, Export("getLiveTranscriptLegalNoticesPrompt")]
+        string LiveTranscriptLegalNoticesPrompt();
+
+        // -(NSString * _Nullable)getLiveTranscriptLegalNoticesExplained;
+        [NullAllowed, Export("getLiveTranscriptLegalNoticesExplained")]
+        string LiveTranscriptLegalNoticesExplained();
     }
 
     // @interface MobileRTCRoomDevice : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCRoomDevice
     {
         // @property (copy, nonatomic) NSString * deviceName;
@@ -1478,7 +2191,6 @@ namespace Zoomios
 
     // @interface MobileRTCCallCountryCode : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCCallCountryCode
     {
         // @property (retain, nonatomic) NSString * countryId;
@@ -1511,6 +2223,10 @@ namespace Zoomios
         [Export("customizeMeetingTitle:")]
         void CustomizeMeetingTitle([NullAllowed] string title);
 
+        // -(BOOL)setMeetingTopic:(NSString * _Nonnull)meetingTopic;
+        [Export("setMeetingTopic:")]
+        bool SetMeetingTopic(string meetingTopic);
+
         // -(BOOL)isDialOutSupported;
         [Export("isDialOutSupported")]
         bool IsDialOutSupported();
@@ -1529,27 +2245,33 @@ namespace Zoomios
 
         // -(BOOL)isCallRoomDeviceSupported;
         [Export("isCallRoomDeviceSupported")]
+
         bool IsCallRoomDeviceSupported();
 
         // -(BOOL)isCallingRoomDevice;
         [Export("isCallingRoomDevice")]
+
         bool IsCallingRoomDevice();
 
         // -(BOOL)cancelCallRoomDevice;
         [Export("cancelCallRoomDevice")]
+
         bool CancelCallRoomDevice();
 
-        // -(NSArray * _Nullable)getIPAddressList;
-        [Export("getIPAddressList")]
-        NSObject[] IPAddressList();
+        // -(NSArray<NSString *> * _Nullable)getIPAddressList;
+        [NullAllowed, Export("getIPAddressList")]
+
+        string[] IPAddressList();
 
         // -(NSString * _Nullable)getH323MeetingPassword;
-        [Export("getH323MeetingPassword")]
+        [NullAllowed, Export("getH323MeetingPassword")]
+
         string H323MeetingPassword();
 
-        // -(NSArray * _Nullable)getRoomDeviceList;
-        [Export("getRoomDeviceList")]
-        NSObject[] RoomDeviceList();
+        // -(NSArray<MobileRTCRoomDevice *> * _Nullable)getRoomDeviceList;
+        [NullAllowed, Export("getRoomDeviceList")]
+
+        MobileRTCRoomDevice[] RoomDeviceList();
 
         // -(BOOL)sendPairingCode:(NSString * _Nonnull)code WithMeetingNumber:(unsigned long long)meetingNumber;
         [Export("sendPairingCode:WithMeetingNumber:")]
@@ -1565,20 +2287,30 @@ namespace Zoomios
 
         // -(MobileRTCCallCountryCode * _Nullable)getDialInCurrentCountryCode;
         [NullAllowed, Export("getDialInCurrentCountryCode")]
+
         MobileRTCCallCountryCode DialInCurrentCountryCode();
 
-        // -(NSArray * _Nullable)getDialInAllCountryCodes;
-        [Export("getDialInAllCountryCodes")]
-        NSObject[] DialInAllCountryCodes();
+        // -(NSArray<NSArray<MobileRTCCallCountryCode *> *> * _Nullable)getDialInAllCountryCodes;
+        [NullAllowed, Export("getDialInAllCountryCodes")]
 
-        // -(NSArray * _Nullable)getDialInCallCodesWithCountryId:(NSString * _Nullable)countryId;
+        MobileRTCCallCountryCode[] DialInAllCountryCodes();
+
+        // -(NSArray<MobileRTCCallCountryCode *> * _Nullable)getDialInCallCodesWithCountryId:(NSString * _Nullable)countryId;
         [Export("getDialInCallCodesWithCountryId:")]
         [return: NullAllowed]
-        NSObject[] GetDialInCallCodesWithCountryId([NullAllowed] string countryId);
+        MobileRTCCallCountryCode[] GetDialInCallCodesWithCountryId([NullAllowed] string countryId);
 
         // -(BOOL)dialInCall:(NSString * _Nullable)countryNumber;
         [Export("dialInCall:")]
         bool DialInCall([NullAllowed] string countryNumber);
+
+        // -(BOOL)setCustomizedPollingUrl:(NSString * _Nullable)pollingURL bCreate:(BOOL)bCreate;
+        [Export("setCustomizedPollingUrl:bCreate:")]
+        bool SetCustomizedPollingUrl([NullAllowed] string pollingURL, bool bCreate);
+
+        // -(BOOL)setCloudWhiteboardFeedbackUrl:(NSString * _Nullable)feedbackUrl;
+        [Export("setCloudWhiteboardFeedbackUrl:")]
+        bool SetCloudWhiteboardFeedbackUrl([NullAllowed] string feedbackUrl);
     }
 
     // @interface Audio (MobileRTCMeetingService)
@@ -1626,16 +2358,19 @@ namespace Zoomios
         [Export("muteAllUserAudio:")]
         bool MuteAllUserAudio(bool allowSelfUnmute);
 
-        // -(BOOL)unmuteAllUserAudio;
-        [Export("unmuteAllUserAudio")]
-        bool UnmuteAllUserAudio();
+        // -(BOOL)askAllToUnmute;
+        [Export("askAllToUnmute")]
+
+        bool AskAllToUnmute();
 
         // -(BOOL)isSupportedVOIP;
         [Export("isSupportedVOIP")]
+
         bool IsSupportedVOIP();
 
         // -(BOOL)isPlayChimeOn;
         [Export("isPlayChimeOn")]
+
         bool IsPlayChimeOn();
 
         // -(BOOL)playChime:(BOOL)on;
@@ -1670,11 +2405,16 @@ namespace Zoomios
 
         // -(BOOL)canUnmuteMyVideo;
         [Export("canUnmuteMyVideo")]
+
         bool CanUnmuteMyVideo();
 
         // -(MobileRTCVideoError)muteMyVideo:(BOOL)mute;
         [Export("muteMyVideo:")]
         MobileRTCVideoError MuteMyVideo(bool mute);
+
+        // -(BOOL)rotateMyVideo:(UIDeviceOrientation)rotation;
+        [Export("rotateMyVideo:")]
+        bool RotateMyVideo(UIDeviceOrientation rotation);
 
         // -(BOOL)isUserSpotlighted:(NSUInteger)userId;
         [Export("isUserSpotlighted:")]
@@ -1683,6 +2423,14 @@ namespace Zoomios
         // -(BOOL)spotlightVideo:(BOOL)on withUser:(NSUInteger)userId;
         [Export("spotlightVideo:withUser:")]
         bool SpotlightVideo(bool on, nuint userId);
+
+        // -(BOOL)unSpotlightAllVideos;
+        [Export("unSpotlightAllVideos")]
+        bool UnSpotlightAllVideos();
+
+        // -(NSArray<NSNumber *> * _Nullable)getSpotLightedVideoUserList;
+        [NullAllowed, Export("getSpotLightedVideoUserList")]
+        NSNumber[] SpotLightedVideoUserList();
 
         // -(BOOL)isUserPinned:(NSUInteger)userId;
         [Export("isUserPinned:")]
@@ -1715,6 +2463,18 @@ namespace Zoomios
         // -(MobileRTCCameraError)switchMyCamera;
         [Export("switchMyCamera")]
         MobileRTCCameraError SwitchMyCamera();
+
+        // -(BOOL)isSupportFollowHostVideoOrder;
+        [Export("isSupportFollowHostVideoOrder")]
+        bool IsSupportFollowHostVideoOrder();
+
+        // -(BOOL)isFollowHostVideoOrderOn;
+        [Export("isFollowHostVideoOrderOn")]
+        bool IsFollowHostVideoOrderOn();
+
+        // -(NSArray<NSNumber *> * _Nullable)getVideoOrderList;
+        [NullAllowed, Export("getVideoOrderList")]
+        NSNumber[] VideoOrderList();
     }
 
     // @interface User (MobileRTCMeetingService)
@@ -1726,12 +2486,12 @@ namespace Zoomios
         [Export("changeName:withUserID:")]
         bool ChangeName(string inputName, nuint userId);
 
-        // -(NSArray * _Nullable)getInMeetingUserList;
-        [Export("getInMeetingUserList")]
+        // -(NSArray<NSNumber *> * _Nullable)getInMeetingUserList;
+        [NullAllowed, Export("getInMeetingUserList")]
         NSNumber[] InMeetingUserList();
 
-        // -(NSArray * _Nullable)getWebinarAttendeeList;
-        [Export("getWebinarAttendeeList")]
+        // -(NSArray<NSNumber *> * _Nullable)getWebinarAttendeeList;
+        [NullAllowed, Export("getWebinarAttendeeList")]
         NSNumber[] WebinarAttendeeList();
 
         // -(MobileRTCMeetingUserInfo * _Nullable)userInfoByID:(NSUInteger)userId;
@@ -1776,17 +2536,30 @@ namespace Zoomios
         [Export("isMyself:")]
         bool IsMyself(nuint userID);
 
+        // -(BOOL)isH323User:(NSUInteger)userID;
+        [Export("isH323User:")]
+        bool IsH323User(nuint userID);
+
         // -(BOOL)raiseMyHand;
         [Export("raiseMyHand")]
+
         bool RaiseMyHand();
 
         // -(BOOL)lowerHand:(NSUInteger)userId;
         [Export("lowerHand:")]
         bool LowerHand(nuint userId);
 
-        // -(BOOL)lowerAllHand;
-        [Export("lowerAllHand")]
-        bool LowerAllHand();
+        // -(BOOL)lowerAllHand:(BOOL)isWebinarAttendee;
+        [Export("lowerAllHand:")]
+        bool LowerAllHand(bool isWebinarAttendee);
+
+        // -(BOOL)canClaimhost;
+        [Export("canClaimhost")]
+        bool CanClaimhost();
+
+        // -(BOOL)reclaimHost;
+        [Export("reclaimHost")]
+        bool ReclaimHost();
 
         // -(BOOL)claimHostWithHostKey:(NSString * _Nonnull)hostKey;
         [Export("claimHostWithHostKey:")]
@@ -1812,19 +2585,37 @@ namespace Zoomios
     {
         // -(BOOL)isChatDisabled;
         [Export("isChatDisabled")]
+
         bool IsChatDisabled();
 
         // -(BOOL)isPrivateChatDisabled;
         [Export("isPrivateChatDisabled")]
+
         bool IsPrivateChatDisabled();
 
-        // -(BOOL)changeAttendeeChatPriviledge:(MobileRTCMeetingChatPriviledgeType)type;
+        // -(BOOL)changeAttendeeChatPriviledge:(MobileRTCMeetingChatPriviledgeType)privilege;
         [Export("changeAttendeeChatPriviledge:")]
-        bool ChangeAttendeeChatPriviledge(MobileRTCMeetingChatPriviledgeType type);
+        bool ChangeAttendeeChatPriviledge(MobileRTCMeetingChatPriviledgeType privilege);
 
         // -(MobileRTCMeetingChatPriviledgeType)getAttendeeChatPriviledge;
         [Export("getAttendeeChatPriviledge")]
+
         MobileRTCMeetingChatPriviledgeType AttendeeChatPriviledge();
+
+        // -(BOOL)isMeetingChatLegalNoticeAvailable;
+        [Export("isMeetingChatLegalNoticeAvailable")]
+
+        bool IsMeetingChatLegalNoticeAvailable();
+
+        // -(NSString * _Nullable)getChatLegalNoticesPrompt;
+        [NullAllowed, Export("getChatLegalNoticesPrompt")]
+
+        string ChatLegalNoticesPrompt();
+
+        // -(NSString * _Nullable)getChatLegalNoticesExplained;
+        [NullAllowed, Export("getChatLegalNoticesExplained")]
+
+        string ChatLegalNoticesExplained();
 
         // -(MobileRTCMeetingChat * _Nullable)meetingChatByID:(NSString * _Nonnull)messageID;
         [Export("meetingChatByID:")]
@@ -1838,113 +2629,160 @@ namespace Zoomios
         // -(MobileRTCSendChatError)sendChatToGroup:(MobileRTCChatGroup)group WithContent:(NSString * _Nonnull)content;
         [Export("sendChatToGroup:WithContent:")]
         MobileRTCSendChatError SendChatToGroup(MobileRTCChatGroup group, string content);
+
+        // -(BOOL)deleteChatMessage:(NSString * _Nonnull)msgId;
+        [Export("deleteChatMessage:")]
+        bool DeleteChatMessage(string msgId);
+
+        // -(NSArray<NSString *> * _Nullable)getAllChatMessageID;
+        [NullAllowed, Export("getAllChatMessageID")]
+
+        string[] AllChatMessageID();
+
+        // -(BOOL)isChatMessageCanBeDeleted:(NSString * _Nonnull)msgId;
+        [Export("isChatMessageCanBeDeleted:")]
+        bool IsChatMessageCanBeDeleted(string msgId);
+
+        // -(BOOL)isShareMeetingChatLegalNoticeAvailable;
+        [Export("isShareMeetingChatLegalNoticeAvailable")]
+        bool IsShareMeetingChatLegalNoticeAvailable();
+
+        // -(NSString * _Nullable)getShareMeetingChatStartedLegalNoticeContent;
+        [NullAllowed, Export("getShareMeetingChatStartedLegalNoticeContent")]
+        string ShareMeetingChatStartedLegalNoticeContent();
+
+        // -(NSString * _Nullable)getShareMeetingChatStoppedLegalNoticeContent;
+        [NullAllowed, Export("getShareMeetingChatStoppedLegalNoticeContent")]
+        string ShareMeetingChatStoppedLegalNoticeContent();
     }
 
     // @interface MobileRTCQAAnswerItem : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCQAAnswerItem
     {
         // -(NSDate * _Nullable)getTime;
         [NullAllowed, Export("getTime")]
+
         NSDate Time { get; }
 
         // -(NSString * _Nullable)getText;
         [NullAllowed, Export("getText")]
+
         string Text { get; }
 
         // -(NSString * _Nullable)getSenderName;
         [NullAllowed, Export("getSenderName")]
+
         string SenderName { get; }
 
         // -(NSString * _Nullable)getQuestionId;
         [NullAllowed, Export("getQuestionId")]
+
         string QuestionId { get; }
 
         // -(NSString * _Nullable)getAnswerID;
         [NullAllowed, Export("getAnswerID")]
+
         string AnswerID { get; }
 
         // -(BOOL)isPrivate;
         [Export("isPrivate")]
+
         bool IsPrivate { get; }
 
         // -(BOOL)isLiveAnswer;
         [Export("isLiveAnswer")]
+
         bool IsLiveAnswer { get; }
 
         // -(BOOL)isSenderMyself;
         [Export("isSenderMyself")]
+
         bool IsSenderMyself { get; }
     }
 
     // @interface MobileRTCQAItem : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCQAItem
     {
         // -(NSString * _Nullable)getQuestionId;
         [NullAllowed, Export("getQuestionId")]
+
         string QuestionId { get; }
 
         // -(NSDate * _Nullable)getTime;
         [NullAllowed, Export("getTime")]
+
         NSDate Time { get; }
 
         // -(NSString * _Nullable)getText;
         [NullAllowed, Export("getText")]
+
         string Text { get; }
 
         // -(NSString * _Nullable)getSenderName;
         [NullAllowed, Export("getSenderName")]
+
         string SenderName { get; }
 
         // -(BOOL)isAnonymous;
         [Export("isAnonymous")]
+
         bool IsAnonymous { get; }
 
         // -(BOOL)isMarkedAsAnswered;
         [Export("isMarkedAsAnswered")]
+
         bool IsMarkedAsAnswered { get; }
 
         // -(BOOL)isMarkedAsDismissed;
         [Export("isMarkedAsDismissed")]
+
         bool IsMarkedAsDismissed { get; }
 
         // -(NSUInteger)getUpvoteNumber;
         [Export("getUpvoteNumber")]
+
         nuint UpvoteNumber { get; }
 
         // -(BOOL)getHasLiveAnswers;
         [Export("getHasLiveAnswers")]
+
         bool HasLiveAnswers { get; }
 
         // -(BOOL)getHasTextAnswers;
         [Export("getHasTextAnswers")]
+
         bool HasTextAnswers { get; }
 
         // -(BOOL)isMySelfUpvoted;
         [Export("isMySelfUpvoted")]
+
         bool IsMySelfUpvoted { get; }
 
         // -(BOOL)amILiveAnswering;
         [Export("amILiveAnswering")]
+
         bool AmILiveAnswering { get; }
 
         // -(BOOL)isLiveAnswering;
         [Export("isLiveAnswering")]
+
         bool IsLiveAnswering { get; }
 
         // -(NSString * _Nullable)getLiveAnswerName;
         [NullAllowed, Export("getLiveAnswerName")]
+
         string LiveAnswerName { get; }
 
         // -(BOOL)isSenderMyself;
         [Export("isSenderMyself")]
+
         bool IsSenderMyself { get; }
 
         // -(NSArray * _Nullable)getAnswerlist;
         [NullAllowed, Export("getAnswerlist")]
+
         NSObject[] Answerlist { get; }
     }
 
@@ -1965,9 +2803,21 @@ namespace Zoomios
         [Export("dePromptPanelist2Attendee:")]
         bool DePromptPanelist2Attendee(nuint userID);
 
+        // -(BOOL)changePanelistChatPrivilege:(MobileRTCPanelistChatPrivilegeType)privilege;
+        [Export("changePanelistChatPrivilege:")]
+        bool ChangePanelistChatPrivilege(MobileRTCPanelistChatPrivilegeType privilege);
+
+        // -(MobileRTCPanelistChatPrivilegeType)getPanelistChatPrivilege;
+        [Export("getPanelistChatPrivilege")]
+        MobileRTCPanelistChatPrivilegeType PanelistChatPrivilege();
+
         // -(BOOL)allowAttendeeChat:(MobileRTCChatAllowAttendeeChat)privilegeType;
         [Export("allowAttendeeChat:")]
         bool AllowAttendeeChat(MobileRTCChatAllowAttendeeChat privilegeType);
+
+        // -(MobileRTCChatAllowAttendeeChat)getWebinarAttendeeChatPrivilege;
+        [Export("getWebinarAttendeeChatPrivilege")]
+        MobileRTCChatAllowAttendeeChat WebinarAttendeeChatPrivilege();
 
         // -(BOOL)isAllowAttendeeTalk:(NSUInteger)userID;
         [Export("isAllowAttendeeTalk:")]
@@ -1979,6 +2829,7 @@ namespace Zoomios
 
         // -(BOOL)isAllowPanelistStartVideo;
         [Export("isAllowPanelistStartVideo")]
+
         bool IsAllowPanelistStartVideo();
 
         // -(BOOL)allowPanelistStartVideo:(BOOL)enable;
@@ -2001,21 +2852,13 @@ namespace Zoomios
         [Export("allowAttendeeViewAllQuestion:")]
         bool AllowAttendeeViewAllQuestion(bool enable);
 
-        // -(BOOL)isAllowAttendeeUpVoteQuestion;       
+        // -(BOOL)isAllowAttendeeUpVoteQuestion;
         [Export("isAllowAttendeeUpVoteQuestion")]
         bool IsAllowAttendeeUpVoteQuestion();
 
         // -(BOOL)allowAttendeeUpVoteQuestion:(BOOL)enable;
         [Export("allowAttendeeUpVoteQuestion:")]
         bool AllowAttendeeUpVoteQuestion(bool enable);
-
-        // -(BOOL)isAllowAttendeeAnswerQuestion __attribute__((deprecated("Had deprecated. Please use - (BOOL)isAllowCommentQuestion; instead")));
-        [Export("isAllowAttendeeAnswerQuestion")]
-        bool IsAllowAttendeeAnswerQuestion();
-
-        // -(BOOL)allowAttendeeAnswerQuestion:(BOOL)enable __attribute__((deprecated("Had deprecated. Please use - (BOOL)allowCommentQuestion:(BOOL)enable; instead")));
-        [Export("allowAttendeeAnswerQuestion:")]
-        bool AllowAttendeeAnswerQuestion(bool enable);
 
         // -(BOOL)isAllowCommentQuestion;
         [Export("isAllowCommentQuestion")]
@@ -2025,27 +2868,27 @@ namespace Zoomios
         [Export("allowCommentQuestion:")]
         bool AllowCommentQuestion(bool enable);
 
-        // -(NSArray * _Nullable)getAllQuestionList;        
-        [Export("getAllQuestionList")]
-        NSObject[] AllQuestionList();
+        // -(NSArray<MobileRTCQAItem *> * _Nullable)getAllQuestionList;
+        [NullAllowed, Export("getAllQuestionList")]
+        MobileRTCQAItem[] AllQuestionList();
 
-        // -(NSArray * _Nullable)getMyQuestionList;
-        [Export("getMyQuestionList")]
-        NSObject[] MyQuestionList();
+        // -(NSArray<MobileRTCQAItem *> * _Nullable)getMyQuestionList;
+        [NullAllowed, Export("getMyQuestionList")]
+        MobileRTCQAItem[] MyQuestionList();
 
-        // -(NSArray * _Nullable)getOpenQuestionList;
-        [Export("getOpenQuestionList")]
-        NSObject[] OpenQuestionList();
+        // -(NSArray<MobileRTCQAItem *> * _Nullable)getOpenQuestionList;
+        [NullAllowed, Export("getOpenQuestionList")]
+        MobileRTCQAItem[] OpenQuestionList();
 
-        // -(NSArray * _Nullable)getDismissedQuestionList;
-        [Export("getDismissedQuestionList")]
-        NSObject[] DismissedQuestionList();
+        // -(NSArray<MobileRTCQAItem *> * _Nullable)getDismissedQuestionList;
+        [NullAllowed, Export("getDismissedQuestionList")]
+        MobileRTCQAItem[] DismissedQuestionList();
 
-        // -(NSArray * _Nullable)getAnsweredQuestionList;
-        [Export("getAnsweredQuestionList")]
-        NSObject[] AnsweredQuestionList();
+        // -(NSArray<MobileRTCQAItem *> * _Nullable)getAnsweredQuestionList;
+        [NullAllowed, Export("getAnsweredQuestionList")]
+        MobileRTCQAItem[] AnsweredQuestionList();
 
-        // -(int)getALLQuestionCount;        
+        // -(int)getALLQuestionCount;
         [Export("getALLQuestionCount")]
         int ALLQuestionCount();
 
@@ -2061,7 +2904,7 @@ namespace Zoomios
         [Export("getDismissedQuestionCount")]
         int DismissedQuestionCount();
 
-        // -(int)getAnsweredQuestionCount;        
+        // -(int)getAnsweredQuestionCount;
         [Export("getAnsweredQuestionCount")]
         int AnsweredQuestionCount();
 
@@ -2110,16 +2953,52 @@ namespace Zoomios
         // -(BOOL)endLiving:(NSString * _Nonnull)questionID;
         [Export("endLiving:")]
         bool EndLiving(string questionID);
+
+        // -(BOOL)deleteQuestion:(NSString * _Nonnull)questionID;
+        [Export("deleteQuestion:")]
+        bool DeleteQuestion(string questionID);
+
+        // -(BOOL)deleteAnswer:(NSString * _Nonnull)answerID;
+        [Export("deleteAnswer:")]
+        bool DeleteAnswer(string answerID);
+
+        // -(BOOL)isQALegalNoticeAvailable;
+        [Export("isQALegalNoticeAvailable")]
+        bool IsQALegalNoticeAvailable();
+
+        // -(NSString * _Nullable)getQALegalNoticesPrompt;
+        [NullAllowed, Export("getQALegalNoticesPrompt")]
+        string QALegalNoticesPrompt();
+
+        // -(NSString * _Nullable)getQALegalNoticesExplained;
+        [NullAllowed, Export("getQALegalNoticesExplained")]
+        string QALegalNoticesExplained();
+
+        // -(NSString * _Nullable)getPollLegalNoticesPrompt;
+        [NullAllowed, Export("getPollLegalNoticesPrompt")]
+
+        string PollLegalNoticesPrompt();
+
+        // -(BOOL)isPollingLegalNoticeAvailable;
+        [Export("isPollingLegalNoticeAvailable")]
+        bool IsPollingLegalNoticeAvailable();
+
+        // -(NSString * _Nullable)getPollLegalNoticesExplained;
+        [NullAllowed, Export("getPollLegalNoticesExplained")]
+        string PollLegalNoticesExplained();
+
+        // -(NSString * _Nullable)getPollAnonymousLegalNoticesExplained;
+        [NullAllowed, Export("getPollAnonymousLegalNoticesExplained")]
+        string PollAnonymousLegalNoticesExplained();
     }
 
-    // @interface ZoomSDKVirtualBGImageInfo : NSObject
-    [Protocol]
+    // @interface MobileRTCVirtualBGImageInfo : NSObject
     [BaseType(typeof(NSObject))]
-    interface ZoomSDKVirtualBGImageInfo
+    interface MobileRTCVirtualBGImageInfo
     {
-        // @property (assign, nonatomic) BOOL isNone;
-        [Export("isNone")]
-        bool IsNone { get; set; }
+        // @property (assign, nonatomic) MobileRTCVBType vbType;
+        [Export("vbType", ArgumentSemantic.Assign)]
+        MobileRTCVBType VbType { get; set; }
 
         // @property (assign, nonatomic) BOOL isSelect;
         [Export("isSelect")]
@@ -2136,11 +3015,8 @@ namespace Zoomios
     interface MobileRTCMeetingService_VirtualBackground
     {
         // @property (retain, nonatomic) UIView * _Nullable previewView;
-        [Export("previewView", ArgumentSemantic.Retain)]
-        UIView PreviewView();
-
-        [Export ("setPreviewView:")]
-        void PreviewView(UIView value);
+        //[NullAllowed, Export("previewView", ArgumentSemantic.Retain)]
+        //UIView PreviewView { get; set; }
 
         // -(BOOL)startPreviewWithFrame:(CGRect)frame;
         [Export("startPreviewWithFrame:")]
@@ -2154,21 +3030,21 @@ namespace Zoomios
         [Export("isSupportSmartVirtualBG")]
         bool IsSupportSmartVirtualBG();
 
-        // -(NSArray * _Nonnull)getBGImageList;
+        // -(NSArray<MobileRTCVirtualBGImageInfo *> * _Nonnull)getBGImageList;
         [Export("getBGImageList")]
-        NSObject[] BGImageList();
+        MobileRTCVirtualBGImageInfo[] BGImageList();
 
         // -(MobileRTCMeetError)addBGImage:(UIImage * _Nonnull)image;
         [Export("addBGImage:")]
         MobileRTCMeetError AddBGImage(UIImage image);
 
-        // -(MobileRTCMeetError)removeBGImage:(ZoomSDKVirtualBGImageInfo * _Nonnull)bgImageInfo;
+        // -(MobileRTCMeetError)removeBGImage:(MobileRTCVirtualBGImageInfo * _Nonnull)bgImageInfo;
         [Export("removeBGImage:")]
-        MobileRTCMeetError RemoveBGImage(ZoomSDKVirtualBGImageInfo bgImageInfo);
+        MobileRTCMeetError RemoveBGImage(MobileRTCVirtualBGImageInfo bgImageInfo);
 
-        // -(MobileRTCMeetError)useBGImage:(ZoomSDKVirtualBGImageInfo * _Nonnull)bgImage;
+        // -(MobileRTCMeetError)useBGImage:(MobileRTCVirtualBGImageInfo * _Nonnull)bgImage;
         [Export("useBGImage:")]
-        MobileRTCMeetError UseBGImage(ZoomSDKVirtualBGImageInfo bgImage);
+        MobileRTCMeetError UseBGImage(MobileRTCVirtualBGImageInfo bgImage);
 
         // -(MobileRTCMeetError)useNoneImage;
         [Export("useNoneImage")]
@@ -2187,34 +3063,177 @@ namespace Zoomios
         MobileRTCMeetError SelectGreenVBPoint(CGPoint point);
     }
 
+    // @interface MobileRTCInterpretationLanguage : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCInterpretationLanguage
+    {
+        // -(NSInteger)getLanguageID;
+        [Export("getLanguageID")]
+        nint LanguageID { get; }
+
+        // -(NSString * _Nullable)getLanguageAbbreviations;
+        [NullAllowed, Export("getLanguageAbbreviations")]
+
+        string LanguageAbbreviations { get; }
+
+        // -(NSString * _Nullable)getLanguageName;
+        [NullAllowed, Export("getLanguageName")]
+
+        string LanguageName { get; }
+    }
+
+    // @interface MobileRTCMeetingInterpreter : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCMeetingInterpreter
+    {
+        // -(NSInteger)getUserID;
+        [Export("getUserID")]
+
+        nint UserID { get; }
+
+        // -(NSInteger)getLanguageID1;
+        [Export("getLanguageID1")]
+
+        nint LanguageID1 { get; }
+
+        // -(NSInteger)getLanguageID2;
+        [Export("getLanguageID2")]
+
+        nint LanguageID2 { get; }
+
+        // -(BOOL)isAvailable;
+        [Export("isAvailable")]
+
+        bool IsAvailable { get; }
+    }
+
+    // @interface Interpretation (MobileRTCMeetingService)
+    [Category]
+    [BaseType(typeof(MobileRTCMeetingService))]
+    interface MobileRTCMeetingService_Interpretation
+    {
+        // -(BOOL)isInterpretationEnabled;
+        [Export("isInterpretationEnabled")]
+        bool IsInterpretationEnabled();
+
+        // -(BOOL)isInterpretationStarted;
+        [Export("isInterpretationStarted")]
+        bool IsInterpretationStarted();
+
+        // -(BOOL)isInterpreter;
+        [Export("isInterpreter")]
+        bool IsInterpreter();
+
+        // -(MobileRTCInterpretationLanguage * _Nullable)getInterpretationLanguageByID:(NSInteger)lanID;
+        [Export("getInterpretationLanguageByID:")]
+        [return: NullAllowed]
+        MobileRTCInterpretationLanguage GetInterpretationLanguageByID(nint lanID);
+
+        // -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getAllLanguageList;
+        [NullAllowed, Export("getAllLanguageList")]
+        MobileRTCInterpretationLanguage[] AllLanguageList();
+
+        // -(NSArray<MobileRTCMeetingInterpreter *> * _Nullable)getInterpreterList;
+        [NullAllowed, Export("getInterpreterList")]
+        MobileRTCMeetingInterpreter[] InterpreterList();
+
+        // -(BOOL)addInterpreter:(NSUInteger)userID lan1:(NSInteger)lanID1 andLan2:(NSInteger)lanID2;
+        [Export("addInterpreter:lan1:andLan2:")]
+        bool AddInterpreter(nuint userID, nint lanID1, nint lanID2);
+
+        // -(BOOL)removeInterpreter:(NSUInteger)userID;
+        [Export("removeInterpreter:")]
+        bool RemoveInterpreter(nuint userID);
+
+        // -(BOOL)modifyInterpreter:(NSUInteger)userID lan1:(NSInteger)lanID1 andLan2:(NSInteger)lanID2;
+        [Export("modifyInterpreter:lan1:andLan2:")]
+        bool ModifyInterpreter(nuint userID, nint lanID1, nint lanID2);
+
+        // -(BOOL)startInterpretation;
+        [Export("startInterpretation")]
+        bool StartInterpretation();
+
+        // -(BOOL)stopInterpretation;
+        [Export("stopInterpretation")]
+        bool StopInterpretation();
+
+        // -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getAvailableLanguageList;
+        [NullAllowed, Export("getAvailableLanguageList")]
+
+        MobileRTCInterpretationLanguage[] AvailableLanguageList();
+
+        // -(BOOL)joinLanguageChannel:(NSInteger)lanID;
+        [Export("joinLanguageChannel:")]
+        bool JoinLanguageChannel(nint lanID);
+
+        // -(NSInteger)getJoinedLanguageID;
+        [Export("getJoinedLanguageID")]
+
+        nint JoinedLanguageID();
+
+        // -(BOOL)turnOffMajorAudio;
+        [Export("turnOffMajorAudio")]
+
+        bool TurnOffMajorAudio();
+
+        // -(BOOL)turnOnMajorAudio;
+        [Export("turnOnMajorAudio")]
+        bool TurnOnMajorAudio();
+
+        // -(BOOL)isMajorAudioTurnOff;
+        [Export("isMajorAudioTurnOff")]
+
+        bool IsMajorAudioTurnOff();
+
+        // -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getInterpreterLans;
+        [NullAllowed, Export("getInterpreterLans")]
+        MobileRTCInterpretationLanguage[] InterpreterLans();
+
+        // -(BOOL)setInterpreterActiveLan:(NSInteger)activeLanID;
+        [Export("setInterpreterActiveLan:")]
+        bool SetInterpreterActiveLan(nint activeLanID);
+
+        // -(NSInteger)getInterpreterActiveLan;
+        [Export("getInterpreterActiveLan")]
+        nint InterpreterActiveLan();
+
+        // -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getInterpreterAvailableLanguages;
+        [NullAllowed, Export("getInterpreterAvailableLanguages")]
+        MobileRTCInterpretationLanguage[] InterpreterAvailableLanguages();
+
+        // -(BOOL)setInterpreterListenLan:(NSInteger)lanID;
+        [Export("setInterpreterListenLan:")]
+        bool SetInterpreterListenLan(nint lanID);
+
+        // -(NSInteger)getInterpreterListenLan;
+        [Export("getInterpreterListenLan")]
+        nint InterpreterListenLan();
+    }
+
     // @interface BO (MobileRTCMeetingService)
     [Category]
     [BaseType(typeof(MobileRTCMeetingService))]
     interface MobileRTCMeetingService_BO
     {
         // -(MobileRTCBOCreator * _Nullable)getCreatorHelper;
-        [Export("getCreatorHelper")]
+        [NullAllowed, Export("getCreatorHelper")]
         MobileRTCBOCreator CreatorHelper();
 
         // -(MobileRTCBOAdmin * _Nullable)getAdminHelper;
-        [Export("getAdminHelper")]
+        [NullAllowed, Export("getAdminHelper")]
         MobileRTCBOAdmin AdminHelper();
 
         // -(MobileRTCBOAssistant * _Nullable)getAssistantHelper;
-        [Export("getAssistantHelper")]
+        [NullAllowed, Export("getAssistantHelper")]
         MobileRTCBOAssistant AssistantHelper();
 
         // -(MobileRTCBOAttendee * _Nullable)getAttedeeHelper;
-        [Export("getAttedeeHelper")]
+        [NullAllowed, Export("getAttedeeHelper")]
         MobileRTCBOAttendee AttedeeHelper();
 
         // -(MobileRTCBOData * _Nullable)getDataHelper;
-        [Export("getDataHelper")]
+        [NullAllowed, Export("getDataHelper")]
         MobileRTCBOData DataHelper();
-
-        // -(BOOL)isMasterMeetingHost;
-        [Export("isMasterMeetingHost")]
-        bool IsMasterMeetingHost();
 
         // -(BOOL)isBOMeetingStarted;
         [Export("isBOMeetingStarted")]
@@ -2226,12 +3245,147 @@ namespace Zoomios
 
         // -(BOOL)isInBOMeeting;
         [Export("isInBOMeeting")]
+
         bool IsInBOMeeting();
+
+        // -(MobileRTCBOStatus)getBOStatus;
+        [Export("getBOStatus")]
+        MobileRTCBOStatus BOStatus();
+    }
+
+    // @interface Reaction (MobileRTCMeetingService)
+    [Category]
+    [BaseType(typeof(MobileRTCMeetingService))]
+    interface MobileRTCMeetingService_Reaction
+    {
+        // -(BOOL)isEmojiReactionEnabled;
+        [Export("isEmojiReactionEnabled")]
+
+        bool IsEmojiReactionEnabled();
+
+        // -(MobileRTCMeetError)sendEmojiReaction:(MobileRTCEmojiReactionType)type reactionSkinTone:(MobileRTCEmojiReactionSkinTone)skinTone;
+        [Export("sendEmojiReaction:reactionSkinTone:")]
+        MobileRTCMeetError SendEmojiReaction(MobileRTCEmojiReactionType type, MobileRTCEmojiReactionSkinTone skinTone);
+
+        // -(MobileRTCMeetError)sendEmojiReaction:(MobileRTCEmojiReactionType)type;
+        [Export("sendEmojiReaction:")]
+        MobileRTCMeetError SendEmojiReaction(MobileRTCEmojiReactionType type);
+    }
+
+    // @interface LiveTranscription (MobileRTCMeetingService)
+    [Category]
+    [BaseType(typeof(MobileRTCMeetingService))]
+    interface MobileRTCMeetingService_LiveTranscription
+    {
+        // -(BOOL)isMeetingSupportCC;
+        [Export("isMeetingSupportCC")]
+        bool IsMeetingSupportCC();
+
+        // -(BOOL)canBeAssignedToSendCC:(NSUInteger)userId;
+        [Export("canBeAssignedToSendCC:")]
+        bool CanBeAssignedToSendCC(nuint userId);
+
+        // -(BOOL)assignCCPrivilege:(NSUInteger)userId;
+        [Export("assignCCPrivilege:")]
+        bool AssignCCPrivilege(nuint userId);
+
+        // -(BOOL)withdrawCCPrivilege:(NSUInteger)userId;
+        [Export("withdrawCCPrivilege:")]
+        bool WithdrawCCPrivilege(nuint userId);
+
+        // -(BOOL)canAssignOthersToSendCC;
+        [Export("canAssignOthersToSendCC")]
+        bool CanAssignOthersToSendCC();
+
+        // -(BOOL)enableMeetingManualCaption:(BOOL)bEnable;
+        [Export("enableMeetingManualCaption:")]
+        bool EnableMeetingManualCaption(bool bEnable);
+
+        // -(BOOL)isMeetingManualCaptionEnabled;
+        [Export("isMeetingManualCaptionEnabled")]
+        bool IsMeetingManualCaptionEnabled();
+
+        // -(BOOL)isLiveTranscriptionFeatureEnabled;
+        [Export("isLiveTranscriptionFeatureEnabled")]
+        bool IsLiveTranscriptionFeatureEnabled();
+
+        // -(MobileRTCLiveTranscriptionStatus)getLiveTranscriptionStatus;
+        [Export("getLiveTranscriptionStatus")]
+        MobileRTCLiveTranscriptionStatus LiveTranscriptionStatus();
+
+        // -(BOOL)canStartLiveTranscription;
+        [Export("canStartLiveTranscription")]
+        bool CanStartLiveTranscription();
+
+        // -(BOOL)startLiveTranscription;
+        [Export("startLiveTranscription")]
+        bool StartLiveTranscription();
+
+        // -(BOOL)stopLiveTranscription;
+        [Export("stopLiveTranscription")]
+        bool StopLiveTranscription();
+
+        // -(BOOL)enableRequestLiveTranscription:(BOOL)enable;
+        [Export("enableRequestLiveTranscription:")]
+        bool EnableRequestLiveTranscription(bool enable);
+
+        // -(BOOL)isRequestToStartLiveTranscriptionEnabled;
+        [Export("isRequestToStartLiveTranscriptionEnabled")]
+        bool IsRequestToStartLiveTranscriptionEnabled();
+
+        // -(BOOL)requestToStartLiveTranscription:(BOOL)requestAnonymous;
+        [Export("requestToStartLiveTranscription:")]
+        bool RequestToStartLiveTranscription(bool requestAnonymous);
+
+        // -(BOOL)isMultiLanguageTranscriptionEnabled;
+        [Export("isMultiLanguageTranscriptionEnabled")]
+        bool IsMultiLanguageTranscriptionEnabled();
+
+        // -(BOOL)isTextLiveTranslationEnabled;
+        [Export("isTextLiveTranslationEnabled")]
+        bool IsTextLiveTranslationEnabled();
+
+        // -(NSArray<MobileRTCLiveTranscriptionLanguage *> *)getAvailableMeetingSpokenLanguages;
+        [Export("getAvailableMeetingSpokenLanguages")]
+        MobileRTCLiveTranscriptionLanguage[] AvailableMeetingSpokenLanguages();
+
+        // -(BOOL)setMeetingSpokenLanguage:(NSInteger)languageID;
+        [Export("setMeetingSpokenLanguage:")]
+        bool SetMeetingSpokenLanguage(nint languageID);
+
+        // -(MobileRTCLiveTranscriptionLanguage *)getMeetingSpokenLanguage;
+        [Export("getMeetingSpokenLanguage")]
+        MobileRTCLiveTranscriptionLanguage MeetingSpokenLanguage();
+
+        // -(NSArray<MobileRTCLiveTranscriptionLanguage *> *)getAvailableTranslationLanguages;
+        [Export("getAvailableTranslationLanguages")]
+        MobileRTCLiveTranscriptionLanguage[] AvailableTranslationLanguages();
+
+        // -(BOOL)setTranslationLanguage:(NSInteger)languageID;
+        [Export("setTranslationLanguage:")]
+        bool SetTranslationLanguage(nint languageID);
+
+        // -(MobileRTCLiveTranscriptionLanguage *)getTranslationLanguage;
+        [Export("getTranslationLanguage")]
+        MobileRTCLiveTranscriptionLanguage TranslationLanguage();
+    }
+
+    // @interface RawArchiving (MobileRTCMeetingService)
+    [Category]
+    [BaseType(typeof(MobileRTCMeetingService))]
+    interface MobileRTCMeetingService_RawArchiving
+    {
+        // -(BOOL)startRawArchiving;
+        [Export("startRawArchiving")]
+        bool StartRawArchiving();
+
+        // -(BOOL)stopRawArchiving;
+        [Export("stopRawArchiving")]
+        bool StopRawArchiving();
     }
 
     // @interface MobileRTCMeetingSettings : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingSettings
     {
         // @property (assign, nonatomic) BOOL meetingTitleHidden;
@@ -2257,6 +3411,10 @@ namespace Zoomios
         // @property (assign, nonatomic) BOOL meetingInviteHidden;
         [Export("meetingInviteHidden")]
         bool MeetingInviteHidden { get; set; }
+
+        // @property (assign, nonatomic) BOOL meetingInviteUrlHidden;
+        [Export("meetingInviteUrlHidden")]
+        bool MeetingInviteUrlHidden { get; set; }
 
         // @property (assign, nonatomic) BOOL meetingChatHidden;
         [Export("meetingChatHidden")]
@@ -2286,7 +3444,11 @@ namespace Zoomios
         [Export("disconnectAudioHidden")]
         bool DisconnectAudioHidden { get; set; }
 
-        // @property (assign, nonatomic) BOOL enableKubi;
+        // @property (assign, nonatomic) BOOL recordButtonHidden;
+        [Export("recordButtonHidden")]
+        bool RecordButtonHidden { get; set; }
+
+        // @property (assign, nonatomic) BOOL enableKubi __attribute__((deprecated("")));
         [Export("enableKubi")]
         bool EnableKubi { get; set; }
 
@@ -2326,6 +3488,14 @@ namespace Zoomios
         [Export("qaButtonHidden")]
         bool QaButtonHidden { get; set; }
 
+        // @property (assign, nonatomic) BOOL promoteToPanelistHidden;
+        [Export("promoteToPanelistHidden")]
+        bool PromoteToPanelistHidden { get; set; }
+
+        // @property (assign, nonatomic) BOOL changeToAttendeeHidden;
+        [Export("changeToAttendeeHidden")]
+        bool ChangeToAttendeeHidden { get; set; }
+
         // @property (assign, nonatomic) BOOL proximityMonitoringDisable;
         [Export("proximityMonitoringDisable")]
         bool ProximityMonitoringDisable { get; set; }
@@ -2334,9 +3504,18 @@ namespace Zoomios
         [Export("enableCustomMeeting")]
         bool EnableCustomMeeting { get; set; }
 
+        // @property (assign, nonatomic) BOOL hideFeedbackButtonOnCloudWhiteboard;
+        [Export("hideFeedbackButtonOnCloudWhiteboard")]
+        bool HideFeedbackButtonOnCloudWhiteboard { get; set; }
+
+        // @property (assign, nonatomic) BOOL hideShareButtonOnCloudWhiteboard;
+        [Export("hideShareButtonOnCloudWhiteboard")]
+        bool HideShareButtonOnCloudWhiteboard { get; set; }
+
         // -(BOOL)autoConnectInternetAudio;
         // -(void)setAutoConnectInternetAudio:(BOOL)connected;
         [Export("autoConnectInternetAudio")]
+
         bool AutoConnectInternetAudio { get; set; }
 
         // -(BOOL)muteAudioWhenJoinMeeting;
@@ -2363,6 +3542,14 @@ namespace Zoomios
         [Export("setFaceBeautyEnabled:")]
         void SetFaceBeautyEnabled(bool enable);
 
+        // -(BOOL)isMirrorEffectEnabled;
+        [Export("isMirrorEffectEnabled")]
+        bool IsMirrorEffectEnabled();
+
+        // -(void)enableMirrorEffect:(BOOL)enable;
+        [Export("enableMirrorEffect:")]
+        void EnableMirrorEffect(bool enable);
+
         // -(BOOL)driveModeDisabled;
         [Export("driveModeDisabled")]
         bool DriveModeDisabled();
@@ -2378,6 +3565,10 @@ namespace Zoomios
         // -(void)disableGalleryView:(BOOL)disabled;
         [Export("disableGalleryView:")]
         void DisableGalleryView(bool disabled);
+
+        // -(void)disableCloudWhiteboard:(BOOL)disabled;
+        [Export("disableCloudWhiteboard:")]
+        void DisableCloudWhiteboard(bool disabled);
 
         // -(BOOL)callInDisabled;
         [Export("callInDisabled")]
@@ -2403,6 +3594,14 @@ namespace Zoomios
         [Export("disableMinimizeMeeting:")]
         void DisableMinimizeMeeting(bool disabled);
 
+        // -(BOOL)freeMeetingUpgradeTipsDisabled;
+        [Export("freeMeetingUpgradeTipsDisabled")]
+        bool FreeMeetingUpgradeTipsDisabled();
+
+        // -(void)disableFreeMeetingUpgradeTips:(BOOL)disabled;
+        [Export("disableFreeMeetingUpgradeTips:")]
+        void DisableFreeMeetingUpgradeTips(bool disabled);
+
         // -(BOOL)speakerOffWhenInMeeting;
         [Export("speakerOffWhenInMeeting")]
         bool SpeakerOffWhenInMeeting();
@@ -2419,18 +3618,73 @@ namespace Zoomios
         [Export("enableShowMyMeetingElapseTime:")]
         void EnableShowMyMeetingElapseTime(bool enable);
 
+        // -(BOOL)micOriginalInputEnabled;
+        [Export("micOriginalInputEnabled")]
+        bool MicOriginalInputEnabled();
+
+        // -(void)enableMicOriginalInput:(BOOL)enable;
+        [Export("enableMicOriginalInput:")]
+        void EnableMicOriginalInput(bool enable);
+
+        // -(BOOL)reactionsOnMeetingUIHidden;
+        [Export("reactionsOnMeetingUIHidden")]
+        bool ReactionsOnMeetingUIHidden();
+
         // -(void)hideReactionsOnMeetingUI:(BOOL)hidden;
         [Export("hideReactionsOnMeetingUI:")]
         void HideReactionsOnMeetingUI(bool hidden);
 
+        // -(BOOL)showVideoPreviewWhenJoinMeetingDisabled;
+        [Export("showVideoPreviewWhenJoinMeetingDisabled")]
+        bool ShowVideoPreviewWhenJoinMeetingDisabled();
+
+        // -(void)disableShowVideoPreviewWhenJoinMeeting:(BOOL)disabled;
+        [Export("disableShowVideoPreviewWhenJoinMeeting:")]
+        void DisableShowVideoPreviewWhenJoinMeeting(bool disabled);
+
+        // -(BOOL)virtualBackgroundDisabled;
+        [Export("virtualBackgroundDisabled")]
+        bool VirtualBackgroundDisabled();
+
+        // -(void)disableVirtualBackground:(BOOL)disabled;
+        [Export("disableVirtualBackground:")]
+        void DisableVirtualBackground(bool disabled);
+
         // -(void)prePopulateWebinarRegistrationInfo:(NSString * _Nonnull)email username:(NSString * _Nonnull)username;
         [Export("prePopulateWebinarRegistrationInfo:username:")]
         void PrePopulateWebinarRegistrationInfo(string email, string username);
+
+        // -(BOOL)disableConfidentialWatermark:(BOOL)disable;
+        [Export("disableConfidentialWatermark:")]
+        bool DisableConfidentialWatermark(bool disable);
+
+        // -(BOOL)copyMeetingUrlDisabled;
+        [Export("copyMeetingUrlDisabled")]
+        bool CopyMeetingUrlDisabled();
+
+        // -(void)disableCopyMeetingUrl:(BOOL)disabled;
+        [Export("disableCopyMeetingUrl:")]
+        void DisableCopyMeetingUrl(bool disabled);
+
+        // -(MobileRTCMeetError)setReactionSkinTone:(MobileRTCEmojiReactionSkinTone)skinTone;
+        [Export("setReactionSkinTone:")]
+        MobileRTCMeetError SetReactionSkinTone(MobileRTCEmojiReactionSkinTone skinTone);
+
+        // -(MobileRTCEmojiReactionSkinTone)reactionSkinTone;
+        [Export("reactionSkinTone")]
+        MobileRTCEmojiReactionSkinTone ReactionSkinTone();
+
+        // -(void)disableClearWebKitCache:(BOOL)disabled;
+        [Export("disableClearWebKitCache:")]
+        void DisableClearWebKitCache(bool disabled);
+
+        // -(BOOL)isDisabledClearWebKitCache;
+        [Export("isDisabledClearWebKitCache")]
+        bool IsDisabledClearWebKitCache();
     }
 
     // @interface MobileRTCInviteHelper : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCInviteHelper
     {
         // @property (readonly, retain, nonatomic) NSString * _Nonnull ongoingMeetingNumber;
@@ -2493,430 +3747,28 @@ namespace Zoomios
         [Export("disableInviteEmail")]
         bool DisableInviteEmail { get; set; }
 
-        // @property (retain, nonatomic) NSString * _Nonnull inviteEmailSubject;
-        [Export("inviteEmailSubject", ArgumentSemantic.Retain)]
+        // @property (retain, nonatomic) NSString * _Nullable inviteEmailSubject;
+        [NullAllowed, Export("inviteEmailSubject", ArgumentSemantic.Retain)]
         string InviteEmailSubject { get; set; }
 
-        // @property (retain, nonatomic) NSString * _Nonnull inviteEmailContent;
-        [Export("inviteEmailContent", ArgumentSemantic.Retain)]
+        // @property (retain, nonatomic) NSString * _Nullable inviteEmailContent;
+        [NullAllowed, Export("inviteEmailContent", ArgumentSemantic.Retain)]
         string InviteEmailContent { get; set; }
 
         // +(MobileRTCInviteHelper * _Nonnull)sharedInstance;
         [Static]
         [Export("sharedInstance")]
+
         MobileRTCInviteHelper SharedInstance { get; }
-    }
-
-    // @interface MobileRTCDialinCountry : NSObject
-    [BaseType(typeof(NSObject))]
-    [Protocol]
-    interface MobileRTCDialinCountry
-    {
-        // @property (retain, nonatomic) NSMutableArray * _Nonnull selectedCountries;
-        [Export("selectedCountries", ArgumentSemantic.Retain)]
-        NSMutableArray SelectedCountries { get; set; }
-
-        // @property (retain, nonatomic) NSMutableArray * _Nonnull allCountries;
-        [Export("allCountries", ArgumentSemantic.Retain)]
-        NSMutableArray AllCountries { get; set; }
-
-        // @property (assign, nonatomic) BOOL isIncludedTollfree;
-        [Export("isIncludedTollfree")]
-        bool IsIncludedTollfree { get; set; }
-
-        // @property (retain, nonatomic) NSString * _Nonnull hash;
-        [Export("hash", ArgumentSemantic.Retain)]
-        string Hash { get; set; }
-    }
-
-    // @interface MobileRTCPremeetingService : NSObject
-    [BaseType(typeof(NSObject))]
-    [Protocol]
-    interface MobileRTCPremeetingService
-    {
-        [Wrap("WeakDelegate")]
-        [NullAllowed]
-        MobileRTCPremeetingDelegate Delegate { get; set; }
-
-        // @property (assign, nonatomic) id<MobileRTCPremeetingDelegate> _Nullable delegate;
-        [NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
-        NSObject WeakDelegate { get; set; }
-
-        // -(id<MobileRTCMeetingItem> _Nullable)createMeetingItem;
-        [NullAllowed, Export("createMeetingItem")]
-        MobileRTCMeetingItem CreateMeetingItem { get; }
-
-        // -(id<MobileRTCMeetingItem> _Nullable)cloneMeetingItem:(id<MobileRTCMeetingItem> _Nonnull)item;
-        [Export("cloneMeetingItem:")]
-        [return: NullAllowed]
-        MobileRTCMeetingItem CloneMeetingItem(MobileRTCMeetingItem item);
-
-        // -(void)destroyMeetingItem:(id<MobileRTCMeetingItem> _Nonnull)item;
-        [Export("destroyMeetingItem:")]
-        void DestroyMeetingItem(MobileRTCMeetingItem item);
-
-        // -(id<MobileRTCMeetingItem> _Nullable)getMeetingItemByUniquedID:(unsigned long long)meetingUniquedID;
-        [Export("getMeetingItemByUniquedID:")]
-        [return: NullAllowed]
-        MobileRTCMeetingItem GetMeetingItemByUniquedID(ulong meetingUniquedID);
-
-        // -(BOOL)scheduleMeeting:(id<MobileRTCMeetingItem> _Nonnull)meetingItem WithScheduleFor:(NSString * _Nullable)userEmail;
-        [Export("scheduleMeeting:WithScheduleFor:")]
-        bool ScheduleMeeting(MobileRTCMeetingItem meetingItem, [NullAllowed] string userEmail);
-
-        // -(BOOL)editMeeting:(id<MobileRTCMeetingItem> _Nonnull)meetingItem;
-        [Export("editMeeting:")]
-        bool EditMeeting(MobileRTCMeetingItem meetingItem);
-
-        // -(BOOL)deleteMeeting:(id<MobileRTCMeetingItem> _Nonnull)meetingItem;
-        [Export("deleteMeeting:")]
-        bool DeleteMeeting(MobileRTCMeetingItem meetingItem);
-
-        // -(BOOL)listMeeting;
-        [Export("listMeeting")]
-        bool ListMeeting { get; }
-
-        // -(MobileRTCDialinCountry * _Nullable)getAvailableDialInCountry;
-        [NullAllowed, Export("getAvailableDialInCountry")]
-        MobileRTCDialinCountry AvailableDialInCountry { get; }
-    }
-
-    // @protocol MobileRTCMeetingItem <NSObject>
-    /*
-      Check whether adding [Model] to this declaration is appropriate.
-      [Model] is used to generate a C# class that implements this protocol,
-      and might be useful for protocols that consumers are supposed to implement,
-      since consumers can subclass the generated class instead of implementing
-      the generated interface. If consumers are not supposed to implement this
-      protocol, then [Model] is redundant and will generate code that will never
-      be used.
-    */
-    [Protocol]
-    [BaseType(typeof(NSObject))]
-    interface MobileRTCMeetingItem
-    {
-        // @required -(unsigned long long)getMeetingUniquedID;
-        [Abstract]
-        [Export("getMeetingUniquedID")]
-        ulong MeetingUniquedID { get; }
-
-        // @required -(void)setMeetingTopic:(NSString * _Nonnull)topic;
-        [Abstract]
-        [Export("setMeetingTopic:")]
-        void SetMeetingTopic(string topic);
-
-        // @required -(NSString * _Nullable)getMeetingTopic;
-        [Abstract]
-        [NullAllowed, Export("getMeetingTopic")]
-        string MeetingTopic { get; }
-
-        // @required -(void)setMeetingID:(NSString * _Nonnull)mid;
-        [Abstract]
-        [Export("setMeetingID:")]
-        void SetMeetingID(string mid);
-
-        // @required -(NSString * _Nullable)getMeetingID;
-        [Abstract]
-        [NullAllowed, Export("getMeetingID")]
-        string MeetingID { get; }
-
-        // @required -(void)setMeetingNumber:(unsigned long long)number;
-        [Abstract]
-        [Export("setMeetingNumber:")]
-        void SetMeetingNumber(ulong number);
-
-        // @required -(unsigned long long)getMeetingNumber;
-        [Abstract]
-        [Export("getMeetingNumber")]
-        ulong MeetingNumber { get; }
-
-        // @required -(void)setMeetingPassword:(NSString * _Nonnull)password;
-        [Abstract]
-        [Export("setMeetingPassword:")]
-        void SetMeetingPassword(string password);
-
-        // @required -(NSString * _Nullable)getMeetingPassword;
-        [Abstract]
-        [NullAllowed, Export("getMeetingPassword")]
-        string MeetingPassword { get; }
-
-        // @required -(void)setTimeZoneID:(NSString * _Nonnull)tzID;
-        [Abstract]
-        [Export("setTimeZoneID:")]
-        void SetTimeZoneID(string tzID);
-
-        // @required -(NSString * _Nullable)getTimeZoneID;
-        [Abstract]
-        [NullAllowed, Export("getTimeZoneID")]
-        string TimeZoneID { get; }
-
-        // @required -(void)setStartTime:(NSDate * _Nonnull)startTime;
-        [Abstract]
-        [Export("setStartTime:")]
-        void SetStartTime(NSDate startTime);
-
-        // @required -(NSDate * _Nullable)getStartTime;
-        [Abstract]
-        [NullAllowed, Export("getStartTime")]
-        NSDate StartTime { get; }
-
-        // @required -(void)setDurationInMinutes:(NSUInteger)duration;
-        [Abstract]
-        [Export("setDurationInMinutes:")]
-        void SetDurationInMinutes(nuint duration);
-
-        // @required -(NSUInteger)getDurationInMinutes;
-        [Abstract]
-        [Export("getDurationInMinutes")]
-        nuint DurationInMinutes { get; }
-
-        // @required -(BOOL)isRecurringMeeting;
-        [Abstract]
-        [Export("isRecurringMeeting")]
-        bool IsRecurringMeeting { get; }
-
-        // @required -(void)setMeetingRepeat:(MeetingRepeat)repeat;
-        [Abstract]
-        [Export("setMeetingRepeat:")]
-        void SetMeetingRepeat(MeetingRepeat repeat);
-
-        // @required -(MeetingRepeat)getMeetingRepeat;
-        [Abstract]
-        [Export("getMeetingRepeat")]
-        MeetingRepeat MeetingRepeat { get; }
-
-        // @required -(void)setRepeatEndDate:(NSDate * _Nonnull)endDate;
-        [Abstract]
-        [Export("setRepeatEndDate:")]
-        void SetRepeatEndDate(NSDate endDate);
-
-        // @required -(NSDate * _Nullable)getRepeatEndDate;
-        [Abstract]
-        [NullAllowed, Export("getRepeatEndDate")]
-        NSDate RepeatEndDate { get; }
-
-        // @required -(void)turnOffVideoForHost:(BOOL)turnOff;
-        [Abstract]
-        [Export("turnOffVideoForHost:")]
-        void TurnOffVideoForHost(bool turnOff);
-
-        // @required -(BOOL)isHostVideoOff;
-        [Abstract]
-        [Export("isHostVideoOff")]
-        bool IsHostVideoOff { get; }
-
-        // @required -(void)turnOffVideoForAttendee:(BOOL)turnOff;
-        [Abstract]
-        [Export("turnOffVideoForAttendee:")]
-        void TurnOffVideoForAttendee(bool turnOff);
-
-        // @required -(BOOL)isAttendeeVideoOff;
-        [Abstract]
-        [Export("isAttendeeVideoOff")]
-        bool IsAttendeeVideoOff { get; }
-
-        // @required -(void)setAllowJoinBeforeHost:(BOOL)allow;
-        [Abstract]
-        [Export("setAllowJoinBeforeHost:")]
-        void SetAllowJoinBeforeHost(bool allow);
-
-        // @required -(BOOL)canJoinBeforeHost;
-        [Abstract]
-        [Export("canJoinBeforeHost")]
-        bool CanJoinBeforeHost { get; }
-
-        // @required -(void)setUsePMIAsMeetingID:(BOOL)usePMI;
-        [Abstract]
-        [Export("setUsePMIAsMeetingID:")]
-        void SetUsePMIAsMeetingID(bool usePMI);
-
-        // @required -(BOOL)isUsePMIAsMeetingID;
-        [Abstract]
-        [Export("isUsePMIAsMeetingID")]
-        bool IsUsePMIAsMeetingID { get; }
-
-        // @required -(void)enableWaitingRoom:(BOOL)enable;
-        [Abstract]
-        [Export("enableWaitingRoom:")]
-        void EnableWaitingRoom(bool enable);
-
-        // @required -(BOOL)isWaitingRoomEnabled;
-        [Abstract]
-        [Export("isWaitingRoomEnabled")]
-        bool IsWaitingRoomEnabled { get; }
-
-        // @required -(void)enableMeetingToPublic:(BOOL)enable;
-        [Abstract]
-        [Export("enableMeetingToPublic:")]
-        void EnableMeetingToPublic(bool enable);
-
-        // @required -(BOOL)isMeetingToPublicEnabled;
-        [Abstract]
-        [Export("isMeetingToPublicEnabled")]
-        bool IsMeetingToPublicEnabled { get; }
-
-        // @required -(void)enableLanguageInterpretation:(BOOL)enable;
-        [Abstract]
-        [Export("enableLanguageInterpretation:")]
-        void EnableLanguageInterpretation(bool enable);
-
-        // @required -(BOOL)isLanguageInterpretationEnabled;
-        [Abstract]
-        [Export("isLanguageInterpretationEnabled")]
-        bool IsLanguageInterpretationEnabled { get; }
-
-        // @required -(void)setAlternativeHostList:(NSArray * _Nonnull)hostList;
-        [Abstract]
-        [Export("setAlternativeHostList:")]
-        void SetAlternativeHostList(NSObject[] hostList);
-
-        // @required -(NSArray * _Nullable)getAlternativeHostInfoList;
-        [Abstract]
-        [NullAllowed, Export("getAlternativeHostInfoList")]
-        NSObject[] AlternativeHostInfoList { get; }
-
-        // @required -(BOOL)setAudioOption:(MobileRTCMeetingItemAudioType)audioOption;
-        [Abstract]
-        [Export("setAudioOption:")]
-        bool SetAudioOption(MobileRTCMeetingItemAudioType audioOption);
-
-        // @required -(MobileRTCMeetingItemAudioType)getAduioOption;
-        [Abstract]
-        [Export("getAduioOption")]
-        MobileRTCMeetingItemAudioType AduioOption { get; }
-
-        // @required -(BOOL)isPersonalMeeting;
-        [Abstract]
-        [Export("isPersonalMeeting")]
-        bool IsPersonalMeeting { get; }
-
-        // @required -(BOOL)isWebinarMeeting;
-        [Abstract]
-        [Export("isWebinarMeeting")]
-        bool IsWebinarMeeting { get; }
-
-        // @required -(NSString * _Nullable)getInviteEmailContent;
-        [Abstract]
-        [NullAllowed, Export("getInviteEmailContent")]
-        string InviteEmailContent { get; }
-
-        // @required -(BOOL)setOnlyAllowSignedInUserJoinMeeting:(BOOL)on;
-        [Abstract]
-        [Export("setOnlyAllowSignedInUserJoinMeeting:")]
-        bool SetOnlyAllowSignedInUserJoinMeeting(bool on);
-
-        // @required -(BOOL)setAvailableDialinCountry:(MobileRTCDialinCountry * _Nonnull)dialinCountry;
-        [Abstract]
-        [Export("setAvailableDialinCountry:")]
-        bool SetAvailableDialinCountry(MobileRTCDialinCountry dialinCountry);
-
-        // @required -(MobileRTCDialinCountry * _Nullable)getAvailableDialInCountry;
-        [Abstract]
-        [NullAllowed, Export("getAvailableDialInCountry")]
-        MobileRTCDialinCountry AvailableDialInCountry { get; }
-
-        // @required -(BOOL)isOnlyAllowSignedInUserJoinMeeting;
-        [Abstract]
-        [Export("isOnlyAllowSignedInUserJoinMeeting")]
-        bool IsOnlyAllowSignedInUserJoinMeeting { get; }
-
-        // @required -(BOOL)set3rdPartyAudioInfo:(NSString * _Nonnull)description;
-        [Abstract]
-        [Export("set3rdPartyAudioInfo:")]
-        bool Set3rdPartyAudioInfo(string description);
-
-        // @required -(NSString * _Nullable)get3rdPartyAudioInfo;
-        [Abstract]
-        [NullAllowed, Export("get3rdPartyAudioInfo")]
-        string ThirdPartyAudioInfo { get; }
-
-        // @required -(NSString * _Nullable)getScheduleForUserEmail;
-        [Abstract]
-        [NullAllowed, Export("getScheduleForUserEmail")]
-        string ScheduleForUserEmail { get; }
-
-        // @required -(BOOL)setRecordType:(MobileRTCMeetingItemRecordType)recordType;
-        [Abstract]
-        [Export("setRecordType:")]
-        bool SetRecordType(MobileRTCMeetingItemRecordType recordType);
-
-        // @required -(MobileRTCMeetingItemRecordType)getRecordType;
-        [Abstract]
-        [Export("getRecordType")]
-        MobileRTCMeetingItemRecordType RecordType { get; }
-
-        // @required -(BOOL)setSpecifiedDomain:(NSArray * _Nullable)domain;
-        [Abstract]
-        [Export("setSpecifiedDomain:")]
-        bool SetSpecifiedDomain([NullAllowed] NSObject[] domain);
-
-        // @required -(NSArray * _Nullable)getSpecifiedDomain;
-        [Abstract]
-        [NullAllowed, Export("getSpecifiedDomain")]
-        NSObject[] SpecifiedDomain { get; }
-    }
-
-    // @interface MobileRTCAlternativeHostInfo : NSObject
-    [BaseType(typeof(NSObject))]
-    [Protocol]
-    interface MobileRTCAlternativeHostInfo
-    {
-        // @property (retain, nonatomic) NSString * _Nullable email;
-        [NullAllowed, Export("email", ArgumentSemantic.Retain)]
-        string Email { get; set; }
-    }
-
-    // @protocol MobileRTCPremeetingDelegate <NSObject>
-    [Protocol, Model(AutoGeneratedName = true)]
-    [BaseType(typeof(NSObject))]
-    interface MobileRTCPremeetingDelegate
-    {
-        // @required -(void)sinkSchedultMeeting:(PreMeetingError)result MeetingUniquedID:(unsigned long long)uniquedID;
-        [Abstract]
-        [Export("sinkSchedultMeeting:MeetingUniquedID:")]
-        void SinkSchedultMeeting(PreMeetingError result, ulong uniquedID);
-
-        // @required -(void)sinkEditMeeting:(PreMeetingError)result MeetingUniquedID:(unsigned long long)uniquedID;
-        [Abstract]
-        [Export("sinkEditMeeting:MeetingUniquedID:")]
-        void SinkEditMeeting(PreMeetingError result, ulong uniquedID);
-
-        // @required -(void)sinkDeleteMeeting:(PreMeetingError)result;
-        [Abstract]
-        [Export("sinkDeleteMeeting:")]
-        void SinkDeleteMeeting(PreMeetingError result);
-
-        // @required -(void)sinkListMeeting:(PreMeetingError)result withMeetingItems:(NSArray * _Nonnull)array;
-        [Abstract]
-        [Export("sinkListMeeting:withMeetingItems:")]
-        void SinkListMeeting(PreMeetingError result, NSObject[] array);
-    }
-
-    // @interface MobileRTCE2EMeetingKey : NSObject
-    [BaseType(typeof(NSObject))]
-    [Protocol]
-    interface MobileRTCE2EMeetingKey
-    {
-        // @property (assign, readwrite, nonatomic) MobileRTCComponentType type;
-        [Export("type", ArgumentSemantic.Assign)]
-        MobileRTCComponentType Type { get; set; }
-
-        // @property (readwrite, retain, nonatomic) NSData * _Nonnull meetingKey;
-        [Export("meetingKey", ArgumentSemantic.Retain)]
-        NSData MeetingKey { get; set; }
-
-        // @property (readwrite, retain, nonatomic) NSData * _Nonnull meetingIv;
-        [Export("meetingIv", ArgumentSemantic.Retain)]
-        NSData MeetingIv { get; set; }
     }
 
     // @interface MobileRTCVideoView : UIView
     [BaseType(typeof(UIView))]
-    [Protocol]
     interface MobileRTCVideoView
     {
         // -(NSInteger)getUserID;
         [Export("getUserID")]
+
         nint UserID { get; }
 
         // -(BOOL)showAttendeeVideoWithUserID:(NSUInteger)userID;
@@ -2934,21 +3786,18 @@ namespace Zoomios
 
     // @interface MobileRTCPreviewVideoView : MobileRTCVideoView
     [BaseType(typeof(MobileRTCVideoView))]
-    [Protocol]
     interface MobileRTCPreviewVideoView
     {
     }
 
     // @interface MobileRTCActiveVideoView : MobileRTCVideoView
     [BaseType(typeof(MobileRTCVideoView))]
-    [Protocol]
     interface MobileRTCActiveVideoView
     {
     }
 
     // @interface MobileRTCActiveShareView : MobileRTCVideoView
     [BaseType(typeof(MobileRTCVideoView))]
-    [Protocol]
     interface MobileRTCActiveShareView
     {
         // -(void)showActiveShareWithUserID:(NSUInteger)userID;
@@ -2969,7 +3818,6 @@ namespace Zoomios
 
     // @interface MobileRTCMeetingInviteActionItem : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingInviteActionItem
     {
         // @property (readwrite, retain, nonatomic) NSString * _Nonnull actionTitle;
@@ -2999,7 +3847,6 @@ namespace Zoomios
 
     // @interface MobileRTCMeetingShareActionItem : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCMeetingShareActionItem
     {
         // @property (readwrite, retain, nonatomic) NSString * _Nonnull actionTitle;
@@ -3035,7 +3882,6 @@ namespace Zoomios
 
     // @interface MobileRTCAnnotationService : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCAnnotationService
     {
         [Wrap("WeakDelegate")]
@@ -3052,7 +3898,8 @@ namespace Zoomios
 
         // -(BOOL)stopAnnotation;
         [Export("stopAnnotation")]
-        bool StopAnnotation();
+
+        bool StopAnnotation { get; }
 
         // -(MobileRTCAnnotationError)setToolColor:(UIColor * _Nullable)toolColor;
         [Export("setToolColor:")]
@@ -3073,30 +3920,37 @@ namespace Zoomios
 
         // -(MobileRTCAnnotationError)clear;
         [Export("clear")]
-        MobileRTCAnnotationError Clear();
+
+        MobileRTCAnnotationError Clear { get; }
 
         // -(MobileRTCAnnotationError)undo;
         [Export("undo")]
-        MobileRTCAnnotationError Undo();
+
+        MobileRTCAnnotationError Undo { get; }
 
         // -(MobileRTCAnnotationError)redo;
         [Export("redo")]
-        MobileRTCAnnotationError Redo();
 
-        // -(NSArray * _Nullable)getSupportedToolType;
+        MobileRTCAnnotationError Redo { get; }
+
+        // -(NSArray * _Nullable)getSupportedToolType __attribute__((deprecated("")));
         [NullAllowed, Export("getSupportedToolType")]
+
         NSObject[] SupportedToolType { get; }
 
         // -(BOOL)isPresenter;
         [Export("isPresenter")]
+
         bool IsPresenter { get; }
 
         // -(BOOL)canDisableViewerAnnoataion;
         [Export("canDisableViewerAnnoataion")]
+
         bool CanDisableViewerAnnoataion { get; }
 
         // -(BOOL)isViewerAnnoataionDisabled;
         [Export("isViewerAnnoataionDisabled")]
+
         bool IsViewerAnnoataionDisabled { get; }
 
         // -(MobileRTCAnnotationError)disableViewerAnnoataion:(BOOL)isDisable;
@@ -3105,12 +3959,27 @@ namespace Zoomios
 
         // -(BOOL)canDoAnnotation;
         [Export("canDoAnnotation")]
+
         bool CanDoAnnotation { get; }
+
+        // -(BOOL)isAnnotationLegalNoticeAvailable;
+        [Export("isAnnotationLegalNoticeAvailable")]
+
+        bool IsAnnotationLegalNoticeAvailable { get; }
+
+        // -(NSString * _Nullable)getAnnotationLegalNoticesPrompt;
+        [NullAllowed, Export("getAnnotationLegalNoticesPrompt")]
+
+        string AnnotationLegalNoticesPrompt { get; }
+
+        // -(NSString * _Nullable)getAnnotationLegalNoticesExplained;
+        [NullAllowed, Export("getAnnotationLegalNoticesExplained")]
+
+        string AnnotationLegalNoticesExplained { get; }
     }
 
     // @interface MobileRTCRemoteControlService : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCRemoteControlService
     {
         [Wrap("WeakDelegate")]
@@ -3120,8 +3989,14 @@ namespace Zoomios
         [NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
         NSObject WeakDelegate { get; set; }
 
+        // -(BOOL)isHaveRemoteControlRight;
+        [Export("isHaveRemoteControlRight")]
+
+        bool IsHaveRemoteControlRight { get; }
+
         // -(BOOL)isRemoteController;
         [Export("isRemoteController")]
+
         bool IsRemoteController { get; }
 
         // -(MobileRTCRemoteControlError)grabRemoteControl:(UIView * _Nonnull)remoteShareView;
@@ -3199,7 +4074,6 @@ namespace Zoomios
 
     // @interface MobileRTCWaitingRoomService : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCWaitingRoomService
     {
         [Wrap("WeakDelegate")]
@@ -3212,19 +4086,22 @@ namespace Zoomios
 
         // -(BOOL)isSupportWaitingRoom;
         [Export("isSupportWaitingRoom")]
+
         bool IsSupportWaitingRoom { get; }
 
         // -(BOOL)isWaitingRoomOnEntryFlagOn;
         [Export("isWaitingRoomOnEntryFlagOn")]
+
         bool IsWaitingRoomOnEntryFlagOn { get; }
 
         // -(MobileRTCMeetError)enableWaitingRoomOnEntry:(BOOL)bEnable;
         [Export("enableWaitingRoomOnEntry:")]
         MobileRTCMeetError EnableWaitingRoomOnEntry(bool bEnable);
 
-        // -(NSArray * _Nullable)waitingRoomList;
+        // -(NSArray<NSNumber *> * _Nullable)waitingRoomList;
         [NullAllowed, Export("waitingRoomList")]
-        NSObject[] WaitingRoomList { get; }
+
+        NSNumber[] WaitingRoomList { get; }
 
         // -(MobileRTCMeetingUserInfo * _Nullable)waitingRoomUserInfoByID:(NSUInteger)userId;
         [Export("waitingRoomUserInfoByID:")]
@@ -3242,7 +4119,6 @@ namespace Zoomios
 
     // @interface MobileRTCRenderer : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCRenderer
     {
         // @property (readonly, assign, nonatomic) NSUInteger userId;
@@ -3259,7 +4135,7 @@ namespace Zoomios
 
         // -(instancetype _Nonnull)initWithDelegate:(id<MobileRTCVideoRawDataDelegate> _Nonnull)delegate;
         [Export("initWithDelegate:")]
-        IntPtr Constructor(MobileRTCVideoRawDataDelegate @delegate);
+        System.IntPtr Constructor(MobileRTCVideoRawDataDelegate @delegate);
 
         // -(MobileRTCRawDataError)setRawDataResolution:(MobileRTCVideoResolution)resolution;
         [Export("setRawDataResolution:")]
@@ -3271,29 +4147,61 @@ namespace Zoomios
 
         // -(MobileRTCRawDataError)unSubscribe;
         [Export("unSubscribe")]
-        MobileRTCRawDataError UnSubscribe();
+
+        MobileRTCRawDataError UnSubscribe { get; }
     }
 
     // @interface MobileRTCAudioRawDataHelper : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCAudioRawDataHelper
     {
         // -(instancetype _Nonnull)initWithDelegate:(id<MobileRTCAudioRawDataDelegate> _Nonnull)delegate;
         [Export("initWithDelegate:")]
-        IntPtr Constructor(MobileRTCAudioRawDataDelegate @delegate);
+        System.IntPtr Constructor(MobileRTCAudioRawDataDelegate @delegate);
 
         // -(MobileRTCRawDataError)subscribe;
         [Export("subscribe")]
-        MobileRTCRawDataError Subscribe();
+
+        MobileRTCRawDataError Subscribe { get; }
 
         // -(MobileRTCRawDataError)unSubscribe;
         [Export("unSubscribe")]
-        MobileRTCRawDataError UnSubscribe();
+
+        MobileRTCRawDataError UnSubscribe { get; }
+    }
+
+    // @interface MobileRTCVideoSourceHelper : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCVideoSourceHelper
+    {
+        // -(MobileRTCRawDataError)setPreProcessor:(id<MobileRTCPreProcessorDelegate>)delegate;
+        [Export("setPreProcessor:")]
+        MobileRTCRawDataError SetPreProcessor(MobileRTCPreProcessorDelegate @delegate);
+
+        // -(MobileRTCRawDataError)setExternalVideoSource:(id<MobileRTCVideoSourceDelegate>)delegate;
+        [Export("setExternalVideoSource:")]
+        MobileRTCRawDataError SetExternalVideoSource(MobileRTCVideoSourceDelegate @delegate);
+    }
+
+    // @interface MobileRTCShareSourceHelper : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCShareSourceHelper
+    {
+        // -(MobileRTCRawDataError)setExternalShareSource:(id<MobileRTCShareSourceDelegate>)delegate;
+        [Export("setExternalShareSource:")]
+        MobileRTCRawDataError SetExternalShareSource(MobileRTCShareSourceDelegate @delegate);
+    }
+
+    // @interface MobileRTCAudioSourceHelper : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCAudioSourceHelper
+    {
+        // -(MobileRTCRawDataError)setExternalAudioSource:(id<MobileRTCAudioSourceDelegate> _Nullable)audioSourceDelegate;
+        [Export("setExternalAudioSource:")]
+        MobileRTCRawDataError SetExternalAudioSource([NullAllowed] MobileRTCAudioSourceDelegate audioSourceDelegate);
     }
 
     // @interface MobileRTCRealNameCountryInfo : NSObject
-    [Protocol]
     [BaseType(typeof(NSObject))]
     interface MobileRTCRealNameCountryInfo
     {
@@ -3311,7 +4219,6 @@ namespace Zoomios
     }
 
     // @interface MobileRTCRetrieveSMSHandler : NSObject
-    [Protocol]
     [BaseType(typeof(NSObject))]
     interface MobileRTCRetrieveSMSHandler
     {
@@ -3321,11 +4228,11 @@ namespace Zoomios
 
         // -(BOOL)cancelAndLeaveMeeting;
         [Export("cancelAndLeaveMeeting")]
-        bool CancelAndLeaveMeeting();
+
+        bool CancelAndLeaveMeeting { get; }
     }
 
     // @interface MobileRTCVerifySMSHandler : NSObject
-    [Protocol]
     [BaseType(typeof(NSObject))]
     interface MobileRTCVerifySMSHandler
     {
@@ -3335,12 +4242,12 @@ namespace Zoomios
 
         // -(BOOL)cancelAndLeaveMeeting;
         [Export("cancelAndLeaveMeeting")]
-        bool CancelAndLeaveMeeting();
+
+        bool CancelAndLeaveMeeting { get; }
     }
 
     // @interface MobileRTCSMSService : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCSMSService
     {
         [Wrap("WeakDelegate")]
@@ -3357,24 +4264,87 @@ namespace Zoomios
 
         // -(MobileRTCRetrieveSMSHandler * _Nullable)getResendSMSVerificationCodeHandler;
         [NullAllowed, Export("getResendSMSVerificationCodeHandler")]
-        MobileRTCRetrieveSMSHandler ResendSMSVerificationCodeHandler();
+
+        MobileRTCRetrieveSMSHandler ResendSMSVerificationCodeHandler { get; }
 
         // -(MobileRTCVerifySMSHandler * _Nullable)getReVerifySMSVerificationCodeHandler;
         [NullAllowed, Export("getReVerifySMSVerificationCodeHandler")]
-        MobileRTCVerifySMSHandler ReVerifySMSVerificationCodeHandler();
 
-        // -(NSArray * _Nullable)getSupportPhoneNumberCountryList;
+        MobileRTCVerifySMSHandler ReVerifySMSVerificationCodeHandler { get; }
+
+        // -(NSArray<MobileRTCRealNameCountryInfo *> * _Nullable)getSupportPhoneNumberCountryList;
         [NullAllowed, Export("getSupportPhoneNumberCountryList")]
-        NSObject[] SupportPhoneNumberCountryList { get; }
+
+        MobileRTCRealNameCountryInfo[] SupportPhoneNumberCountryList { get; }
 
         // -(BOOL)setDefaultCellPhoneInfo:(NSString * _Nullable)countryCode phoneNum:(NSString * _Nullable)phoneNum;
         [Export("setDefaultCellPhoneInfo:phoneNum:")]
         bool SetDefaultCellPhoneInfo([NullAllowed] string countryCode, [NullAllowed] string phoneNum);
     }
 
+    // @interface MobileRTCDirectShareViaMeetingIDOrPairingCodeHandler : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCDirectShareViaMeetingIDOrPairingCodeHandler
+    {
+        // -(BOOL)TryWithMeetingNumber:(NSString * _Nonnull)meetingNumber;
+        [Export("TryWithMeetingNumber:")]
+        bool TryWithMeetingNumber(string meetingNumber);
+
+        // -(BOOL)TryWithPairingCode:(NSString * _Nonnull)pairingCode;
+        [Export("TryWithPairingCode:")]
+        bool TryWithPairingCode(string pairingCode);
+
+        // -(BOOL)cancel;
+        [Export("cancel")]
+
+        bool Cancel { get; }
+    }
+
+    // @protocol MobileRTCDirectShareServiceDelegate <NSObject>
+    [Protocol, Model(AutoGeneratedName = true)]
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCDirectShareServiceDelegate
+    {
+        // @optional -(void)onDirectShareStatusUpdate:(MobileRTCDirectShareStatus)status handler:(MobileRTCDirectShareViaMeetingIDOrPairingCodeHandler * _Nullable)handler;
+        [Export("onDirectShareStatusUpdate:handler:")]
+        void Handler(MobileRTCDirectShareStatus status, [NullAllowed] MobileRTCDirectShareViaMeetingIDOrPairingCodeHandler handler);
+    }
+
+    // @interface MobileRTCDirectShareService : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCDirectShareService
+    {
+        [Wrap("WeakDelegate")]
+        [NullAllowed]
+        MobileRTCDirectShareServiceDelegate Delegate { get; set; }
+
+        // @property (assign, nonatomic) id<MobileRTCDirectShareServiceDelegate> _Nullable delegate;
+        [NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
+        NSObject WeakDelegate { get; set; }
+
+        // -(BOOL)canStartDirectShare;
+        [Export("canStartDirectShare")]
+
+        bool CanStartDirectShare { get; }
+
+        // -(BOOL)isDirectShareInProgress;
+        [Export("isDirectShareInProgress")]
+
+        bool IsDirectShareInProgress { get; }
+
+        // -(BOOL)startDirectShare;
+        [Export("startDirectShare")]
+
+        bool StartDirectShare { get; }
+
+        // -(BOOL)stopDirectShare;
+        [Export("stopDirectShare")]
+
+        bool StopDirectShare { get; }
+    }
+
     // @interface MobileRTCSDKInitContext : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTCSDKInitContext
     {
         // @property (copy, nonatomic) NSString * _Nullable domain;
@@ -3408,11 +4378,14 @@ namespace Zoomios
         // @property (copy, nonatomic) NSString * _Nullable appGroupId;
         [NullAllowed, Export("appGroupId")]
         string AppGroupId { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nullable replaykitBundleIdentifier;
+        [NullAllowed, Export("replaykitBundleIdentifier")]
+        string ReplaykitBundleIdentifier { get; set; }
     }
 
     // @interface MobileRTC : NSObject
     [BaseType(typeof(NSObject))]
-    [Protocol]
     interface MobileRTC
     {
         // @property (readonly, retain, nonatomic) NSString * _Nullable mobileRTCDomain;
@@ -3430,6 +4403,7 @@ namespace Zoomios
         // +(MobileRTC * _Nonnull)sharedRTC;
         [Static]
         [Export("sharedRTC")]
+
         MobileRTC SharedRTC { get; }
 
         // -(BOOL)initialize:(MobileRTCSDKInitContext * _Nonnull)context;
@@ -3440,24 +4414,6 @@ namespace Zoomios
         [Export("switchDomain:force:")]
         bool SwitchDomain(string newDomain, bool force);
 
-        // +(void)initializeWithDomain:(NSString * _Nonnull)domain enableLog:(BOOL)enableLog __attribute__((deprecated("Will be deleted in the next release. Please use [[MobileRTC sharedRTC] initialize:context] instead")));
-        [Static]
-        [Export("initializeWithDomain:enableLog:")]
-        void InitializeWithDomain(string domain, bool enableLog);
-
-        // +(void)initializeWithDomain:(NSString * _Nonnull)domain enableLog:(BOOL)enableLog bundleResPath:(NSString * _Nullable)bundleResPath __attribute__((deprecated("Will be deleted in the next release. Please use [[MobileRTC sharedRTC] initialize:context] instead")));
-        [Static]
-        [Export("initializeWithDomain:enableLog:bundleResPath:")]
-        void InitializeWithDomain(string domain, bool enableLog, [NullAllowed] string bundleResPath);
-
-        // -(void)setMobileRTCDomain:(NSString * _Nonnull)domain __attribute__((deprecated("Will be deleted in the next release. Please use [[MobileRTC sharedRTC] initialize:context] instead")));
-        [Export("setMobileRTCDomain:")]
-        void SetMobileRTCDomain(string domain);
-
-        // -(void)setMobileRTCResPath:(NSString * _Nullable)path __attribute__((deprecated("Will be deleted in the next release. Please use [[MobileRTC sharedRTC] initialize:context] instead")));
-        [Export("setMobileRTCResPath:")]
-        void SetMobileRTCResPath([NullAllowed] string path);
-
         // -(void)setMobileRTCCustomLocalizableName:(NSString * _Nullable)localizableName;
         [Export("setMobileRTCCustomLocalizableName:")]
         void SetMobileRTCCustomLocalizableName([NullAllowed] string localizableName);
@@ -3465,6 +4421,7 @@ namespace Zoomios
         // -(UINavigationController * _Nullable)mobileRTCRootController;
         // -(void)setMobileRTCRootController:(UINavigationController * _Nullable)navController;
         [NullAllowed, Export("mobileRTCRootController")]
+
         UINavigationController MobileRTCRootController { get; set; }
 
         // -(NSString * _Nullable)mobileRTCVersion;
@@ -3484,11 +4441,6 @@ namespace Zoomios
         [Export("getAuthService")]
         [return: NullAllowed]
         MobileRTCAuthService GetAuthService();
-
-        // -(MobileRTCPremeetingService * _Nullable)getPreMeetingService;
-        [Export("getPreMeetingService")]
-        [return: NullAllowed]
-        MobileRTCPremeetingService GetPreMeetingService();
 
         // -(MobileRTCMeetingService * _Nullable)getMeetingService;
         [Export("getMeetingService")]
@@ -3520,17 +4472,28 @@ namespace Zoomios
         [return: NullAllowed]
         MobileRTCSMSService GetSMSService();
 
-        // -(NSArray * _Nonnull)supportedLanguages;
+        // -(MobileRTCDirectShareService * _Nullable)getDirectShareService;
+        [Export("getDirectShareService")]
+        [return: NullAllowed]
+        MobileRTCDirectShareService GetDirectShareService();
+
+        // -(MobileRTCVideoSourceHelper * _Nullable)getVideoSourceHelper;
+        [Export("getVideoSourceHelper")]
+        [return: NullAllowed]
+        MobileRTCVideoSourceHelper GetVideoSourceHelper();
+
+        // -(MobileRTCShareSourceHelper * _Nullable)getShareSourceHelper;
+        [Export("getShareSourceHelper")]
+        [return: NullAllowed]
+        MobileRTCShareSourceHelper GetShareSourceHelper();
+
+        // -(NSArray<NSString *> * _Nonnull)supportedLanguages;
         [Export("supportedLanguages")]
-        NSObject[] SupportedLanguages();
+        string[] SupportedLanguages();
 
         // -(void)setLanguage:(NSString * _Nullable)lang;
         [Export("setLanguage:")]
         void SetLanguage([NullAllowed] string lang);
-
-        // -(void)setAppGroupsName:(NSString * _Nullable)appGroupId __attribute__((deprecated("Will be deleted in the next release. Please use [[MobileRTC sharedRTC] initialize:context] instead")));
-        [Export("setAppGroupsName:")]
-        void SetAppGroupsName([NullAllowed] string appGroupId);
 
         // -(void)appWillResignActive;
         [Export("appWillResignActive")]
@@ -3547,6 +4510,14 @@ namespace Zoomios
         // -(void)appWillTerminate;
         [Export("appWillTerminate")]
         void AppWillTerminate();
+
+        // -(void)willTransitionToTraitCollection:(UITraitCollection * _Nullable)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator> _Nullable)coordinator;
+        //[Export("willTransitionToTraitCollection:withTransitionCoordinator:")]
+        //void WillTransitionToTraitCollection([NullAllowed] UITraitCollection newCollection, [NullAllowed] UIViewControllerTransitionCoordinator coordinator);
+
+        // -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator> _Nullable)coordinator;
+        //[Export("viewWillTransitionToSize:withTransitionCoordinator:")]
+        //void ViewWillTransitionToSize(CGSize size, [NullAllowed] UIViewControllerTransitionCoordinator coordinator);
 
         // -(BOOL)hasRawDataLicense;
         [Export("hasRawDataLicense")]
