@@ -18,10 +18,12 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>TRACE;__IOS__;__MOBILE__;__UNIFIED__;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -31,11 +33,16 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Assets.car" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -46,77 +53,103 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="MobileRTC.framework">
+    <BundleResource Include="Resources\MobileRTCResources.bundle\archival.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Assets.car" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\de.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\dingdong.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\dingdong1.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\double_beep.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\emojis.json" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\emojisForMeeting.json" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\emojiSkins.json" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\emojiSkinsForMeeting.json" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\G Arpeggio.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\G Step.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Gamelan.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Info.plist" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\leave.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\meeting_chat_chime.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\meeting_raisehand_chime.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Pizzicato Strings.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\record_start.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\record_stop.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Reed Organ.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ring.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ring.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\searchEmoji.json" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Ukulele G.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Ukulele.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Vibraphone.m4r" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\wr_ding.pcm" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMBOActionView.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMBrowserViewController.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMBrowserViewController_iPad.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMCallPhoneViewController.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMCountryCodesViewController.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMGestureViewController.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMRefreshPlainView.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZMThumbnailVideoCell.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZPAttendeeViewCell.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ZPParticipantViewController.nib" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\en.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\es.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\fr.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\it.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ja.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ko.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\pl.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\pt-PT.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ru.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\tr.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\vi.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\zh-Hans.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\zh-Hant.lproj\Localizable.strings" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\dingdong.wav" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\dudu.wav" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\image.html" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\immersive_mask.png" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\message.wav" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ring.wav" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\vb_default.png" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\vb_default0.png" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\vb_default1.png" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\vb_default2.png" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\ringtone.xml" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\localization.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="Native References/MobileRTC.framework">
       <Kind>Framework</Kind>
-      <SmartLink>False</SmartLink>
+      <SmartLink>True</SmartLink>
+      <NeedsGccExceptionHandling>False</NeedsGccExceptionHandling>
+      <ForceLoad>True</ForceLoad>
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\archival.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Assets.car" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\de.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\dingdong.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\dingdong1.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\double_beep.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\emojis.json" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\emojisForMeeting.json" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\emojiSkins.json" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\emojiSkinsForMeeting.json" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\G Arpeggio.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\G Step.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Gamelan.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Info.plist" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\leave.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\meeting_chat_chime.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\meeting_raisehand_chime.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Pizzicato Strings.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\record_start.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\record_stop.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Reed Organ.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ring.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ring.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\searchEmoji.json" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Ukulele G.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Ukulele.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Vibraphone.m4r" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\wr_ding.pcm" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMBOActionView.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMBrowserViewController.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMBrowserViewController_iPad.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMCallPhoneViewController.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMCountryCodesViewController.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMGestureViewController.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMRefreshPlainView.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZMThumbnailVideoCell.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZPAttendeeViewCell.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ZPParticipantViewController.nib" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\en.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\es.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\fr.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\it.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ja.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ko.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\pl.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\pt-PT.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ru.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\tr.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\vi.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\zh-Hans.lproj\Localizable.strings" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\zh-Hant.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\icon_ecb.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\dingdong.wav" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\dudu.wav" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\image.html" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\immersive_mask.png" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\message.wav" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ring.wav" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\vb_default.png" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\vb_default0.png" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\vb_default1.png" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\vb_default2.png" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\ringtone.xml" />
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\localization.xml" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\icon_ecb%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\icon_ecb%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\icon_gcm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\icon_gcm%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\icon_gcm%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>
