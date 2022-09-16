@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>TRACE;__IOS__;__MOBILE__;__UNIFIED__;DEBUG;</DefineConstants>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -27,11 +27,13 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BTouchExtraArgs>
+    </BTouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
@@ -39,9 +41,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Xamarin.iOS" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Assets.car" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,16 +68,10 @@
     <BundleResource Include="Resources\MobileRTCResources.bundle\zh-Hant.lproj\Localizable.strings" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Info.plist" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\MobileRTCResources.bundle\archival.pcm" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\Assets.car" />
+    <BundleResource Include="Resources\MobileRTCResources.bundle\Assets.car" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\MobileRTCResources.bundle\dingdong.pcm" />
@@ -222,8 +215,19 @@
     <BundleResource Include="Resources\MobileRTCResources.bundle\ZPParticipantViewController.nib" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Assets.car" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <NativeReference Include="Native References/MobileRTC.framework">
       <Kind>Framework</Kind>
+      <ForceLoad>False</ForceLoad>
+      <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
