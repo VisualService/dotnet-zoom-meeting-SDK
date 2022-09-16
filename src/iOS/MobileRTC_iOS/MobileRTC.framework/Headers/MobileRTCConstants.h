@@ -170,6 +170,8 @@ typedef NS_ENUM(NSUInteger, MobileRTCMeetError) {
     MobileRTCMeetError_VBNoSupport,
     ///Virtual background GreenScreen not support, only iPad support green screen.
     MobileRTCMeetError_VBGreenScreenNoSupport,
+    ///App privilege token error.
+    MobileRTCMeetError_AppPrivilegeTokenError          = 500,
     
     ///Unknown error.
     MobileRTCMeetError_Unknown,
@@ -196,8 +198,6 @@ typedef NS_ENUM(NSUInteger, MobileRTCMeetingState) {
     MobileRTCMeetingState_WebinarDePromote,///<Downgrade the attendees from the panelist.
     MobileRTCMeetingState_JoinBO,///<Join the breakout room.
     MobileRTCMeetingState_LeaveBO,///<Leave the breakout room.
-    MobileRTCMeetingState_WaitingExternalSessionKey,///<Waiting for the additional secret key.
-    
 };
 
 /*!
@@ -740,6 +740,7 @@ typedef NS_ENUM(NSUInteger,MobileRTCRawDataError)
     MobileRTCRawData_Invalid_Param,
     MobileRTCRawData_Not_In_Meeting,
     MobileRTCRawData_No_License,
+    MobileRTCRawData_Unknow,
     
     MobileRTCRawData_Video_Module_Not_Ready,
     MobileRTCRawData_Video_Module_Error,
@@ -747,12 +748,14 @@ typedef NS_ENUM(NSUInteger,MobileRTCRawDataError)
     MobileRTCRawData_No_Video_Data,
     
     MobileRTCRawData_Share_Module_Not_Ready,
-    MobileRTCRawData_Hare_Module_Error,
+    MobileRTCRawData_Share_Module_Error,
     MobileRTCRawData_No_Share_Data,
+    MobileRTCRawData_Share_Cannot_Subscribe_Myself,
     
     MobileRTCRawData_Audio_Module_Not_Ready,
     MobileRTCRawData_Audio_Module_Error,
     MobileRTCRawData_No_Audio_Data,
+    MobileRTCRawData_Send_Too_Frequently
 };
 
 /*!
