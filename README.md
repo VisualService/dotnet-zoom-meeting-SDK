@@ -3,8 +3,8 @@
  * Android: Meeting SDK Version: 5.11.3.7251
  
  * iOS: 
- ** MobileRTC Version: 5.11.10.4556
- ** MobileRTC Screen Share Version: Not implemented yet, PRs are welcome! 
+ 	* MobileRTC Version: 5.11.10.4556
+ 	* MobileRTC Screen Share Version: Not implemented yet, PRs are welcome! 
 
  * Originally based on [this repo](https://github.com/stntz/Xamarin.ZoomBinding)
  
@@ -43,7 +43,7 @@ Make sure you tick to include pre-releases - the latest version of the package i
 5. Listen for successful initialisation inside IZoomSDKInitializeListener.OnZoomSDKInitializeResult
 
 ```
-        public async void OnZoomSDKInitializeResult(int errorCode, int internalErrorCode)
+    public async void OnZoomSDKInitializeResult(int errorCode, int internalErrorCode)
         {
             if (errorCode == ZoomError.ZoomErrorSuccess)
             {
@@ -65,7 +65,7 @@ Make sure you tick to include pre-releases - the latest version of the package i
             {
                 // something bad happened
             }
-        }
+    }
 ```
 
 6. Join Meeting
@@ -160,8 +160,8 @@ Make sure you tick to include pre-releases - the latest version of the package i
 5. Join the meeting 
 
 ```
-		public void JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
-		{
+     public void JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
+     {
             if (IsInitialized())
             {
                 var meetingService = mobileRTC.GetMeetingService();
@@ -184,7 +184,7 @@ Make sure you tick to include pre-releases - the latest version of the package i
                     Console.WriteLine($"Meeting Joining Response {meetingJoinResponse}");
                 });
             }
-		}
+	}
 ```
 
 6. Monitor the meeting status
