@@ -140,7 +140,6 @@
       <Name>ZoomCommonLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Res\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>

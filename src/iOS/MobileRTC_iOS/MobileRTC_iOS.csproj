@@ -230,5 +230,8 @@
       <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="read.me" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

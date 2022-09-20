@@ -46,7 +46,7 @@ void Main()
 
     //change your res folder to where you extracted the mobile rtc and then the common lib e.g C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\commonlib\res
     var resFolder =
-        @"C:\Users\adam_\OneDrive\Business\Visual Service\Zoom Binding\5.11.3.7251\mobilertc\res";
+        @"C:\Users\Michele DM\Documents\GitHub\Xamarin.ZoomSDKBinding\Exoplayer UI Resources\Resources";
 
     //var resFolder = @"C:\Users\adam_\Downloads\test";
 
