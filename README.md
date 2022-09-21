@@ -1,6 +1,6 @@
 ﻿# Xamarin.ZoomSDKBinding
  
- * Android: Meeting SDK Version: 5.11.3.7251
+ * Android: Meeting SDK Version: 5.11.10.8019.
  
  * iOS: 
  	* MobileRTC Version: 5.11.10.4556
