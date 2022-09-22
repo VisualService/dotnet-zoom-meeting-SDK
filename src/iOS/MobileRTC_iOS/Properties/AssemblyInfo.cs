@@ -13,9 +13,9 @@ using Foundation;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("Zoomios")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Zoom iOS SDK binding for Xamarin. iOS version of the SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("NT2 - Nuove Tecnologie S.r.l.")]
 [assembly: AssemblyProduct("Zoomios")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]

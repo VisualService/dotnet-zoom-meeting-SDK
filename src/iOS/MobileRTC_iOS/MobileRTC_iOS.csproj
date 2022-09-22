@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.5-dev.8\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,7 +11,26 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Zoomios</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <PackageId>VisualService.Xamarin.iOS.ZoomSDK</PackageId>
+    <Version>5.11.10.4556</Version>
+    <Authors>Michele Di Maria</Authors>
+    <Copyright>Copyright 2022</Copyright>
+    <Owners>Michele Di Maria, NT2 - Nuove Tecnologie</Owners>
+    <Company>NT2 - Nuove Tecnologie S.r.l.</Company>
+    <PackageProjectUrl>https://github.com/VisualService/Xamarin.ZoomSDKBinding</PackageProjectUrl>
+    <Summary>VisualService.Xamarin.iOS.ZoomSDK binding</Summary>
+    <PackageTags>Xamarin.iOS, Zoom</PackageTags>
+    <Title>Xamarin.iOS.Zoom</Title>
+    <Description>Zoom iOS SDK binding for Xamarin. iOS version of the SDK</Description>
+    <IsPackable>True</IsPackable>
+	<PackageIcon>res/icon.png</PackageIcon>
+	<PackageOutputPath>bin/$(Configuration)</PackageOutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- ... -->
+    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.2.0" />
+    <!-- ... -->
+  </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -34,6 +52,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <BTouchExtraArgs>
     </BTouchExtraArgs>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
@@ -233,5 +252,16 @@
   <ItemGroup>
     <None Include="read.me" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>  
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>  
 </Project>
