@@ -1,8 +1,10 @@
 ﻿# Xamarin.ZoomSDKBinding
  
- * Android: Meeting SDK Version: 5.11.3.7251
+ * Android: Meeting SDK Version: 5.11.10.8019.
  
- * iOS: No support for iOS yet. PRs welcome!
+ * iOS: 
+ 	* MobileRTC Version: 5.11.10.4556
+ 	* MobileRTC Screen Share Version: Not implemented yet, PRs are welcome! 
 
  * Originally based on [this repo](https://github.com/stntz/Xamarin.ZoomBinding)
  
@@ -41,7 +43,7 @@ Make sure you tick to include pre-releases - the latest version of the package i
 5. Listen for successful initialisation inside IZoomSDKInitializeListener.OnZoomSDKInitializeResult
 
 ```
-        public async void OnZoomSDKInitializeResult(int errorCode, int internalErrorCode)
+    public async void OnZoomSDKInitializeResult(int errorCode, int internalErrorCode)
         {
             if (errorCode == ZoomError.ZoomErrorSuccess)
             {
@@ -63,7 +65,7 @@ Make sure you tick to include pre-releases - the latest version of the package i
             {
                 // something bad happened
             }
-        }
+    }
 ```
 
 6. Join Meeting
@@ -86,11 +88,130 @@ Make sure you tick to include pre-releases - the latest version of the package i
  7. At this point, if you are using default UI, zoom will launch an activity containing the call and you can switch on video etc. You're off to the races. Although I think I heard a rumour somewhere that default UI with this library was untested, it could be nothing though.
  8. If using custom ui, in your implementation of IInMeetingServiceListener you passed to the init, listen for the successsfully joined call event, and then start your activity for custom ui. You can follow instructions in [the documentation](https://marketplace.zoom.us/docs/sdk/native-sdks/android/) for custom UI on the Android Zoom meeting SDK for further details
 
+## Installation and integration - iOS
+
+1. Grab the package from nuget ```Install-Package VisualService.Xamarin.iOS.ZoomSDK``` and install it as a dependency to your Xamarin.iOS platform project.
+ 
+2. Implement a IMobileRTCMeetingServiceDelegate (which should also inherit from your "Cross platform interface" as a DependencyService);
+ 
+3. In the IMobileRTCMeetingServiceDelegate class you should initialize the SDK as follows: 
+ 
+ ```
+        public void InitZoomLib(string appKey, string appSecret)
+        {
+            bool InitResult;
+
+            Device.BeginInvokeOnMainThread(() => { 
+                InitResult = mobileRTC.Initialize(new MobileRTCSDKInitContext
+                {
+                    EnableLog = true,
+                    Domain = "https://zoom.us",
+                    Locale = MobileRTC_ZoomLocale.Default
+                });
+                if (InitResult)
+                {
+                    mobileRTC.SetLanguage("it");
+                    authService = mobileRTC.GetAuthService();
+                    if (authService != null)
+                    {
+                        authService.Delegate = new MobileDelegate();   //inherits from MobileRTCAuthDelegate
+                        authService.ClientKey = appKey;
+                        authService.ClientSecret = appSecret;
+                        authService.SdkAuth();
+                    }
+                    Console.WriteLine($"Mobile RTC Version: {mobileRTC.MobileRTCVersion()} ");
+                }
+            });
+        } 
+```
+
+4. Listen for successful initialisation inside MobileRTCAuthDelegate
+```
+        class MobileDelegate : MobileRTCAuthDelegate
+        {
+            public override void OnMobileRTCAuthReturn(MobileRTCAuthError returnValue)
+            {
+                Console.WriteLine($"Another Log from our iOS counterpart: {returnValue}");
+            }
+        }
+```
+
+4.1 You can monitor the initialisation and authorization status in any moment like this: 
+
+```
+        public bool IsInitialized()
+        {
+            bool result = false;
+
+            if (MobileRTC.SharedRTC != null)
+            {
+                if (MobileRTC.SharedRTC.IsRTCAuthorized())
+                {
+                    if (MobileRTC.SharedRTC.GetMeetingService() != null)
+                    {
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        }
+```
+
+5. Join the meeting 
+
+```
+     public void JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
+     {
+            if (IsInitialized())
+            {
+                var meetingService = mobileRTC.GetMeetingService();
+                meetingService.Init();
+                meetingService.Delegate = this;
+
+                MobileRTCMeetingJoinParam meetingParamDict = new MobileRTCMeetingJoinParam();
+                meetingParamDict.UserName = displayName;
+                meetingParamDict.MeetingNumber = meetingID;
+                meetingParamDict.Password = meetingPassword;
+
+                MobileRTCMeetingSettings settings = mobileRTC.GetMeetingSettings();
+                settings.DisableDriveMode(true);
+                settings.EnableCustomMeeting = false;
+                //Specify your meeting options here
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var meetingJoinResponse = meetingService.JoinMeetingWithJoinParam(meetingParamDict);
+                    Console.WriteLine($"Meeting Joining Response {meetingJoinResponse}");
+                });
+            }
+	}
+```
+
+6. Monitor the meeting status
+```
+        public override void OnMeetingStateChange(MobileRTCMeetingState state)
+        {
+            if (state == MobileRTCMeetingState.Ended)
+            {
+                //The meeting has ended
+                //=> Fire your event! 
+            }
+            if (state == MobileRTCMeetingState.InMeeting)
+            {
+                inMeeting = true;
+            }
+            else
+            {
+                inMeeting = false;
+            }
+        }
+```
+
 ## Contributing
 
 You are welcome to raise issues. PRs are particularly welcome, as the maintainers primary focus is a commercial product which only uses certain limited feature of the zoom sdk. Therefore time to spend on fixing issues not directly related to features we require will be limited.
 
-## Building locally
+## Building locally - Android
 
 If you download a fresh android sdk .aar file to upgrade the version, before it will build, it needs to go through a manual process to strip out incorrectly formatted placeholder characters present in the source resource files. Basically %s and %d characters need replacing with their positional alternatives %1$s and %2$d etc. There are hundreds of resource files, so I am including a replace utility console app in the src. Instructions for use are below. A PR to automate this process further is welcome. I also raised [an issue in the zoom developer forums](https://devforum.zoom.us/t/2-multiple-substitutions-still-specified-in-non-positional-format/63243) to fix this at their end, but there is no sign of a fix yet.
 

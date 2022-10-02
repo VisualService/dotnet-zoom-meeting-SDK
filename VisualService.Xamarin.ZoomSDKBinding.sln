@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32106.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_iOS", "src\iOS\MobileRTC_iOS\MobileRTC_iOS.csproj", "{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0}"
 EndProject
@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{6751B512
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{904AECEA-8685-40A1-AA36-E4CDE0926F08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceBrokenPlaceholdersUtility", "src\Droid\ReplaceBrokenPlaceholdersUtility\ReplaceBrokenPlaceholdersUtility.csproj", "{5C1E463F-C18D-4D43-A405-779D38558FB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReplaceBrokenPlaceholdersUtility", "src\Droid\ReplaceBrokenPlaceholdersUtility\ReplaceBrokenPlaceholdersUtility.csproj", "{5C1E463F-C18D-4D43-A405-779D38558FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
