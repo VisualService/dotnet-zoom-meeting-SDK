@@ -47,7 +47,7 @@
                     //perform various setup steps
                     // only custom ui is tested, which requires adding your own Meeting Activity and video renderers in the android.xamarin project
                     // default UI may work fine, but it is untested
-                    zoomSDK.MeetingSettingsHelper.CustomizedMeetingUIEnabled = true; 
+                    zoomSDK.MeetingSettingsHelper.CustomizedMeetingUIEnabled = true;  // set this to false to use the zoom provided, Default UI
                     zoomSDK.MeetingSettingsHelper.EnableForceAutoStartMyVideoWhenJoinMeeting(false);
                     
                     //Add listeners according to your needs
@@ -204,11 +204,13 @@
 
 ## Contributing
 
-You are welcome to raise issues. PRs are particularly welcome, as the maintainers primary focus is a commercial product which only uses certain limited feature of the zoom sdk. Therefore time to spend on fixing issues not directly related to features we require will be limited.
+You are welcome to raise issues. PRs are particularly welcome, as the maintainer's primary focus is a commercial product which only uses certain limited feature of the Zoom SDK. Therefore time to spend on fixing issues not directly related to features we require will be limited.
 
 ## Building locally - Android
 
-If you download a fresh android sdk .aar file to upgrade the version, before it will build, it needs to go through a manual process to strip out incorrectly formatted placeholder characters present in the source resource files. Basically %s and %d characters need replacing with their positional alternatives %1$s and %2$d etc. There are hundreds of resource files, so I am including a replace utility console app in the src. Instructions for use are below. A PR to automate this process further is welcome. I also raised [an issue in the zoom developer forums](https://devforum.zoom.us/t/2-multiple-substitutions-still-specified-in-non-positional-format/63243) to fix this at their end, but there is no sign of a fix yet.
+If you download a fresh android sdk .aar file to upgrade the version, before it will build, you will need to run a manual process to strip out incorrectly formatted placeholder characters present in the zoom sdk resource files. Basically %s and %d characters need replacing with their positional alternatives %1$s and %2$d etc. (I don't know how it compiles for the zoom guys themselves without this, but perhaps the native android build process handles this kind of thing for you?) 
+
+There are hundreds of resource files, so I am including a replace utility console app in the src. Instructions for use are below. A PR to automate this process further is welcome. I also raised [an issue in the zoom developer forums](https://devforum.zoom.us/t/2-multiple-substitutions-still-specified-in-non-positional-format/63243) to fix this at their end, but there is no sign of a fix yet.
 
 1. Download the latest zoom sdk
 2. Inside the mobile RTC folder, find the file called mobilertc.aar and rename it to mobilertc.zip
