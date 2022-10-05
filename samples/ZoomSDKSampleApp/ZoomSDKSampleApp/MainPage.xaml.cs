@@ -17,7 +17,7 @@ namespace ZoomSDKSampleApp
 
         async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
-            await DependencyService.Get<IZoomSDKService>().JoinMeeting(A_MEETING_ID, A_MEETING_PASSWORD, "Rocky Balboa");
+            await DependencyService.Get<IZoomSDKService>().JoinMeeting(AppKeys.A_MEETING_ID, AppKeys.A_MEETING_PASSWORD, "Rocky Balboa");
         }
     }
 }
