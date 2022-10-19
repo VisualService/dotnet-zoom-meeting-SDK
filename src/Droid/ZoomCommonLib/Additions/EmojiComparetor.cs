@@ -1,9 +1,8 @@
-﻿using US.Zoom.Core.Data.Emoji;
-using Object = Java.Lang.Object;
+﻿using Object = Java.Lang.Object;
 
-namespace US.Zoom.Core.Model
+namespace US.Zoom.Core.Data.Emoji
 {
-    public partial class HashMapComparator
+    public partial class EmojiComparetor
     {
         public int Compare(Object o1, Object o2)
         {
