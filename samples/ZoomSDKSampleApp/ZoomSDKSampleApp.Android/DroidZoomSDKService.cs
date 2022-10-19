@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using US.Zoom.Sdk;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using ZoomSDKSampleApp.Droid;
 
@@ -36,6 +37,18 @@ namespace ZoomSDKSampleApp.Droid
 
         public void OnZoomAuthIdentityExpired() { }
 
-        public void OnZoomSDKInitializeResult(int p0, int p1) { }
+        public void OnZoomSDKInitializeResult(int errorCode, int internalErrorCode)
+        {
+            if (errorCode == ZoomError.ZoomErrorSuccess)
+            {
+                //Add listeners according to your needs
+                //zoomSDK.InMeetingService.AddListener(new YourInMeetingServiceListener());
+                //zoomSDK.MeetingService.AddListener(new YourMeetingServiceListener());
+            }
+            else
+            {
+                // something bad happened
+            }
+        }
     }
 }
