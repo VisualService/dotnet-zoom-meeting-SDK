@@ -1,125 +1,41 @@
-﻿//using System;
-//using System.Threading.Tasks;
-//using Android.App;
-//using Java.Interop;
-//using US.Zoom.Sdk;
-//using Xamarin.Essentials;
+﻿using System.Threading.Tasks;
+using US.Zoom.Sdk;
+using Xamarin.Forms;
+using ZoomSDKSampleApp.Droid;
 
-//namespace ZoomSDKSampleApp.Droid
-//{
-//    public class DroidZoomSDKService : IZoomSDKInitializeListener, IZoomSDKService
-//    {
-//        ZoomSDK zoomSDK;
+[assembly: Dependency(typeof(DroidZoomSDKService))]
+namespace ZoomSDKSampleApp.Droid
+{
+    public class DroidZoomSDKService : Java.Lang.Object, IZoomSDKService, IZoomSDKInitializeListener
+    {
+        ZoomSDK zoomSDK;
+        public async Task<bool> InitZoomLib(string appKey, string appSecret)
+        {
+            zoomSDK = ZoomSDK.Instance;
+            var zoomInitParams = new ZoomSDKInitParams
+            {
+                AppKey = appKey,
+                AppSecret = appSecret,
+            };
+            zoomSDK.Initialize(Android.App.Application.Context, this, zoomInitParams);
+            await Task.Delay(5000);
 
-//        public DroidZoomSDKService() { }
+            return true;
+        }
 
-//        public IntPtr Handle => throw new NotImplementedException();
+        public async Task JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
+        {
+            var meetingService = zoomSDK.MeetingService;
+            var resultJoinMeeting = meetingService.JoinMeetingWithParams(Android.App.Application.Context, new JoinMeetingParams
+            {
+                MeetingNo = meetingID,
+                DisplayName = displayName,
+                Password = meetingPassword
+            }, new JoinMeetingOptions { });
+        }
 
-//        public int JniIdentityHashCode => 0;
+        public void OnZoomAuthIdentityExpired() { }
 
-//        public JniObjectReference PeerReference => throw new NotImplementedException();
-
-//        public JniPeerMembers JniPeerMembers => throw new NotImplementedException();
-
-//        public JniManagedPeerStates JniManagedPeerState => throw new NotImplementedException();
-
-//        public void Dispose()
-//        {
-//        }
-
-//        public void Disposed()
-//        {
-//        }
-
-//        public void DisposeUnlessReferenced()
-//        {
-//        }
-
-//        public void Finalized()
-//        {
-//        }
-
-//        public async Task<bool> InitZoomLib(string appKey, string appSecret)
-//        {
-//            var zoomInitParams = new ZoomSDKInitParams
-//            {
-//                AppKey = appKey,
-//                AppSecret = appSecret
-//            };
-
-//            await MainThread.InvokeOnMainThreadAsync(() =>
-//            {
-//                zoomSDK = ZoomSDK.Instance;
-//                zoomSDK.Initialize(Application.Context, this, zoomInitParams);
-//            }).ConfigureAwait(false);
-
-//            return true;
-//        }
-
-//        public async Task JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
-//        {
-//            var meetingService = zoomSDK.MeetingService;
-
-//            await MainThread.InvokeOnMainThreadAsync(() =>
-//            {
-//                meetingService.JoinMeetingWithParams(Application.Context,
-//                    new JoinMeetingParams
-//                    {
-//                        MeetingNo = meetingID,
-//                        Password = meetingPassword,
-//                        DisplayName = displayName
-//                    }, new JoinMeetingOptions());
-//            }).ConfigureAwait(false);
-//        }
-
-//        public void OnZoomAuthIdentityExpired()
-//        {
-//            throw new NotImplementedException();
-//        }
-
-//        public async void OnZoomSDKInitializeResult(int errorCode, int internalErrorCode)
-//        {
-//            if (errorCode == ZoomError.ZoomErrorSuccess)
-//            {
-//                await MainThread.InvokeOnMainThreadAsync(() =>
-//                {
-//                    //perform various setup steps
-//                    // only custom ui is tested, which requires adding your own Meeting Activity and video renderers in the android.xamarin project
-//                    // default UI may work fine, but it is untested
-//                    zoomSDK.MeetingSettingsHelper.CustomizedMeetingUIEnabled = true;  // set this to false to use the zoom provided, Default UI
-//                    zoomSDK.MeetingSettingsHelper.EnableForceAutoStartMyVideoWhenJoinMeeting(false);
-
-//                    //Add listeners according to your needs
-//                    //zoomSDK.InMeetingService.AddListener(new YourInMeetingServiceListener());
-//                    //zoomSDK.MeetingService.AddListener(new YourMeetingServiceListener());
-//                });
-
-//            }
-//            else
-//            {
-//                // something bad happened
-//            }
-//        }
-
-//        public void SetJniIdentityHashCode(int value)
-//        {
-//            throw new NotImplementedException();
-//        }
-
-//        public void SetJniManagedPeerState(JniManagedPeerStates value)
-//        {
-//            throw new NotImplementedException();
-//        }
-
-//        public void SetPeerReference(JniObjectReference reference)
-//        {
-//            throw new NotImplementedException();
-//        }
-
-//        public void UnregisterFromRuntime()
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-//}
-
+        public void OnZoomSDKInitializeResult(int p0, int p1) { }
+    }
+}
