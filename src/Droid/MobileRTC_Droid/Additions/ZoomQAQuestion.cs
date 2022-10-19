@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Object = Java.Lang.Object;
+
 namespace Com.Zipow.Videobox.Confapp.QA
 {
     public partial class ZoomQAQuestion
     {
-        public virtual unsafe int CompareTo(Java.Lang.Object p0)
+        public int CompareTo(Object _object)
         {
-            return CompareTo((Com.Zipow.Videobox.Confapp.QA.ZoomQAQuestion) p0);
+            var paramZoomQAQuestion = (ZoomQAQuestion)_object;
+            return paramZoomQAQuestion.UpvoteCompareTo(paramZoomQAQuestion);
         }
     }
 }
+
