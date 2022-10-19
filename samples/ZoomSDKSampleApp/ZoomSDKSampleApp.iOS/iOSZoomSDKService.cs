@@ -3,19 +3,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Zoomios;
 
-[assembly:Dependency(typeof(ZoomSDKSampleApp.iOS.iOSZoomSDKService))]
+[assembly: Dependency(typeof(ZoomSDKSampleApp.iOS.iOSZoomSDKService))]
 namespace ZoomSDKSampleApp.iOS
 {
     public class iOSZoomSDKService : IMobileRTCMeetingServiceDelegate, IZoomSDKService
     {
-     
-        public iOSZoomSDKService()
-        {
-        }
-
         private bool inMeeting;
+        private MobileRTCAuthService authService;
 
-             public override void OnMeetingStateChange(MobileRTCMeetingState state)
+        public override void OnMeetingStateChange(MobileRTCMeetingState state)
         {
             if (state == MobileRTCMeetingState.Ended)
             {
@@ -32,35 +28,35 @@ namespace ZoomSDKSampleApp.iOS
             }
         }
 
-        private MobileRTCAuthService authService;
- public async Task<bool> InitZoomLib(string appKey, string appSecret)
-       {
-           bool InitResult= false;;
+        public async Task<bool> InitZoomLib(string appKey, string appSecret)
+        {
+            bool InitResult = false; ;
 
-           await Device.InvokeOnMainThreadAsync(() => { 
-               InitResult = MobileRTC.SharedRTC.Initialize(new MobileRTCSDKInitContext
-               {
-                   EnableLog = true,
-                   Domain = "https://zoom.us",
-                   Locale = MobileRTC_ZoomLocale.Default
-               });
-               if (InitResult)
-               {
-                   MobileRTC.SharedRTC.SetLanguage("en");
-                   authService = MobileRTC.SharedRTC.GetAuthService();
-                   if (authService != null)
-                   {
-                       authService.Delegate = new MobileDelegate();   //inherits from MobileRTCAuthDelegate
-                       authService.ClientKey = appKey;
-                       authService.ClientSecret = appSecret;
-                       authService.SdkAuth();
-                   }
-                   Console.WriteLine($"Mobile RTC Version: {MobileRTC.SharedRTC.MobileRTCVersion()} ");
-               }
-           });
+            await Device.InvokeOnMainThreadAsync(() =>
+            {
+                InitResult = MobileRTC.SharedRTC.Initialize(new MobileRTCSDKInitContext
+                {
+                    EnableLog = true,
+                    Domain = "https://zoom.us",
+                    Locale = MobileRTC_ZoomLocale.Default
+                });
+                if (InitResult)
+                {
+                    MobileRTC.SharedRTC.SetLanguage("en");
+                    authService = MobileRTC.SharedRTC.GetAuthService();
+                    if (authService != null)
+                    {
+                        authService.Delegate = new MobileDelegate();   //inherits from MobileRTCAuthDelegate
+                        authService.ClientKey = appKey;
+                        authService.ClientSecret = appSecret;
+                        authService.SdkAuth();
+                    }
+                    Console.WriteLine($"Mobile RTC Version: {MobileRTC.SharedRTC.MobileRTCVersion()} ");
+                }
+            });
 
             return InitResult;
-       }
+        }
 
         public bool IsInitialized()
         {
@@ -79,9 +75,8 @@ namespace ZoomSDKSampleApp.iOS
             return result;
         }
 
-    
-public async Task JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
-     {
+        public async Task JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
+        {
             if (IsInitialized())
             {
                 var meetingService = MobileRTC.SharedRTC.GetMeetingService();
@@ -105,17 +100,15 @@ public async Task JoinMeeting(string meetingID, string meetingPassword, string d
 
                 Console.WriteLine($"Meeting Joining Response {meetingJoinResponse}");
             }
-	}
-
-
+        }
     }
 
-      class MobileDelegate : MobileRTCAuthDelegate
+    class MobileDelegate : MobileRTCAuthDelegate
+    {
+        public override void OnMobileRTCAuthReturn(MobileRTCAuthError returnValue)
         {
-            public override void OnMobileRTCAuthReturn(MobileRTCAuthError returnValue)
-            {
-                Console.WriteLine($"Another Log from our iOS counterpart: {returnValue}");
-            }
-        } 
+            Console.WriteLine($"Another Log from our iOS counterpart: {returnValue}");
+        }
+    }
 }
 
