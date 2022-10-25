@@ -9,7 +9,7 @@
 ## Android Gotchas
 * Requires your android app to compile for Android 12
 
-* The csproj of your android app needs a particular version of AndroidX.Core which is out of the bounds of the latest Xamarin.Forms version. It is likely to remain so with MAUI here now an XF development at a minimum from Microsoft. I haven't noticed any negative consequences in my XF app, but it is something to watch out for in your implementation.
+* The csproj of your android app needs a particular version of AndroidX.Core which is out of the bounds of the latest Xamarin.Forms version. It is likely to remain so with MAUI here now, and XF development at a minimum from Microsoft. I haven't noticed any negative consequences in my XF app, but it is something to watch out for in your implementation.
 
 ```
 <PackageReference Include="Xamarin.AndroidX.Core">
