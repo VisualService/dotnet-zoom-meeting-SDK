@@ -55,11 +55,15 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.AndroidX.Core">
+      <Version>1.8.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DroidZoomSDKService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -89,6 +93,14 @@
     <ProjectReference Include="..\ZoomSDKSampleApp\ZoomSDKSampleApp.csproj">
       <Project>{AA0EE7FA-AE09-440D-A0B2-F254D6EEA592}</Project>
       <Name>ZoomSDKSampleApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\Droid\ZoomCommonLib\ZoomCommonLib.csproj">
+      <Project>{8F896C4F-56FE-4237-9373-D47F564D7065}</Project>
+      <Name>ZoomCommonLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\Droid\MobileRTC_Droid\MobileRTC_Droid.csproj">
+      <Project>{DE93193F-342D-4284-8FCD-8360F6DDB99A}</Project>
+      <Name>MobileRTC_Droid</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

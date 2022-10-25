@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using US.Zoom.Core.Data.Emoji;
+using Object = Java.Lang.Object;
 
 namespace US.Zoom.Core.Model
 {
     public partial class HashMapComparator
     {
-        public virtual unsafe int Compare(Java.Lang.Object map1, Java.Lang.Object map2)
+        public int Compare(Object o1, Object o2)
         {
-            return Compare((IDictionary<string, object>)map1, (IDictionary<string, object>)map2);
+            return Compare((CommonEmoji)o1, (CommonEmoji)o2);
         }
     }
 }
+
