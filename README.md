@@ -183,7 +183,19 @@ You are welcome to raise issues. PRs are particularly welcome, as the maintainer
 
 ## Building locally - Android
 
-To create the nuget package
+### Format correctly the .aar file (Only if it is necessary)
+If you download a fresh android sdk .aar file to upgrade the version, before it will build, you will need to run a manual process to strip out incorrectly formatted placeholder characters present in the zoom sdk resource files. Basically %s and %d characters need replacing with their positional alternatives %1$s and %2$d etc. (I don't know how it compiles for the zoom guys themselves without this, but perhaps the native android build process handles this kind of thing for you?) 
+
+There are hundreds of resource files, so I am including a replace utility console app in the src. Instructions for use are below. A PR to automate this process further is welcome. I also raised [an issue in the zoom developer forums](https://devforum.zoom.us/t/2-multiple-substitutions-still-specified-in-non-positional-format/63243) to fix this at their end, but there is no sign of a fix yet.
+
+1. Download the latest zoom sdk
+2. Inside the mobile RTC folder, find the file called mobilertc.aar and rename it to mobilertc.zip
+3. Extract the contents of the folder.
+4. Run the replace utility console app, located in src/Droid/, making sure to point the file location in the script to the res folder inside the extracted folder
+5. Recompile the mobilertc.aar file with this command ```jar cvf mobilertc.aar -C theExtractedFolderName/ .```
+6. Your mobilertc.aar file will now be suitable to use in the binding project.
+
+### To create the nuget package
 
 1. Change the Version node in the file MobileRTC_Droid.csproj to the latest version
 2. Build in release mode
