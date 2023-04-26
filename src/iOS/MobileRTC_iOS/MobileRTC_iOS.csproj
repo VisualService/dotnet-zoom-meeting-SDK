@@ -28,7 +28,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- ... -->
-    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.2.0" />
+    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.5.0"><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+<PrivateAssets>all</PrivateAssets>
+</PackageReference>
     <!-- ... -->
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -253,8 +255,10 @@
     <None Include="read.me" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Res\icon.png" Pack="true" PackagePath="" />
-  </ItemGroup>  
+  <Content Include="res\icon.png">
+    <PackagePath>res\icon.png</PackagePath>
+  </Content>
+</ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
   <PropertyGroup>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
