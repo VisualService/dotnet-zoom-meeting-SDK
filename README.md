@@ -1,5 +1,12 @@
-# Xamarin.ZoomSDKBinding
- 
+# MAUI
+
+dotnet MAUI support for Android and iOS is a work in progress. 
+
+# Xamarin.Forms
+
+This library started life as a Xamarin Forms binding. Legacy support is maintained up to the following versions of the zoom meeting sdk.
+If anyone needs Xamarin support for greater versions, PRs would be accepted
+
 * Android: Meeting SDK Version: 5.12.2.9109
  
 * iOS: 
