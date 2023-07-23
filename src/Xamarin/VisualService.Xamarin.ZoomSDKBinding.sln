@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{6751B512
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{904AECEA-8685-40A1-AA36-E4CDE0926F08}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{7D6CE052-D776-4FC7-BC5A-6A22CC819BBF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleApp", "SampleApp", "{7D6CE052-D776-4FC7-BC5A-6A22CC819BBF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomSDKSampleApp.Android", "ZoomSDKSampleApp\ZoomSDKSampleApp.Android\ZoomSDKSampleApp.Android.csproj", "{03C02B73-5C38-4319-83F8-24DD26AA6FB1}"
 EndProject
@@ -14,11 +14,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomSDKSampleApp.iOS", "Zoo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomSDKSampleApp", "ZoomSDKSampleApp\ZoomSDKSampleApp\ZoomSDKSampleApp.csproj", "{AA0EE7FA-AE09-440D-A0B2-F254D6EEA592}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_iOS", "..\..\src\Xamarin\iOS\MobileRTC_iOS\MobileRTC_iOS.csproj", "{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_iOS", "iOS\MobileRTC_iOS\MobileRTC_iOS.csproj", "{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_Droid", "..\..\src\Xamarin\Droid\MobileRTC_Droid\MobileRTC_Droid.csproj", "{DE93193F-342D-4284-8FCD-8360F6DDB99A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_Droid", "Droid\MobileRTC_Droid\MobileRTC_Droid.csproj", "{DE93193F-342D-4284-8FCD-8360F6DDB99A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomCommonLib", "..\..\src\Xamarin\Droid\ZoomCommonLib\ZoomCommonLib.csproj", "{8F896C4F-56FE-4237-9373-D47F564D7065}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomCommonLib", "Droid\ZoomCommonLib\ZoomCommonLib.csproj", "{8F896C4F-56FE-4237-9373-D47F564D7065}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
