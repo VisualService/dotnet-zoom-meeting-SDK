@@ -134,12 +134,6 @@
       <Project>{AA0EE7FA-AE09-440D-A0B2-F254D6EEA592}</Project>
       <Name>ZoomSDKSampleApp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\iOS\MobileRTC_iOS\MobileRTC_iOS.csproj">
-      <Project>{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0}</Project>
-      <Name>MobileRTC_iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

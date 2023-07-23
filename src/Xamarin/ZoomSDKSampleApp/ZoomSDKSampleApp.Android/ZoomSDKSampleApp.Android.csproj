@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -94,14 +94,6 @@
       <Project>{AA0EE7FA-AE09-440D-A0B2-F254D6EEA592}</Project>
       <Name>ZoomSDKSampleApp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Droid\ZoomCommonLib\ZoomCommonLib.csproj">
-      <Project>{8F896C4F-56FE-4237-9373-D47F564D7065}</Project>
-      <Name>ZoomCommonLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Droid\MobileRTC_Droid\MobileRTC_Droid.csproj">
-      <Project>{DE93193F-342D-4284-8FCD-8360F6DDB99A}</Project>
-      <Name>MobileRTC_Droid</Name>
-    </ProjectReference>
   </ItemGroup>
- <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
