@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{C71A658D-8CE8-4557-9531-7204DAEB2022}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomCommonLib.MAUI", "Android\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj", "{7D584FD5-77D5-4BFC-8CF7-623B13448472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC.MAUI", "Android\MobileRTC.MAUI\MobileRTC.MAUI.csproj", "{379E527C-B01C-452F-8822-CBC6CB97DC05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{2188A071-985D-4B51-9174-948782376B53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "Samples\SampleApp\SampleApp.csproj", "{8181487D-AECA-4DB5-A9D8-C57618C2F517}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D584FD5-77D5-4BFC-8CF7-623B13448472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D584FD5-77D5-4BFC-8CF7-623B13448472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D584FD5-77D5-4BFC-8CF7-623B13448472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D584FD5-77D5-4BFC-8CF7-623B13448472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{379E527C-B01C-452F-8822-CBC6CB97DC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{379E527C-B01C-452F-8822-CBC6CB97DC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{379E527C-B01C-452F-8822-CBC6CB97DC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{379E527C-B01C-452F-8822-CBC6CB97DC05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8181487D-AECA-4DB5-A9D8-C57618C2F517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8181487D-AECA-4DB5-A9D8-C57618C2F517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8181487D-AECA-4DB5-A9D8-C57618C2F517}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8181487D-AECA-4DB5-A9D8-C57618C2F517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8181487D-AECA-4DB5-A9D8-C57618C2F517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8181487D-AECA-4DB5-A9D8-C57618C2F517}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D584FD5-77D5-4BFC-8CF7-623B13448472} = {C71A658D-8CE8-4557-9531-7204DAEB2022}
+		{379E527C-B01C-452F-8822-CBC6CB97DC05} = {C71A658D-8CE8-4557-9531-7204DAEB2022}
+		{8181487D-AECA-4DB5-A9D8-C57618C2F517} = {2188A071-985D-4B51-9174-948782376B53}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C02CE80-4F39-49F7-A51A-9AD5DEAF3075}
+	EndGlobalSection
+EndGlobal
