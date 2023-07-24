@@ -3,4 +3,10 @@
     <color name="colorPrimary">#512BD4</color>
     <color name="colorPrimaryDark">#2B0B98</color>
     <color name="colorAccent">#2B0B98</color>
+    <color name="zm_v1_gray_C600_alpha90">#2B0B98</color>
+  <color name="zm_v1_gray_780">#2B0B98</color>
+  <color name="zm_v1_gray_2450">#2B0B98</color>
+  <color name="zm_v1_gray_2150_alpha90">#2B0B98</color>
+  <color name="zm_v1_blue_B400_alpha40">#2B0B98</color>
+  <color name="zm_v1_blue_B400_alpha35">#2B0B98</color>
 </resources>
