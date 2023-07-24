@@ -1,23 +1,24 @@
-﻿using SampleApp.Platforms.Android;
+﻿
+namespace SampleApp;
 
-namespace SampleApp
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            MainPage = new AppShell();
-        }
+        MainPage = new AppShell();
+    }
 
-        public ZoomService ZoomService { get; private set; }
-        
-        protected override void OnStart()
-        {
-            base.OnStart();
-            ZoomService = new ZoomService();
-            ZoomService.Init();
-        }
+    
+    public IZoomService ZoomService { get; private set; }
+    
+    protected override void OnStart()
+    {
+        base.OnStart();
+#if ANDROID
+            ZoomService = new Platforms.Android.ZoomService();
+#endif
+        ZoomService.Init();
     }
 }
