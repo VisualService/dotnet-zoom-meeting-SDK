@@ -19,6 +19,17 @@
 	<attr path="/api/package[@name='com.zipow.annotate']/class[@name='AnnoNoteView']/method[@name='onLayout' and count(parameter)=5 and parameter[1][@type='boolean'] and parameter[2][@type='int'] and parameter[3][@type='int'] and parameter[4][@type='int'] and parameter[5][@type='int']]" name="visibility">protected</attr>
 	<attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.scene.uservideo']/class[@name='ZmScrollableGalleryItemView']/method[@name='getDisplayUsers' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]" name="visibility">protected</attr>
 	<attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]/parameter[1]" name="managedType">AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder</attr>
+
+  <!--<attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.scene.uservideo']/class[@name='ZmGalleryRecyclerAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]" name="visibility">public</attr>
+  <attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.scene.uservideo']/class[@name='ZmGalleryRecyclerAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]" name="managedOverride">override</attr>
+  <attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.scene.uservideo']/class[@name='ZmGalleryRecyclerAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]/parameter[1]" name="managedType">AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder</attr>
+  <attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.scene.uservideo']/class[@name='ZmGalleryRecyclerAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]" name="managedReturn">void</attr>-->
+
+	<attr path="/api/package[@name='com.zipow.annotate.annoMultiPage']/class[@name='AnnoMultiPageAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='com.zipow.annotate.annoMultiPage.AnnoMultiPageAdapter.WhiteboardViewHolder'] and parameter[2][@type='int']]" name="managedOverride">override</attr>
+  <attr path="/api/package[@name='com.zipow.annotate.annoMultiPage']/class[@name='AnnoMultiPageAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='com.zipow.annotate.annoMultiPage.AnnoMultiPageAdapter.WhiteboardViewHolder'] and parameter[2][@type='int']]/parameter[1]" name="managedType">AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder</attr>
+
+
+
 	<attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onCreateViewHolder' and count(parameter)=2 and parameter[1][@type='android.view.ViewGroup'] and parameter[2][@type='int']]" name="managedOverride">override</attr>
 	<attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]" name="managedOverride">override</attr>
 	<attr path="/api/package[@name='us.zoom.uicommon.widget.view']/class[@name='ZMHorizontalListView']/method[@name='getAdapter' and count(parameter)=0]" name="managedOverride">virtual</attr>
@@ -57,7 +68,9 @@
 	<attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='us.zoom.androidlib.widget.pinnedsectionrecyclerview.BaseRecyclerViewAdapter.BaseViewHolder'] and parameter[2][@type='int']]" name="managedReturn">void</attr>
 	<attr path="/api/package[@name='com.zipow.videobox.confapp.meeting.actionsheet']/class[@name='ZmBaseActionSheetAdapter']/method[@name='onCreateViewHolder' and count(parameter)=2 and parameter[1][@type='android.view.ViewGroup'] and parameter[2][@type='int']]" name="managedReturn">AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder</attr>
 
-	<!-- Obfuscating those classes because they are publicity inherited by public SDK members -->
+
+	
+        <!-- Obfuscating those classes because they are publicity inherited by public SDK members -->
 	<remove-node path="/api/package[@name='com.zipow.videobox.confapp.meeting.videoeffects.videofilter']/class[@name='ZmVideoFilterRecyclerAdapter']">
 	</remove-node>
 	<remove-node path="/api/package[@name='com.zipow.videobox.confapp.meeting.videoeffects.virtualbackground']/class[@name='ZmVirtualBackgroundRecyclerAdapter']">
@@ -110,8 +123,9 @@
 	<remove-node path="/api/package[@name='com.zipow.videobox.view.mm']" />
 	<remove-node path="/api/package[@name='com.zipow.videobox.photopicker']" />
 	<remove-node path="/api/package[@name='com.zipow.videobox.view.sip']" />
+<remove-node path="/api/package[@name='com.zipow.videobox.newjoinflow.waitingview.oldui']/class[@name='ZmJoinFlowVideoView']"/>
 
-	<!-- Renaming those classes because they are conflicts with namespaces of the same name -->
+             <!-- Renaming those classes because they are conflicts with namespaces of the same name -->
 	<attr path="/api/package[@name='com.zipow.videobox.view']/interface[@name='MeetingReactionView.OnSelectListener']/method[@name='onSelectMeetingReaction' and count(parameter)=1 and parameter[1][@type='java.lang.String']]" name="managedName">OnSelectMeetingReaction2</attr>
 	<attr path="/api/package[@name='com.zipow.videobox.view.mm']/interface[@name='OnContentFileOperatorListener']/method[@name='onZoomFileClick' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.util.List&lt;java.lang.String&gt;']]" name="managedName">OnZoomFileClick2</attr>
 	<attr path="/api/package[@name='com.zipow.videobox.view.mm']/class[@name='MMContentSearchFilesListView']/method[@name='onZoomFileClick' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.util.List&lt;java.lang.String&gt;']]" name="managedName">OnZoomFileClick2</attr>

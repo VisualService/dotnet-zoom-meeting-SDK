@@ -4,5 +4,8 @@
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+
   </PropertyGroup>
+
 </Project>

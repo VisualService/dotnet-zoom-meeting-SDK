@@ -23,6 +23,14 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">28.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
+	  <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android33.0|AnyCPU'">
+	  <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -47,16 +55,17 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Android\MobileRTC.MAUI\MobileRTC.MAUI.csproj" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android33.0'">
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.8.0"/>
-    <PackageReference Include="XAB.FlexboxLayout">
-	    <Version>3.0.0.2</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xam.Plugins.Android.ExoPlayer">
-	    <Version>2.18.11</Version>
-	  </PackageReference>
-	</ItemGroup>
-
+  </ItemGroup>
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <PackageReference Include="Xamarin.Android.Glide" Version="4.15.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" Version="2.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel" Version="2.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel.Ktx" Version="2.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Security.SecurityCrypto" Version="1.1.0.1-alpha06" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.8.0" />
+    <PackageReference Include="XAB.FlexboxLayout" Version="3.0.0.2"/>
+    <PackageReference Include="Xam.Plugins.Android.ExoPlayer" Version="2.18.11"/>
+    <PackageReference Include="Xamarin.Google.Crypto.Tink.Android" Version="1.9.0.2" />
+  </ItemGroup>
 </Project>
