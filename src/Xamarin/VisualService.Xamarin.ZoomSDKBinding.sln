@@ -16,9 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomSDKSampleApp", "ZoomSDK
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_iOS", "iOS\MobileRTC_iOS\MobileRTC_iOS.csproj", "{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileRTC_Droid", "Droid\MobileRTC_Droid\MobileRTC_Droid.csproj", "{DE93193F-342D-4284-8FCD-8360F6DDB99A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileRTC_Droid", "Droid\MobileRTC_Droid\MobileRTC_Droid.csproj", "{DE93193F-342D-4284-8FCD-8360F6DDB99A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomCommonLib", "Droid\ZoomCommonLib\ZoomCommonLib.csproj", "{8F896C4F-56FE-4237-9373-D47F564D7065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomCommonLib", "Droid\ZoomCommonLib\ZoomCommonLib.csproj", "{8F896C4F-56FE-4237-9373-D47F564D7065}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiSampleApp", "ZoomSDKSampleApp\MauiSampleApp\MauiSampleApp.csproj", "{E6D54862-9F1C-4B77-9604-BAF48D090CBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,24 @@ Global
 		{8F896C4F-56FE-4237-9373-D47F564D7065}.Release|iPhone.Build.0 = Release|Any CPU
 		{8F896C4F-56FE-4237-9373-D47F564D7065}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{8F896C4F-56FE-4237-9373-D47F564D7065}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|iPhone.Deploy.0 = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|iPhone.Build.0 = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|iPhone.Deploy.0 = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +134,7 @@ Global
 		{CA661E6B-BCDF-4EC2-8E6C-045702BD2EA0} = {904AECEA-8685-40A1-AA36-E4CDE0926F08}
 		{DE93193F-342D-4284-8FCD-8360F6DDB99A} = {6751B512-6F43-4520-BEEB-FA86C4FD88E2}
 		{8F896C4F-56FE-4237-9373-D47F564D7065} = {6751B512-6F43-4520-BEEB-FA86C4FD88E2}
+		{E6D54862-9F1C-4B77-9604-BAF48D090CBF} = {7D6CE052-D776-4FC7-BC5A-6A22CC819BBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F0C09EAD-FEBC-4FED-BA6D-44DB7D3BCAA8}
