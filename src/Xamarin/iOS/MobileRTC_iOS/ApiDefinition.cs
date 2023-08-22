@@ -573,7 +573,7 @@ namespace Zoomios
 	{
 		// -(MobileRTCRawDataError)send:(char *)data dataLength:(unsigned int)length sampleRate:(int)rate;
 		[Export ("send:dataLength:sampleRate:")]
-		unsafe MobileRTCRawDataError Send (sbyte* data, uint length, int rate);
+		unsafe MobileRTCRawDataError Send (IntPtr data, uint length, int rate);
 	}
 
 	// @interface MobileRTCVideoSender : NSObject
@@ -582,11 +582,11 @@ namespace Zoomios
 	{
 		// -(void)sendVideoFrame:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height dataLength:(NSUInteger)dataLength rotation:(MobileRTCVideoRawDataRotation)rotation __attribute__((deprecated("Use -sendRawData: width: height: dataLength: ratation: format: instead")));
 		[Export ("sendVideoFrame:width:height:dataLength:rotation:")]
-		unsafe void SendVideoFrame (sbyte* frameBuffer, nuint width, nuint height, nuint dataLength, MobileRTCVideoRawDataRotation rotation);
+		unsafe void SendVideoFrame (IntPtr frameBuffer, nuint width, nuint height, nuint dataLength, MobileRTCVideoRawDataRotation rotation);
 
 		// -(void)sendVideoFrame:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height dataLength:(NSUInteger)dataLength rotation:(MobileRTCVideoRawDataRotation)rotation format:(MobileRTCFrameDataFormat)format;
 		[Export ("sendVideoFrame:width:height:dataLength:rotation:format:")]
-		unsafe void SendVideoFrame (sbyte* frameBuffer, nuint width, nuint height, nuint dataLength, MobileRTCVideoRawDataRotation rotation, MobileRTCFrameDataFormat format);
+		unsafe void SendVideoFrame (IntPtr frameBuffer, nuint width, nuint height, nuint dataLength, MobileRTCVideoRawDataRotation rotation, MobileRTCFrameDataFormat format);
 	}
 
 	// @interface MobileRTCShareSender : NSObject
@@ -595,11 +595,11 @@ namespace Zoomios
 	{
 		// -(void)sendShareFrameBuffer:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height frameLength:(NSUInteger)dataLength __attribute__((deprecated("Use -sendShareFrameBuffer:width:height:frameLength:format:instead")));
 		[Export ("sendShareFrameBuffer:width:height:frameLength:")]
-		unsafe void SendShareFrameBuffer (sbyte* frameBuffer, nuint width, nuint height, nuint dataLength);
+		unsafe void SendShareFrameBuffer (IntPtr frameBuffer, nuint width, nuint height, nuint dataLength);
 
 		// -(void)sendShareFrameBuffer:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height frameLength:(NSUInteger)dataLength format:(MobileRTCFrameDataFormat)format;
 		[Export ("sendShareFrameBuffer:width:height:frameLength:format:")]
-		unsafe void SendShareFrameBuffer (sbyte* frameBuffer, nuint width, nuint height, nuint dataLength, MobileRTCFrameDataFormat format);
+		unsafe void SendShareFrameBuffer (IntPtr frameBuffer, nuint width, nuint height, nuint dataLength, MobileRTCFrameDataFormat format);
 	}
 
 	// @interface MobileRTCVideoCapabilityItem : NSObject
@@ -688,7 +688,7 @@ namespace Zoomios
 	{
 		// -(MobileRTCRawDataError)sendShareAudio:(char *)data dataLength:(NSUInteger)length sampleRate:(NSUInteger)rate audioChannel:(MobileRTCAudioChannel)channel;
 		[Export ("sendShareAudio:dataLength:sampleRate:audioChannel:")]
-		unsafe MobileRTCRawDataError SendShareAudio (sbyte* data, nuint length, nuint rate, MobileRTCAudioChannel channel);
+		unsafe MobileRTCRawDataError SendShareAudio (IntPtr data, nuint length, nuint rate, MobileRTCAudioChannel channel);
 	}
 
 	// @protocol MobileRTCMeetingServiceDelegate <NSObject>
@@ -785,8 +785,8 @@ namespace Zoomios
 		void OnFreeMeetingUpgradedToProMeeting ();
 
 		//// @optional -(BOOL)onClickedInviteButton:(UIViewController * _Nonnull)parentVC addInviteActionItem:(NSMutableArray<MobileRTCMeetingInviteActionItem *> * _Nullable)array;
-		//[Export ("onClickedInviteButton:addInviteActionItem:")]
-		//bool OnClickedInviteButton (UIViewController parentVC, [NullAllowed] NSMutableArray<MobileRTCMeetingInviteActionItem> array);
+        [Export("onClickedInviteButton:addInviteActionItem:")]
+        bool OnClickedInviteButton(UIViewController parentVC, [NullAllowed] NSMutableArray array);
 
 		// @optional -(BOOL)onClickedAudioButton:(UIViewController * _Nonnull)parentVC;
 		[Export ("onClickedAudioButton:")]
@@ -797,8 +797,8 @@ namespace Zoomios
 		bool OnClickedParticipantsButton (UIViewController parentVC);
 
 		//// @optional -(BOOL)onClickedShareButton:(UIViewController * _Nonnull)parentVC addShareActionItem:(NSMutableArray<MobileRTCMeetingShareActionItem *> * _Nonnull)array;
-		//[Export ("onClickedShareButton:addShareActionItem:")]
-		//bool OnClickedShareButton (UIViewController parentVC, NSMutableArray<MobileRTCMeetingShareActionItem> array);
+        [Export("onClickedShareButton:addShareActionItem:")]
+        bool OnClickedShareButton(UIViewController parentVC, NSMutableArray array);
 
 		// @optional -(BOOL)onClickedEndButton:(UIViewController * _Nonnull)parentVC endButton:(UIButton * _Nonnull)endButton;
 		[Export ("onClickedEndButton:endButton:")]
