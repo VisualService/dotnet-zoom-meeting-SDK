@@ -236,15 +236,6 @@
     <BundleResource Include="Resources\MobileRTCResources.bundle\ZPParticipantViewController.nib" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Assets.car" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Info.plist" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <NativeReference Include="Native References/MobileRTC.framework">
       <Kind>Framework</Kind>
       <ForceLoad>False</ForceLoad>

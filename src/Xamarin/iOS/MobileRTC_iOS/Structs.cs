@@ -3,45 +3,6 @@
 namespace Zoomios
 {
     [Native]
-    public enum MobileRTCSDKError : ulong
-    {
-        Success = 0,
-        NoImpl,
-        WrongUsage,
-        InvalidParameter,
-        ModuleLoadFailed,
-        MemoryFailed,
-        ServiceFailed,
-        Uninitialize,
-        Unauthentication,
-        NoRecordingInprocess,
-        TranscoderNoFound,
-        VideoNotReady,
-        NoPermission,
-        Unknown,
-        OtherSdkInstanceRunning,
-        InternalError,
-        NoAudiodeviceIsFound,
-        NoVideoDeviceIsFound,
-        TooFrequentCall,
-        FailAssignUserPrivilege,
-        MeetingDontSupportFeature,
-        MeetingNotShareSender,
-        MeetingYouHaveNoShare,
-        MeetingViewtypeParameterIsWrong,
-        MeetingAnnotationIsOff,
-        SettingOsDontSupport,
-        EmailLoginIsDisabled,
-        HardwareNotMeetForVb,
-        NeedUserConfirmRecordDisclaimer,
-        NoShareData,
-        ShareCannotSubscribeMyself,
-        NotInMeeting,
-        MeetingCallOutFailed,
-        NotSupportMultiStreamVideoUser
-    }
-
-    [Native]
     public enum MobileRTCAuthError : ulong
     {
         Success,
@@ -281,6 +242,45 @@ namespace Zoomios
         On = 0,
         Off = 1,
         Muted_ByHost = 2
+    }
+
+    [Native]
+    public enum MobileRTCSDKError : ulong
+    {
+        Success = 0,
+        NoImpl,
+        WrongUsage,
+        InvalidParameter,
+        ModuleLoadFailed,
+        MemoryFailed,
+        ServiceFailed,
+        Uninitialize,
+        Unauthentication,
+        NoRecordingInprocess,
+        TranscoderNoFound,
+        VideoNotReady,
+        NoPermission,
+        Unknown,
+        OtherSdkInstanceRunning,
+        InternalError,
+        NoAudiodeviceIsFound,
+        NoVideoDeviceIsFound,
+        TooFrequentCall,
+        FailAssignUserPrivilege,
+        MeetingDontSupportFeature,
+        MeetingNotShareSender,
+        MeetingYouHaveNoShare,
+        MeetingViewtypeParameterIsWrong,
+        MeetingAnnotationIsOff,
+        SettingOsDontSupport,
+        EmailLoginIsDisabled,
+        HardwareNotMeetForVb,
+        NeedUserConfirmRecordDisclaimer,
+        NoShareData,
+        ShareCannotSubscribeMyself,
+        NotInMeeting,
+        MeetingCallOutFailed,
+        NotSupportMultiStreamVideoUser
     }
 
     [Native]
