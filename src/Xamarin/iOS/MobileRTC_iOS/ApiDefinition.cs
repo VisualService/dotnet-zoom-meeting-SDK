@@ -15,6 +15,10 @@ namespace Zoomios
         [NullAllowed]
         MobileRTCAuthDelegate Delegate { get; set; }
 
+        // @property (nonatomic, weak) id<MobileRTCAuthDelegate> _Nullable delegate;
+        [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
+        NSObject WeakDelegate { get; set; }
+
         // @property (retain, nonatomic) NSString * _Nullable clientKey;
         [NullAllowed, Export("clientKey", ArgumentSemantic.Retain)]
         string ClientKey { get; set; }
@@ -22,10 +26,6 @@ namespace Zoomios
         // @property (retain, nonatomic) NSString * _Nullable clientSecret;
         [NullAllowed, Export("clientSecret", ArgumentSemantic.Retain)]
         string ClientSecret { get; set; }
-
-        // @property (nonatomic, weak) id<MobileRTCAuthDelegate> _Nullable delegate;
-        [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-        NSObject WeakDelegate { get; set; }
 
         // @property (retain, nonatomic) NSString * _Nullable jwtToken;
         [NullAllowed, Export("jwtToken", ArgumentSemantic.Retain)]
@@ -37,12 +37,10 @@ namespace Zoomios
 
         // -(BOOL)isLoggedIn;
         [Export("isLoggedIn")]
-        //[Verify (MethodToProperty)]
         bool IsLoggedIn { get; }
 
         // -(MobileRTCUserType)getUserType;
         [Export("getUserType")]
-        //[Verify (MethodToProperty)]
         MobileRTCUserType UserType { get; }
 
         // -(NSString * _Nullable)generateSSOLoginWebURL:(NSString * _Nonnull)vanityUrl;
@@ -56,12 +54,10 @@ namespace Zoomios
 
         // -(BOOL)logoutRTC;
         [Export("logoutRTC")]
-        //[Verify (MethodToProperty)]
         bool LogoutRTC { get; }
 
         // -(MobileRTCAccountInfo * _Nullable)getAccountInfo;
         [NullAllowed, Export("getAccountInfo")]
-        //[Verify (MethodToProperty)]
         MobileRTCAccountInfo AccountInfo { get; }
 
         // -(void)enableAutoRegisterNotificationServiceForLogin:(BOOL)enable;
@@ -74,12 +70,10 @@ namespace Zoomios
 
         // -(MobileRTCSDKError)unregisterNotificationService;
         [Export("unregisterNotificationService")]
-        //[Verify (MethodToProperty)]
         MobileRTCSDKError UnregisterNotificationService { get; }
 
         // -(MobileRTCNotificationServiceHelper * _Nullable)getNotificationServiceHelper;
         [NullAllowed, Export("getNotificationServiceHelper")]
-        //[Verify (MethodToProperty)]
         MobileRTCNotificationServiceHelper NotificationServiceHelper { get; }
     }
 
@@ -116,77 +110,62 @@ namespace Zoomios
 	{
 		// -(NSString * _Nullable)getEmailAddress;
 		[NullAllowed, Export ("getEmailAddress")]
-		//[Verify (MethodToProperty)]
 		string EmailAddress { get; }
 
 		// -(NSString * _Nullable)getUserName;
 		[NullAllowed, Export ("getUserName")]
-		//[Verify (MethodToProperty)]
 		string UserName { get; }
 
 		// -(NSString * _Nullable)getPMIVanityURL;
 		[NullAllowed, Export ("getPMIVanityURL")]
-		//[Verify (MethodToProperty)]
 		string PMIVanityURL { get; }
 
 		// -(BOOL)isTelephoneOnlySupported;
 		[Export ("isTelephoneOnlySupported")]
-		//[Verify (MethodToProperty)]
 		bool IsTelephoneOnlySupported { get; }
 
 		// -(BOOL)isTelephoneAndVoipSupported;
 		[Export ("isTelephoneAndVoipSupported")]
-		//[Verify (MethodToProperty)]
 		bool IsTelephoneAndVoipSupported { get; }
 
 		// -(BOOL)is3rdPartyAudioSupported;
 		[Export ("is3rdPartyAudioSupported")]
-		//[Verify (MethodToProperty)]
 		bool Is3rdPartyAudioSupported { get; }
 
 		// -(NSString * _Nullable)get3rdPartyAudioInfo;
 		[NullAllowed, Export ("get3rdPartyAudioInfo")]
-		//[Verify (MethodToProperty)]
 		string Get3rdPartyAudioInfo { get; }
 
 		// -(MobileRTCMeetingItemAudioType)getDefaultAudioInfo;
 		[Export ("getDefaultAudioInfo")]
-		//[Verify (MethodToProperty)]
 		MobileRTCMeetingItemAudioType DefaultAudioInfo { get; }
 
 		// -(BOOL)onlyAllowSignedInUserJoinMeeting;
 		[Export ("onlyAllowSignedInUserJoinMeeting")]
-		//[Verify (MethodToProperty)]
 		bool OnlyAllowSignedInUserJoinMeeting { get; }
 
 		// -(NSArray<MobileRTCAlternativeHost *> * _Nullable)getCanScheduleForUsersList;
 		[NullAllowed, Export ("getCanScheduleForUsersList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAlternativeHost[] CanScheduleForUsersList { get; }
 
 		// -(BOOL)isLocalRecordingSupported;
 		[Export ("isLocalRecordingSupported")]
-		//[Verify (MethodToProperty)]
 		bool IsLocalRecordingSupported { get; }
 
 		// -(BOOL)isCloudRecordingSupported;
 		[Export ("isCloudRecordingSupported")]
-		//[Verify (MethodToProperty)]
 		bool IsCloudRecordingSupported { get; }
 
 		// -(MobileRTCMeetingItemRecordType)getDefaultAutoRecordType;
 		[Export ("getDefaultAutoRecordType")]
-		//[Verify (MethodToProperty)]
 		MobileRTCMeetingItemRecordType DefaultAutoRecordType { get; }
 
 		// -(BOOL)isSpecifiedDomainCanJoinFeatureOn;
 		[Export ("isSpecifiedDomainCanJoinFeatureOn")]
-		//[Verify (MethodToProperty)]
 		bool IsSpecifiedDomainCanJoinFeatureOn { get; }
 
 		// -(NSArray<NSString *> * _Nullable)getDefaultCanJoinUserSpecifiedDomains;
 		[NullAllowed, Export ("getDefaultCanJoinUserSpecifiedDomains")]
-		//[Verify (MethodToProperty)]
 		string[] DefaultCanJoinUserSpecifiedDomains { get; }
 	}
 
@@ -245,17 +224,14 @@ namespace Zoomios
 
 		// -(BOOL)canAddRef;
 		[Export ("canAddRef")]
-		//[Verify (MethodToProperty)]
 		bool CanAddRef { get; }
 
 		// -(BOOL)addRef;
 		[Export ("addRef")]
-		//[Verify (MethodToProperty)]
 		bool AddRef { get; }
 
 		// -(NSInteger)releaseRef;
 		[Export ("releaseRef")]
-		//[Verify (MethodToProperty)]
 		nint ReleaseRef { get; }
 	}
 
@@ -281,17 +257,14 @@ namespace Zoomios
 
 		// -(BOOL)canAddRef;
 		[Export ("canAddRef")]
-		//[Verify (MethodToProperty)]
 		bool CanAddRef { get; }
 
 		// -(BOOL)addRef;
 		[Export ("addRef")]
-		//[Verify (MethodToProperty)]
 		bool AddRef { get; }
 
 		// -(NSInteger)releaseRef;
 		[Export ("releaseRef")]
-		//[Verify (MethodToProperty)]
 		nint ReleaseRef { get; }
 	}
 
@@ -301,17 +274,14 @@ namespace Zoomios
 	{
 		// -(NSString * _Nullable)getUserId;
 		[NullAllowed, Export ("getUserId")]
-		//[Verify (MethodToProperty)]
 		string UserId { get; }
 
 		// -(NSString * _Nullable)getUserName;
 		[NullAllowed, Export ("getUserName")]
-		//[Verify (MethodToProperty)]
 		string UserName { get; }
 
 		// -(MobileRTCBOUserStatus)getUserStatus;
 		[Export ("getUserStatus")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOUserStatus UserStatus { get; }
 	}
 
@@ -321,17 +291,14 @@ namespace Zoomios
 	{
 		// -(NSString * _Nullable)getBOMeetingId;
 		[NullAllowed, Export ("getBOMeetingId")]
-		//[Verify (MethodToProperty)]
 		string BOMeetingId { get; }
 
 		// -(NSString * _Nullable)getBOMeetingName;
 		[NullAllowed, Export ("getBOMeetingName")]
-		//[Verify (MethodToProperty)]
 		string BOMeetingName { get; }
 
 		// -(NSArray<NSString *> * _Nullable)getBOMeetingUserList;
 		[NullAllowed, Export ("getBOMeetingUserList")]
-		//[Verify (MethodToProperty)]
 		string[] BOMeetingUserList { get; }
 	}
 
@@ -403,22 +370,18 @@ namespace Zoomios
 
 		// -(MobileRTCBOOption * _Nullable)getBOOption;
 		[NullAllowed, Export ("getBOOption")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOOption BOOption { get; }
 
 		// -(BOOL)isWebPreAssignBOEnabled;
 		[Export ("isWebPreAssignBOEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsWebPreAssignBOEnabled { get; }
 
 		// -(MobileRTCSDKError)requestAndUseWebPreAssignBOList;
 		[Export ("requestAndUseWebPreAssignBOList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError RequestAndUseWebPreAssignBOList { get; }
 
 		// -(MobileRTCBOPreAssignBODataStatus)getWebPreAssignBODataStatus;
 		[Export ("getWebPreAssignBODataStatus")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOPreAssignBODataStatus WebPreAssignBODataStatus { get; }
 	}
 
@@ -428,12 +391,10 @@ namespace Zoomios
 	{
 		// -(BOOL)startBO;
 		[Export ("startBO")]
-		//[Verify (MethodToProperty)]
 		bool StartBO { get; }
 
 		// -(BOOL)stopBO;
 		[Export ("stopBO")]
-		//[Verify (MethodToProperty)]
 		bool StopBO { get; }
 
 		// -(BOOL)assignNewUser:(NSString * _Nonnull)boUserId toRunningBO:(NSString * _Nonnull)boId;
@@ -446,7 +407,6 @@ namespace Zoomios
 
 		// -(BOOL)canStartBO;
 		[Export ("canStartBO")]
-		//[Verify (MethodToProperty)]
 		bool CanStartBO { get; }
 
 		// -(BOOL)joinBOByUserRequest:(NSString * _Nonnull)boUserId;
@@ -467,12 +427,10 @@ namespace Zoomios
 
 		// -(BOOL)isBroadcastVoiceToBOSupport;
 		[Export ("isBroadcastVoiceToBOSupport")]
-		//[Verify (MethodToProperty)]
 		bool IsBroadcastVoiceToBOSupport { get; }
 
 		// -(BOOL)canBroadcastVoiceToBO;
 		[Export ("canBroadcastVoiceToBO")]
-		//[Verify (MethodToProperty)]
 		bool CanBroadcastVoiceToBO { get; }
 
 		// -(BOOL)broadcastVoiceToBO:(BOOL)bStart;
@@ -490,7 +448,6 @@ namespace Zoomios
 
 		// -(BOOL)leaveBO;
 		[Export ("leaveBO")]
-		//[Verify (MethodToProperty)]
 		bool LeaveBO { get; }
 	}
 
@@ -500,32 +457,26 @@ namespace Zoomios
 	{
 		// -(BOOL)joinBO;
 		[Export ("joinBO")]
-		//[Verify (MethodToProperty)]
 		bool JoinBO { get; }
 
 		// -(BOOL)leaveBO;
 		[Export ("leaveBO")]
-		//[Verify (MethodToProperty)]
 		bool LeaveBO { get; }
 
 		// -(NSString * _Nullable)getBOName;
 		[NullAllowed, Export ("getBOName")]
-		//[Verify (MethodToProperty)]
 		string BOName { get; }
 
 		// -(BOOL)requestForHelp;
 		[Export ("requestForHelp")]
-		//[Verify (MethodToProperty)]
 		bool RequestForHelp { get; }
 
 		// -(BOOL)isHostInThisBO;
 		[Export ("isHostInThisBO")]
-		//[Verify (MethodToProperty)]
 		bool IsHostInThisBO { get; }
 
 		// -(BOOL)isCanReturnMainSession;
 		[Export ("isCanReturnMainSession")]
-		//[Verify (MethodToProperty)]
 		bool IsCanReturnMainSession { get; }
 	}
 
@@ -555,7 +506,6 @@ namespace Zoomios
 
 		// -(NSString * _Nullable)getCurrentBOName;
 		[NullAllowed, Export ("getCurrentBOName")]
-		//[Verify (MethodToProperty)]
 		string CurrentBOName { get; }
 
 		// -(BOOL)isBOUserMyself:(NSString * _Nonnull)boUserId;
@@ -569,7 +519,6 @@ namespace Zoomios
 	{
 		// -(BOOL)returnToMainSession;
 		[Export ("returnToMainSession")]
-		//[Verify (MethodToProperty)]
 		bool ReturnToMainSession { get; }
 
 		// -(void)ignore;
@@ -706,37 +655,30 @@ namespace Zoomios
 	{
 		// -(NSString *)getRequestId;
 		[Export ("getRequestId")]
-		//[Verify (MethodToProperty)]
 		string RequestId { get; }
 
 		// -(NSUInteger)getRequesterId;
 		[Export ("getRequesterId")]
-		//[Verify (MethodToProperty)]
 		nuint RequesterId { get; }
 
 		// -(NSString *)getRequesterName;
 		[Export ("getRequesterName")]
-		//[Verify (MethodToProperty)]
 		string RequesterName { get; }
 
 		// -(NSString *)getBroadcastUrl;
 		[Export ("getBroadcastUrl")]
-		//[Verify (MethodToProperty)]
 		string BroadcastUrl { get; }
 
 		// -(NSString *)getBroadcastName;
 		[Export ("getBroadcastName")]
-		//[Verify (MethodToProperty)]
 		string BroadcastName { get; }
 
 		// -(BOOL)grantRawLiveStreamPrivilege;
 		[Export ("grantRawLiveStreamPrivilege")]
-		//[Verify (MethodToProperty)]
 		bool GrantRawLiveStreamPrivilege { get; }
 
 		// -(BOOL)denyRawLiveStreamPrivilege;
 		[Export ("denyRawLiveStreamPrivilege")]
-		//[Verify (MethodToProperty)]
 		bool DenyRawLiveStreamPrivilege { get; }
 	}
 
@@ -864,7 +806,6 @@ namespace Zoomios
 
 		// @optional -(BOOL)onCheckIfMeetingVoIPCallRunning;
 		[Export ("onCheckIfMeetingVoIPCallRunning")]
-		//[Verify (MethodToProperty)]
 		bool OnCheckIfMeetingVoIPCallRunning { get; }
 
 		// @optional -(void)onOngoingShareStopped;
@@ -1908,7 +1849,6 @@ namespace Zoomios
 
 		// -(MobileRTCMeetingState)getMeetingState;
 		[Export ("getMeetingState")]
-		//[Verify (MethodToProperty)]
 		MobileRTCMeetingState MeetingState { get; }
 
 		// -(void)leaveMeetingWithCmd:(LeaveMeetingCmd)cmd;
@@ -1917,7 +1857,6 @@ namespace Zoomios
 
 		// -(UIView * _Nullable)meetingView;
 		[NullAllowed, Export ("meetingView")]
-		//[Verify (MethodToProperty)]
 		UIView MeetingView { get; }
 
 		// -(BOOL)setCustomizedInvitationDomain:(NSString * _Nonnull)invitationDomain;
@@ -1945,7 +1884,6 @@ namespace Zoomios
 	{
 		// -(BOOL)isDirectAppShareMeeting;
 		[Export("isDirectAppShareMeeting")]
-		//[Verify (MethodToProperty)]
 		bool IsDirectAppShareMeeting();
 
 		// -(void)appShareWithView:(id _Nonnull)view;
@@ -1954,7 +1892,6 @@ namespace Zoomios
 
 		// -(BOOL)startAppShare;
 		[Export("startAppShare")]
-		//[Verify (MethodToProperty)]
 		bool StartAppShare();
 
 		// -(void)stopAppShare;
@@ -1963,17 +1900,14 @@ namespace Zoomios
 
 		// -(BOOL)isStartingShare;
 		[Export("isStartingShare")]
-		//[Verify (MethodToProperty)]
 		bool IsStartingShare();
 
 		// -(BOOL)isViewingShare;
 		[Export("isViewingShare")]
-		//[Verify (MethodToProperty)]
 		bool IsViewingShare();
 
 		// -(BOOL)isAnnotationOff;
 		[Export("isAnnotationOff")]
-		//[Verify (MethodToProperty)]
 		bool IsAnnotationOff();
 
 		// -(BOOL)suspendSharing:(BOOL)suspend;
@@ -1982,17 +1916,14 @@ namespace Zoomios
 
 		// -(BOOL)isWhiteboardLegalNoticeAvailable;
 		[Export("isWhiteboardLegalNoticeAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsWhiteboardLegalNoticeAvailable();
 
 		// -(NSString * _Nullable)getWhiteboardLegalNoticesPrompt;
 		[NullAllowed, Export("getWhiteboardLegalNoticesPrompt")]
-		//[Verify (MethodToProperty)]
 		string WhiteboardLegalNoticesPrompt();
 
 		// -(NSString * _Nullable)getWhiteboardLegalNoticesExplained;
 		[NullAllowed, Export("getWhiteboardLegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		string WhiteboardLegalNoticesExplained();
 
 		// -(void)setShareAudio:(BOOL)enableAudio;
@@ -2001,12 +1932,10 @@ namespace Zoomios
 
 		// -(BOOL)isSharedAudio;
 		[Export("isSharedAudio")]
-		//[Verify (MethodToProperty)]
 		bool IsSharedAudio();
 
 		// -(BOOL)isDeviceSharing;
 		[Export("isDeviceSharing")]
-		//[Verify (MethodToProperty)]
 		bool IsDeviceSharing();
 	}
 
@@ -2225,27 +2154,22 @@ namespace Zoomios
 	{
 		// -(NSString * _Nullable)getRequestId;
 		[NullAllowed, Export ("getRequestId")]
-		//[Verify (MethodToProperty)]
 		string RequestId { get; }
 
 		// -(NSInteger)getRequesterId;
 		[Export ("getRequesterId")]
-		//[Verify (MethodToProperty)]
 		nint RequesterId { get; }
 
 		// -(NSString * _Nullable)getRequesterName;
 		[NullAllowed, Export ("getRequesterName")]
-		//[Verify (MethodToProperty)]
 		string RequesterName { get; }
 
 		// -(MobileRTCSDKError)grantLocalRecordingPrivilege;
 		[Export ("grantLocalRecordingPrivilege")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError GrantLocalRecordingPrivilege { get; }
 
 		// -(MobileRTCSDKError)denyLocalRecordingPrivilege;
 		[Export ("denyLocalRecordingPrivilege")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError DenyLocalRecordingPrivilege { get; }
 	}
 
@@ -2256,52 +2180,42 @@ namespace Zoomios
 	{
 		// -(BOOL)isMeetingHost;
 		[Export("isMeetingHost")]
-		//[Verify (MethodToProperty)]
 		bool IsMeetingHost();
 
 		// -(BOOL)isMeetingCoHost;
 		[Export("isMeetingCoHost")]
-		//[Verify (MethodToProperty)]
 		bool IsMeetingCoHost();
 
 		// -(BOOL)isWebinarAttendee;
 		[Export("isWebinarAttendee")]
-		//[Verify (MethodToProperty)]
 		bool IsWebinarAttendee();
 
 		// -(BOOL)isWebinarPanelist;
 		[Export ("isWebinarPanelist")]
-		//[Verify (MethodToProperty)]
 		bool IsWebinarPanelist();
 
 		// -(BOOL)isMeetingLocked;
 		[Export("isMeetingLocked")]
-		//[Verify (MethodToProperty)]
 		bool IsMeetingLocked();
 
 		// -(BOOL)isShareLocked;
 		[Export("isShareLocked")]
-		//[Verify (MethodToProperty)]
 		bool IsShareLocked();
 
 		// -(BOOL)isCMREnabled;
 		[Export("isCMREnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsCMREnabled();
 
 		// -(BOOL)isCMRInProgress;
 		[Export("isCMRInProgress")]
-		//[Verify (MethodToProperty)]
 		bool IsCMRInProgress();
 
 		// -(BOOL)isCMRPaused;
 		[Export("isCMRPaused")]
-		//[Verify (MethodToProperty)]
 		bool IsCMRPaused();
 
 		// -(BOOL)resumePauseCMR;
 		[Export("resumePauseCMR")]
-		//[Verify (MethodToProperty)]
 		bool ResumePauseCMR();
 
 		// -(void)turnOnCMR:(BOOL)on;
@@ -2310,22 +2224,18 @@ namespace Zoomios
 
 		// -(MobileRTCRecordingStatus)getCloudRecordingStatus;
 		[Export("getCloudRecordingStatus")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRecordingStatus CloudRecordingStatus();
 
 		// -(BOOL)isFailoverMeeting;
 		[Export("isFailoverMeeting")]
-		//[Verify (MethodToProperty)]
 		bool IsFailoverMeeting();
 
 		// -(MobileRTCMeetingType)getMeetingType;
 		[Export("getMeetingType")]
-		//[Verify (MethodToProperty)]
 		MobileRTCMeetingType MeetingType();
 
 		// -(BOOL)isWebinarMeeting;
 		[Export("isWebinarMeeting")]
-		//[Verify (MethodToProperty)]
 		bool IsWebinarMeeting();
 
 		// -(BOOL)lockMeeting:(BOOL)lock;
@@ -2358,22 +2268,18 @@ namespace Zoomios
 
 		// -(NSDictionary * _Nullable)getLiveStreamURL;
 		[NullAllowed, Export("getLiveStreamURL")]
-		//[Verify (MethodToProperty)]
 		NSDictionary LiveStreamURL();
 
 		// -(BOOL)stopLiveStream;
 		[Export("stopLiveStream")]
-		//[Verify (MethodToProperty)]
 		bool StopLiveStream();
 
 		// -(BOOL)isRawLiveStreamSupported;
 		[Export("isRawLiveStreamSupported")]
-		//[Verify (MethodToProperty)]
 		bool IsRawLiveStreamSupported();
 
 		// -(MobileRTCSDKError)canStartRawLiveStream;
 		[Export("canStartRawLiveStream")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError CanStartRawLiveStream();
 
 		// -(MobileRTCSDKError)requestRawLiveStream:(NSString * _Nonnull)broadcastURL __attribute__((deprecated("Use -requestRawLiveStreaming: broadcastName: instead")));
@@ -2394,7 +2300,6 @@ namespace Zoomios
 
 		// -(MobileRTCSDKError)stopRawLiveStream;
 		[Export("stopRawLiveStream")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError StopRawLiveStream();
 
 		// -(MobileRTCSDKError)removeRawLiveStreamPrivilege:(NSUInteger)userId;
@@ -2403,12 +2308,10 @@ namespace Zoomios
 
 		// -(NSArray<MobileRTCRawLiveStreamInfo *> * _Nullable)getRawLiveStreamingInfoList;
 		[NullAllowed, Export("getRawLiveStreamingInfoList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRawLiveStreamInfo[] RawLiveStreamingInfoList();
 
 		// -(NSArray<NSNumber *> * _Nullable)getRawLiveStreamPrivilegeUserList;
 		[NullAllowed, Export("getRawLiveStreamPrivilegeUserList")]
-		//[Verify (MethodToProperty)]
 		NSNumber[] RawLiveStreamPrivilegeUserList();
 
 		// -(BOOL)showMobileRTCMeeting:(void (^ _Nonnull)(void))completion;
@@ -2441,12 +2344,10 @@ namespace Zoomios
 
 		// -(MobileRTCANNError)hideAANPanel;
 		[Export("hideAANPanel")]
-		//[Verify (MethodToProperty)]
 		MobileRTCANNError HideAANPanel();
 
 		// -(BOOL)isQAEnabled;
 		[Export("isQAEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsQAEnabled();
 
 		// -(BOOL)presentQAViewController:(UIViewController * _Nonnull)parentVC;
@@ -2455,22 +2356,18 @@ namespace Zoomios
 
 		// -(NSString * _Nullable)getMeetingPassword;
 		[NullAllowed, Export("getMeetingPassword")]
-		//[Verify (MethodToProperty)]
 		string MeetingPassword();
 
 		// -(BOOL)showMinimizeMeetingFromZoomUIMeeting;
 		[Export("showMinimizeMeetingFromZoomUIMeeting")]
-		//[Verify (MethodToProperty)]
 		bool ShowMinimizeMeetingFromZoomUIMeeting();
 
 		// -(BOOL)backZoomUIMeetingFromMinimizeMeeting;
 		[Export("backZoomUIMeetingFromMinimizeMeeting")]
-		//[Verify (MethodToProperty)]
 		bool BackZoomUIMeetingFromMinimizeMeeting();
 
 		// -(BOOL)isParticipantsRenameAllowed;
 		[Export("isParticipantsRenameAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsParticipantsRenameAllowed();
 
 		// -(void)allowParticipantsToRename:(BOOL)allow;
@@ -2479,7 +2376,6 @@ namespace Zoomios
 
 		// -(BOOL)isParticipantsUnmuteSelfAllowed;
 		[Export("isParticipantsUnmuteSelfAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsParticipantsUnmuteSelfAllowed();
 
 		// -(void)allowParticipantsToUnmuteSelf:(BOOL)allow;
@@ -2492,7 +2388,6 @@ namespace Zoomios
 
 		// -(BOOL)isParticipantsStartVideoAllowed;
 		[Export("isParticipantsStartVideoAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsParticipantsStartVideoAllowed();
 
 		// -(MobileRTCSDKError)allowParticipantsToShareWhiteBoard:(BOOL)allow;
@@ -2501,27 +2396,22 @@ namespace Zoomios
 
 		// -(BOOL)isParticipantsShareWhiteBoardAllowed;
 		[Export("isParticipantsShareWhiteBoardAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsParticipantsShareWhiteBoardAllowed();
 
 		// -(BOOL)isLiveTranscriptLegalNoticeAvailable;
 		[Export("isLiveTranscriptLegalNoticeAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsLiveTranscriptLegalNoticeAvailable();
 
 		// -(NSString * _Nullable)getLiveTranscriptLegalNoticesPrompt;
 		[NullAllowed, Export("getLiveTranscriptLegalNoticesPrompt")]
-		//[Verify (MethodToProperty)]
 		string LiveTranscriptLegalNoticesPrompt();
 
 		// -(NSString * _Nullable)getLiveTranscriptLegalNoticesExplained;
 		[NullAllowed, Export("getLiveTranscriptLegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		string LiveTranscriptLegalNoticesExplained();
 
 		// -(BOOL)isParticipantRequestLocalRecordingAllowed;
 		[Export("isParticipantRequestLocalRecordingAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsParticipantRequestLocalRecordingAllowed();
 
 		// -(MobileRTCSDKError)allowParticipantsToRequestLocalRecording:(BOOL)allow;
@@ -2530,7 +2420,6 @@ namespace Zoomios
 
 		// -(BOOL)isAutoAllowLocalRecordingRequest;
 		[Export("isAutoAllowLocalRecordingRequest")]
-		//[Verify (MethodToProperty)]
 		bool IsAutoAllowLocalRecordingRequest();
 
 		// -(MobileRTCSDKError)autoAllowLocalRecordingRequest:(BOOL)allow;
@@ -2539,12 +2428,10 @@ namespace Zoomios
 
 		// -(BOOL)canSuspendParticipantsActivities;
 		[Export("canSuspendParticipantsActivities")]
-		//[Verify (MethodToProperty)]
 		bool CanSuspendParticipantsActivities();
 
 		// -(MobileRTCSDKError)suspendParticipantsActivites;
 		[Export("suspendParticipantsActivites")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError SuspendParticipantsActivites();
 	}
 
@@ -2613,32 +2500,26 @@ namespace Zoomios
 
 		// -(BOOL)isCallRoomDeviceSupported;
 		[Export("isCallRoomDeviceSupported")]
-		//[Verify (MethodToProperty)]
 		bool IsCallRoomDeviceSupported();
 
 		// -(BOOL)isCallingRoomDevice;
 		[Export("isCallingRoomDevice")]
-		//[Verify (MethodToProperty)]
 		bool IsCallingRoomDevice();
 
 		// -(BOOL)cancelCallRoomDevice;
 		[Export("cancelCallRoomDevice")]
-		//[Verify (MethodToProperty)]
 		bool CancelCallRoomDevice();
 
 		// -(NSArray<NSString *> * _Nullable)getIPAddressList;
 		[NullAllowed, Export("getIPAddressList")]
-		//[Verify (MethodToProperty)]
 		string[] IPAddressList();
 
 		// -(NSString * _Nullable)getH323MeetingPassword;
 		[NullAllowed, Export("getH323MeetingPassword")]
-		//[Verify (MethodToProperty)]
 		string H323MeetingPassword();
 
 		// -(NSArray<MobileRTCRoomDevice *> * _Nullable)getRoomDeviceList;
 		[NullAllowed, Export("getRoomDeviceList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRoomDevice[] RoomDeviceList();
 
 		// -(BOOL)sendPairingCode:(NSString * _Nonnull)code WithMeetingNumber:(unsigned long long)meetingNumber;
@@ -2651,7 +2532,6 @@ namespace Zoomios
 
 		// -(NSUInteger)getParticipantID;
 		[Export("getParticipantID")]
-		//[Verify (MethodToProperty)]
 		nuint ParticipantID();
 
 		// -(BOOL)setCustomizedPollingUrl:(NSString * _Nullable)pollingURL bCreate:(BOOL)bCreate;
@@ -2670,7 +2550,6 @@ namespace Zoomios
 	{
 		// -(MobileRTCAudioType)myAudioType;
 		[Export("myAudioType")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAudioType MyAudioType();
 
 		// -(BOOL)connectMyAudio:(BOOL)on;
@@ -2679,22 +2558,18 @@ namespace Zoomios
 
 		// -(MobileRTCAudioOutput)myAudioOutputDescription;
 		[Export("myAudioOutputDescription")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAudioOutput MyAudioOutputDescription();
 
 		// -(BOOL)isMyAudioMuted;
 		[Export("isMyAudioMuted")]
-		//[Verify (MethodToProperty)]
 		bool IsMyAudioMuted();
 
 		// -(BOOL)canUnmuteMyAudio;
 		[Export("canUnmuteMyAudio")]
-		//[Verify (MethodToProperty)]
 		bool CanUnmuteMyAudio();
 
 		// -(BOOL)isMuteOnEntryOn;
 		[Export("isMuteOnEntryOn")]
-		//[Verify (MethodToProperty)]
 		bool IsMuteOnEntryOn();
 
 		// -(BOOL)muteOnEntry:(BOOL)on;
@@ -2715,17 +2590,14 @@ namespace Zoomios
 
 		// -(BOOL)askAllToUnmute;
 		[Export("askAllToUnmute")]
-		//[Verify (MethodToProperty)]
 		bool AskAllToUnmute();
 
 		// -(BOOL)isSupportedVOIP;
 		[Export("isSupportedVOIP")]
-		//[Verify (MethodToProperty)]
 		bool IsSupportedVOIP();
 
 		// -(BOOL)isPlayChimeOn;
 		[Export("isPlayChimeOn")]
-		//[Verify (MethodToProperty)]
 		bool IsPlayChimeOn();
 
 		// -(BOOL)playChime:(BOOL)on;
@@ -2738,7 +2610,6 @@ namespace Zoomios
 
 		// -(MobileRTCAudioError)switchMyAudioSource;
 		[Export("switchMyAudioSource")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAudioError SwitchMyAudioSource();
 
 		// -(void)resetMeetingAudioSession;
@@ -2751,7 +2622,6 @@ namespace Zoomios
 
 		// -(BOOL)isIncomingAudioStopped;
 		[Export("isIncomingAudioStopped")]
-		//[Verify (MethodToProperty)]
 		bool IsIncomingAudioStopped();
 
 		// -(MobileRTCSDKError)stopIncomingAudio:(BOOL)enabled;
@@ -2760,7 +2630,6 @@ namespace Zoomios
 
 		// -(int)getSupportedMeetingAudioType;
 		[Export("getSupportedMeetingAudioType")]
-		//[Verify (MethodToProperty)]
 		int SupportedMeetingAudioType();
 	}
 
@@ -2771,12 +2640,10 @@ namespace Zoomios
 	{
 		// -(BOOL)isSendingMyVideo;
 		[Export("isSendingMyVideo")]
-		//[Verify (MethodToProperty)]
 		bool IsSendingMyVideo();
 
 		// -(BOOL)canUnmuteMyVideo;
 		[Export("canUnmuteMyVideo")]
-		//[Verify (MethodToProperty)]
 		bool CanUnmuteMyVideo();
 
 		// -(MobileRTCSDKError)muteMyVideo:(BOOL)mute;
@@ -2797,12 +2664,10 @@ namespace Zoomios
 
 		// -(BOOL)unSpotlightAllVideos;
 		[Export("unSpotlightAllVideos")]
-		//[Verify (MethodToProperty)]
 		bool UnSpotlightAllVideos();
 
 		// -(NSArray<NSNumber *> * _Nullable)getSpotLightedVideoUserList;
 		[NullAllowed, Export("getSpotLightedVideoUserList")]
-		//[Verify (MethodToProperty)]
 		NSNumber[] SpotLightedVideoUserList();
 
 		// -(BOOL)isUserPinned:(NSUInteger)userId;
@@ -2831,27 +2696,22 @@ namespace Zoomios
 
 		// -(BOOL)isBackCamera;
 		[Export("isBackCamera")]
-		//[Verify (MethodToProperty)]
 		bool IsBackCamera();
 
 		// -(MobileRTCCameraError)switchMyCamera;
 		[Export("switchMyCamera")]
-		//[Verify (MethodToProperty)]
 		MobileRTCCameraError SwitchMyCamera();
 
 		// -(BOOL)isSupportFollowHostVideoOrder;
 		[Export("isSupportFollowHostVideoOrder")]
-		//[Verify (MethodToProperty)]
 		bool IsSupportFollowHostVideoOrder();
 
 		// -(BOOL)isFollowHostVideoOrderOn;
 		[Export("isFollowHostVideoOrderOn")]
-		//[Verify (MethodToProperty)]
 		bool IsFollowHostVideoOrderOn();
 
 		// -(NSArray<NSNumber *> * _Nullable)getVideoOrderList;
 		[NullAllowed, Export("getVideoOrderList")]
-		//[Verify (MethodToProperty)]
 		NSNumber[] VideoOrderList();
 
 		// -(MobileRTCSDKError)stopIncomingVideo:(BOOL)enable;
@@ -2860,12 +2720,10 @@ namespace Zoomios
 
 		// -(BOOL)isIncomingVideoStoped;
 		[Export("isIncomingVideoStoped")]
-		//[Verify (MethodToProperty)]
 		bool IsIncomingVideoStoped();
 
 		// -(BOOL)isStopIncomingVideoSupported;
 		[Export("isStopIncomingVideoSupported")]
-		//[Verify (MethodToProperty)]
 		bool IsStopIncomingVideoSupported();
 
 		// -(MobileRTCSDKError)enableVideoAutoFraming:(MobileRTCAutoFramingParameter * _Nullable)setting forMode:(MobileRTCAutoFramingMode)mode;
@@ -2874,17 +2732,14 @@ namespace Zoomios
 
 		// -(MobileRTCSDKError)disableVideoAutoFraming;
 		[Export("disableVideoAutoFraming")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError DisableVideoAutoFraming();
 
 		// -(BOOL)isVideoAutoFramingEnabled;
 		[Export("isVideoAutoFramingEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsVideoAutoFramingEnabled();
 
 		// -(MobileRTCAutoFramingMode)getVideoAutoFramingMode;
 		[Export("getVideoAutoFramingMode")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAutoFramingMode VideoAutoFramingMode();
 
 		// -(MobileRTCSDKError)setVideoAutoFramingMode:(MobileRTCAutoFramingMode)mode;
@@ -2916,12 +2771,10 @@ namespace Zoomios
 
 		// -(NSArray<NSNumber *> * _Nullable)getInMeetingUserList;
 		[NullAllowed, Export("getInMeetingUserList")]
-		//[Verify (MethodToProperty)]
 		NSNumber[] InMeetingUserList();
 
 		// -(NSArray<NSNumber *> * _Nullable)getWebinarAttendeeList;
 		[NullAllowed, Export("getWebinarAttendeeList")]
-		//[Verify (MethodToProperty)]
 		NSNumber[] WebinarAttendeeList();
 
 		// -(MobileRTCMeetingUserInfo * _Nullable)userInfoByID:(NSUInteger)userId;
@@ -2944,17 +2797,14 @@ namespace Zoomios
 
 		// -(NSUInteger)myselfUserID;
 		[Export("myselfUserID")]
-		//[Verify (MethodToProperty)]
 		nuint MyselfUserID();
 
 		// -(NSUInteger)activeUserID;
 		[Export("activeUserID")]
-		//[Verify (MethodToProperty)]
 		nuint ActiveUserID();
 
 		// -(NSUInteger)activeShareUserID;
 		[Export("activeShareUserID")]
-		//[Verify (MethodToProperty)]
 		nuint ActiveShareUserID();
 
 		// -(BOOL)isSameUser:(NSUInteger)user1 compareTo:(NSUInteger)user2;
@@ -2975,7 +2825,6 @@ namespace Zoomios
 
 		// -(BOOL)raiseMyHand;
 		[Export("raiseMyHand")]
-		//[Verify (MethodToProperty)]
 		bool RaiseMyHand();
 
 		// -(BOOL)lowerHand:(NSUInteger)userId;
@@ -2988,12 +2837,10 @@ namespace Zoomios
 
 		// -(BOOL)canClaimhost;
 		[Export("canClaimhost")]
-		//[Verify (MethodToProperty)]
 		bool CanClaimhost();
 
 		// -(BOOL)reclaimHost;
 		[Export("reclaimHost")]
-		//[Verify (MethodToProperty)]
 		bool ReclaimHost();
 
 		// -(BOOL)claimHostWithHostKey:(NSString * _Nonnull)hostKey;
@@ -3028,12 +2875,10 @@ namespace Zoomios
 	{
 		// -(BOOL)isChatDisabled;
 		[Export("isChatDisabled")]
-		//[Verify (MethodToProperty)]
 		bool IsChatDisabled();
 
 		// -(BOOL)isPrivateChatDisabled;
 		[Export("isPrivateChatDisabled")]
-		//[Verify (MethodToProperty)]
 		bool IsPrivateChatDisabled();
 
 		// -(BOOL)changeAttendeeChatPriviledge:(MobileRTCMeetingChatPriviledgeType)privilege;
@@ -3042,22 +2887,18 @@ namespace Zoomios
 
 		// -(MobileRTCMeetingChatPriviledgeType)getAttendeeChatPriviledge;
 		[Export("getAttendeeChatPriviledge")]
-		//[Verify (MethodToProperty)]
 		MobileRTCMeetingChatPriviledgeType AttendeeChatPriviledge();
 
 		// -(BOOL)isMeetingChatLegalNoticeAvailable;
 		[Export("isMeetingChatLegalNoticeAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsMeetingChatLegalNoticeAvailable();
 
 		// -(NSString * _Nullable)getChatLegalNoticesPrompt;
 		[NullAllowed, Export("getChatLegalNoticesPrompt")]
-		//[Verify (MethodToProperty)]
 		string ChatLegalNoticesPrompt();
 
 		// -(NSString * _Nullable)getChatLegalNoticesExplained;
 		[NullAllowed, Export("getChatLegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		string ChatLegalNoticesExplained();
 
 		// -(MobileRTCMeetingChat * _Nullable)meetingChatByID:(NSString * _Nonnull)messageID;
@@ -3079,7 +2920,6 @@ namespace Zoomios
 
 		// -(NSArray<NSString *> * _Nullable)getAllChatMessageID;
 		[NullAllowed, Export("getAllChatMessageID")]
-		//[Verify (MethodToProperty)]
 		string[] AllChatMessageID();
 
 		// -(BOOL)isChatMessageCanBeDeleted:(NSString * _Nonnull)msgId;
@@ -3088,17 +2928,14 @@ namespace Zoomios
 
 		// -(BOOL)isShareMeetingChatLegalNoticeAvailable;
 		[Export("isShareMeetingChatLegalNoticeAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsShareMeetingChatLegalNoticeAvailable();
 
 		// -(NSString * _Nullable)getShareMeetingChatStartedLegalNoticeContent;
 		[NullAllowed, Export("getShareMeetingChatStartedLegalNoticeContent")]
-		//[Verify (MethodToProperty)]
 		string ShareMeetingChatStartedLegalNoticeContent();
 
 		// -(NSString * _Nullable)getShareMeetingChatStoppedLegalNoticeContent;
 		[NullAllowed, Export("getShareMeetingChatStoppedLegalNoticeContent")]
-		//[Verify (MethodToProperty)]
 		string ShareMeetingChatStoppedLegalNoticeContent();
 	}
 
@@ -3134,17 +2971,14 @@ namespace Zoomios
 	{
 		// -(BOOL)is3DAvatarSupportedByDevice;
 		[Export("is3DAvatarSupportedByDevice")]
-		//[Verify (MethodToProperty)]
 		bool Is3DAvatarSupportedByDevice();
 
 		// -(BOOL)is3DAvatarEnabled;
 		[Export("is3DAvatarEnabled")]
-		//[Verify (MethodToProperty)]
 		bool Is3DAvatarEnabled();
 
 		// -(NSArray<MobileRTC3DAvatarImageInfo *> *)get3DAvatarImageList;
 		[Export("get3DAvatarImageList")]
-		//[Verify (MethodToProperty)]
 		MobileRTC3DAvatarImageInfo[] Get3DAvatarImageList();
 
 		// -(MobileRTCSDKError)set3DAvatarImage:(MobileRTC3DAvatarImageInfo *)imageInfo;
@@ -3157,7 +2991,6 @@ namespace Zoomios
 
 		// -(BOOL)isShowAvatar;
 		[Export("isShowAvatar")]
-		//[Verify (MethodToProperty)]
 		bool IsShowAvatar();
 
 		// -(MobileRTCSDKError)enable3DAvatarEffectForAllMeeting:(BOOL)enable;
@@ -3166,7 +2999,6 @@ namespace Zoomios
 
 		// -(BOOL)is3DAvatarEffectForAllMeetingEnabled;
 		[Export("is3DAvatarEffectForAllMeetingEnabled")]
-		//[Verify (MethodToProperty)]
 		bool Is3DAvatarEffectForAllMeetingEnabled();
 	}
 
@@ -3176,42 +3008,34 @@ namespace Zoomios
 	{
 		// -(NSDate * _Nullable)getTime;
 		[NullAllowed, Export ("getTime")]
-		//[Verify (MethodToProperty)]
 		NSDate Time { get; }
 
 		// -(NSString * _Nullable)getText;
 		[NullAllowed, Export ("getText")]
-		//[Verify (MethodToProperty)]
 		string Text { get; }
 
 		// -(NSString * _Nullable)getSenderName;
 		[NullAllowed, Export ("getSenderName")]
-		//[Verify (MethodToProperty)]
 		string SenderName { get; }
 
 		// -(NSString * _Nullable)getQuestionId;
 		[NullAllowed, Export ("getQuestionId")]
-		//[Verify (MethodToProperty)]
 		string QuestionId { get; }
 
 		// -(NSString * _Nullable)getAnswerID;
 		[NullAllowed, Export ("getAnswerID")]
-		//[Verify (MethodToProperty)]
 		string AnswerID { get; }
 
 		// -(BOOL)isPrivate;
 		[Export ("isPrivate")]
-		//[Verify (MethodToProperty)]
 		bool IsPrivate { get; }
 
 		// -(BOOL)isLiveAnswer;
 		[Export ("isLiveAnswer")]
-		//[Verify (MethodToProperty)]
 		bool IsLiveAnswer { get; }
 
 		// -(BOOL)isSenderMyself;
 		[Export ("isSenderMyself")]
-		//[Verify (MethodToProperty)]
 		bool IsSenderMyself { get; }
 	}
 
@@ -3221,82 +3045,66 @@ namespace Zoomios
 	{
 		// -(NSString * _Nullable)getQuestionId;
 		[NullAllowed, Export ("getQuestionId")]
-		//[Verify (MethodToProperty)]
 		string QuestionId { get; }
 
 		// -(NSDate * _Nullable)getTime;
 		[NullAllowed, Export ("getTime")]
-		//[Verify (MethodToProperty)]
 		NSDate Time { get; }
 
 		// -(NSString * _Nullable)getText;
 		[NullAllowed, Export ("getText")]
-		//[Verify (MethodToProperty)]
 		string Text { get; }
 
 		// -(NSString * _Nullable)getSenderName;
 		[NullAllowed, Export ("getSenderName")]
-		//[Verify (MethodToProperty)]
 		string SenderName { get; }
 
 		// -(BOOL)isAnonymous;
 		[Export ("isAnonymous")]
-		//[Verify (MethodToProperty)]
 		bool IsAnonymous { get; }
 
 		// -(BOOL)isMarkedAsAnswered;
 		[Export ("isMarkedAsAnswered")]
-		//[Verify (MethodToProperty)]
 		bool IsMarkedAsAnswered { get; }
 
 		// -(BOOL)isMarkedAsDismissed;
 		[Export ("isMarkedAsDismissed")]
-		//[Verify (MethodToProperty)]
 		bool IsMarkedAsDismissed { get; }
 
 		// -(NSUInteger)getUpvoteNumber;
 		[Export ("getUpvoteNumber")]
-		//[Verify (MethodToProperty)]
 		nuint UpvoteNumber { get; }
 
 		// -(BOOL)getHasLiveAnswers;
 		[Export ("getHasLiveAnswers")]
-		//[Verify (MethodToProperty)]
 		bool HasLiveAnswers { get; }
 
 		// -(BOOL)getHasTextAnswers;
 		[Export ("getHasTextAnswers")]
-		//[Verify (MethodToProperty)]
 		bool HasTextAnswers { get; }
 
 		// -(BOOL)isMySelfUpvoted;
 		[Export ("isMySelfUpvoted")]
-		//[Verify (MethodToProperty)]
 		bool IsMySelfUpvoted { get; }
 
 		// -(BOOL)amILiveAnswering;
 		[Export ("amILiveAnswering")]
-		//[Verify (MethodToProperty)]
 		bool AmILiveAnswering { get; }
 
 		// -(BOOL)isLiveAnswering;
 		[Export ("isLiveAnswering")]
-		//[Verify (MethodToProperty)]
 		bool IsLiveAnswering { get; }
 
 		// -(NSString * _Nullable)getLiveAnswerName;
 		[NullAllowed, Export ("getLiveAnswerName")]
-		//[Verify (MethodToProperty)]
 		string LiveAnswerName { get; }
 
 		// -(BOOL)isSenderMyself;
 		[Export ("isSenderMyself")]
-		//[Verify (MethodToProperty)]
 		bool IsSenderMyself { get; }
 
 		// -(NSArray<MobileRTCQAAnswerItem *> * _Nullable)getAnswerlist;
 		[NullAllowed, Export ("getAnswerlist")]
-		//[Verify (MethodToProperty)]
 		MobileRTCQAAnswerItem[] Answerlist { get; }
 	}
 
@@ -3307,7 +3115,6 @@ namespace Zoomios
 	{
 		// -(BOOL)hasPromptAndDePromptPrivilege;
 		[Export("hasPromptAndDePromptPrivilege")]
-		//[Verify (MethodToProperty)]
 		bool HasPromptAndDePromptPrivilege();
 
 		// -(BOOL)promptAttendee2Panelist:(NSUInteger)userID;
@@ -3324,7 +3131,6 @@ namespace Zoomios
 
 		// -(MobileRTCPanelistChatPrivilegeType)getPanelistChatPrivilege;
 		[Export("getPanelistChatPrivilege")]
-		//[Verify (MethodToProperty)]
 		MobileRTCPanelistChatPrivilegeType PanelistChatPrivilege();
 
 		// -(BOOL)allowAttendeeChat:(MobileRTCChatAllowAttendeeChat)privilegeType;
@@ -3333,7 +3139,6 @@ namespace Zoomios
 
 		// -(MobileRTCChatAllowAttendeeChat)getWebinarAttendeeChatPrivilege;
 		[Export("getWebinarAttendeeChatPrivilege")]
-		//[Verify (MethodToProperty)]
 		MobileRTCChatAllowAttendeeChat WebinarAttendeeChatPrivilege();
 
 		// -(BOOL)isAllowAttendeeTalk:(NSUInteger)userID;
@@ -3346,7 +3151,6 @@ namespace Zoomios
 
 		// -(BOOL)isAllowPanelistStartVideo;
 		[Export("isAllowPanelistStartVideo")]
-		//[Verify (MethodToProperty)]
 		bool IsAllowPanelistStartVideo();
 
 		// -(BOOL)allowPanelistStartVideo:(BOOL)enable;
@@ -3355,7 +3159,6 @@ namespace Zoomios
 
 		// -(BOOL)isAllowAskQuestionAnonymously;
 		[Export("isAllowAskQuestionAnonymously")]
-		//[Verify (MethodToProperty)]
 		bool IsAllowAskQuestionAnonymously();
 
 		// -(BOOL)allowAskQuestionAnonymously:(BOOL)enable;
@@ -3364,7 +3167,6 @@ namespace Zoomios
 
 		// -(BOOL)isAllowAttendeeViewAllQuestion;
 		[Export("isAllowAttendeeViewAllQuestion")]
-		//[Verify (MethodToProperty)]
 		bool IsAllowAttendeeViewAllQuestion();
 
 		// -(BOOL)allowAttendeeViewAllQuestion:(BOOL)enable;
@@ -3373,7 +3175,6 @@ namespace Zoomios
 
 		// -(BOOL)isAllowAttendeeUpVoteQuestion;
 		[Export("isAllowAttendeeUpVoteQuestion")]
-		//[Verify (MethodToProperty)]
 		bool IsAllowAttendeeUpVoteQuestion();
 
 		// -(BOOL)allowAttendeeUpVoteQuestion:(BOOL)enable;
@@ -3382,7 +3183,6 @@ namespace Zoomios
 
 		// -(BOOL)isAllowCommentQuestion;
 		[Export("isAllowCommentQuestion")]
-		//[Verify (MethodToProperty)]
 		bool IsAllowCommentQuestion();
 
 		// -(BOOL)allowCommentQuestion:(BOOL)enable;
@@ -3391,52 +3191,42 @@ namespace Zoomios
 
 		// -(NSArray<MobileRTCQAItem *> * _Nullable)getAllQuestionList;
 		[NullAllowed, Export("getAllQuestionList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCQAItem[] AllQuestionList();
 
 		// -(NSArray<MobileRTCQAItem *> * _Nullable)getMyQuestionList;
 		[NullAllowed, Export("getMyQuestionList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCQAItem[] MyQuestionList();
 
 		// -(NSArray<MobileRTCQAItem *> * _Nullable)getOpenQuestionList;
 		[NullAllowed, Export("getOpenQuestionList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCQAItem[] OpenQuestionList();
 
 		// -(NSArray<MobileRTCQAItem *> * _Nullable)getDismissedQuestionList;
 		[NullAllowed, Export("getDismissedQuestionList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCQAItem[] DismissedQuestionList();
 
 		// -(NSArray<MobileRTCQAItem *> * _Nullable)getAnsweredQuestionList;
 		[NullAllowed, Export("getAnsweredQuestionList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCQAItem[] AnsweredQuestionList();
 
 		// -(int)getALLQuestionCount;
 		[Export("getALLQuestionCount")]
-		//[Verify (MethodToProperty)]
 		int ALLQuestionCount();
 
 		// -(int)getMyQuestionCount;
 		[Export("getMyQuestionCount")]
-		//[Verify (MethodToProperty)]
 		int MyQuestionCount();
 
 		// -(int)getOpenQuestionCount;
 		[Export("getOpenQuestionCount")]
-		//[Verify (MethodToProperty)]
 		int OpenQuestionCount();
 
 		// -(int)getDismissedQuestionCount;
 		[Export("getDismissedQuestionCount")]
-		//[Verify (MethodToProperty)]
 		int DismissedQuestionCount();
 
 		// -(int)getAnsweredQuestionCount;
 		[Export("getAnsweredQuestionCount")]
-		//[Verify (MethodToProperty)]
 		int AnsweredQuestionCount();
 
 		// -(MobileRTCQAItem * _Nullable)getQuestion:(NSString * _Nonnull)questionID;
@@ -3495,57 +3285,46 @@ namespace Zoomios
 
 		// -(BOOL)isQALegalNoticeAvailable;
 		[Export("isQALegalNoticeAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsQALegalNoticeAvailable();
 
 		// -(BOOL)isWebinarEmojiReactionAllowed;
 		[Export("isWebinarEmojiReactionAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsWebinarEmojiReactionAllowed();
 
 		// -(MobileRTCSDKError)allowWebinarEmojiReaction;
 		[Export("allowWebinarEmojiReaction")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError AllowWebinarEmojiReaction();
 
 		// -(MobileRTCSDKError)disallowWebinarEmojiReaction;
 		[Export("disallowWebinarEmojiReaction")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError DisallowWebinarEmojiReaction();
 
 		// -(BOOL)isAttendeeRaiseHandAllowed;
 		[Export("isAttendeeRaiseHandAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsAttendeeRaiseHandAllowed();
 
 		// -(MobileRTCSDKError)allowAttendeeRaiseHand;
 		[Export("allowAttendeeRaiseHand")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError AllowAttendeeRaiseHand();
 
 		// -(MobileRTCSDKError)disallowAttendeeRaiseHand;
 		[Export("disallowAttendeeRaiseHand")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError DisallowAttendeeRaiseHand();
 
 		// -(BOOL)isAttendeeViewTheParticipantCountAllowed;
 		[Export("isAttendeeViewTheParticipantCountAllowed")]
-		//[Verify (MethodToProperty)]
 		bool IsAttendeeViewTheParticipantCountAllowed();
 
 		// -(MobileRTCSDKError)allowAttendeeViewTheParticipantCount;
 		[Export("allowAttendeeViewTheParticipantCount")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError AllowAttendeeViewTheParticipantCount();
 
 		// -(MobileRTCSDKError)disallowAttendeeViewTheParticipantCount;
 		[Export("disallowAttendeeViewTheParticipantCount")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError DisallowAttendeeViewTheParticipantCount();
 
 		// -(NSUInteger)getParticipantCount;
 		[Export("getParticipantCount")]
-		//[Verify (MethodToProperty)]
 		nuint ParticipantCount();
 
 		// -(MobileRTCSDKError)setAttendeeViewMode:(MobileRTCAttendeeViewMode)mode;
@@ -3554,47 +3333,38 @@ namespace Zoomios
 
 		// -(MobileRTCAttendeeViewMode)getAttendeeViewMode;
 		[Export("getAttendeeViewMode")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAttendeeViewMode AttendeeViewMode();
 
 		// -(NSString * _Nullable)getQALegalNoticesPrompt;
 		[NullAllowed, Export("getQALegalNoticesPrompt")]
-		//[Verify (MethodToProperty)]
 		string QALegalNoticesPrompt();
 
 		// -(NSString * _Nullable)getQALegalNoticesExplained;
 		[NullAllowed, Export("getQALegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		string QALegalNoticesExplained();
 
 		// -(NSString * _Nullable)getPollLegalNoticesPrompt;
 		[NullAllowed, Export("getPollLegalNoticesPrompt")]
-		//[Verify (MethodToProperty)]
 		string PollLegalNoticesPrompt();
 
 		// -(BOOL)isPollingLegalNoticeAvailable;
 		[Export("isPollingLegalNoticeAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsPollingLegalNoticeAvailable();
 
 		// -(NSString * _Nullable)getPollLegalNoticesExplained;
 		[NullAllowed, Export("getPollLegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		string PollLegalNoticesExplained();
 
 		// -(NSString * _Nullable)getPollAnonymousLegalNoticesExplained;
 		[NullAllowed, Export("getPollAnonymousLegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		string PollAnonymousLegalNoticesExplained();
 
 		// -(NSString * _Nullable)getWebinarRegistrationLegalNoticesPrompt;
 		[NullAllowed, Export("getWebinarRegistrationLegalNoticesPrompt")]
-		//[Verify (MethodToProperty)]
 		string WebinarRegistrationLegalNoticesPrompt();
 
 		// -(MobileRTCWebinarRegistLegalNoticeContent * _Nullable)getWebinarRegistrationLegalNoticesExplained;
 		[NullAllowed, Export("getWebinarRegistrationLegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		MobileRTCWebinarRegistLegalNoticeContent WebinarRegistrationLegalNoticesExplained();
 	}
 
@@ -3630,17 +3400,14 @@ namespace Zoomios
 
 		// -(BOOL)isSupportVirtualBG;
 		[Export("isSupportVirtualBG")]
-		//[Verify (MethodToProperty)]
 		bool IsSupportVirtualBG();
 
 		// -(BOOL)isSupportSmartVirtualBG;
 		[Export("isSupportSmartVirtualBG")]
-		//[Verify (MethodToProperty)]
 		bool IsSupportSmartVirtualBG();
 
 		// -(NSArray<MobileRTCVirtualBGImageInfo *> * _Nonnull)getBGImageList;
 		[Export("getBGImageList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCVirtualBGImageInfo[] BGImageList();
 
 		// -(MobileRTCMeetError)addBGImage:(UIImage * _Nonnull)image;
@@ -3657,12 +3424,10 @@ namespace Zoomios
 
 		// -(MobileRTCMeetError)useNoneImage;
 		[Export("useNoneImage")]
-		//[Verify (MethodToProperty)]
 		MobileRTCMeetError UseNoneImage();
 
 		// -(BOOL)isUsingGreenVB;
 		[Export("isUsingGreenVB")]
-		//[Verify (MethodToProperty)]
 		bool IsUsingGreenVB();
 
 		// -(MobileRTCMeetError)enableGreenVB:(BOOL)enable;
@@ -3680,17 +3445,14 @@ namespace Zoomios
 	{
 		// -(NSInteger)getLanguageID;
 		[Export ("getLanguageID")]
-		//[Verify (MethodToProperty)]
 		nint LanguageID { get; }
 
 		// -(NSString * _Nullable)getLanguageAbbreviations;
 		[NullAllowed, Export ("getLanguageAbbreviations")]
-		//[Verify (MethodToProperty)]
 		string LanguageAbbreviations { get; }
 
 		// -(NSString * _Nullable)getLanguageName;
 		[NullAllowed, Export ("getLanguageName")]
-		//[Verify (MethodToProperty)]
 		string LanguageName { get; }
 	}
 
@@ -3700,22 +3462,18 @@ namespace Zoomios
 	{
 		// -(NSInteger)getUserID;
 		[Export ("getUserID")]
-		//[Verify (MethodToProperty)]
 		nint UserID { get; }
 
 		// -(NSInteger)getLanguageID1;
 		[Export ("getLanguageID1")]
-		//[Verify (MethodToProperty)]
 		nint LanguageID1 { get; }
 
 		// -(NSInteger)getLanguageID2;
 		[Export ("getLanguageID2")]
-		//[Verify (MethodToProperty)]
 		nint LanguageID2 { get; }
 
 		// -(BOOL)isAvailable;
 		[Export ("isAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsAvailable { get; }
 	}
 
@@ -3726,17 +3484,14 @@ namespace Zoomios
 	{
 		// -(BOOL)isInterpretationEnabled;
 		[Export("isInterpretationEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsInterpretationEnabled();
 
 		// -(BOOL)isInterpretationStarted;
 		[Export("isInterpretationStarted")]
-		//[Verify (MethodToProperty)]
 		bool IsInterpretationStarted();
 
 		// -(BOOL)isInterpreter;
 		[Export("isInterpreter")]
-		//[Verify (MethodToProperty)]
 		bool IsInterpreter();
 
 		// -(MobileRTCInterpretationLanguage * _Nullable)getInterpretationLanguageByID:(NSInteger)lanID;
@@ -3746,12 +3501,10 @@ namespace Zoomios
 
 		// -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getAllLanguageList;
 		[NullAllowed, Export("getAllLanguageList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCInterpretationLanguage[] AllLanguageList();
 
 		// -(NSArray<MobileRTCMeetingInterpreter *> * _Nullable)getInterpreterList;
 		[NullAllowed, Export("getInterpreterList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCMeetingInterpreter[] InterpreterList();
 
 		// -(BOOL)addInterpreter:(NSUInteger)userID lan1:(NSInteger)lanID1 andLan2:(NSInteger)lanID2;
@@ -3768,17 +3521,14 @@ namespace Zoomios
 
 		// -(BOOL)startInterpretation;
 		[Export("startInterpretation")]
-		//[Verify (MethodToProperty)]
 		bool StartInterpretation();
 
 		// -(BOOL)stopInterpretation;
 		[Export("stopInterpretation")]
-		//[Verify (MethodToProperty)]
 		bool StopInterpretation();
 
 		// -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getAvailableLanguageList;
 		[NullAllowed, Export("getAvailableLanguageList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCInterpretationLanguage[] AvailableLanguageList();
 
 		// -(BOOL)joinLanguageChannel:(NSInteger)lanID;
@@ -3787,27 +3537,22 @@ namespace Zoomios
 
 		// -(NSInteger)getJoinedLanguageID;
 		[Export("getJoinedLanguageID")]
-		//[Verify (MethodToProperty)]
 		nint JoinedLanguageID();
 
 		// -(BOOL)turnOffMajorAudio;
 		[Export("turnOffMajorAudio")]
-		//[Verify (MethodToProperty)]
 		bool TurnOffMajorAudio();
 
 		// -(BOOL)turnOnMajorAudio;
 		[Export("turnOnMajorAudio")]
-		//[Verify (MethodToProperty)]
 		bool TurnOnMajorAudio();
 
 		// -(BOOL)isMajorAudioTurnOff;
 		[Export("isMajorAudioTurnOff")]
-		//[Verify (MethodToProperty)]
 		bool IsMajorAudioTurnOff();
 
 		// -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getInterpreterLans;
 		[NullAllowed, Export("getInterpreterLans")]
-		//[Verify (MethodToProperty)]
 		MobileRTCInterpretationLanguage[] InterpreterLans();
 
 		// -(BOOL)setInterpreterActiveLan:(NSInteger)activeLanID;
@@ -3816,12 +3561,10 @@ namespace Zoomios
 
 		// -(NSInteger)getInterpreterActiveLan;
 		[Export("getInterpreterActiveLan")]
-		//[Verify (MethodToProperty)]
 		nint InterpreterActiveLan();
 
 		// -(NSArray<MobileRTCInterpretationLanguage *> * _Nullable)getInterpreterAvailableLanguages;
 		[NullAllowed, Export("getInterpreterAvailableLanguages")]
-		//[Verify (MethodToProperty)]
 		MobileRTCInterpretationLanguage[] InterpreterAvailableLanguages();
 
 		// -(BOOL)setInterpreterListenLan:(NSInteger)lanID;
@@ -3830,7 +3573,6 @@ namespace Zoomios
 
 		// -(NSInteger)getInterpreterListenLan;
 		[Export("getInterpreterListenLan")]
-		//[Verify (MethodToProperty)]
 		nint InterpreterListenLan();
 	}
 
@@ -3883,17 +3625,14 @@ namespace Zoomios
 	{
 		// -(BOOL)isSignInterpretationEnabled;
 		[Export("isSignInterpretationEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsSignInterpretationEnabled();
 
 		// -(MobileRTCSignInterpretationStatus)getSignInterpretationStatus;
 		[Export("getSignInterpretationStatus")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSignInterpretationStatus SignInterpretationStatus();
 
 		// -(BOOL)isSignInterpreter;
 		[Export("isSignInterpreter")]
-		//[Verify (MethodToProperty)]
 		bool IsSignInterpreter();
 
 		// -(MobileRTCSignInterpreterLanguage * _Nullable)getSignInterpretationLanguageInfoByID:(NSString * _Nullable)signLanguageID;
@@ -3903,17 +3642,14 @@ namespace Zoomios
 
 		// -(NSArray<MobileRTCSignInterpreterLanguage *> * _Nullable)getAvailableSignLanguageInfoList;
 		[NullAllowed, Export("getAvailableSignLanguageInfoList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSignInterpreterLanguage[] AvailableSignLanguageInfoList();
 
 		// -(NSArray<MobileRTCSignInterpreterLanguage *> * _Nullable)getAllSupportedSignLanguageInfoList;
 		[NullAllowed, Export("getAllSupportedSignLanguageInfoList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSignInterpreterLanguage[] AllSupportedSignLanguageInfoList();
 
 		// -(NSArray<MobileRTCSignInterpreter *> * _Nullable)getSignInterpreterList;
 		[NullAllowed, Export("getSignInterpreterList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSignInterpreter[] SignInterpreterList();
 
 		// -(MobileRTCSDKError)addSignInterpreter:(NSUInteger)userID signLanId:(NSString * _Nullable)signLanID;
@@ -3930,17 +3666,14 @@ namespace Zoomios
 
 		// -(BOOL)canStartSignInterpretation;
 		[Export("canStartSignInterpretation")]
-		//[Verify (MethodToProperty)]
 		bool CanStartSignInterpretation();
 
 		// -(MobileRTCSDKError)startSignInterpretation;
 		[Export("startSignInterpretation")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError StartSignInterpretation();
 
 		// -(MobileRTCSDKError)stopSignInterpretation;
 		[Export("stopSignInterpretation")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError StopSignInterpretation();
 
 		// -(MobileRTCSDKError)requestSignLanuageInterpreterToTalk:(NSUInteger)userID allowToTalk:(BOOL)allowToTalk;
@@ -3953,7 +3686,6 @@ namespace Zoomios
 
 		// -(NSString * _Nullable)getSignInterpreterAssignedLanID;
 		[NullAllowed, Export("getSignInterpreterAssignedLanID")]
-		//[Verify (MethodToProperty)]
 		string SignInterpreterAssignedLanID();
 
 		// -(MobileRTCSDKError)joinSignLanguageChannel:(NSString * _Nullable)signLanID;
@@ -3962,7 +3694,6 @@ namespace Zoomios
 
 		// -(MobileRTCSDKError)leaveSignLanguageChannel;
 		[Export("leaveSignLanguageChannel")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError LeaveSignLanguageChannel();
 	}
 
@@ -3973,52 +3704,42 @@ namespace Zoomios
 	{
 		// -(MobileRTCBOCreator * _Nullable)getCreatorHelper;
 		[NullAllowed, Export("getCreatorHelper")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOCreator CreatorHelper();
 
 		// -(MobileRTCBOAdmin * _Nullable)getAdminHelper;
 		[NullAllowed, Export("getAdminHelper")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOAdmin AdminHelper();
 
 		// -(MobileRTCBOAssistant * _Nullable)getAssistantHelper;
 		[NullAllowed, Export("getAssistantHelper")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOAssistant AssistantHelper();
 
 		// -(MobileRTCBOAttendee * _Nullable)getAttedeeHelper;
 		[NullAllowed, Export("getAttedeeHelper")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOAttendee AttedeeHelper();
 
 		// -(MobileRTCBOData * _Nullable)getDataHelper;
 		[NullAllowed, Export("getDataHelper")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOData DataHelper();
 
 		// -(BOOL)isBOMeetingStarted;
 		[Export("isBOMeetingStarted")]
-		//[Verify (MethodToProperty)]
 		bool IsBOMeetingStarted();
 
 		// -(BOOL)isBOMeetingEnabled;
 		[Export("isBOMeetingEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsBOMeetingEnabled();
 
 		// -(BOOL)isInBOMeeting;
 		[Export("isInBOMeeting")]
-		//[Verify (MethodToProperty)]
 		bool IsInBOMeeting();
 
 		// -(BOOL)isBroadcastingVoiceToBO;
 		[Export("isBroadcastingVoiceToBO")]
-		//[Verify (MethodToProperty)]
 		bool IsBroadcastingVoiceToBO();
 
 		// -(MobileRTCBOStatus)getBOStatus;
 		[Export("getBOStatus")]
-		//[Verify (MethodToProperty)]
 		MobileRTCBOStatus BOStatus();
 	}
 
@@ -4029,7 +3750,6 @@ namespace Zoomios
 	{
 		// -(BOOL)isEmojiReactionEnabled;
 		[Export("isEmojiReactionEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsEmojiReactionEnabled();
 
 		// -(MobileRTCSDKError)sendEmojiReaction:(MobileRTCEmojiReactionType)type;
@@ -4042,7 +3762,6 @@ namespace Zoomios
 
 		// -(MobileRTCSDKError)cancelEmojiFeedback;
 		[Export("cancelEmojiFeedback")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError CancelEmojiFeedback();
 	}
 
@@ -4082,12 +3801,10 @@ namespace Zoomios
 	{
 		// -(BOOL)isMeetingSupportCC;
 		[Export("isMeetingSupportCC")]
-		//[Verify (MethodToProperty)]
 		bool IsMeetingSupportCC();
 
 		// -(BOOL)canDisableCaptions;
 		[Export("canDisableCaptions")]
-		//[Verify (MethodToProperty)]
 		bool CanDisableCaptions();
 
 		// -(MobileRTCSDKError)enableCaptions:(BOOL)bEnable;
@@ -4096,7 +3813,6 @@ namespace Zoomios
 
 		// -(BOOL)isCaptionsEnabled;
 		[Export("isCaptionsEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsCaptionsEnabled();
 
 		// -(BOOL)canBeAssignedToSendCC:(NSUInteger)userId;
@@ -4113,7 +3829,6 @@ namespace Zoomios
 
 		// -(BOOL)canAssignOthersToSendCC;
 		[Export("canAssignOthersToSendCC")]
-		//[Verify (MethodToProperty)]
 		bool CanAssignOthersToSendCC();
 
 		// -(BOOL)enableMeetingManualCaption:(BOOL)bEnable;
@@ -4122,32 +3837,26 @@ namespace Zoomios
 
 		// -(BOOL)isMeetingManualCaptionEnabled;
 		[Export("isMeetingManualCaptionEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsMeetingManualCaptionEnabled();
 
 		// -(BOOL)isLiveTranscriptionFeatureEnabled;
 		[Export("isLiveTranscriptionFeatureEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsLiveTranscriptionFeatureEnabled();
 
 		// -(MobileRTCLiveTranscriptionStatus)getLiveTranscriptionStatus;
 		[Export("getLiveTranscriptionStatus")]
-		//[Verify (MethodToProperty)]
 		MobileRTCLiveTranscriptionStatus LiveTranscriptionStatus();
 
 		// -(BOOL)canStartLiveTranscription;
 		[Export("canStartLiveTranscription")]
-		//[Verify (MethodToProperty)]
 		bool CanStartLiveTranscription();
 
 		// -(BOOL)startLiveTranscription;
 		[Export("startLiveTranscription")]
-		//[Verify (MethodToProperty)]
 		bool StartLiveTranscription();
 
 		// -(BOOL)stopLiveTranscription;
 		[Export("stopLiveTranscription")]
-		//[Verify (MethodToProperty)]
 		bool StopLiveTranscription();
 
 		// -(BOOL)enableRequestLiveTranscription:(BOOL)enable;
@@ -4156,7 +3865,6 @@ namespace Zoomios
 
 		// -(BOOL)isRequestToStartLiveTranscriptionEnabled;
 		[Export("isRequestToStartLiveTranscriptionEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsRequestToStartLiveTranscriptionEnabled();
 
 		// -(BOOL)requestToStartLiveTranscription:(BOOL)requestAnonymous;
@@ -4165,12 +3873,10 @@ namespace Zoomios
 
 		// -(BOOL)isMultiLanguageTranscriptionEnabled;
 		[Export("isMultiLanguageTranscriptionEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsMultiLanguageTranscriptionEnabled();
 
 		// -(BOOL)isTextLiveTranslationEnabled;
 		[Export("isTextLiveTranslationEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsTextLiveTranslationEnabled();
 
 		// -(MobileRTCSDKError)enableReceiveSpokenlLanguageContent:(BOOL)enabled;
@@ -4179,12 +3885,10 @@ namespace Zoomios
 
 		// -(BOOL)isReceiveSpokenLanguageContentEnabled;
 		[Export("isReceiveSpokenLanguageContentEnabled")]
-		//[Verify (MethodToProperty)]
 		bool IsReceiveSpokenLanguageContentEnabled();
 
 		// -(NSArray<MobileRTCLiveTranscriptionLanguage *> *)getAvailableMeetingSpokenLanguages;
 		[Export("getAvailableMeetingSpokenLanguages")]
-		//[Verify (MethodToProperty)]
 		MobileRTCLiveTranscriptionLanguage[] AvailableMeetingSpokenLanguages();
 
 		// -(BOOL)setMeetingSpokenLanguage:(NSInteger)languageID;
@@ -4193,12 +3897,10 @@ namespace Zoomios
 
 		// -(MobileRTCLiveTranscriptionLanguage *)getMeetingSpokenLanguage;
 		[Export("getMeetingSpokenLanguage")]
-		//[Verify (MethodToProperty)]
 		MobileRTCLiveTranscriptionLanguage MeetingSpokenLanguage();
 
 		// -(NSArray<MobileRTCLiveTranscriptionLanguage *> *)getAvailableTranslationLanguages;
 		[Export("getAvailableTranslationLanguages")]
-		//[Verify (MethodToProperty)]
 		MobileRTCLiveTranscriptionLanguage[] AvailableTranslationLanguages();
 
 		// -(BOOL)setTranslationLanguage:(NSInteger)languageID;
@@ -4207,7 +3909,6 @@ namespace Zoomios
 
 		// -(MobileRTCLiveTranscriptionLanguage *)getTranslationLanguage;
 		[Export("getTranslationLanguage")]
-		//[Verify (MethodToProperty)]
 		MobileRTCLiveTranscriptionLanguage TranslationLanguage();
 	}
 
@@ -4218,12 +3919,10 @@ namespace Zoomios
 	{
 		// -(BOOL)startRawArchiving;
 		[Export("startRawArchiving")]
-		//[Verify (MethodToProperty)]
 		bool StartRawArchiving();
 
 		// -(BOOL)stopRawArchiving;
 		[Export("stopRawArchiving")]
-		//[Verify (MethodToProperty)]
 		bool StopRawArchiving();
 	}
 
@@ -4234,17 +3933,14 @@ namespace Zoomios
 	{
 		// -(BOOL)isDialOutSupported;
 		[Export("isDialOutSupported")]
-		//[Verify (MethodToProperty)]
 		bool IsDialOutSupported();
 
 		// -(NSArray<MobileRTCCallCountryCode *> * _Nonnull)getSupportCountryInfo;
 		[Export("getSupportCountryInfo")]
-		//[Verify (MethodToProperty)]
 		MobileRTCCallCountryCode[] SupportCountryInfo();
 
 		// -(BOOL)isDialOutInProgress;
 		[Export("isDialOutInProgress")]
-		//[Verify (MethodToProperty)]
 		bool IsDialOutInProgress();
 
 		// -(BOOL)dialOut:(NSString * _Nonnull)phone isCallMe:(BOOL)me withName:(NSString * _Nullable)username;
@@ -4257,13 +3953,11 @@ namespace Zoomios
 
 		// -(MobileRTCCallCountryCode * _Nullable)getDialInCurrentCountryCode;
 		[NullAllowed, Export ("getDialInCurrentCountryCode")]
-		//[Verify (MethodToProperty)]
 		MobileRTCCallCountryCode DialInCurrentCountryCode();
 
 		//// -(NSArray<NSArray<MobileRTCCallCountryCode *> *> * _Nullable)getDialInAllCountryCodes;
 		//[NullAllowed, Export ("getDialInAllCountryCodes")]
-		////[Verify (MethodToProperty)]
-		//NSArray<MobileRTCCallCountryCode>[] DialInAllCountryCodes { get; }
+		//		//NSArray<MobileRTCCallCountryCode>[] DialInAllCountryCodes { get; }
 
 		// -(NSArray<MobileRTCCallCountryCode *> * _Nullable)getDialInCallCodesWithCountryId:(NSString * _Nullable)countryId;
 		[Export ("getDialInCallCodesWithCountryId:")]
@@ -4406,7 +4100,6 @@ namespace Zoomios
 		// -(BOOL)autoConnectInternetAudio;
 		// -(void)setAutoConnectInternetAudio:(BOOL)connected;
 		[Export ("autoConnectInternetAudio")]
-		//[Verify (MethodToProperty)]
 		bool AutoConnectInternetAudio { get; set; }
 
 		// -(BOOL)muteAudioWhenJoinMeeting;
@@ -4685,7 +4378,6 @@ namespace Zoomios
 		// +(MobileRTCInviteHelper * _Nonnull)sharedInstance;
 		[Static]
 		[Export ("sharedInstance")]
-		//[Verify (MethodToProperty)]
 		MobileRTCInviteHelper SharedInstance { get; }
 	}
 
@@ -4695,7 +4387,6 @@ namespace Zoomios
 	{
 		// -(NSInteger)getUserID;
 		[Export ("getUserID")]
-		//[Verify (MethodToProperty)]
 		nint UserID { get; }
 
 		// -(BOOL)showAttendeeVideoWithUserID:(NSUInteger)userID;
@@ -4825,7 +4516,6 @@ namespace Zoomios
 
 		// -(BOOL)stopAnnotation;
 		[Export ("stopAnnotation")]
-		//[Verify (MethodToProperty)]
 		bool StopAnnotation { get; }
 
 		// -(MobileRTCAnnotationError)setToolColor:(UIColor * _Nullable)toolColor;
@@ -4834,7 +4524,6 @@ namespace Zoomios
 
 		// -(UIColor * _Nullable)getToolColor;
 		[NullAllowed, Export ("getToolColor")]
-		//[Verify (MethodToProperty)]
 		UIColor ToolColor { get; }
 
 		// -(MobileRTCAnnotationError)setToolType:(MobileRTCAnnoTool)type;
@@ -4843,7 +4532,6 @@ namespace Zoomios
 
 		// -(MobileRTCAnnoTool)getToolType;
 		[Export ("getToolType")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAnnoTool ToolType { get; }
 
 		// -(MobileRTCAnnotationError)setToolWidth:(NSUInteger)width;
@@ -4852,7 +4540,6 @@ namespace Zoomios
 
 		// -(NSUInteger)getToolWidth;
 		[Export ("getToolWidth")]
-		//[Verify (MethodToProperty)]
 		nuint ToolWidth { get; }
 
 		// -(MobileRTCAnnotationError)clear:(MobileRTCAnnoClearType)type;
@@ -4861,27 +4548,22 @@ namespace Zoomios
 
 		// -(MobileRTCAnnotationError)undo;
 		[Export ("undo")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAnnotationError Undo { get; }
 
 		// -(MobileRTCAnnotationError)redo;
 		[Export ("redo")]
-		//[Verify (MethodToProperty)]
 		MobileRTCAnnotationError Redo { get; }
 
 		// -(BOOL)isPresenter;
 		[Export ("isPresenter")]
-		//[Verify (MethodToProperty)]
 		bool IsPresenter { get; }
 
 		// -(BOOL)canDisableViewerAnnoataion;
 		[Export ("canDisableViewerAnnoataion")]
-		//[Verify (MethodToProperty)]
 		bool CanDisableViewerAnnoataion { get; }
 
 		// -(BOOL)isViewerAnnoataionDisabled;
 		[Export ("isViewerAnnoataionDisabled")]
-		//[Verify (MethodToProperty)]
 		bool IsViewerAnnoataionDisabled { get; }
 
 		// -(MobileRTCAnnotationError)disableViewerAnnoataion:(BOOL)isDisable;
@@ -4890,22 +4572,18 @@ namespace Zoomios
 
 		// -(BOOL)canDoAnnotation;
 		[Export ("canDoAnnotation")]
-		//[Verify (MethodToProperty)]
 		bool CanDoAnnotation { get; }
 
 		// -(BOOL)isAnnotationLegalNoticeAvailable;
 		[Export ("isAnnotationLegalNoticeAvailable")]
-		//[Verify (MethodToProperty)]
 		bool IsAnnotationLegalNoticeAvailable { get; }
 
 		// -(NSString * _Nullable)getAnnotationLegalNoticesPrompt;
 		[NullAllowed, Export ("getAnnotationLegalNoticesPrompt")]
-		//[Verify (MethodToProperty)]
 		string AnnotationLegalNoticesPrompt { get; }
 
 		// -(NSString * _Nullable)getAnnotationLegalNoticesExplained;
 		[NullAllowed, Export ("getAnnotationLegalNoticesExplained")]
-		//[Verify (MethodToProperty)]
 		string AnnotationLegalNoticesExplained { get; }
 	}
 
@@ -4922,12 +4600,10 @@ namespace Zoomios
 
 		// -(BOOL)isHaveRemoteControlRight;
 		[Export ("isHaveRemoteControlRight")]
-		//[Verify (MethodToProperty)]
 		bool IsHaveRemoteControlRight { get; }
 
 		// -(BOOL)isRemoteController;
 		[Export ("isRemoteController")]
-		//[Verify (MethodToProperty)]
 		bool IsRemoteController { get; }
 
 		// -(MobileRTCRemoteControlError)grabRemoteControl:(UIView * _Nonnull)remoteShareView;
@@ -5062,12 +4738,10 @@ namespace Zoomios
 
 		// -(BOOL)isSupportWaitingRoom;
 		[Export ("isSupportWaitingRoom")]
-		//[Verify (MethodToProperty)]
 		bool IsSupportWaitingRoom { get; }
 
 		// -(BOOL)isWaitingRoomOnEntryFlagOn;
 		[Export ("isWaitingRoomOnEntryFlagOn")]
-		//[Verify (MethodToProperty)]
 		bool IsWaitingRoomOnEntryFlagOn { get; }
 
 		// -(MobileRTCMeetError)enableWaitingRoomOnEntry:(BOOL)bEnable;
@@ -5076,7 +4750,6 @@ namespace Zoomios
 
 		// -(NSArray<NSNumber *> * _Nullable)waitingRoomList;
 		[NullAllowed, Export ("waitingRoomList")]
-		//[Verify (MethodToProperty)]
 		NSNumber[] WaitingRoomList { get; }
 
 		// -(MobileRTCMeetingUserInfo * _Nullable)waitingRoomUserInfoByID:(NSUInteger)userId;
@@ -5090,7 +4763,6 @@ namespace Zoomios
 
 		// -(MobileRTCSDKError)admitAllToMeeting;
 		[Export ("admitAllToMeeting")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError AdmitAllToMeeting { get; }
 
 		// -(MobileRTCSDKError)putInWaitingRoom:(NSUInteger)userId;
@@ -5099,22 +4771,18 @@ namespace Zoomios
 
 		// -(BOOL)isAudioEnabledInWaitingRoom;
 		[Export ("isAudioEnabledInWaitingRoom")]
-		//[Verify (MethodToProperty)]
 		bool IsAudioEnabledInWaitingRoom { get; }
 
 		// -(BOOL)isVideoEnabledInWaitingRoom;
 		[Export ("isVideoEnabledInWaitingRoom")]
-		//[Verify (MethodToProperty)]
 		bool IsVideoEnabledInWaitingRoom { get; }
 
 		// -(MobileRTCSDKError)requestCustomWaitingRoomData;
 		[Export ("requestCustomWaitingRoomData")]
-		//[Verify (MethodToProperty)]
 		MobileRTCSDKError RequestCustomWaitingRoomData { get; }
 
 		// -(BOOL)canRenameUser;
 		[Export ("canRenameUser")]
-		//[Verify (MethodToProperty)]
 		bool CanRenameUser { get; }
 
 		// -(MobileRTCSDKError)renameUser:(NSInteger)userID newUserName:(NSString * _Nonnull)userName;
@@ -5123,7 +4791,6 @@ namespace Zoomios
 
 		// -(BOOL)canExpelUser;
 		[Export ("canExpelUser")]
-		//[Verify (MethodToProperty)]
 		bool CanExpelUser { get; }
 
 		// -(MobileRTCSDKError)expelUser:(NSInteger)userID;
@@ -5161,7 +4828,6 @@ namespace Zoomios
 
 		// -(MobileRTCRawDataError)unSubscribe;
 		[Export ("unSubscribe")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRawDataError UnSubscribe { get; }
 	}
 
@@ -5175,12 +4841,10 @@ namespace Zoomios
 
 		// -(MobileRTCRawDataError)subscribe;
 		[Export ("subscribe")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRawDataError Subscribe { get; }
 
 		// -(MobileRTCRawDataError)unSubscribe;
 		[Export ("unSubscribe")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRawDataError UnSubscribe { get; }
 	}
 
@@ -5246,7 +4910,6 @@ namespace Zoomios
 
 		// -(BOOL)cancelAndLeaveMeeting;
 		[Export ("cancelAndLeaveMeeting")]
-		//[Verify (MethodToProperty)]
 		bool CancelAndLeaveMeeting { get; }
 	}
 
@@ -5260,7 +4923,6 @@ namespace Zoomios
 
 		// -(BOOL)cancelAndLeaveMeeting;
 		[Export ("cancelAndLeaveMeeting")]
-		//[Verify (MethodToProperty)]
 		bool CancelAndLeaveMeeting { get; }
 	}
 
@@ -5282,17 +4944,14 @@ namespace Zoomios
 
 		// -(MobileRTCRetrieveSMSHandler * _Nullable)getResendSMSVerificationCodeHandler;
 		[NullAllowed, Export ("getResendSMSVerificationCodeHandler")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRetrieveSMSHandler ResendSMSVerificationCodeHandler { get; }
 
 		// -(MobileRTCVerifySMSHandler * _Nullable)getReVerifySMSVerificationCodeHandler;
 		[NullAllowed, Export ("getReVerifySMSVerificationCodeHandler")]
-		//[Verify (MethodToProperty)]
 		MobileRTCVerifySMSHandler ReVerifySMSVerificationCodeHandler { get; }
 
 		// -(NSArray<MobileRTCRealNameCountryInfo *> * _Nullable)getSupportPhoneNumberCountryList;
 		[NullAllowed, Export ("getSupportPhoneNumberCountryList")]
-		//[Verify (MethodToProperty)]
 		MobileRTCRealNameCountryInfo[] SupportPhoneNumberCountryList { get; }
 
 		// -(BOOL)setDefaultCellPhoneInfo:(NSString * _Nullable)countryCode phoneNum:(NSString * _Nullable)phoneNum;
@@ -5314,7 +4973,6 @@ namespace Zoomios
 
 		// -(BOOL)cancel;
 		[Export ("cancel")]
-		//[Verify (MethodToProperty)]
 		bool Cancel { get; }
 	}
 
@@ -5342,22 +5000,18 @@ namespace Zoomios
 
 		// -(BOOL)canStartDirectShare;
 		[Export ("canStartDirectShare")]
-		//[Verify (MethodToProperty)]
 		bool CanStartDirectShare { get; }
 
 		// -(BOOL)isDirectShareInProgress;
 		[Export ("isDirectShareInProgress")]
-		//[Verify (MethodToProperty)]
 		bool IsDirectShareInProgress { get; }
 
 		// -(BOOL)startDirectShare;
 		[Export ("startDirectShare")]
-		//[Verify (MethodToProperty)]
 		bool StartDirectShare { get; }
 
 		// -(BOOL)stopDirectShare;
 		[Export ("stopDirectShare")]
-		//[Verify (MethodToProperty)]
 		bool StopDirectShare { get; }
 	}
 
@@ -5486,7 +5140,6 @@ namespace Zoomios
 		// +(MobileRTC * _Nonnull)sharedRTC;
 		[Static]
 		[Export ("sharedRTC")]
-		//[Verify (MethodToProperty)]
 		MobileRTC SharedRTC { get; }
 
 		// -(BOOL)initialize:(MobileRTCSDKInitContext * _Nonnull)context;
@@ -5504,7 +5157,6 @@ namespace Zoomios
 		// -(UINavigationController * _Nullable)mobileRTCRootController;
 		// -(void)setMobileRTCRootController:(UINavigationController * _Nullable)navController;
 		[NullAllowed, Export ("mobileRTCRootController")]
-		//[Verify (MethodToProperty)]
 		UINavigationController MobileRTCRootController { get; set; }
 
 		// -(NSString * _Nullable)mobileRTCVersion;
@@ -5712,17 +5364,14 @@ namespace Zoomios
 
         // -(MobileRTCSDKError)accept;
         [Export("accept")]
-        //[Verify (MethodToProperty)]
         MobileRTCSDKError Accept { get; }
 
         // -(MobileRTCSDKError)decline;
         [Export("decline")]
-        //[Verify (MethodToProperty)]
         MobileRTCSDKError Decline { get; }
 
         // -(MobileRTCSDKError)timeout;
         [Export("timeout")]
-        //[Verify (MethodToProperty)]
         MobileRTCSDKError Timeout { get; }
     }
 
@@ -5791,7 +5440,6 @@ namespace Zoomios
 
         // -(MobileRTCSDKError)requestStarContact;
         [Export("requestStarContact")]
-        //[Verify (MethodToProperty)]
         MobileRTCSDKError RequestStarContact { get; }
 
         // -(MobileRTCSDKError)starContact:(NSString * _Nonnull)contactID;
@@ -5851,12 +5499,10 @@ namespace Zoomios
 
         // -(BOOL)isTransferMeetingEnabled;
         [Export("isTransferMeetingEnabled")]
-        //[Verify (MethodToProperty)]
         bool IsTransferMeetingEnabled { get; }
 
         // -(BOOL)isPresenceFeatureEnabled;
         [Export("isPresenceFeatureEnabled")]
-        //[Verify (MethodToProperty)]
         bool IsPresenceFeatureEnabled { get; }
 
         // -(MobileRTCSDKError)transferMeeting:(NSInteger)index;
@@ -5865,7 +5511,6 @@ namespace Zoomios
 
         // -(MobileRTCPresenceHelper * _Nullable)getPresenceHelper;
         [NullAllowed, Export("getPresenceHelper")]
-        //[Verify (MethodToProperty)]
         MobileRTCPresenceHelper PresenceHelper { get; }
     }
 }
