@@ -7,326 +7,81 @@ using UIKit;
 
 namespace Zoomios
 {
-	// @interface MobileRTCInMeetingDeviceInfo : NSObject
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCInMeetingDeviceInfo
-	{
-		// @property (readonly, assign, nonatomic) NSInteger index;
-		[Export ("index")]
-		nint Index { get; }
+    // @interface MobileRTCAuthService : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCAuthService
+    {
+        [Wrap("WeakDelegate")]
+        [NullAllowed]
+        MobileRTCAuthDelegate Delegate { get; set; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable deviceName;
-		[NullAllowed, Export ("deviceName")]
-		string DeviceName { get; }
+        // @property (retain, nonatomic) NSString * _Nullable clientKey;
+        [NullAllowed, Export("clientKey", ArgumentSemantic.Retain)]
+        string ClientKey { get; set; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable meetingTopic;
-		[NullAllowed, Export ("meetingTopic")]
-		string MeetingTopic { get; }
+        // @property (retain, nonatomic) NSString * _Nullable clientSecret;
+        [NullAllowed, Export("clientSecret", ArgumentSemantic.Retain)]
+        string ClientSecret { get; set; }
 
-		// @property (readonly, assign, nonatomic) NSUInteger meetingNumber;
-		[Export ("meetingNumber")]
-		nuint MeetingNumber { get; }
-	}
+        // @property (nonatomic, weak) id<MobileRTCAuthDelegate> _Nullable delegate;
+        [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
+        NSObject WeakDelegate { get; set; }
 
-	// @interface MobileRTCContactInfo : NSObject
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCContactInfo
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nullable contactID;
-		[NullAllowed, Export ("contactID")]
-		string ContactID { get; }
+        // @property (retain, nonatomic) NSString * _Nullable jwtToken;
+        [NullAllowed, Export("jwtToken", ArgumentSemantic.Retain)]
+        string JwtToken { get; set; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable contactName;
-		[NullAllowed, Export ("contactName")]
-		string ContactName { get; }
+        // -(void)sdkAuth;
+        [Export("sdkAuth")]
+        void SdkAuth();
 
-		// @property (readonly, assign, nonatomic) MobileRTCPresenceStatus presenceStatus;
-		[Export ("presenceStatus", ArgumentSemantic.Assign)]
-		MobileRTCPresenceStatus PresenceStatus { get; }
+        // -(BOOL)isLoggedIn;
+        [Export("isLoggedIn")]
+        //[Verify (MethodToProperty)]
+        bool IsLoggedIn { get; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable profilepicture;
-		[NullAllowed, Export ("profilepicture")]
-		string Profilepicture { get; }
+        // -(MobileRTCUserType)getUserType;
+        [Export("getUserType")]
+        //[Verify (MethodToProperty)]
+        MobileRTCUserType UserType { get; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable personalNote;
-		[NullAllowed, Export ("personalNote")]
-		string PersonalNote { get; }
+        // -(NSString * _Nullable)generateSSOLoginWebURL:(NSString * _Nonnull)vanityUrl;
+        [Export("generateSSOLoginWebURL:")]
+        [return: NullAllowed]
+        string GenerateSSOLoginWebURL(string vanityUrl);
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable companyName;
-		[NullAllowed, Export ("companyName")]
-		string CompanyName { get; }
+        // -(MobileRTCLoginFailReason)ssoLoginWithWebUriProtocol:(NSString * _Nonnull)uriProtocol;
+        [Export("ssoLoginWithWebUriProtocol:")]
+        MobileRTCLoginFailReason SsoLoginWithWebUriProtocol(string uriProtocol);
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable department;
-		[NullAllowed, Export ("department")]
-		string Department { get; }
+        // -(BOOL)logoutRTC;
+        [Export("logoutRTC")]
+        //[Verify (MethodToProperty)]
+        bool LogoutRTC { get; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable jobTitle;
-		[NullAllowed, Export ("jobTitle")]
-		string JobTitle { get; }
+        // -(MobileRTCAccountInfo * _Nullable)getAccountInfo;
+        [NullAllowed, Export("getAccountInfo")]
+        //[Verify (MethodToProperty)]
+        MobileRTCAccountInfo AccountInfo { get; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable phoneNumber;
-		[NullAllowed, Export ("phoneNumber")]
-		string PhoneNumber { get; }
+        // -(void)enableAutoRegisterNotificationServiceForLogin:(BOOL)enable;
+        [Export("enableAutoRegisterNotificationServiceForLogin:")]
+        void EnableAutoRegisterNotificationServiceForLogin(bool enable);
 
-		// @property (readonly, copy, nonatomic) NSString * _Nullable email;
-		[NullAllowed, Export ("email")]
-		string Email { get; }
-	}
+        // -(MobileRTCSDKError)registerNotificationService:(NSString * _Nullable)accessToken;
+        [Export("registerNotificationService:")]
+        MobileRTCSDKError RegisterNotificationService([NullAllowed] string accessToken);
 
-	// @interface MobileRTCInvitationMeetingHandler : NSObject
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCInvitationMeetingHandler
-	{
-		// @property (readonly, copy, nonatomic) NSString * _Nullable senderName;
-		[NullAllowed, Export ("senderName")]
-		string SenderName { get; }
+        // -(MobileRTCSDKError)unregisterNotificationService;
+        [Export("unregisterNotificationService")]
+        //[Verify (MethodToProperty)]
+        MobileRTCSDKError UnregisterNotificationService { get; }
 
-		// @property (readonly, assign, nonatomic) long long meetingNumber;
-		[Export ("meetingNumber")]
-		long MeetingNumber { get; }
-
-		// @property (readonly, assign, nonatomic) BOOL isChannelInvitation;
-		[Export ("isChannelInvitation")]
-		bool IsChannelInvitation { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable channelName;
-		[NullAllowed, Export ("channelName")]
-		string ChannelName { get; }
-
-		// @property (readonly, assign, nonatomic) unsigned int channelMemberCount;
-		[Export ("channelMemberCount")]
-		uint ChannelMemberCount { get; }
-
-		// -(void)setScreenName:(NSString * _Nullable)screenName;
-		[Export ("setScreenName:")]
-		void SetScreenName ([NullAllowed] string screenName);
-
-		// -(MobileRTCSDKError)accept;
-		[Export ("accept")]
-		//[Verify (MethodToProperty)]
-		MobileRTCSDKError Accept { get; }
-
-		// -(MobileRTCSDKError)decline;
-		[Export ("decline")]
-		//[Verify (MethodToProperty)]
-		MobileRTCSDKError Decline { get; }
-
-		// -(MobileRTCSDKError)timeout;
-		[Export ("timeout")]
-		//[Verify (MethodToProperty)]
-		MobileRTCSDKError Timeout { get; }
-	}
-
-	// @protocol MobileRTCPresenceHelperDelegate <NSObject>
-	[Protocol, Model (AutoGeneratedName = true)]
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCPresenceHelperDelegate
-	{
-		// @required -(void)onRequestStarContact:(NSArray<NSString *> * _Nullable)contactIDList;
-		[Abstract]
-		[Export ("onRequestStarContact:")]
-		void OnRequestStarContact ([NullAllowed] string[] contactIDList);
-
-		// @required -(void)onRequestContactDetailInfo:(NSArray<MobileRTCContactInfo *> * _Nullable)contactList;
-		[Abstract]
-		[Export ("onRequestContactDetailInfo:")]
-		void OnRequestContactDetailInfo ([NullAllowed] MobileRTCContactInfo[] contactList);
-
-		// @required -(void)onUserPresenceChanged:(NSString * _Nullable)contactID presenceStatus:(MobileRTCPresenceStatus)status;
-		[Abstract]
-		[Export ("onUserPresenceChanged:presenceStatus:")]
-		void OnUserPresenceChanged ([NullAllowed] string contactID, MobileRTCPresenceStatus status);
-
-		// @required -(void)onStarContactListChanged:(NSArray<NSString *> * _Nullable)contactIDList isAdd:(BOOL)add;
-		[Abstract]
-		[Export ("onStarContactListChanged:isAdd:")]
-		void OnStarContactListChanged ([NullAllowed] string[] contactIDList, bool add);
-
-		// @required -(void)onReceiveInvitationToMeeting:(MobileRTCInvitationMeetingHandler * _Nullable)handler;
-		[Abstract]
-		[Export ("onReceiveInvitationToMeeting:")]
-		void OnReceiveInvitationToMeeting ([NullAllowed] MobileRTCInvitationMeetingHandler handler);
-
-		// @required -(void)onMeetingInvitationCanceled:(long long)meetingNumber;
-		[Abstract]
-		[Export ("onMeetingInvitationCanceled:")]
-		void OnMeetingInvitationCanceled (long meetingNumber);
-
-		// @required -(void)onMeetingAcceptedByOtherDevice:(long long)meetingNumber;
-		[Abstract]
-		[Export ("onMeetingAcceptedByOtherDevice:")]
-		void OnMeetingAcceptedByOtherDevice (long meetingNumber);
-
-		// @required -(void)onMeetingInvitationDeclined:(NSString * _Nullable)contactID;
-		[Abstract]
-		[Export ("onMeetingInvitationDeclined:")]
-		void OnMeetingInvitationDeclined ([NullAllowed] string contactID);
-
-		// @required -(void)onMeetingDeclinedByOtherDevice:(long long)meetingNumber;
-		[Abstract]
-		[Export ("onMeetingDeclinedByOtherDevice:")]
-		void OnMeetingDeclinedByOtherDevice (long meetingNumber);
-	}
-
-	// @interface MobileRTCPresenceHelper : NSObject
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCPresenceHelper
-	{
-		[Wrap ("WeakDelegate")]
-		[NullAllowed]
-		MobileRTCPresenceHelperDelegate Delegate { get; set; }
-
-		// @property (assign, nonatomic) id<MobileRTCPresenceHelperDelegate> _Nullable delegate;
-		[NullAllowed, Export ("delegate", ArgumentSemantic.Assign)]
-		NSObject WeakDelegate { get; set; }
-
-		// -(MobileRTCSDKError)requestStarContact;
-		[Export ("requestStarContact")]
-		//[Verify (MethodToProperty)]
-		MobileRTCSDKError RequestStarContact { get; }
-
-		// -(MobileRTCSDKError)starContact:(NSString * _Nonnull)contactID;
-		[Export ("starContact:")]
-		MobileRTCSDKError StarContact (string contactID);
-
-		// -(MobileRTCSDKError)unStarContact:(NSString * _Nonnull)contactID;
-		[Export ("unStarContact:")]
-		MobileRTCSDKError UnStarContact (string contactID);
-
-		// -(MobileRTCSDKError)inviteContact:(NSString * _Nonnull)contactID;
-		[Export ("inviteContact:")]
-		MobileRTCSDKError InviteContact (string contactID);
-
-		// -(MobileRTCSDKError)inviteContactList:(NSArray<NSString *> * _Nonnull)contactIDList;
-		[Export ("inviteContactList:")]
-		MobileRTCSDKError InviteContactList (string[] contactIDList);
-
-		// -(MobileRTCSDKError)requestContactDetailInfo:(NSArray<NSString *> * _Nonnull)contactIDList;
-		[Export ("requestContactDetailInfo:")]
-		MobileRTCSDKError RequestContactDetailInfo (string[] contactIDList);
-
-		// -(MobileRTCSDKError)subscribeContactPresence:(NSArray<NSString *> * _Nonnull)contactIDList;
-		[Export ("subscribeContactPresence:")]
-		MobileRTCSDKError SubscribeContactPresence (string[] contactIDList);
-
-		// -(MobileRTCSDKError)unSubscribeContactPresence:(NSArray<NSString *> * _Nonnull)contactIDList;
-		[Export ("unSubscribeContactPresence:")]
-		MobileRTCSDKError UnSubscribeContactPresence (string[] contactIDList);
-	}
-
-	// @protocol MobileRTCNotificationServiceHelperDelegate <NSObject>
-	[Protocol, Model (AutoGeneratedName = true)]
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCNotificationServiceHelperDelegate
-	{
-		// @optional -(void)onMeetingDeviceListChanged:(NSArray<MobileRTCInMeetingDeviceInfo *> * _Nullable)deviceList;
-		[Export ("onMeetingDeviceListChanged:")]
-		void OnMeetingDeviceListChanged ([NullAllowed] MobileRTCInMeetingDeviceInfo[] deviceList);
-
-		// @optional -(void)onTransferMeetingStatus:(BOOL)bSuccess;
-		[Export ("onTransferMeetingStatus:")]
-		void OnTransferMeetingStatus (bool bSuccess);
-	}
-
-	// @interface MobileRTCNotificationServiceHelper : NSObject
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCNotificationServiceHelper
-	{
-		[Wrap ("WeakDelegate")]
-		[NullAllowed]
-		MobileRTCNotificationServiceHelperDelegate Delegate { get; set; }
-
-		// @property (assign, nonatomic) id<MobileRTCNotificationServiceHelperDelegate> _Nullable delegate;
-		[NullAllowed, Export ("delegate", ArgumentSemantic.Assign)]
-		NSObject WeakDelegate { get; set; }
-
-		// -(BOOL)isTransferMeetingEnabled;
-		[Export ("isTransferMeetingEnabled")]
-		//[Verify (MethodToProperty)]
-		bool IsTransferMeetingEnabled { get; }
-
-		// -(BOOL)isPresenceFeatureEnabled;
-		[Export ("isPresenceFeatureEnabled")]
-		//[Verify (MethodToProperty)]
-		bool IsPresenceFeatureEnabled { get; }
-
-		// -(MobileRTCSDKError)transferMeeting:(NSInteger)index;
-		[Export ("transferMeeting:")]
-		MobileRTCSDKError TransferMeeting (nint index);
-
-		// -(MobileRTCPresenceHelper * _Nullable)getPresenceHelper;
-		[NullAllowed, Export ("getPresenceHelper")]
-		//[Verify (MethodToProperty)]
-		MobileRTCPresenceHelper PresenceHelper { get; }
-	}
-
-	// @interface MobileRTCAuthService : NSObject
-	[BaseType (typeof(NSObject))]
-	interface MobileRTCAuthService
-	{
-		[Wrap ("WeakDelegate")]
-		[NullAllowed]
-		MobileRTCAuthDelegate Delegate { get; set; }
-
-		// @property (nonatomic, weak) id<MobileRTCAuthDelegate> _Nullable delegate;
-		[NullAllowed, Export ("delegate", ArgumentSemantic.Weak)]
-		NSObject WeakDelegate { get; set; }
-
-		// @property (retain, nonatomic) NSString * _Nullable jwtToken;
-		[NullAllowed, Export ("jwtToken", ArgumentSemantic.Retain)]
-		string JwtToken { get; set; }
-
-		// -(void)sdkAuth;
-		[Export ("sdkAuth")]
-		void SdkAuth ();
-
-		// -(BOOL)isLoggedIn;
-		[Export ("isLoggedIn")]
-		//[Verify (MethodToProperty)]
-		bool IsLoggedIn { get; }
-
-		// -(MobileRTCUserType)getUserType;
-		[Export ("getUserType")]
-		//[Verify (MethodToProperty)]
-		MobileRTCUserType UserType { get; }
-
-		// -(NSString * _Nullable)generateSSOLoginWebURL:(NSString * _Nonnull)vanityUrl;
-		[Export ("generateSSOLoginWebURL:")]
-		[return: NullAllowed]
-		string GenerateSSOLoginWebURL (string vanityUrl);
-
-		// -(MobileRTCLoginFailReason)ssoLoginWithWebUriProtocol:(NSString * _Nonnull)uriProtocol;
-		[Export ("ssoLoginWithWebUriProtocol:")]
-		MobileRTCLoginFailReason SsoLoginWithWebUriProtocol (string uriProtocol);
-
-		// -(BOOL)logoutRTC;
-		[Export ("logoutRTC")]
-		//[Verify (MethodToProperty)]
-		bool LogoutRTC { get; }
-
-		// -(MobileRTCAccountInfo * _Nullable)getAccountInfo;
-		[NullAllowed, Export ("getAccountInfo")]
-		//[Verify (MethodToProperty)]
-		MobileRTCAccountInfo AccountInfo { get; }
-
-		// -(void)enableAutoRegisterNotificationServiceForLogin:(BOOL)enable;
-		[Export ("enableAutoRegisterNotificationServiceForLogin:")]
-		void EnableAutoRegisterNotificationServiceForLogin (bool enable);
-
-		// -(MobileRTCSDKError)registerNotificationService:(NSString * _Nullable)accessToken;
-		[Export ("registerNotificationService:")]
-		MobileRTCSDKError RegisterNotificationService ([NullAllowed] string accessToken);
-
-		// -(MobileRTCSDKError)unregisterNotificationService;
-		[Export ("unregisterNotificationService")]
-		//[Verify (MethodToProperty)]
-		MobileRTCSDKError UnregisterNotificationService { get; }
-
-		// -(MobileRTCNotificationServiceHelper * _Nullable)getNotificationServiceHelper;
-		[NullAllowed, Export ("getNotificationServiceHelper")]
-		//[Verify (MethodToProperty)]
-		MobileRTCNotificationServiceHelper NotificationServiceHelper { get; }
-	}
+        // -(MobileRTCNotificationServiceHelper * _Nullable)getNotificationServiceHelper;
+        [NullAllowed, Export("getNotificationServiceHelper")]
+        //[Verify (MethodToProperty)]
+        MobileRTCNotificationServiceHelper NotificationServiceHelper { get; }
+    }
 
 	// @protocol MobileRTCAuthDelegate <NSObject>
 	[Protocol, Model (AutoGeneratedName = true)]
@@ -5859,5 +5614,258 @@ namespace Zoomios
 		// -(BOOL)hasRawDataLicense;
 		[Export ("hasRawDataLicense")]
 		bool HasRawDataLicense ();
-	}
+    }
+
+    // @interface MobileRTCInMeetingDeviceInfo : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCInMeetingDeviceInfo
+    {
+        // @property (readonly, assign, nonatomic) NSInteger index;
+        [Export("index")]
+        nint Index { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable deviceName;
+        [NullAllowed, Export("deviceName")]
+        string DeviceName { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable meetingTopic;
+        [NullAllowed, Export("meetingTopic")]
+        string MeetingTopic { get; }
+
+        // @property (readonly, assign, nonatomic) NSUInteger meetingNumber;
+        [Export("meetingNumber")]
+        nuint MeetingNumber { get; }
+    }
+
+    // @interface MobileRTCContactInfo : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCContactInfo
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nullable contactID;
+        [NullAllowed, Export("contactID")]
+        string ContactID { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable contactName;
+        [NullAllowed, Export("contactName")]
+        string ContactName { get; }
+
+        // @property (readonly, assign, nonatomic) MobileRTCPresenceStatus presenceStatus;
+        [Export("presenceStatus", ArgumentSemantic.Assign)]
+        MobileRTCPresenceStatus PresenceStatus { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable profilepicture;
+        [NullAllowed, Export("profilepicture")]
+        string Profilepicture { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable personalNote;
+        [NullAllowed, Export("personalNote")]
+        string PersonalNote { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable companyName;
+        [NullAllowed, Export("companyName")]
+        string CompanyName { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable department;
+        [NullAllowed, Export("department")]
+        string Department { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable jobTitle;
+        [NullAllowed, Export("jobTitle")]
+        string JobTitle { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable phoneNumber;
+        [NullAllowed, Export("phoneNumber")]
+        string PhoneNumber { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable email;
+        [NullAllowed, Export("email")]
+        string Email { get; }
+    }
+
+    // @interface MobileRTCInvitationMeetingHandler : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCInvitationMeetingHandler
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nullable senderName;
+        [NullAllowed, Export("senderName")]
+        string SenderName { get; }
+
+        // @property (readonly, assign, nonatomic) long long meetingNumber;
+        [Export("meetingNumber")]
+        long MeetingNumber { get; }
+
+        // @property (readonly, assign, nonatomic) BOOL isChannelInvitation;
+        [Export("isChannelInvitation")]
+        bool IsChannelInvitation { get; }
+
+        // @property (readonly, copy, nonatomic) NSString * _Nullable channelName;
+        [NullAllowed, Export("channelName")]
+        string ChannelName { get; }
+
+        // @property (readonly, assign, nonatomic) unsigned int channelMemberCount;
+        [Export("channelMemberCount")]
+        uint ChannelMemberCount { get; }
+
+        // -(void)setScreenName:(NSString * _Nullable)screenName;
+        [Export("setScreenName:")]
+        void SetScreenName([NullAllowed] string screenName);
+
+        // -(MobileRTCSDKError)accept;
+        [Export("accept")]
+        //[Verify (MethodToProperty)]
+        MobileRTCSDKError Accept { get; }
+
+        // -(MobileRTCSDKError)decline;
+        [Export("decline")]
+        //[Verify (MethodToProperty)]
+        MobileRTCSDKError Decline { get; }
+
+        // -(MobileRTCSDKError)timeout;
+        [Export("timeout")]
+        //[Verify (MethodToProperty)]
+        MobileRTCSDKError Timeout { get; }
+    }
+
+    // @protocol MobileRTCPresenceHelperDelegate <NSObject>
+    [Protocol, Model(AutoGeneratedName = true)]
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCPresenceHelperDelegate
+    {
+        // @required -(void)onRequestStarContact:(NSArray<NSString *> * _Nullable)contactIDList;
+        [Abstract]
+        [Export("onRequestStarContact:")]
+        void OnRequestStarContact([NullAllowed] string[] contactIDList);
+
+        // @required -(void)onRequestContactDetailInfo:(NSArray<MobileRTCContactInfo *> * _Nullable)contactList;
+        [Abstract]
+        [Export("onRequestContactDetailInfo:")]
+        void OnRequestContactDetailInfo([NullAllowed] MobileRTCContactInfo[] contactList);
+
+        // @required -(void)onUserPresenceChanged:(NSString * _Nullable)contactID presenceStatus:(MobileRTCPresenceStatus)status;
+        [Abstract]
+        [Export("onUserPresenceChanged:presenceStatus:")]
+        void OnUserPresenceChanged([NullAllowed] string contactID, MobileRTCPresenceStatus status);
+
+        // @required -(void)onStarContactListChanged:(NSArray<NSString *> * _Nullable)contactIDList isAdd:(BOOL)add;
+        [Abstract]
+        [Export("onStarContactListChanged:isAdd:")]
+        void OnStarContactListChanged([NullAllowed] string[] contactIDList, bool add);
+
+        // @required -(void)onReceiveInvitationToMeeting:(MobileRTCInvitationMeetingHandler * _Nullable)handler;
+        [Abstract]
+        [Export("onReceiveInvitationToMeeting:")]
+        void OnReceiveInvitationToMeeting([NullAllowed] MobileRTCInvitationMeetingHandler handler);
+
+        // @required -(void)onMeetingInvitationCanceled:(long long)meetingNumber;
+        [Abstract]
+        [Export("onMeetingInvitationCanceled:")]
+        void OnMeetingInvitationCanceled(long meetingNumber);
+
+        // @required -(void)onMeetingAcceptedByOtherDevice:(long long)meetingNumber;
+        [Abstract]
+        [Export("onMeetingAcceptedByOtherDevice:")]
+        void OnMeetingAcceptedByOtherDevice(long meetingNumber);
+
+        // @required -(void)onMeetingInvitationDeclined:(NSString * _Nullable)contactID;
+        [Abstract]
+        [Export("onMeetingInvitationDeclined:")]
+        void OnMeetingInvitationDeclined([NullAllowed] string contactID);
+
+        // @required -(void)onMeetingDeclinedByOtherDevice:(long long)meetingNumber;
+        [Abstract]
+        [Export("onMeetingDeclinedByOtherDevice:")]
+        void OnMeetingDeclinedByOtherDevice(long meetingNumber);
+    }
+
+    // @interface MobileRTCPresenceHelper : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCPresenceHelper
+    {
+        [Wrap("WeakDelegate")]
+        [NullAllowed]
+        MobileRTCPresenceHelperDelegate Delegate { get; set; }
+
+        // @property (assign, nonatomic) id<MobileRTCPresenceHelperDelegate> _Nullable delegate;
+        [NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
+        NSObject WeakDelegate { get; set; }
+
+        // -(MobileRTCSDKError)requestStarContact;
+        [Export("requestStarContact")]
+        //[Verify (MethodToProperty)]
+        MobileRTCSDKError RequestStarContact { get; }
+
+        // -(MobileRTCSDKError)starContact:(NSString * _Nonnull)contactID;
+        [Export("starContact:")]
+        MobileRTCSDKError StarContact(string contactID);
+
+        // -(MobileRTCSDKError)unStarContact:(NSString * _Nonnull)contactID;
+        [Export("unStarContact:")]
+        MobileRTCSDKError UnStarContact(string contactID);
+
+        // -(MobileRTCSDKError)inviteContact:(NSString * _Nonnull)contactID;
+        [Export("inviteContact:")]
+        MobileRTCSDKError InviteContact(string contactID);
+
+        // -(MobileRTCSDKError)inviteContactList:(NSArray<NSString *> * _Nonnull)contactIDList;
+        [Export("inviteContactList:")]
+        MobileRTCSDKError InviteContactList(string[] contactIDList);
+
+        // -(MobileRTCSDKError)requestContactDetailInfo:(NSArray<NSString *> * _Nonnull)contactIDList;
+        [Export("requestContactDetailInfo:")]
+        MobileRTCSDKError RequestContactDetailInfo(string[] contactIDList);
+
+        // -(MobileRTCSDKError)subscribeContactPresence:(NSArray<NSString *> * _Nonnull)contactIDList;
+        [Export("subscribeContactPresence:")]
+        MobileRTCSDKError SubscribeContactPresence(string[] contactIDList);
+
+        // -(MobileRTCSDKError)unSubscribeContactPresence:(NSArray<NSString *> * _Nonnull)contactIDList;
+        [Export("unSubscribeContactPresence:")]
+        MobileRTCSDKError UnSubscribeContactPresence(string[] contactIDList);
+    }
+
+    // @protocol MobileRTCNotificationServiceHelperDelegate <NSObject>
+    [Protocol, Model(AutoGeneratedName = true)]
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCNotificationServiceHelperDelegate
+    {
+        // @optional -(void)onMeetingDeviceListChanged:(NSArray<MobileRTCInMeetingDeviceInfo *> * _Nullable)deviceList;
+        [Export("onMeetingDeviceListChanged:")]
+        void OnMeetingDeviceListChanged([NullAllowed] MobileRTCInMeetingDeviceInfo[] deviceList);
+
+        // @optional -(void)onTransferMeetingStatus:(BOOL)bSuccess;
+        [Export("onTransferMeetingStatus:")]
+        void OnTransferMeetingStatus(bool bSuccess);
+    }
+
+    // @interface MobileRTCNotificationServiceHelper : NSObject
+    [BaseType(typeof(NSObject))]
+    interface MobileRTCNotificationServiceHelper
+    {
+        [Wrap("WeakDelegate")]
+        [NullAllowed]
+        MobileRTCNotificationServiceHelperDelegate Delegate { get; set; }
+
+        // @property (assign, nonatomic) id<MobileRTCNotificationServiceHelperDelegate> _Nullable delegate;
+        [NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
+        NSObject WeakDelegate { get; set; }
+
+        // -(BOOL)isTransferMeetingEnabled;
+        [Export("isTransferMeetingEnabled")]
+        //[Verify (MethodToProperty)]
+        bool IsTransferMeetingEnabled { get; }
+
+        // -(BOOL)isPresenceFeatureEnabled;
+        [Export("isPresenceFeatureEnabled")]
+        //[Verify (MethodToProperty)]
+        bool IsPresenceFeatureEnabled { get; }
+
+        // -(MobileRTCSDKError)transferMeeting:(NSInteger)index;
+        [Export("transferMeeting:")]
+        MobileRTCSDKError TransferMeeting(nint index);
+
+        // -(MobileRTCPresenceHelper * _Nullable)getPresenceHelper;
+        [NullAllowed, Export("getPresenceHelper")]
+        //[Verify (MethodToProperty)]
+        MobileRTCPresenceHelper PresenceHelper { get; }
+    }
 }
