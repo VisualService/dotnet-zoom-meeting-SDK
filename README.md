@@ -15,7 +15,7 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
 * Android: Meeting SDK Version: 5.12.2.9109
  
 * iOS: 
- 	* MobileRTC Version: 5.11.10.4556
+ 	* MobileRTC Version: 5.15.7.9685 
  	* MobileRTC Screen Share Version: Not implemented yet, PRs are welcome! 
  
 ## Android Gotchas
@@ -83,8 +83,10 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
 1. Grab the package from nuget ```Install-Package VisualService.Xamarin.iOS.ZoomSDK``` and install it as a dependency to your Xamarin.iOS platform project.
  
 2. Implement an IMobileRTCMeetingServiceDelegate (which should also inherit from your "Cross platform interface" as a DependencyService);
- 
-3. In the IMobileRTCMeetingServiceDelegate class you should initialize the SDK as follows: 
+
+3. Generate a JWT token as per https://developers.zoom.us/docs/meeting-sdk/ios/get-started/enter-credentials/
+
+4. In the IMobileRTCMeetingServiceDelegate class you should initialize the SDK as follows: 
  
  ```
         public void InitZoomLib(string appKey, string appSecret)
@@ -105,8 +107,7 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
                     if (authService != null)
                     {
                         authService.Delegate = new MobileDelegate();   //inherits from MobileRTCAuthDelegate
-                        authService.ClientKey = appKey;
-                        authService.ClientSecret = appSecret;
+                        authService.JwtToken = jwtToken;
                         authService.SdkAuth();
                     }
                     Console.WriteLine($"Mobile RTC Version: {mobileRTC.MobileRTCVersion()} ");
@@ -115,7 +116,7 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
         } 
 ```
 
-4. Listen for successful initialisation inside MobileRTCAuthDelegate
+5. Listen for successful initialisation inside MobileRTCAuthDelegate
 ```
         class MobileDelegate : MobileRTCAuthDelegate
         {
@@ -126,7 +127,7 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
         }
 ```
 
-4.1 You can monitor the initialisation and authorization status in any moment like this: 
+5.1 You can monitor the initialisation and authorization status in any moment like this: 
 
 ```
         public bool IsInitialized()
@@ -147,7 +148,7 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
         }
 ```
 
-5. Join the meeting 
+6. Join the meeting 
 
 ```
      public void JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo")
@@ -177,7 +178,7 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
 	}
 ```
 
-6. Monitor the meeting status
+7. Monitor the meeting status
 ```
         public override void OnMeetingStateChange(MobileRTCMeetingState state)
         {
