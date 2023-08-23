@@ -19,14 +19,6 @@ namespace Zoomios
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
         NSObject WeakDelegate { get; set; }
 
-        // @property (retain, nonatomic) NSString * _Nullable clientKey;
-        [NullAllowed, Export("clientKey", ArgumentSemantic.Retain)]
-        string ClientKey { get; set; }
-
-        // @property (retain, nonatomic) NSString * _Nullable clientSecret;
-        [NullAllowed, Export("clientSecret", ArgumentSemantic.Retain)]
-        string ClientSecret { get; set; }
-
         // @property (retain, nonatomic) NSString * _Nullable jwtToken;
         [NullAllowed, Export("jwtToken", ArgumentSemantic.Retain)]
         string JwtToken { get; set; }
