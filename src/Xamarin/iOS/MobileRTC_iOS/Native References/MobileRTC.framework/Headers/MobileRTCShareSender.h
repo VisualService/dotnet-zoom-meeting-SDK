@@ -18,6 +18,16 @@
  @param height The height of the data to send.
  @param frameLength The length of the data to send.
  */
-- (void)sendShareFrameBuffer:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height frameLength:(NSUInteger)dataLength;
+- (void)sendShareFrameBuffer:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height frameLength:(NSUInteger)dataLength DEPRECATED_MSG_ATTRIBUTE("Use -sendShareFrameBuffer:width:height:frameLength:format:instead");
+
+/*!
+ @brief Send share raw data in meeting.
+ @param frameBuffer The buffer of the data to send.
+ @param width The width of the data to send.
+ @param height The height of the data to send.
+ @param frameLength The length of the data to send.
+ @param format The format of the data to send.
+ */
+- (void)sendShareFrameBuffer:(char *)frameBuffer width:(NSUInteger)width height:(NSUInteger)height frameLength:(NSUInteger)dataLength format:(MobileRTCFrameDataFormat)format;
 
 @end

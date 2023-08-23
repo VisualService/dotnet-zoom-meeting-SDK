@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /*!
- @class MobileRTCQAAnswerItem
- @brief The object of Q&A question answer.
+ @brief The Q&A answer interface.
  */
 @interface MobileRTCQAAnswerItem : NSObject
 
@@ -27,8 +26,7 @@
 @end
 
 /*!
- @class MobileRTCQAAnswerItem
- @brief The object of Q&A question.
+ @brief The Q&A question interface.
  */
 @interface MobileRTCQAItem : NSObject
 
@@ -58,7 +56,7 @@
 
 - (BOOL)isSenderMyself;
 
-- (nullable NSArray *)getAnswerlist;
+- (nullable NSArray <MobileRTCQAAnswerItem *>*)getAnswerlist;
 @end
 
 

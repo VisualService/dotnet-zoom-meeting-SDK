@@ -48,7 +48,7 @@
 /*!
  @brief The raw data format of video data
  */
-@property (nonatomic, assign) MobileRTCVideoRawDataFormat format;
+@property (nonatomic, assign) MobileRTCFrameDataFormat format;
 
 /*!
  @brief The direction of video data.

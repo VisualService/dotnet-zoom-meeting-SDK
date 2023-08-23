@@ -15,7 +15,7 @@
  @brief Query if the user has the privilege to prompt or demote users in the webinar. 
  @return YES means that user owns the privilege, otherwise not.
  */
-- (BOOL)hasPromptAndDePromptPrivilige;
+- (BOOL)hasPromptAndDePromptPrivilege;
 
 /*!
  @brief Prompt Attendee to Panelist in Webinar.
@@ -325,6 +325,87 @@
 - (BOOL)isQALegalNoticeAvailable;
 
 /*!
+@brief Query if emoji reactions status.
+@return webinar emoji reaction be allowed or not
+*/
+- (BOOL)isWebinarEmojiReactionAllowed;
+
+/*!
+ @brief permitted to use emoji reactions.
+ @return If the function succeeds, the return value is MobileRTCSDKError_Success. Otherwise the function fails. To get extended error information, see \link MobileRTCSDKError \endlink enum.
+ @warning  If the function succeeds, the user will receive the callback onAllowWebinarReactionStatusChanged:. Available only for the host.
+*/
+- (MobileRTCSDKError)allowWebinarEmojiReaction;
+
+/*!
+ @brief Forbid use of emoji reactions.
+ @return If the function succeeds, the return value is MobileRTCSDKError_Success. Otherwise the function fails. To get extended error information, see \link MobileRTCSDKError \endlink enum.
+ @warning  If the function succeeds, the user will receive the callback onAllowWebinarReactionStatusChanged:. Available only for the host.
+*/
+- (MobileRTCSDKError)disallowWebinarEmojiReaction;
+
+/*!
+ @brief Query if attendee raise hand status.
+ @return webinar attendee allow to reaise hand or not.
+*/
+- (BOOL)isAttendeeRaiseHandAllowed;
+
+/*!
+ @brief The attendee is allowed to use the raise hand.
+ @return If the function succeeds, the return value is MobileRTCSDKError_Success. Otherwise the function fails. To get extended error information, see \link MobileRTCSDKError \endlink enum.
+ @warning If the function succeeds, the user will receive the callback onAllowAttendeeRiseHandStatusChanged:. Available only for the host.
+*/
+- (MobileRTCSDKError)allowAttendeeRaiseHand;
+
+/*!
+ @brief Do not letthe attendee to raise their hand.
+ @return If the function succeeds, the return value is MobileRTCSDKError_Success. Otherwise the function fails. To get extended error information, see \link MobileRTCSDKError \endlink enum.
+ @warning If the function succeeds, the user will receive the callback onAllowAttendeeRiseHandStatusChanged:. Available only for the host.
+*/
+- (MobileRTCSDKError)disallowAttendeeRaiseHand;
+
+/*!
+ @brief Query if attendee to view the participant count.
+ @return If it allow, the return value is YES, otherwise NO.
+*/
+- (BOOL)isAttendeeViewTheParticipantCountAllowed;
+
+/*!
+ @brief The attendee is allow to view the participant count.
+ @return If the function succeeds, the return value is MobileRTCSDKError_Success. Otherwise the function fails. To get extended error information, see \link MobileRTCSDKError \endlink enum.
+ @warning If the function succeeds, the user will receive the onAllowAttendeeViewTheParticipantCountStatusChanged: callback event. Available only for the host.
+*/
+- (MobileRTCSDKError)allowAttendeeViewTheParticipantCount;
+
+/*!
+ @brief Forbid the attendee to view the participant count.
+ @return If the function succeeds, the return value is MobileRTCSDKError_Success. Otherwise the function fails. To get extended error information, see \link MobileRTCSDKError \endlink enum.
+ @warning If the function succeeds, the user will receive the onAllowAttendeeViewTheParticipantCountStatusChanged: callback event. Available only for the host.
+*/
+- (MobileRTCSDKError)disallowAttendeeViewTheParticipantCount;
+
+/*!
+ @brief Get the participant count.
+ @return The count of participant.
+*/
+- (NSUInteger)getParticipantCount;
+
+/**
+ * @brief Set the view mode of the attendee.
+ * @param mode The view mode of the attendee.
+ * @return If the function succeeds, it will return MobileRTCSDKError_Success. Otherwise failed.
+ * @warning Only for host call this api, only for zoom ui mode.
+ */
+- (MobileRTCSDKError)setAttendeeViewMode:(MobileRTCAttendeeViewMode)mode;
+
+/**
+ * @brief Get the view mode of the attendee.
+ * @return If the function succeeds, it will return the attendee's view mode. For more details, see @{@link MobileRTCSDKAttendeeViewMode}.
+ * @warning Only for host call this api, only for zoom ui mode.
+ */
+- (MobileRTCAttendeeViewMode)getAttendeeViewMode;
+
+/*!
 @brief Get QA legal notices prompt.
 @return QA legal notices prompt.
 */
@@ -359,4 +440,17 @@
  @return poll anonymous legal notices explained.
  */
 - (NSString *_Nullable)getPollAnonymousLegalNoticesExplained;
+
+/**
+ * @brief Get annotation over share legal notices prompt.
+ * @return annotation over share legal notices prompt.
+ */
+- (NSString *_Nullable)getWebinarRegistrationLegalNoticesPrompt;
+
+/**
+ * @brief Get annotation over share legal notices explained.
+ * @return annotation over share legal notices explained.
+ */
+- (MobileRTCWebinarRegistLegalNoticeContent *_Nullable)getWebinarRegistrationLegalNoticesExplained;
+
 @end

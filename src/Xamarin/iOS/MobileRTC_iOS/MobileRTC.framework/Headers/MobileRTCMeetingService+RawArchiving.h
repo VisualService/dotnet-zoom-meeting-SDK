@@ -11,14 +11,14 @@
 @interface MobileRTCMeetingService (RawArchiving)
 
 /**
- * @brief start raw archiving,call this method can get rawdata receive previlege.
- * @return If the function succeeds, the return value is YES. Otherwise failed.
+ * @brief Start raw archiving and get raw data receive previlege.
+ * @return YES if start raw archiving succeeds. Otherwise failed.
  */
 - (BOOL)startRawArchiving;
 
 /**
- * @brief stop raw archiving, call this method reclaim rawdata receive previlege.
- * @return If the function succeeds, the return value is YES. Otherwise failed.
+ * @brief Stop raw archiving and revoke rawdata receive previlege.
+ * @return YES if stop raw archiving succeeds. Otherwise failed.
  */
 - (BOOL)stopRawArchiving;
 

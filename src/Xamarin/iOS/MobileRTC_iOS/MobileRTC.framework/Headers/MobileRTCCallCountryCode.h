@@ -10,19 +10,19 @@
 
 @interface MobileRTCCallCountryCode : NSObject
 /*!
- @brief the country Id.
+ @brief Get the ID of the country where a user can dial in.The country ID. (e.g. US, CA, etc.)
  */
 @property (nonatomic, retain) NSString *countryId;
 /*!
- @brief the country name.
+ @brief Get the country name.
  */
 @property (nonatomic, retain) NSString *countryName;
 /*!
- @brief the country code.
+ @brief Get the country code.
  */
 @property (nonatomic, retain) NSString *countryCode;
 /*!
- @brief the country number.
+ @brief Get the country number.
  */
 @property (nonatomic, retain) NSString *countryNumber;
 /*!
