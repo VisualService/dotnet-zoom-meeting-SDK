@@ -12,7 +12,7 @@
     <AssemblyName>Zoomios</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackageId>VisualService.Xamarin.iOS.ZoomSDK</PackageId>
-    <Version>5.11.10.4556</Version>
+    <Version>5.15.7.9685</Version>
     <Authors>Michele Di Maria</Authors>
     <Copyright>Copyright 2022</Copyright>
     <Owners>Michele Di Maria, NT2 - Nuove Tecnologie</Owners>
