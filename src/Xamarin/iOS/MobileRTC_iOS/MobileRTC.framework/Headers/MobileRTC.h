@@ -10,6 +10,7 @@
 #import <MobileRTC/MobileRTCConstants.h>
 #import <MobileRTC/MobileRTCAuthService.h>
 #import <MobileRTC/MobileRTCMeetingService.h>
+#import <MobileRTC/MobileRTCAutoFramingParameter.h>
 #import <MobileRTC/MobileRTCMeetingService+AppShare.h>
 #import <MobileRTC/MobileRTCMeetingService+InMeeting.h>
 #import <MobileRTC/MobileRTCMeetingService+Customize.h>
@@ -17,6 +18,7 @@
 #import <MobileRTC/MobileRTCMeetingService+Video.h>
 #import <MobileRTC/MobileRTCMeetingService+User.h>
 #import <MobileRTC/MobileRTCMeetingService+Chat.h>
+#import <MobileRTC/MobileRTCMeetingService+Avatar.h>
 #import <MobileRTC/MobileRTCMeetingService+Webinar.h>
 #import <MobileRTC/MobileRTCMeetingService+VirtualBackground.h>
 #import <MobileRTC/MobileRTCMeetingService+Interpretation.h>
@@ -24,6 +26,7 @@
 #import <MobileRTC/MobileRTCMeetingService+Reaction.h>
 #import <MobileRTC/MobileRTCMeetingService+LiveTranscription.h>
 #import <MobileRTC/MobileRTCMeetingService+RawArchiving.h>
+#import <MobileRTC/MobileRTCMeetingService+Phone.h>
 #import <MobileRTC/MobileRTCMeetingSettings.h>
 #import <MobileRTC/MobileRTCInviteHelper.h>
 #import <MobileRTC/MobileRTCRoomDevice.h>
@@ -42,6 +45,7 @@
 #import <MobileRTC/MobileRTCAudioSourceHelper.h>
 #import <MobileRTC/MobileRTCSMSService.h>
 #import <MobileRTC/MobileRTCDirectShareService.h>
+#import <MobileRTC/MobileRTCReminderHelper.h>
 
 /*!
  @brief MobileRTCSDKInitContext.
@@ -83,6 +87,8 @@
  @brief [Optional] If you use direct screen share, you need create replaykit bundle identifier in your apple developer account, and setup here.
  */
 @property (nonatomic, copy) NSString                        * _Nullable replaykitBundleIdentifier;
+
+@property (nonatomic, assign) NSInteger                     wrapperType;
 @end
 
 /*!
@@ -219,6 +225,12 @@
 - (MobileRTCDirectShareService * _Nullable)getDirectShareService;
 
 /*!
+@brief Get the default MobileRTC reminder helper.
+@return The MobileRTC reminder helper.
+*/
+- (MobileRTCReminderHelper * _Nullable)getReminderHelper;
+
+/*!
 @brief Get the video source helper.@see MobileRTCVideoSourceHelper
 @return The object of MobileRTCVideoSourceHelper.
 */
@@ -267,6 +279,12 @@
  @warning It is necessary to call the method in AppDelegate "- (void)applicationWillTerminate:(UIApplication *)application".
  */
 - (void)appWillTerminate;
+
+/*!
+ @brief cleanup the SDK.
+ @warning user will clean up the SDK when no longer need the SDK instance, only can call this method after initialized.
+ */
+- (void)cleanup;
 
 /*!
 @brief Notify MobileRTC when the root UIViewController's traitCollection will change

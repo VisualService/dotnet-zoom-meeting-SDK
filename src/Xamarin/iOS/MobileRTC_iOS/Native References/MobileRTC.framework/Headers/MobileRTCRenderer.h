@@ -12,41 +12,45 @@
 @interface MobileRTCRenderer : NSObject
 
 /*!
-@brief the userId of MobileRTCRenderer object.
+@brief MobileRTCRenderer's user ID.
 */
 @property (nonatomic, assign, readonly) NSUInteger userId;
 
 /*!
- @brief the video type of MobileRTCRenderer object.
+ @brief MobileRTCRenderer's video type defined in {@link MobileRTCVideoType}.
  */
 @property (nonatomic, assign, readonly) MobileRTCVideoType videoType;
 
 /*!
- @brief the video resolution of MobileRTCRenderer object.
+ @brief MobileRTCRenderer's video resolution defined in {@link MobileRTCVideoResolution}.
  */
 @property (nonatomic, assign, readonly) MobileRTCVideoResolution resolution;
 
 /*!
- @brief Call the function to initialize MobileRTCRenderer.
+ @brief Initialize MobileRTCRenderer.
+ @param delegate - The delegate to receive callbacks. See {@link MobileRTCVideoRawDataDelegate}.
  @return The MobileRTCRenderer object.
  */
 - (instancetype _Nonnull)initWithDelegate:(id<MobileRTCVideoRawDataDelegate>_Nonnull) delegate;
 
 /*!
  @brief Call the function to set video resolution.
+ @return If the function succeeds, the return value is MobileRTCRawData_Success. Otherwise, the function fails and returns null. To get extended error information, see {@link MobileRTCRawDataError}.
  */
 - (MobileRTCRawDataError)setRawDataResolution:(MobileRTCVideoResolution)resolution;
 
 /*!
- @brief Call the function to subscribe video raw data. Before entering the meeting, you can subscribe your preview video data with userid=0, If you are already in the meeting, you can subscribe your own video data using the real userid or userid=0.
- @return the result of the method.
+ @brief Call the function to subscribe to raw video data.
+ @note Before entering the meeting, subscribe to your preview video data with userId = 0.
+ @note If you are already in the meeting, subscribe to your own video data using the real userId or userId = 0.
+ @return If the function succeeds, the return value is MobileRTCRawData_Success. Otherwise, the function fails and returns null. To get extended error information, see {@link MobileRTCRawDataError}.
  */
 - (MobileRTCRawDataError)subscribe:(NSUInteger)userId
                     videoType:(MobileRTCVideoType)type;
 
 /*!
- @brief Call the function to unsubscribe video raw data.
- @return the result of the method.
+ @brief Call the function to unsubscribe from raw video data.
+ @return If the function succeeds, the return value is MobileRTCRawData_Success. Otherwise, the function fails and returns null. To get extended error information, see {@link MobileRTCRawDataError}.
  */
 - (MobileRTCRawDataError)unSubscribe;
 

@@ -11,5 +11,6 @@
         <file id="7" name="Ukulele G.pcm" ios_name="Ukulele G.m4r" ></file>
         <file id="8" name="Vibraphone.pcm" ios_name="Vibraphone.m4r" ></file>
         <file id="9" name="double_beep.pcm" ios_name="double_beep.m4r" ></file>
+        <file id="10" name="Silent.pcm" ios_name="Silent.m4r" ></file>
     </filelist>
 </ringtone>

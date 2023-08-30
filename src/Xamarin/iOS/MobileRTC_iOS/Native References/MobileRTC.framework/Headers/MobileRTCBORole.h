@@ -46,7 +46,7 @@ typedef enum : NSUInteger {
 /*!
 @brief get bo meeting user array.
 */
-- (NSArray * _Nullable)getBOMeetingUserList;
+- (NSArray <NSString *>* _Nullable)getBOMeetingUserList;
 @end
 
 /*!
@@ -83,11 +83,11 @@ typedef NS_ENUM(NSUInteger, MobileRTCBOStopCountDown) {
  */
 @property (nonatomic, assign) BOOL isAutoMoveAllAssignedParticipantsEnabled;
 /*!
- @brief true: it's timer BO false: not timer BO
+ @brief YES: it's timer BO NO: not timer BO
  */
 @property (nonatomic, assign) BOOL isBOTimerEnabled;
 /*!
- @brief true: if time is up, will stop BO auto. false: don't auto stop.
+ @brief YES: if time is up, will stop BO auto. NO: don't auto stop.
  */
 @property (nonatomic, assign) BOOL isTimerAutoStopBOEnabled;
 /*!
@@ -141,8 +141,8 @@ typedef NS_ENUM(NSUInteger, MobileRTCBOStopCountDown) {
  *
  *   Import Remarks:
  *   1. attendee in master conference/attendee in BO conference
- *       1) if BOOption.IsParticipantCanChooseBO is true, attendee has objects:  [attendee + assistant + dataHelper]
- *      2) if BOOption.IsParticipantCanChooseBO is false, attendee has object:  [attendee]
+ *       1) if BOOption.IsParticipantCanChooseBO is YES, attendee has objects:  [attendee + assistant + dataHelper]
+ *      2) if BOOption.IsParticipantCanChooseBO is NO, attendee has object:  [attendee]
  *   2. CoHost in master conference
  *       1) if CoHost is desktop client, and host is desktop client, the CoHost has objects: [creator + admin + assistant + dataHelper]
  *      2) if CoHost is desktop client, and host is mobile client, the CoHost has object: [attendee]
@@ -197,7 +197,7 @@ typedef NS_ENUM(NSUInteger, MobileRTCBOStopCountDown) {
 /*!
 @brief Set BO option.
 @param option, the option that you want to set.
-@return if success the return value is true, otherwise false.
+@return if success the return value is YES, otherwise NO.
 */
 - (BOOL)setBOOption:(MobileRTCBOOption *_Nonnull)option;
 
@@ -206,6 +206,25 @@ typedef NS_ENUM(NSUInteger, MobileRTCBOStopCountDown) {
 @return the BOOption value.
 */
 - (MobileRTCBOOption * _Nullable)getBOOption;
+
+/*!
+@brief Check whether web enabled the pre-assigned option when scheduling a meeting.
+@return YES if it is enabled, otherwise NO.
+*/
+- (BOOL)isWebPreAssignBOEnabled;
+
+/*!
+@brief Request web pre-assigned data and create those rooms.
+@return If the function succeeds, the return value is SDKErr_Success.Otherwise failed. To get extended error information, see [MobileRTCSDKError]
+*/
+- (MobileRTCSDKError)requestAndUseWebPreAssignBOList;
+
+/*!
+@brief Get the downloading status of pre-assigned data.
+@returnThe return value is a enum for download status. For more details, see [MobileRTCBOPreAssignBODataStatus]
+*/
+- (MobileRTCBOPreAssignBODataStatus)getWebPreAssignBODataStatus;
+
 @end
 
 @interface MobileRTCBOAdmin : NSObject
@@ -267,9 +286,26 @@ typedef NS_ENUM(NSUInteger, MobileRTCBOStopCountDown) {
 /*!
 @brief Host invite user return to main session, When BO is started and user is in BO.
 @param boUserId the bo user id.
-@return true indicates success, otherwise fail.
+@return YES indicates success, otherwise fail.
 */
 - (BOOL)inviteBOUserReturnToMainSession:(NSString * _Nonnull)boUserId;
+/*!
+ @brief Query if the current meeting supports broadcasting host's voice to BO.
+ @return YES means that the meeting supports this, otherwise it's not supported.
+ */
+- (BOOL)isBroadcastVoiceToBOSupport;
+
+/*!
+ @brief Query if the host now has the ability to broadcast voice to BO.
+ @return true means that the host now has the ability, otherwise the host does not.
+ */
+- (BOOL)canBroadcastVoiceToBO;
+/*!
+ @brief start or stop broadcasting voice to BO.
+ @param bStart YES for start and NO for stop.
+ @return YES means that the invocation succeeds., Otherwise, it fails.
+ */
+- (BOOL)broadcastVoiceToBO:(BOOL)bStart;
 @end
 
 @interface MobileRTCBOAssistant : NSObject
@@ -323,7 +359,7 @@ typedef NS_ENUM(NSUInteger, MobileRTCBOStopCountDown) {
 
 /*!
  @brief Determine if participant can return to main session.
- @return true if can, otherwise false.
+ @return YES if can, otherwise NO.
 */
 - (BOOL)isCanReturnMainSession;
 
