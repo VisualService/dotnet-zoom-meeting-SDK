@@ -226,3 +226,6 @@ There are hundreds of resource files, so I am including a replace utility consol
 ## History
 
 This project is originally based on [this repo](https://github.com/stntz/Xamarin.ZoomBinding)
+
+![Alt](https://repobeats.axiom.co/api/embed/202fa097a3580ce220e25c97ef0cbd845134449c.svg "Repobeats analytics image")
+
