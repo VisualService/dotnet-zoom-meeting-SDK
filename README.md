@@ -202,6 +202,9 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
 
 You are welcome to raise issues. PRs are particularly welcome, as the maintainer's primary focus is a commercial product which only uses certain limited feature of the Zoom SDK. Therefore time to spend on fixing issues not directly related to features we require will be limited.
 
+## Stats
+![Alt](https://repobeats.axiom.co/api/embed/202fa097a3580ce220e25c97ef0cbd845134449c.svg "Repobeats analytics image")
+
 ## Building locally - Android
 
 ### Format correctly the .aar file (Unneccessary in 5.12.2.9109 - but be aware zoom may break things in future versions)
@@ -226,6 +229,4 @@ There are hundreds of resource files, so I am including a replace utility consol
 ## History
 
 This project is originally based on [this repo](https://github.com/stntz/Xamarin.ZoomBinding)
-
-![Alt](https://repobeats.axiom.co/api/embed/202fa097a3580ce220e25c97ef0cbd845134449c.svg "Repobeats analytics image")
 
