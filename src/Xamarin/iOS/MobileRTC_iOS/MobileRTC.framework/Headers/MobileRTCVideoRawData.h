@@ -11,47 +11,49 @@
 @interface MobileRTCVideoRawData : NSObject
 
 /*!
- @brief y data pointer of video's YUV data.
+ @brief The y-data pointer to a video's YUV data.
  */
 @property (nonatomic, assign) char *yBuffer;
 
 /*!
- @brief u data pointer of video's YUV data.
+ @brief The u-data data pointer to a video's YUV data.
  */
 @property (nonatomic, assign) char *uBuffer;
 
 /*!
- @brief v data pointer of video's YUV data.
+ @brief The v-data data pointer to a video's YUV data.
  */
 @property (nonatomic, assign) char *vBuffer;
 
 /*!
- @brief the size of video data.
+ @brief The video data's size.
  */
 @property (nonatomic, assign) CGSize size;
 
 /*!
- @brief The raw data format of video data
+ @brief The video data's raw data format defined in {@link MobileRTCVideoRawDataFormat}.
  */
-@property (nonatomic, assign) MobileRTCVideoRawDataFormat format;
+@property (nonatomic, assign) MobileRTCFrameDataFormat format;
 
 /*!
- @brief The direction of video data.
+ @brief The video data's rotation defined in {@link MobileRTCVideoRawDataRotation}.
  */
 @property (nonatomic, assign) MobileRTCVideoRawDataRotation rotation;
 
 /*!
- @brief Can add reference count or not
+ @brief Whether adding a reference is allowed.
+ @return true if allow. Otherwise, false.
  */
 - (BOOL)canAddRef;
 
 /*!
- @brief Add reference count
+ @brief Add to reference count.
+ @return true if successfully added. Otherwise, this returns false.
  */
 - (BOOL)addRef;
 
 /*!
- @brief Minus reference count
+ @brief Subtract from reference count.
  */
 - (NSInteger)releaseRef;
 

@@ -13,28 +13,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MobileRTCMeetingService (Reaction)
 
-/**
- * @brief Determine if the Reaction feature is enabled.
- * @return YES means Reaction feature is enable,otherwise not.
+/*!
+ @brief Determine if the Reaction feature is enabled.
+ @return YES means Reaction feature is enabled, otherwise not.
  */
 - (BOOL)isEmojiReactionEnabled;
 
 /**
  * @brief Send emoji reaction.
- * @param type The type of the emoji reaction.
- * @param skinTone The skintone of the emoji reaction
- * @return If the function succeeds, it will return MobileRTCMeetError_Success, otherwise not.
+ * @param type - The type of the emoji reaction.
+ * @return If the function succeeds, it will return ZoomSDKError_succuss, otherwise not.
+ * @warning MobileRTCEmojiReactionSkinTone doesn't work for MobileRTCEmojiReactionType_Heart type. To set MobileRTCEmojiReactionSkinTone, use -[MobileRTCMeetingSettings setReactionSkinTone] in MobileRTCMeetingSettings.h file
  */
-- (MobileRTCMeetError)sendEmojiReaction:(MobileRTCEmojiReactionType)type reactionSkinTone:(MobileRTCEmojiReactionSkinTone)skinTone; DEPRECATED_MSG_ATTRIBUTE("Use -sendEmojiReaction: instead");
+- (MobileRTCSDKError)sendEmojiReaction:(MobileRTCEmojiReactionType)type;
 
 /**
- * @brief Send emoji reaction.
- * @param type The type of the emoji reaction.
- * @return If the function succeeds, it will return ZoomSDKError_succuss, otherwise not.
- * @waring MobileRTCEmojiReactionSkinTone don't work for MobileRTCEmojiReactionType_Heart type. if you want to set MobileRTCEmojiReactionSkinTone, you need to use -[MobileRTCMeetingSettings setReactionSkinTone] in MobileRTCMeetingSettings.h file
+ * @brief Send the emoji feedback.
+ * @param type  Specify the emoji feedback type to be sent. See {@link MobileRTCEmojiFeedbackType}.
+ * @return If the function succeeds, it will return MobileRTCMeetError_Success, otherwise not.
  */
-- (MobileRTCMeetError)sendEmojiReaction:(MobileRTCEmojiReactionType)type;
+- (MobileRTCSDKError)sendEmojiFeedback:(MobileRTCEmojiFeedbackType)type;
 
+/**
+ * @brief Cancel the emoji feedback.
+ * @return If the function succeeds, it will return MobileRTCMeetError_Success, otherwise not.
+ */
+- (MobileRTCSDKError)cancelEmojiFeedback;
 @end
 
 NS_ASSUME_NONNULL_END

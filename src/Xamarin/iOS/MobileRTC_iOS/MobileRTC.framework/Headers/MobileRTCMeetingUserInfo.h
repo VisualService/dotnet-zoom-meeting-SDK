@@ -109,7 +109,7 @@ typedef NS_ENUM(NSUInteger, MobileRTCFeedbackType) {
 	 @brief Other expression.
 	 */
     MobileRTCFeedbackType_Emoji,
-};
+} DEPRECATED_MSG_ATTRIBUTE("Use MobileRTCEmojiFeedbackType instead");
 
 /*!
  @brief The information of the current user in the meeting.
@@ -139,10 +139,6 @@ typedef NS_ENUM(NSUInteger, MobileRTCFeedbackType) {
  @brief The path to store the head portrait.
  */
 @property (nonatomic, retain) NSString* _Nonnull       avatarPath;
-/*!
- @brief Unread messages in the meeting.
- */
-@property (nonatomic, assign) NSInteger        unread;
 /*!
  @brief User's video status in the meeting.
  */
@@ -182,7 +178,11 @@ typedef NS_ENUM(NSUInteger, MobileRTCFeedbackType) {
 /*!
  @brief The feedback type from the user.
  */
-@property (nonatomic, assign) MobileRTCFeedbackType  feedbackType;
+@property (nonatomic, assign) MobileRTCFeedbackType  feedbackType DEPRECATED_MSG_ATTRIBUTE("Use emojiFeedbackType instead");
+/*!
+ @brief The emoji feedback type from the user.
+ */
+@property (nonatomic, assign) MobileRTCEmojiFeedbackType  emojiFeedbackType;
 /*!
  @brief the type of role of the user specified by the current information.
  */

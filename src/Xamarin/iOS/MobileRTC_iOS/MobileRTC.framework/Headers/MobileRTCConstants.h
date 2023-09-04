@@ -7,6 +7,46 @@
 //
 
 /*!
+ @brief An enumeration of SDK error.
+ */
+typedef NS_ENUM(NSUInteger, MobileRTCSDKError) {
+    MobileRTCSDKError_Success = 0,///<success.
+    MobileRTCSDKError_NoImpl,///<this feature is currently invalid.
+    MobileRTCSDKError_WrongUsage,///<incorrect usage of the feature.
+    MobileRTCSDKError_InvalidParameter,///<wrong parameter.
+    MobileRTCSDKError_ModuleLoadFailed,///<loading module failed.
+    MobileRTCSDKError_MemoryFailed,///<no memory is allocated.
+    MobileRTCSDKError_ServiceFailed,///<internal service error.
+    MobileRTCSDKError_Uninitialize,///<not initialized before the usage.
+    MobileRTCSDKError_Unauthentication,///<not authorized before the usage.
+    MobileRTCSDKError_NoRecordingInprocess,///<no recording in process.
+    MobileRTCSDKError_TranscoderNoFound,///<transcoder module is not found.
+    MobileRTCSDKError_VideoNotReady,///<the video service is not ready.
+    MobileRTCSDKError_NoPermission,///<no permission.
+    MobileRTCSDKError_Unknown,///<unknown error.
+    MobileRTCSDKError_OtherSdkInstanceRunning,///<the other instance of the sdk is in process.
+    MobileRTCSDKError_InternalError,///<sdk internal error.
+    MobileRTCSDKError_NoAudiodeviceIsFound,///<no audio device found.
+    MobileRTCSDKError_NoVideoDeviceIsFound,///<no video device found.
+    MobileRTCSDKError_TooFrequentCall,///<api calls too frequently.
+    MobileRTCSDKError_FailAssignUserPrivilege, ///<user can't be assigned with new privilege.
+    MobileRTCSDKError_MeetingDontSupportFeature,///<the current meeting doesn't support the feature.
+    MobileRTCSDKError_MeetingNotShareSender,///<the current user is not the presenter.
+    MobileRTCSDKError_MeetingYouHaveNoShare,///<there is no sharing.
+    MobileRTCSDKError_MeetingViewtypeParameterIsWrong, ///<incorrect viewtype parameters.
+    MobileRTCSDKError_MeetingAnnotationIsOff, ///<annotation is disabled.
+    MobileRTCSDKError_SettingOsDontSupport, ///<current os doesn't support the setting.
+    MobileRTCSDKError_EmailLoginIsDisabled, ///<email login is disable
+    MobileRTCSDKError_HardwareNotMeetForVb, ///<computer doesn't meet the minimum requirements to use virtual background feature.
+    MobileRTCSDKError_NeedUserConfirmRecordDisclaimer,  ///<need process disclaimer.
+    MobileRTCSDKError_NoShareData,///<there is no raw data of sharing.
+    MobileRTCSDKError_ShareCannotSubscribeMyself,///<can't subscribe my self share.
+    MobileRTCSDKError_NotInMeeting,///<not in meeting.
+    MobileRTCSDKError_MeetingCallOutFailed,///<meeting call out fail.
+    MobileRTCSDKError_NotSupportMultiStreamVideoUser,///<not support multi stream video user.
+};
+
+/*!
  @brief An enumeration of SDK authentication.
  */
 typedef NS_ENUM(NSUInteger, MobileRTCAuthError) {
@@ -43,7 +83,7 @@ typedef NS_ENUM(NSUInteger, MobileRTCLoginFailReason) {
     ///login is successful.
     MobileRTCLoginFailReason_Success,
     ///Email login disabled.
-    MobileRTCLoginFailReason_EmailLoginDiable,
+    MobileRTCLoginFailReason_EmailLoginDisable,
     ///User not exist.
     MobileRTCLoginFailReason_UserNotExist,
     ///Password is wrong.
@@ -270,11 +310,11 @@ typedef NS_ENUM(NSUInteger, DialOutStatus) {
     DialOutStatus_ZoomCancelCallFail,
     ///The call is not answered.
     DialOutStatus_NoAnswer,
-    ///Disable the function of international outgoing call before the host joins the meeting.
+    ///Disable the international call-out function before the host joins the meeting.
     DialOutStatus_BlockNoHost,
     ///The call-out is blocked by the system due to high cost.
     DialOutStatus_BlockHighRate,
-    ///All the invitees invited by the call should press the button one(1) to join the meeting. In case that many invitees do not press the button that leads to time out, the call invitation for this meeting shall be banned.
+    ///All the users invited by the call should press one (1) to join the meeting. If many invitees do not press the button and instead are timed out, the call invitation for this meeting is blocked.
     DialOutStatus_BlockTooFrequent,
 };
 
@@ -405,18 +445,6 @@ typedef NS_ENUM(NSUInteger, MobileRTC_VideoStatus) {
     MobileRTC_VideoStatus_Video_OFF                           = 1,
     ///<Muted by the host.
     MobileRTC_VideoStatus_Video_Muted_ByHost                  = 2,
-};
-
-/*!
- @brief MobileRTCVideoError An enumeration of video-related operational error states.
- */
-typedef NS_ENUM(NSUInteger, MobileRTCVideoError) {
-    ///Success
-    MobileRTCVideoError_Success                                   = 0,
-    ///Camera Permission is Denied
-    MobileRTCVideoError_CameraPermissionDenied                    = 1,
-    ///User can not unmute his Audio.
-    MobileRTCVideoError_CannotUnmuteMyVideo                       = 3,
 };
 
 /*!
@@ -707,11 +735,18 @@ typedef NS_ENUM(NSUInteger, MobileRTCVideoResolution) {
 };
 
 /*!
- @brief MobileRTCVideoResolution An enumeration of video raw data format.
+ @brief MobileRTCVideoRawDataFormat An enumeration of video raw data format.
  */
 typedef NS_ENUM(NSUInteger, MobileRTCVideoRawDataFormat) {
     MobileRTCVideoRawDataFormatI420            = 1,
-    MobileRTCVideoRawDataFormatI420_Limit,
+} DEPRECATED_MSG_ATTRIBUTE("Use MobileRTCFrameDataFormat instead");
+
+/*!
+ @brief MobileRTCFrameDataFormat An enumeration of raw data frame format.
+ */
+typedef NS_ENUM(NSUInteger, MobileRTCFrameDataFormat) {
+    MobileRTCFrameDataFormat_I420            = 1,
+    MobileRTCFrameDataFormat_I420_Limit,
 };
 
 /*!
@@ -755,7 +790,9 @@ typedef NS_ENUM(NSUInteger,MobileRTCRawDataError)
     MobileRTCRawData_Audio_Module_Not_Ready,
     MobileRTCRawData_Audio_Module_Error,
     MobileRTCRawData_No_Audio_Data,
-    MobileRTCRawData_Send_Too_Frequently
+    MobileRTCRawData_Send_Too_Frequently,
+    MobileRTCRawData_Can_Not_Change_Virtual_Device,
+    MobileRTCRawData_Not_Join_Audio
 };
 
 /*!
@@ -848,6 +885,16 @@ typedef NS_ENUM(NSUInteger, MobileRTCBOControllerError) {
 };
 
 /*!
+ @brief PreAssign BO Data Status
+ */
+typedef NS_ENUM(NSUInteger, MobileRTCBOPreAssignBODataStatus) {
+    MobileRTCBOPreAssignBODataStatus_None = 0,       ///<initial status, no request was sent
+    MobileRTCBOPreAssignBODataStatus_Downloading,    ///<download in progress
+    MobileRTCBOPreAssignBODataStatus_Download_Ok,    ///<download success
+    MobileRTCBOPreAssignBODataStatus_Download_Fail   ///<download fail
+};
+
+/*!
 @brief Direct sharing status.
 */
 typedef NS_ENUM(NSUInteger, MobileRTCDirectShareStatus) {
@@ -874,6 +921,18 @@ typedef NS_ENUM(NSUInteger, MobileRTCEmojiReactionType) {
     MobileRTCEmojiReactionType_Joy, /// joy
     MobileRTCEmojiReactionType_Openmouth, /// openmouth
     MobileRTCEmojiReactionType_Tada, /// tada
+};
+
+/*!
+@brief emoji feedback type.
+*/
+typedef NS_ENUM(NSUInteger, MobileRTCEmojiFeedbackType) {
+    MobileRTCEmojiFeedbackType_None,    /// none
+    MobileRTCEmojiFeedbackType_Yes,    /// yes
+    MobileRTCEmojiFeedbackType_No, /// no
+    MobileRTCEmojiFeedbackType_SpeedUp, /// Speed Up
+    MobileRTCEmojiFeedbackType_SlowDown, /// Slow Down
+    MobileRTCEmojiFeedbackType_Away  /// Away
 };
 
 /*!
@@ -956,6 +1015,10 @@ typedef NS_ENUM(NSUInteger, MobileRTCSharingStatus)
     MobileRTCSharingStatus_Pause,
     /// Resume sharing.
     MobileRTCSharingStatus_Resume,
+    /// Other user begins to share the sounds of computer audio.
+    MobileRTCSharingStatus_OtherPureAudioShareStart,
+    /// Other user stops sharing the sounds of computer audio.
+    MobileRTCSharingStatus_OtherPureAudioShareStop,
 };
 
 /*!
@@ -1050,3 +1113,127 @@ typedef NS_ENUM(NSUInteger, MobileRTCLiveTranscriptionOperationType) {
     MobileRTC_LiveTranscription_OperationType_NotSupported      = 5,
 };
 
+typedef NS_ENUM(NSInteger,MobileRTCSignInterpretationStatus)
+{
+    MobileRTCSignInterpretationStatus_Initial, //<The initial status
+    MobileRTCSignInterpretationStatus_Started, //<sign interpretation stared.
+    MobileRTCSignInterpretationStatus_Stopped,  //<sign interpretation stopped.
+};
+
+/*!
+ @brief Enumerations of the type for alive connect service status.
+ */
+typedef NS_ENUM(NSInteger, MobileRTCNotificationServiceStatus) {
+    MobileRTCNotificationServiceStatus_None = 0,
+    MobileRTCNotificationServiceStatus_Starting,
+    MobileRTCNotificationServiceStatus_Started,
+    MobileRTCNotificationServiceStatus_StartFailed,
+    MobileRTCNotificationServiceStatus_Closed
+};
+
+/*!
+ @brief Enumerations of the type for in meeting audio type.
+ */
+typedef NS_ENUM(NSInteger, MobileRTCInMeetingSupportAudioType) {
+    MobileRTCInMeetingSupportAudioType_None = 0,
+    MobileRTCInMeetingSupportAudioType_Voip = 1,
+    MobileRTCInMeetingSupportAudioType_Telephone = 1 << 1
+};
+
+/*!
+ @brief Enumerations of webinar attendee view mode, Only host can set.
+ */
+typedef NS_ENUM(NSInteger, MobileRTCAttendeeViewMode){
+    MobileRTCAttendeeViewMode_None,
+    MobileRTCAttendeeViewMode_FollowHost,
+    MobileRTCAttendeeViewMode_Speaker,
+    MobileRTCAttendeeViewMode_Gallery,
+    MobileRTCAttendeeViewMode_Sharing_Standard,
+    MobileRTCAttendeeViewMode_Sharing_SidebysideSpeaker,
+    MobileRTCAttendeeViewMode_Sharing_SidebysideGallery
+};
+
+typedef NS_ENUM(NSUInteger, MobileRTCLocalRecordingRequestPrivilegeStatus) {
+    MobileRTCLocalRecordingRequestPrivilege_None,
+    ///allow participant to send request privilege.
+    MobileRTCLocalRecordingRequestPrivilege_AllowRequest,
+    ///host auto allow all privilege request.
+    MobileRTCLocalRecordingRequestPrivilege_AutoGrant,
+    ///host auto deny all privilege request
+    MobileRTCLocalRecordingRequestPrivilege_AutoDeny,
+};
+
+typedef NS_ENUM(NSUInteger, MobileRTCReminderType) {
+    /// Disclaimer type of login.
+    MobileRTCReminderType_Login,
+    /// Disclaimer type of start or join meeting.
+    MobileRTCReminderType_StartOrJoinMeeting,
+    /// Disclaimer type of record reminder.
+    MobileRTCReminderType_RecordReminder,
+    /// Disclaimer type of record disclaimer.
+    MobileRTCReminderType_RecordDisclaimer,
+    /// Disclaimer type of live stream disclaimer.
+    MobileRTCReminderType_LiveStreamDisclaimer,
+    /// Disclaimer type of archive disclaimer.
+    MobileRTCReminderType_ArchiveDisclaimer,
+    /// Disclaimer type of join webinar as panelist.
+    MobileRTCReminderType_WebinarAsPanelistJoin,
+    /// Disclaimer type of .terms or service
+    MobileRTCReminderType_TermsOfService,
+    /// Disclaimer type of Smart Summary Disclaimer
+    MobileRTCReminderType_SmartSummaryDisclaimer,
+};
+
+typedef NS_ENUM(NSInteger, MobileRTCInviteMeetingStatus) {
+    /// Meeting invitation accepted .
+    MobileRTCInviteMeetingStatus_Accepted,
+    /// Meeting invitation declined .
+    MobileRTCInviteMeetingStatus_Declined,
+    /// Meeting invitation canceled.
+    MobileRTCInviteMeetingStatus_Canceled,
+    /// Meeting invitation timeout
+    MobileRTCInviteMeetingStatus_Timeout
+};
+
+typedef NS_ENUM(NSInteger, MobileRTCPresenceStatus) {
+    /// Presence status none
+    MobileRTCPresenceStatus_None,
+    /// Presence status available
+    MobileRTCPresenceStatus_Available,
+    /// Presence status unavailable
+    MobileRTCPresenceStatus_UnAvailable,
+    /// Presence status in meeting
+    MobileRTCPresenceStatus_InMeeting,
+    /// Presence status busy
+    MobileRTCPresenceStatus_Busy,
+    /// Presence status do not disturb
+    MobileRTCPresenceStatus_DoNotDisturb,
+    /// Presence status away
+    MobileRTCPresenceStatus_Away,
+    /// Presence status phone call
+    MobileRTCPresenceStatus_PhoneCall,
+    /// Presence status presenting
+    MobileRTCPresenceStatus_Presenting,
+    /// Presence status calendar
+    MobileRTCPresenceStatus_Calendar,
+    /// Presence status out of office
+    MobileRTCPresenceStatus_OutOfOffice
+};
+
+typedef NS_ENUM(NSInteger, MobileRTCAutoFramingMode) {
+    MobileRTCAutoFramingMode_None,               ///<No use of the auto-framing.
+    MobileRTCAutoFramingMode_CenterCoordinates, ///<use the video frame’s center point as the center to zoom.
+    MobileRTCAutoFramingMode_FaceRecognition    ///<use the detected face in the video frame as the center to zoom in.
+};
+
+typedef NS_ENUM(NSInteger, MobileRTCFaceRecognitionFailStrategy) {
+    MobileRTCFaceRecognitionFailStrategy_None,                      ///<No use of the fail strategy
+    MobileRTCFaceRecognitionFailStrategy_Remain,                   ///<After face recognition fails, do nothing until face recognition succeed again.
+    MobileRTCFaceRecognitionFailStrategy_UsingCenterCoordinates, ///<After face recognition fails, use the video frame’s center point as the center for zoom in.
+    MobileRTCFaceRecognitionFailStrategy_UsingOriginalVideo      ///<After face recognition fails, use original video.
+};
+
+typedef NS_ENUM(NSInteger, MobileRTCAudioChannel) {
+    MobileRTCAudioChannel_Mono,         /// mono
+    MobileRTCAudioChannel_Stereo,       /// stereo
+};

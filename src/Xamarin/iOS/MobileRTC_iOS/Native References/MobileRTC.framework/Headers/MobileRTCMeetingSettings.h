@@ -106,13 +106,6 @@
 @property (assign, nonatomic) BOOL recordButtonHidden;
 
 /*!
- @brief Enable/Disable Kubi Device in the meeting.
- @warning The option is available only on iPad if you want to use Kubi device. 
- @warning The function only for Zoom UI.
- */
-@property (assign, nonatomic) BOOL enableKubi DEPRECATED_ATTRIBUTE;
-
-/*!
  @brief Change thumbnail video layout while viewing a share in the meeting.
  @warning If you set it to YES, the video of attendees will be placed at right of the Landscape(the device screen is oriented horizontally) or the bottom of Portrait(the device screen is oriented vertically) apart from the shared content, which means the video won't cover the content; if you set to NO, it will show only the video of active speaker and the video will be placed in the bottom right of the screen.
  @warning The function only for Zoom UI.
@@ -201,6 +194,11 @@
  @brief hide share button on cloud whiteboard.
  */
 @property (assign, nonatomic) BOOL hideShareButtonOnCloudWhiteboard;
+
+/*!
+ @brief About button’s visibility on the cloud whiteboard. Default is displaying.
+ */
+@property (assign, nonatomic) BOOL hideAboutButtonOnCloudWhiteboard;
 
 /*!
  @brief Query if the user joins meeting with audio device. 
@@ -439,6 +437,18 @@
 - (void)prePopulateWebinarRegistrationInfo:(nonnull NSString *)email username:(nonnull NSString *)username;
 
 /*!
+@brief Set the webinar register information dialog to hide or display.
+@param hide Yes means hide the dialog. Otherwise, do not hide the dialog.
+*/
+- (void)setHideRegisterWebinarInfoWindow:(BOOL)hide;
+
+/*!
+@brief Get the webinar register information dialog to hide or display.
+@return boolean value of the setting value.
+*/
+- (BOOL)hideRegisterWebinarInfoWindow;
+
+/*!
 @brief Set to disable confidential watermark.
 @param disabled The option value.
 @return YES means confidential watermark is disable, otherwise not.
@@ -482,8 +492,47 @@
 
 /*!
 @brief Query if the action of clear WebView's cache be disabled.
- @return Action of clear WebView's cache is disabled or not.
+@return Action of clear WebView's cache is disabled or not.
 */
 - (BOOL)isDisabledClearWebKitCache;
 
+/*!
+@brief Query if the option HIDE NON-VIDEO PARTICIPANTS is enabled.
+@return YES means enabled. NO not.
+*/
+- (BOOL)isHideNoVideoUsersEnabled;
+
+/*!
+@brief Set whether to enable the option HIDE NON-VIDEO PARTICIPANTS.
+@param enabled YES means enabled. NO not.
+*/
+- (void)setHideNoVideoUsersEnabled:(BOOL)enabled;
+
+/*
+@brief Enable or disable to hide the userself's view. isHidden TRUE indicates to enable to hide the userself's view.
+*/
+- (void)enableHideSelfView:(BOOL)isHidden;
+
+/*!
+ @brief Get the flag to enable/disable to hide userself's view.
+*/
+- (BOOL)isHideSelfViewEnabled;
+
+/*!
+ @brief Set the visibility of request local recording privilege dialog when attendee request local recording privilege. Default is displaying.
+ @param bHide YES indicates to display the tab. No not.
+*/
+- (void)hideRequestRecordPrivilegeDialog:(BOOL)bHide;
+
+/*!
+ @brief Get the flag of auto enter Picture-in-Picture Mode for video calls.
+ */
+- (BOOL)videoCallPictureInPictureEnabled;
+
+/*!
+ @brief Set the flag of auto enter Picture-in-Picture Mode for video calls.
+ @param enable YES to follow Zoom VoIP Meeting Picture-in-Picture logic.
+ @warning only works in ZoomUI.
+ */
+- (void)enableVideoCallPictureInPicture:(BOOL)enable;
 @end

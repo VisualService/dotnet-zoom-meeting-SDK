@@ -72,7 +72,7 @@
  @warning 6.you will receive callback 'onVerifySMSVerificationCodeResultNotification:' for the verify result.
  */
 @interface MobileRTCSMSService : NSObject
-@property (nullable, assign, nonatomic) id<MobileRTCSMSServiceDelegate> delegate;
+@property (weak, nonatomic) id<MobileRTCSMSServiceDelegate> _Nullable delegate;
 
 /*!
  @brief enable, pass YES for using the auth real name service. the call back function will called when need.(Judged by sdk logic)

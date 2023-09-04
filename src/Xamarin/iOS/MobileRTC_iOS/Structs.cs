@@ -23,7 +23,7 @@ namespace Zoomios
     public enum MobileRTCLoginFailReason : ulong
     {
         Success,
-        EmailLoginDiable,
+        EmailLoginDisable,
         UserNotExist,
         WrongPassword,
         AccountLocked,
@@ -245,11 +245,42 @@ namespace Zoomios
     }
 
     [Native]
-    public enum MobileRTCVideoError : ulong
+    public enum MobileRTCSDKError : ulong
     {
         Success = 0,
-        CameraPermissionDenied = 1,
-        CannotUnmuteMyVideo = 3
+        NoImpl,
+        WrongUsage,
+        InvalidParameter,
+        ModuleLoadFailed,
+        MemoryFailed,
+        ServiceFailed,
+        Uninitialize,
+        Unauthentication,
+        NoRecordingInprocess,
+        TranscoderNoFound,
+        VideoNotReady,
+        NoPermission,
+        Unknown,
+        OtherSdkInstanceRunning,
+        InternalError,
+        NoAudiodeviceIsFound,
+        NoVideoDeviceIsFound,
+        TooFrequentCall,
+        FailAssignUserPrivilege,
+        MeetingDontSupportFeature,
+        MeetingNotShareSender,
+        MeetingYouHaveNoShare,
+        MeetingViewtypeParameterIsWrong,
+        MeetingAnnotationIsOff,
+        SettingOsDontSupport,
+        EmailLoginIsDisabled,
+        HardwareNotMeetForVb,
+        NeedUserConfirmRecordDisclaimer,
+        NoShareData,
+        ShareCannotSubscribeMyself,
+        NotInMeeting,
+        MeetingCallOutFailed,
+        NotSupportMultiStreamVideoUser
     }
 
     [Native]
@@ -442,7 +473,13 @@ namespace Zoomios
     [Native]
     public enum MobileRTCVideoRawDataFormat : ulong
     {
-        MobileRTCVideoRawDataFormatI420 = 1,
+        MobileRTCVideoRawDataFormatI420 = 1
+    }
+
+    [Native]
+    public enum MobileRTCFrameDataFormat : ulong
+    {
+        MobileRTCFrameDataFormat_I420 = 1,
         Limit
     }
 
@@ -477,7 +514,9 @@ namespace Zoomios
         Audio_Module_Not_Ready,
         Audio_Module_Error,
         No_Audio_Data,
-        Send_Too_Frequently
+        Send_Too_Frequently,
+        Can_Not_Change_Virtual_Device,
+        Not_Join_Audio
     }
 
     [Native]
@@ -564,6 +603,15 @@ namespace Zoomios
     }
 
     [Native]
+    public enum MobileRTCBOPreAssignBODataStatus : ulong
+    {
+        None = 0,
+        Downloading,
+        Download_Ok,
+        Download_Fail
+    }
+
+    [Native]
     public enum MobileRTCDirectShareStatus : ulong
     {
         Unknown = 0,
@@ -588,6 +636,17 @@ namespace Zoomios
         Joy,
         Openmouth,
         Tada
+    }
+
+    [Native]
+    public enum MobileRTCEmojiFeedbackType : ulong
+    {
+        None,
+        Yes,
+        No,
+        SpeedUp,
+        SlowDown,
+        Away
     }
 
     [Native]
@@ -641,7 +700,9 @@ namespace Zoomios
         Other_Share_End,
         View_Other_Sharing,
         Pause,
-        Resume
+        Resume,
+        OtherPureAudioShareStart,
+        OtherPureAudioShareStop
     }
 
     [Native]
@@ -701,6 +762,116 @@ namespace Zoomios
         Delete = 3,
         Complete = 4,
         NotSupported = 5
+    }
+
+    [Native]
+    public enum MobileRTCSignInterpretationStatus : long
+    {
+        Initial,
+        Started,
+        Stopped
+    }
+
+    [Native]
+    public enum MobileRTCNotificationServiceStatus : long
+    {
+        None = 0,
+        Starting,
+        Started,
+        StartFailed,
+        Closed
+    }
+
+    [Native]
+    public enum MobileRTCInMeetingSupportAudioType : long
+    {
+        None = 0,
+        Voip = 1,
+        Telephone = 1L << 1
+    }
+
+    [Native]
+    public enum MobileRTCAttendeeViewMode : long
+    {
+        None,
+        FollowHost,
+        Speaker,
+        Gallery,
+        Sharing_Standard,
+        Sharing_SidebysideSpeaker,
+        Sharing_SidebysideGallery
+    }
+
+    [Native]
+    public enum MobileRTCLocalRecordingRequestPrivilegeStatus : ulong
+    {
+        None,
+        AllowRequest,
+        AutoGrant,
+        AutoDeny
+    }
+
+    [Native]
+    public enum MobileRTCReminderType : ulong
+    {
+        Login,
+        StartOrJoinMeeting,
+        RecordReminder,
+        RecordDisclaimer,
+        LiveStreamDisclaimer,
+        ArchiveDisclaimer,
+        WebinarAsPanelistJoin,
+        TermsOfService,
+        SmartSummaryDisclaimer
+    }
+
+    [Native]
+    public enum MobileRTCInviteMeetingStatus : long
+    {
+        Accepted,
+        Declined,
+        Canceled,
+        Timeout
+    }
+
+    [Native]
+    public enum MobileRTCPresenceStatus : long
+    {
+        None,
+        Available,
+        UnAvailable,
+        InMeeting,
+        Busy,
+        DoNotDisturb,
+        Away,
+        PhoneCall,
+        Presenting,
+        Calendar,
+        OutOfOffice
+    }
+
+    [Native]
+    public enum MobileRTCAutoFramingMode : long
+    {
+        None,
+        CenterCoordinates,
+        FaceRecognition
+    }
+
+    [Native]
+    public enum MobileRTCFaceRecognitionFailStrategy : long
+    {
+        None,
+        Remain,
+        UsingCenterCoordinates,
+        UsingOriginalVideo
+    }
+
+    [Native]
+    public enum MobileRTCAudioChannel : long
+    {
+        Mono,
+        Stereo
     }
 
     [Native]
@@ -776,24 +947,63 @@ namespace Zoomios
         PanAndScan = 3
     }
 
-    public enum MobileRTCAnnoTool : uint
+    [Native]
+    public enum MobileRTCAnnoTool : ulong
     {
-        Whiteboard = 1,
-        Spotlight = 2,
-        Pen = 3,
-        Highligher = 4,
-        Line = 8,
-        Arrow = 9,
-        Arrow2 = 10,
-        Rectangle = 11,
-        Ellipse = 12,
-        Text = 13,
-        Eraser = 15
+        None = 0,
+        Pen,
+        HighLighter,
+        AutoLine,
+        AutoRectangle,
+        AutoEllipse,
+        AutoArrow,
+        AutoArrow2,
+        AutoRectangleFill,
+        AutoEllipseFill,
+        SpotLight,
+        Arrow,
+        Eraser,
+        Picker,
+        AutoRectangleSemiFill,
+        AutoEllipseSemiFill,
+        AutoDoubleArrow,
+        AutoDiamond,
+        AutoStampArrow,
+        AutoStampCheck,
+        AutoStampX,
+        AutoStampStar,
+        AutoStampHeart,
+        AutoStampQm
+    }
+
+    [Native]
+    public enum MobileRTCAnnoClearType : ulong
+    {
+        All = 0,
+        My,
+        Others
     }
 
     public enum MobileRTCRemoteControlInputType : uint
     {
         Del,
         Return
+    }
+
+    [Native]
+    public enum MobileRTCWaitingRoomLayoutType : ulong
+    {
+        Default = 0,
+        Logo,
+        Video
+    }
+
+    [Native]
+    public enum MobileRTCCustomWaitingRoomDataStatus : ulong
+    {
+        Init,
+        Downloading,
+        Download_OK,
+        Download_Fail
     }
 }

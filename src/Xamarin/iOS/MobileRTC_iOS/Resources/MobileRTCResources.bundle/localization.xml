@@ -11,6 +11,7 @@
         <ID7 text="Soft Reveille"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Beep"></ID9>
+        <ID10 text="Silent"></ID10>
     </English>
     <ChineseSimplified>
         <ID0 text="默认"></ID0>
@@ -23,6 +24,7 @@
         <ID7 text="柔和版起床号"></ID7>
         <ID8 text="弗雷德"></ID8>
         <ID9 text="蜂鸣音"></ID9>
+        <ID10 text="静音"></ID10>
     </ChineseSimplified>
     <ChineseTraditional>
         <ID0 text="預設"></ID0>
@@ -35,6 +37,7 @@
         <ID7 text="輕柔起床號"></ID7>
         <ID8 text="佛瑞德"></ID8>
         <ID9 text="嗶聲"></ID9>
+        <ID10 text="靜音"></ID10>
     </ChineseTraditional>
     <Italian>
         <ID0 text="Predefinito"></ID0>
@@ -47,6 +50,7 @@
         <ID7 text="Soft Reveille"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Bip"></ID9>
+        <ID10 text="Disattiva audio"></ID10>
     </Italian>
     <French>
         <ID0 text="Par défaut"></ID0>
@@ -59,6 +63,7 @@
         <ID7 text="Doux réveil"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Signal sonore"></ID9>
+        <ID10 text="Silencieux"></ID10>
     </French>
     <German>
         <ID0 text="Standard"></ID0>
@@ -71,6 +76,7 @@
         <ID7 text="Sanfte Wehmut"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Signalton"></ID9>
+        <ID10 text="Lautlos"></ID10>
     </German>
     <Spanish>
         <ID0 text="Predeterminado"></ID0>
@@ -83,6 +89,7 @@
         <ID7 text="Toque de diana suave"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Sonido"></ID9>
+        <ID10 text="Silencioso"></ID10>
     </Spanish>
     <Japanese>
         <ID0 text="デフォルト"></ID0>
@@ -95,6 +102,7 @@
         <ID7 text="穏やかな目覚め"></ID7>
         <ID8 text="フレッド"></ID8>
         <ID9 text="ビープ"></ID9>
+        <ID10 text="サイレント"></ID10>
     </Japanese>
     <Portuguese>
         <ID0 text="Padrão"></ID0>
@@ -107,6 +115,7 @@
         <ID7 text="Reveille macia"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Bipe"></ID9>
+        <ID10 text="Silencioso"></ID10>
     </Portuguese>
     <Russian>
         <ID0 text="По умолчанию"></ID0>
@@ -119,6 +128,7 @@
         <ID7 text="Нежное пробуждение"></ID7>
         <ID8 text="Фред"></ID8>
         <ID9 text="Сигнал"></ID9>
+        <ID10 text="Беззвучный"></ID10>
     </Russian>
     <Korean>
         <ID0 text="기본"></ID0>
@@ -131,6 +141,7 @@
         <ID7 text="부드러운 기상나팔"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="경고음"></ID9>
+        <ID10 text="무음"></ID10>
     </Korean>
     <Vietnamese>
         <ID0 text="Mặc định"></ID0>
@@ -143,6 +154,7 @@
         <ID7 text="Đánh thức nhẹ nhàng"></ID7>
         <ID8 text="Yên ả"></ID8>
         <ID9 text="Beep"></ID9>
+        <ID10 text="Im lặng"></ID10>
     </Vietnamese>
     <Polish>
         <ID0 text="Domyślny"></ID0>
@@ -155,6 +167,7 @@
         <ID7 text="Delikatne przebudzenie"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Sygnał dźwiękowy"></ID9>
+        <ID10 text="Tryb wyciszony"></ID10>
     </Polish>
     <Turkish>
         <ID0 text="Varsayılan"></ID0>
@@ -167,6 +180,7 @@
         <ID7 text="Yumuşak Bir Çağrı"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Bip"></ID9>
+        <ID10 text="Sessiz"></ID10>
     </Turkish>
     <Indonesian>
         <ID0 text="Default"></ID0>
@@ -179,5 +193,19 @@
         <ID7 text="Reveille Lembut"></ID7>
         <ID8 text="Fred"></ID8>
         <ID9 text="Bip"></ID9>
+        <ID10 text="Senyap"></ID10>
     </Indonesian>
+    <Dutch>
+        <ID0 text="Standaard"></ID0>
+        <ID1 text="Golven"></ID1>
+        <ID2 text="Discotheek"></ID2>
+        <ID3 text="Ontwaken"></ID3>
+        <ID4 text="Lentevreugde"></ID4>
+        <ID5 text="In het riet"></ID5>
+        <ID6 text="Middagzon"></ID6>
+        <ID7 text="Zacht ontwaken"></ID7>
+        <ID8 text="Fred"></ID8>
+        <ID9 text="Pieptoon"></ID9>
+        <ID10 text="Stil"></ID10>
+    </Dutch>
 </language>

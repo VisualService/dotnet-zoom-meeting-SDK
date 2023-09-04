@@ -12,7 +12,7 @@
     <AssemblyName>Zoomios</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackageId>VisualService.Xamarin.iOS.ZoomSDK</PackageId>
-    <Version>5.11.10.4556</Version>
+    <Version>5.15.7.9685</Version>
     <Authors>Michele Di Maria</Authors>
     <Copyright>Copyright 2022</Copyright>
     <Owners>Michele Di Maria, NT2 - Nuove Tecnologie</Owners>
@@ -234,15 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\MobileRTCResources.bundle\ZPParticipantViewController.nib" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Assets.car" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\Info.plist" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\MobileRTCResources.bundle\zdcRes.bundle\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <NativeReference Include="Native References/MobileRTC.framework">
