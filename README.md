@@ -10,8 +10,11 @@ dotnet MAUI support for Android and iOS is a work in progress on the "Mauify" br
 This library started life as a Xamarin Forms binding. Legacy support is maintained up to the following versions of the zoom meeting sdk.
 If anyone needs Xamarin support for greater versions, PRs will still be accepted up to the end of life date of XF.
 
-* Android: Meeting SDK Version: 5.15.10.1778 - [Latest Nuget](https://www.nuget.org/packages/VisualService.Xamarin.Android.ZoomSDK/5.15.10.15778)
+* Android: Meeting SDK Version: 5.15.10.1778 [![AndroidNuGetShield]][AndroidNuGetLink] 
  
+[AndroidNuGetLink]: https://www.nuget.org/packages/VisualService.Xamarin.Android.ZoomSDK/5.15.10.15778
+[AndroidNuGetShield]: https://img.shields.io/nuget/v/VisualService.Xamarin.Android.ZoomSDK.svg
+
 * iOS: 
  	* MobileRTC Version: 5.15.7.9685 
  	* MobileRTC Screen Share Version: Not implemented yet, PRs are welcome! 
