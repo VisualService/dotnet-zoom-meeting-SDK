@@ -1,0 +1,8 @@
+To extract the classes from the framework file:
+
+sharpie bind --output=Result --namespace=Zoomios --sdk=iphoneos15.5 -framework /Users/michele/Desktop/MobileRTC.xcframework/ios-arm64_armv7/MobileRTC.framework
+
+Some hints to remember how to fix the API definitions, you should replace the following:
+	NativeHandle => becomes System.IntPtr
+	sbyte* => becomes unsafe IntPtr
+	Where the error is "cannot declare instance members in a static class" you should replace { get; } => becomes a function "();"

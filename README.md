@@ -18,14 +18,14 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
  
 ## SAMPLE APP
 
-Uses mobile.buildtools for the zoom app key and secret. You need a file called appsettings.json at the root of your repo
+Uses mobile.buildtools for the zoom jwt. You need a file called appsettings.json at the root of your repo
+Refer to the Zoom Meeting SDK documentation on how to create a jwt
 
 ```json
 {
-    "ZOOM_APP_KEY":"YOUR_KEY_HERE",
-    "ZOOM_APP_SECRET":"etc",
-    "ZOOM_MEETING_NUMBER":"etc",
-    "ZOOM_MEETING_PASSWORD":"etc"
+    "ZOOM_JWT":"YOUR_JWT_HERE",
+    "ZOOM_MEETING_NUMBER":"***REMOVED***",
+    "ZOOM_MEETING_PASSWORD":"***REMOVED***"
 }
 ```
 
@@ -52,8 +52,7 @@ Uses mobile.buildtools for the zoom app key and secret. You need a file called a
             zoomSDK = ZoomSDK.Instance;
             var zoomInitParams = new ZoomSDKInitParams
             {
-                AppKey = appKey,
-                AppSecret = appSecret,
+                JwtToken = jwt,
             };
             zoomSDK.Initialize(Android.App.Application.Context, this, zoomInitParams);
 ```
@@ -100,7 +99,7 @@ Uses mobile.buildtools for the zoom app key and secret. You need a file called a
 4. In the IMobileRTCMeetingServiceDelegate class you should initialize the SDK as follows: 
  
  ```
-        public void InitZoomLib(string appKey, string appSecret)
+        public void InitZoomLib(string jwtToken)
         {
             bool InitResult;
 
