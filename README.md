@@ -16,6 +16,19 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
  	* MobileRTC Version: 5.15.7.9685 
  	* MobileRTC Screen Share Version: Not implemented yet, PRs are welcome! 
  
+## SAMPLE APP
+
+Uses mobile.buildtools for the zoom app key and secret. You need a file called appsettings.json at the root of your repo
+
+```json
+{
+    "ZOOM_APP_KEY":"YOUR_KEY_HERE",
+    "ZOOM_APP_SECRET":"etc",
+    "ZOOM_MEETING_NUMBER":"etc",
+    "ZOOM_MEETING_PASSWORD":"etc"
+}
+```
+
 ## Android Gotchas
 * Requires your android app to compile for Android 12
 
