@@ -18,14 +18,14 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
  
 ## SAMPLE APP
 
-Uses the awesome [mobile.buildtools](https://mobilebuildtools.com/config/appsettings/configuration/) for the zoom jwt. You need a file called appsettings.json at the root of your repo
+Uses the awesome [mobile.buildtools](https://mobilebuildtools.com/config/appsettings/configuration/) to load in secret values without having to commit them to source control.You need a file called appsettings.json at the root of your repo
 Refer to the Zoom Meeting SDK documentation on how to create a jwt
 
 ```json
 {
     "ZOOM_JWT":"YOUR_JWT_HERE",
-    "ZOOM_MEETING_NUMBER":"***REMOVED***",
-    "ZOOM_MEETING_PASSWORD":"***REMOVED***"
+    "ZOOM_MEETING_NUMBER":"YOUR_MEETING_NO_HERE",
+    "ZOOM_MEETING_PASSWORD":"YOUR_PW_HERE"
 }
 ```
 
