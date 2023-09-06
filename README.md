@@ -1,11 +1,9 @@
 # MAUI
 
-dotnet MAUI support for Android and iOS is a work in progress. If you want to help, current status is below:
+dotnet MAUI support for Android and iOS is a work in progress on the "Mauify" branch.
 
 - [ ] Droid: Project started. Build issues remain around resource files.
 - [ ] iOS: Not started
-- [ ] MACOSX: Not started
-- [ ] Windows: Not started
 
 # Xamarin.Forms
 
