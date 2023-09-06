@@ -19,17 +19,17 @@
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackageId>VisualService.Xamarin.Android.ZoomSDK</PackageId>
-    <Version>5.12.2.9109</Version>
+    <Version>5.15.10.15778</Version>
     <PackageOutputPath>bin/$(Configuration)</PackageOutputPath>
-    <Authors>Adam Diament</Authors>
+    <Authors>Visual Service, Adam Diament, Tim Barry-Woods</Authors>
     <Copyright>Copyright 2022</Copyright>
-    <Owners>Adam Diament, Visual Service</Owners>
+    <Owners>Visual Service, Adam Diament, Tim Barry-Woods</Owners>
     <Company>Visual Service</Company>
-    <PackageProjectUrl>https://github.com/VisualService/Xamarin.ZoomSDKBinding</PackageProjectUrl>
-    <Summary>VisualService.Xamarin.Android.ZoomSDK binding</Summary>
+    <PackageProjectUrl>https://github.com/VisualService/dotnet-zoom-meeting-SDK</PackageProjectUrl>
+    <Summary>VisualService.Xamarin.Android.Zoom Meeting SDK binding</Summary>
     <PackageTags>Xamarin.Android, Zoom</PackageTags>
     <Title>Xamarin.Android.Zoom</Title>
-    <Description>Zoom Android SDK binding for Xamarin. AndroidX version of the SDK</Description>
+    <Description>Zoom Meeting SDK binding for Xamarin Android</Description>
     <IsPackable>True</IsPackable>
     <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
