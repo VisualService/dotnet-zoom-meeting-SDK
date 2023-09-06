@@ -10,7 +10,7 @@ dotnet MAUI support for Android and iOS is a work in progress on the "Mauify" br
 This library started life as a Xamarin Forms binding. Legacy support is maintained up to the following versions of the zoom meeting sdk.
 If anyone needs Xamarin support for greater versions, PRs will still be accepted up to the end of life date of XF.
 
-* Android: Meeting SDK Version: 5.12.2.9109
+* Android: Meeting SDK Version: 5.15.10.1778
  
 * iOS: 
  	* MobileRTC Version: 5.15.7.9685 
