@@ -130,6 +130,12 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\iOS\MobileRTC_iOS\MobileRTC_iOS.csproj">
+      <Project>{ca661e6b-bcdf-4ec2-8e6c-045702bd2ea0}</Project>
+      <Name>MobileRTC_iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
     <ProjectReference Include="..\ZoomSDKSampleApp\ZoomSDKSampleApp.csproj">
       <Project>{AA0EE7FA-AE09-440D-A0B2-F254D6EEA592}</Project>
       <Name>ZoomSDKSampleApp</Name>
