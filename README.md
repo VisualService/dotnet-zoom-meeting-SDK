@@ -18,7 +18,7 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
  
 ## SAMPLE APP
 
-Uses mobile.buildtools for the zoom jwt. You need a file called appsettings.json at the root of your repo
+Uses the awesome [mobile.buildtools](https://mobilebuildtools.com/config/appsettings/configuration/) for the zoom jwt. You need a file called appsettings.json at the root of your repo
 Refer to the Zoom Meeting SDK documentation on how to create a jwt
 
 ```json
