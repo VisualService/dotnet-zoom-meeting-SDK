@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileRTC.MAUI", "..\Mobile
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "..\..\SampleApp\SampleApp.csproj", "{C13092C7-57D7-45EB-A8D0-92D18CFC0044}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.Android", "..\Lottie.Android\Lottie.Android.csproj", "{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

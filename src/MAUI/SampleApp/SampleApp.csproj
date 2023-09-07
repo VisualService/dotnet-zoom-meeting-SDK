@@ -57,7 +57,6 @@
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
     <PackageReference Include="Naxam.EventBus.Droid" Version="3.0.0-pre1"/>
-    <PackageReference Include="SkiaSharp.Skottie" Version="2.88.6-preview.1.2" />
     <PackageReference Include="XAB.FlexboxLayout" Version="3.0.0.2" />
     <PackageReference Include="Xam.Plugins.Android.ExoPlayer" Version="2.19.1" />
     <PackageReference Include="Xam.Plugins.Android.ExoPlayer.UI" Version="2.19.1" />

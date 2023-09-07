@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0-android</TargetFramework>
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
@@ -6,8 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-        <PackageReference Include="Naxam.EventBus.Droid" Version="3.0.0-pre1"/>
-        <PackageReference Include="SkiaSharp.Skottie" Version="2.88.6-preview.1.2" />
+        <PackageReference Include="Naxam.EventBus.Droid" Version="3.0.0-pre1" />
         <PackageReference Include="XAB.FlexboxLayout" Version="3.0.0.2" />
         <PackageReference Include="Xam.Plugins.Android.ExoPlayer" Version="2.19.1" />
         <PackageReference Include="Xam.Plugins.Android.ExoPlayer.UI" Version="2.19.1" />
@@ -24,5 +23,8 @@
         <PackageReference Include="Xamarin.AndroidX.Window.WindowJava" Version="1.1.0.1" />
         <PackageReference Include="Xamarin.Google.Android.Material" Version="1.9.0.2" />
         <PackageReference Include="Xamarin.Google.Crypto.Tink.Android" Version="1.10.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" />
   </ItemGroup>
 </Project>
