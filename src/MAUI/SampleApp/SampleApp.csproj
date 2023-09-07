@@ -54,6 +54,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Android\Lottie.Android\Lottie.Android.csproj" />
 	  <ProjectReference Include="..\Android\MobileRTC.MAUI\MobileRTC.MAUI.csproj" />
+	  <ProjectReference Include="..\Android\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj" />
 	</ItemGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
