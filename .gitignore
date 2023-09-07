@@ -404,3 +404,5 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 samples/ZoomDemo/Helpers/Constants.cs
+bfg-1.14.0.jar
+passwords.txt
