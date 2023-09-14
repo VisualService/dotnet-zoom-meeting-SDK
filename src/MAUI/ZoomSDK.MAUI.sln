@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomCommonLib.MAUI", "ZoomCommonLib.MAUI.csproj", "{1834809D-B157-414F-B7BD-EC330751C480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomCommonLib.MAUI", "Android\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj", "{1834809D-B157-414F-B7BD-EC330751C480}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileRTC.MAUI", "..\MobileRTC.MAUI\MobileRTC.MAUI.csproj", "{086A4C06-F7A4-4DCB-86BC-18BE655DE9E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileRTC.MAUI", "Android\MobileRTC.MAUI\MobileRTC.MAUI.csproj", "{086A4C06-F7A4-4DCB-86BC-18BE655DE9E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "..\..\SampleApp\SampleApp.csproj", "{C13092C7-57D7-45EB-A8D0-92D18CFC0044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\SampleApp.csproj", "{C13092C7-57D7-45EB-A8D0-92D18CFC0044}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.Android", "..\Lottie.Android\Lottie.Android.csproj", "{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.Android", "Android\Lottie.Android\Lottie.Android.csproj", "{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1F2E221-105C-4C34-AC3D-4AADC0ED46D1}"
+	ProjectSection(SolutionItems) = preProject
+		buildtools.json = buildtools.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
