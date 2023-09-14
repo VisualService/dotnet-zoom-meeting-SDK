@@ -49,6 +49,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Mobile.BuildTools" Version="2.0.245" />
 	</ItemGroup>
 
 	<ItemGroup>

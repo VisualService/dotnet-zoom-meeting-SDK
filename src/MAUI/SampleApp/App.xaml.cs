@@ -1,5 +1,5 @@
 ﻿using SampleApp.Platforms.Android;
-
+using SampleApp.Helpers;
 namespace SampleApp;
 
 public partial class App : Application
@@ -9,19 +9,20 @@ public partial class App : Application
         InitializeComponent();
 
         MainPage = new AppShell();
+
+#if ANDROID
+        ZoomSDKService = new DroidZoomSDKService();
+        #elif IOS
+       //todo implement iOS
+#endif
+        
     }
 
     public IZoomSDKService ZoomSDKService { get; private set; }
-    protected async override void OnStart()
+
+    protected override void OnStart()
     {
-        ZoomSDKService = new DroidZoomSDKService();
-
-        if (ZoomSDKService != null)
-        {
-            var initResult =   ZoomSDKService.InitZoomLib("INSERT_JWT_HERE");
-
-        }
-           
+        ZoomSDKService.InitZoomLib(AppSettings.ZOOM_JWT);
     }
             
 }

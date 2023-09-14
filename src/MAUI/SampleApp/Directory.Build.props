@@ -1,0 +1,6 @@
+﻿<Project>
+<Target Name="MBTHack"
+        BeforeTargets="Secrets"
+        DependsOnTargets="MobileBuildToolsInit">
+</Target>
+</Project>
