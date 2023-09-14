@@ -19,9 +19,9 @@ If anyone needs Xamarin support for greater versions, PRs will still be accepted
  	* MobileRTC Version: 5.15.7.9685 
  	* MobileRTC Screen Share Version: Not implemented yet, PRs are welcome! 
  
-## SAMPLE APP
+## SAMPLE APP (For both MAUI and XF)
 
-Uses the awesome [mobile.buildtools](https://mobilebuildtools.com/config/appsettings/configuration/) to load in secret values without having to commit them to source control.You need a file called appsettings.json at the root of your repo
+Uses the awesome [mobile.buildtools](https://mobilebuildtools.com/config/appsettings/configuration/) to load in secret values without having to commit them to source control.You need a file called appsettings.json at the root of your repo (in the sample app, at the route of either the XF or MAUI folder)
 Refer to the Zoom Meeting SDK documentation on how to create a jwt
 
 ```json
