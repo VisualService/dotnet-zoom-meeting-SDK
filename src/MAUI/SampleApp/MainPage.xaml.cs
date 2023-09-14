@@ -9,7 +9,7 @@
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void OnCounterClicked(object sender, EventArgs e)
         {
             count++;
 
@@ -19,6 +19,15 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+
+            await ((App)Application.Current).ZoomSDKService.JoinMeeting("INSERT_MEETING_ID_HERE","INSERT_MEETING_PW_HERE");
+
         }
+    }
+
+    public interface IZoomSDKService
+    {
+        Task<bool> InitZoomLib(string token);
+        Task JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo");
     }
 }

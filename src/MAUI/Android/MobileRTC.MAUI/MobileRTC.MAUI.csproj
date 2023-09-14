@@ -33,5 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" />
+    <ProjectReference Include="..\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj" />
   </ItemGroup>
 </Project>
