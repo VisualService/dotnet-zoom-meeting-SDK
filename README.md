@@ -2,7 +2,7 @@
 
 dotnet MAUI support for Android and iOS is a work in progress. Current status:
 
-- [x] Android - supported - no nuget package yet but it is coming soon. In the meantime you can build MobileRTC.Droid and link to the dll.
+- [x] Android - supported - no nuget package yet but it is coming soon. In the meantime you can build the binding project in src\MAUI\Android\MobileRTC.MAUI, and link to the dll.
 - [ ] iOS: Not yet supported, in progress.
 
 # Xamarin.Forms
