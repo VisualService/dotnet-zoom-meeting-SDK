@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomCommonLib.MAUI", "Android\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj", "{1834809D-B157-414F-B7BD-EC330751C480}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileRTC.MAUI", "Android\MobileRTC.MAUI\MobileRTC.MAUI.csproj", "{086A4C06-F7A4-4DCB-86BC-18BE655DE9E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\SampleApp.csproj", "{C13092C7-57D7-45EB-A8D0-92D18CFC0044}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.Android", "Android\Lottie.Android\Lottie.Android.csproj", "{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1F2E221-105C-4C34-AC3D-4AADC0ED46D1}"
+	ProjectSection(SolutionItems) = preProject
+		buildtools.json = buildtools.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1834809D-B157-414F-B7BD-EC330751C480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1834809D-B157-414F-B7BD-EC330751C480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1834809D-B157-414F-B7BD-EC330751C480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1834809D-B157-414F-B7BD-EC330751C480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086A4C06-F7A4-4DCB-86BC-18BE655DE9E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086A4C06-F7A4-4DCB-86BC-18BE655DE9E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086A4C06-F7A4-4DCB-86BC-18BE655DE9E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086A4C06-F7A4-4DCB-86BC-18BE655DE9E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13092C7-57D7-45EB-A8D0-92D18CFC0044}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819C96ED-06C7-47B7-A5B7-C5AEE52D5BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {424AF50D-4821-4640-9865-5D36CC772D34}
+	EndGlobalSection
+EndGlobal

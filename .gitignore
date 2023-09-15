@@ -406,3 +406,13 @@ ASALocalRun/
 samples/ZoomDemo/Helpers/Constants.cs
 bfg-1.14.0.jar
 passwords.txt
+
+
+# Mobile.BuildTools
+appsettings.json
+appsettings.*.json
+
+
+# Mobile.BuildTools
+appsettings.json
+appsettings.*.json
