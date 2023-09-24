@@ -2,7 +2,8 @@
 
 dotnet MAUI support for Android and iOS is a work in progress. Current status:
 
-- [x] Android - supported - no nuget package yet but it is coming soon. In the meantime you can build the binding project in src\MAUI\Android\MobileRTC.MAUI, and link to the dll.
+* Android: Meeting SDK Version: 5.15.10.1778 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
+
 - [ ] iOS: Not yet supported, in progress.
 
 # Xamarin.Forms
@@ -10,10 +11,12 @@ dotnet MAUI support for Android and iOS is a work in progress. Current status:
 This library started life as a Xamarin Forms binding. Legacy support is maintained up to the following versions of the zoom meeting sdk.
 If anyone needs Xamarin support for greater versions, PRs will still be accepted up to the end of life date of XF.
 
-* Android: Meeting SDK Version: 5.15.10.1778 [![AndroidNuGetShield]][AndroidNuGetLink] 
+* Android: Meeting SDK Version: 5.15.10.1778 [![AndroidXFNugetShield]][AndroidXFNugetLink] 
  
-[AndroidNuGetLink]: https://www.nuget.org/packages/VisualService.Xamarin.Android.ZoomSDK/5.15.10.15778
-[AndroidNuGetShield]: https://img.shields.io/nuget/v/VisualService.Xamarin.Android.ZoomSDK.svg
+[AndroidXFNugetLink]: https://www.nuget.org/packages/VisualService.Xamarin.Android.ZoomSDK/5.15.10.15778
+[AndroidXFNugetShield]: https://img.shields.io/nuget/v/VisualService.Xamarin.Android.ZoomSDK.svg
+[AndroidMauiNugetLink]: https://www.nuget.org/packages/zoommeetingsdk.dotnet.android/5.15.10.15778
+[AndroidMauiNugetShield]: https://img.shields.io/nuget/v/zoommeetingsdk.dotnet.android.svg
 
 * iOS: 
  	* MobileRTC Version: 5.15.7.9685 
@@ -238,6 +241,11 @@ There are hundreds of resource files, so I am including a replace utility consol
 1. Change the Version node in the file MobileRTC_Droid.csproj to the latest version
 2. Build in release mode
 3. The nuget package will appear in the bin/Release folder
+
+## Acknowledgements
+
+The Lottie dependency is adapted from https://github.com/Baseflow/LottieXamarin
+
 
 ## History
 

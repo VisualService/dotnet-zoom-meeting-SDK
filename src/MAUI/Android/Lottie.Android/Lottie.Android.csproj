@@ -4,17 +4,13 @@
     <AssemblyName>Lottie.Android</AssemblyName>
     <RootNamespace>Lottie.Android</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
-    <PackageId>Com.Airbnb.Android.Lottie</PackageId>
     <EnableDefaultItems>false</EnableDefaultItems>
-    <Version>4.2.3</Version>
-    
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <_EnableInterfaceMembers>true</_EnableInterfaceMembers>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidDexTool>d8</AndroidDexTool>
     <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
-  
   <ItemGroup>
     <PackageReference Include="Square.OkIO" Version="1.17.4" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
@@ -26,5 +22,4 @@
     <None Include="readme.txt" pack="true" PackagePath="." />
     <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
-  
 </Project>

@@ -4,8 +4,19 @@
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>zoommeetingsdk.dotnet.android</PackageId>
+    <Version>5.15.10.15778</Version>
+    <Title>ZoomMeetingSDK Binding for MAUI Android</Title>
+    <Authors>Visual Service, Adam Diament</Authors>
+    <PackageProjectUrl>https://github.com/VisualService/dotnet-zoom-meeting-SDK</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>all</IncludeAssets>
+      <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
+    </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.Security.SecurityCrypto" Version="1.1.0.1-alpha06" />
     <PackageReference Include="Xamarin.Google.Crypto.Tink.Android" Version="1.10.0" />
     <PackageReference Include="Xam.Plugins.Android.ExoPlayer.Core" Version="2.19.1" />
@@ -21,7 +32,6 @@
     <PackageReference Include="Xamarin.Android.Glide" Version="4.15.1.2" />
     <PackageReference Include="Naxam.EventBus.Droid" Version="3.0.0-pre1" />
     <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.1" />
-    <!--LOTTIE GOES HERE IN BUILD.GRADLE   -->
     <PackageReference Include="Xamarin.AndroidX.Window" Version="1.1.0.1" />
     <PackageReference Include="Xamarin.AndroidX.Window.WindowJava" Version="1.1.0.1" />
     <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.0.1" />
@@ -32,7 +42,21 @@
     <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" />
-    <ProjectReference Include="..\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj" />
+    <!-- Include the .aar files in the NuGet package output, placing them in the same directory as other package files -->
+    <None Pack="true" PackagePath="\lib\net7.0-android33.0" Include="../ZoomCommonLib.MAUI/commonlib.5.15.10.15778.aar" />
+    <None Pack="true" PackagePath="\lib\net7.0-android33.0" Include="../Lottie.Android/Jars/lottie-4.2.2.aar" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj" PrivateAssets="all" />
+  </ItemGroup>
+<!-- The next two sections ensure that the dlls of the referenced projects are compiled into the nuget package -->
+  <!-- <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target> -->
 </Project>
