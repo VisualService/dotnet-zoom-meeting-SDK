@@ -101,7 +101,7 @@
       <Name>MobileRTC_Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Droid\ZoomCommonLib\ZoomCommonLib.csproj">
-      <Project>{8f896c4f-56fe-4237-9373-d47f564d7065}</Project>
+      <Project>{8F896C4F-56FE-4237-9373-D47F564D7065}</Project>
       <Name>ZoomCommonLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\SampleApp\ZoomSDKSampleApp.csproj">
