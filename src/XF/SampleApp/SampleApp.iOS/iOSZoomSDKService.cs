@@ -28,7 +28,7 @@ namespace ZoomSDKSampleApp.iOS
             }
         }
 
-        public async Task<bool> InitZoomLib(string appKey, string appSecret)
+        public async Task<bool> InitZoomLib(string jwtToken)
         {
             bool InitResult = false; ;
 
@@ -47,8 +47,7 @@ namespace ZoomSDKSampleApp.iOS
                     if (authService != null)
                     {
                         authService.Delegate = new MobileDelegate();   //inherits from MobileRTCAuthDelegate
-                        authService.ClientKey = appKey;
-                        authService.ClientSecret = appSecret;
+                        authService.JwtToken = jwtToken;
                         authService.SdkAuth();
                     }
                     Console.WriteLine($"Mobile RTC Version: {MobileRTC.SharedRTC.MobileRTCVersion()} ");
