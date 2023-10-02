@@ -1,13 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net7.0-ios</TargetFramework>
+        <TargetFrameworks>net7.0-ios</TargetFrameworks>
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
         <IsBindingProject>true</IsBindingProject>
     </PropertyGroup>
+    <ItemGroup>
+        <NativeReference Include="MobileRTC.xcframework">
+            <Kind>Framework</Kind>
+            <Frameworks>Foundation</Frameworks>
+            <ForceLoad>False</ForceLoad>
+            <SmartLink>False</SmartLink>
+        </NativeReference>
+    </ItemGroup>
 
     <ItemGroup>
-        <ObjcBindingApiDefinition Include="ApiDefinition.cs"/>
-        <ObjcBindingCoreSource Include="StructsAndEnums.cs"/>
+        <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+        <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
     </ItemGroup>
 </Project>
