@@ -4,7 +4,7 @@ dotnet MAUI support for Android and iOS is a work in progress. Current status:
 
 * Android: Meeting SDK Version: 5.15.10.1778 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
 
-- [ ] iOS: Not yet supported, in progress.
+* iOS: MobileRTC Version: 5.15.7.9685 
 
 # Xamarin.Forms
 
