@@ -4,7 +4,23 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
         <IsBindingProject>true</IsBindingProject>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <PackageId>ZoomMeetingSDK.DotNet.iOS</PackageId>
+        <Version>5.15.7.9685</Version>
+        <Title>ZoomMeetingSDK Binding for MAUI iOS</Title>
+        <Authors>Visual Service, Tim Barry-Woods</Authors>
+        <PackageProjectUrl>https://github.com/VisualService/dotnet-zoom-meeting-SDK</PackageProjectUrl>
+        <Description>ZoomMeetingSDK Binding for MAUI iOS</Description>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>all</IncludeAssets>
+          <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
+        </PackageReference>
+    </ItemGroup>
+
     <ItemGroup>
         <NativeReference Include="MobileRTC.xcframework">
             <Kind>Framework</Kind>
@@ -13,7 +29,7 @@
             <SmartLink>False</SmartLink>
         </NativeReference>
     </ItemGroup>
-
+    
     <ItemGroup>
         <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
         <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
