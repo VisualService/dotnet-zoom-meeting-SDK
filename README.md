@@ -2,7 +2,9 @@
 
 * Android: Meeting SDK Version: 5.15.10.1778 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
 
-* iOS: MobileRTC Version: 5.15.7.9685 [![iOSMAUINugetShield]][iOSMAUINugetLink] 
+* iOS: MobileRTC Version: 5.15.7.9685 [![iOSMAUINugetShield]][iOSMAUINugetLink]
+
+* The maintainers of this policy will strive to always keep the meeting SDK version above the minimum supported version from Zoom, available here https://developers.zoom.us/docs/meeting-sdk/minimum-version/
 
 # Xamarin.Forms
 
