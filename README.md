@@ -4,7 +4,7 @@
 
 * iOS: MobileRTC Version: 5.15.7.9685 [![iOSMAUINugetShield]][iOSMAUINugetLink]
 
-* The maintainers of this policy will strive to always keep the meeting SDK version above the minimum supported version from Zoom, available here https://developers.zoom.us/docs/meeting-sdk/minimum-version/
+* The maintainers of this repository will strive to always keep the meeting SDK version above the minimum supported version from Zoom, available here https://developers.zoom.us/docs/meeting-sdk/minimum-version/
 
 # Xamarin.Forms
 
