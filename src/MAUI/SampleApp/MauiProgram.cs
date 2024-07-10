@@ -1,25 +1,27 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace SampleApp
+namespace SampleApp;
+
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static IZoomSDKService ZoomSDKService { get; set; }
+    
+    public static MauiApp CreateMauiApp(IZoomSDKService zoomSDKService)
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+        ZoomSDKService = zoomSDKService;
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }

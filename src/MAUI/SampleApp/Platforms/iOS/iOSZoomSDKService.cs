@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 using SampleApp;
 using Zoomios;
 
@@ -10,6 +12,7 @@ namespace ZoomSDKSampleApp.iOS
     {
         private bool inMeeting;
         private MobileRTCAuthService authService;
+        private ZoomInitStatus zoomInitStatus = ZoomInitStatus.NotStarted;
 
         public override void OnMeetingStateChange(MobileRTCMeetingState state)
         {
@@ -28,19 +31,18 @@ namespace ZoomSDKSampleApp.iOS
             }
         }
 
-        public async Task<bool> InitZoomLib(string jwtToken)
+        public async void InitZoomLib(string jwtToken)
         {
-            bool InitResult = false; ;
-
+            ZoomInitStatus = ZoomInitStatus.InProgress;
             await Device.InvokeOnMainThreadAsync(() =>
             {
-                InitResult = MobileRTC.SharedRTC.Initialize(new MobileRTCSDKInitContext
+                var initResult = MobileRTC.SharedRTC.Initialize(new MobileRTCSDKInitContext
                 {
                     EnableLog = true,
                     Domain = "https://zoom.us",
                     Locale = MobileRTC_ZoomLocale.Default
                 });
-                if (InitResult)
+                if (initResult)
                 {
                     MobileRTC.SharedRTC.SetLanguage("en");
                     authService = MobileRTC.SharedRTC.GetAuthService();
@@ -51,10 +53,15 @@ namespace ZoomSDKSampleApp.iOS
                         authService.SdkAuth();
                     }
                     Console.WriteLine($"Mobile RTC Version: {MobileRTC.SharedRTC.MobileRTCVersion()} ");
+                    
+                    ZoomInitStatus = ZoomInitStatus.Success;
+                }
+
+                else
+                {
+                    ZoomInitStatus = ZoomInitStatus.Failed;
                 }
             });
-
-            return InitResult;
         }
 
         public bool IsInitialized()
@@ -89,7 +96,6 @@ namespace ZoomSDKSampleApp.iOS
 
                 MobileRTCMeetingSettings settings = MobileRTC.SharedRTC.GetMeetingSettings();
                 settings.DisableDriveMode(true);
-                settings.EnableCustomMeeting = false;
                 //Specify your meeting options here
 
                 var meetingJoinResponse = await Device.InvokeOnMainThreadAsync(() =>
@@ -100,6 +106,18 @@ namespace ZoomSDKSampleApp.iOS
                 Console.WriteLine($"Meeting Joining Response {meetingJoinResponse}");
             }
         }
+
+        public ZoomInitStatus ZoomInitStatus
+        {
+            get => zoomInitStatus;
+            set
+            {
+                zoomInitStatus = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ZoomInitStatus)));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     class MobileDelegate : MobileRTCAuthDelegate

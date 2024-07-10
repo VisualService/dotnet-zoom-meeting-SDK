@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Runtime;
+using SampleApp.Platforms.Android;
 
 namespace SampleApp
 {
@@ -11,6 +12,6 @@ namespace SampleApp
         {
         }
 
-        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp(new DroidZoomSDKService());
     }
 }

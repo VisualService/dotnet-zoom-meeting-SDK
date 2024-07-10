@@ -1,6 +1,4 @@
-﻿using Android.Telephony.Data;
-using SampleApp.Helpers;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace SampleApp
 {
@@ -11,7 +9,7 @@ namespace SampleApp
         public MainPage()
         {
             InitializeComponent();
-            zoomSdkService = ((App)Application.Current).ZoomSDKService;
+            zoomSdkService = MauiProgram.ZoomSDKService;
             this.ZoomInitStatusLabel.Text = "ZOOM INIT STATUS: " + zoomSdkService.ZoomInitStatus;
             zoomSdkService.PropertyChanged += ZoomSdkServiceOnPropertyChanged;
         }
