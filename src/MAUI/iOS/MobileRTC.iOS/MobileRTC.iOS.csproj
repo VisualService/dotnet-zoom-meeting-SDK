@@ -6,7 +6,7 @@
         <IsBindingProject>true</IsBindingProject>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageId>ZoomMeetingSDK.DotNet.iOS</PackageId>
-        <Version>6.1.0.16235</Version>
+        <Version>6.1.0.16236</Version>
         <Title>ZoomMeetingSDK Binding for MAUI iOS</Title>
         <Authors>Visual Service, Tim Barry-Woods</Authors>
         <PackageProjectUrl>https://github.com/VisualService/dotnet-zoom-meeting-SDK</PackageProjectUrl>

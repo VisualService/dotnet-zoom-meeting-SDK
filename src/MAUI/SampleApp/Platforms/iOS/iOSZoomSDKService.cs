@@ -13,6 +13,7 @@ namespace ZoomSDKSampleApp.iOS
         private bool inMeeting;
         private MobileRTCAuthService authService;
         private ZoomInitStatus zoomInitStatus = ZoomInitStatus.NotStarted;
+        private string zoomVersion;
 
         public override void OnMeetingStateChange(MobileRTCMeetingState state)
         {
@@ -53,7 +54,7 @@ namespace ZoomSDKSampleApp.iOS
                         authService.SdkAuth();
                     }
                     Console.WriteLine($"Mobile RTC Version: {MobileRTC.SharedRTC.MobileRTCVersion()} ");
-                    
+                    ZoomVersion = MobileRTC.SharedRTC.MobileRTCVersion();
                     ZoomInitStatus = ZoomInitStatus.Success;
                 }
 
@@ -114,6 +115,16 @@ namespace ZoomSDKSampleApp.iOS
             {
                 zoomInitStatus = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ZoomInitStatus)));
+            }
+        }
+
+        public string ZoomVersion
+        {
+            get => zoomVersion;
+            private set
+            {
+                zoomVersion = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ZoomVersion)));
             }
         }
 

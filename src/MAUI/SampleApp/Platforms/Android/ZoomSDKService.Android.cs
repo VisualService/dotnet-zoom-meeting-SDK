@@ -11,7 +11,7 @@ namespace SampleApp.Platforms.Android
     /// Yes, we're mixing a service and a viewmodel. But what do you want from me, it's a sample app!
     /// </summary>
     public class DroidZoomSDKService 
-        : Java.Lang.Object, IZoomSDKService, IZoomSDKInitializeListener, INotifyPropertyChanged
+        : Java.Lang.Object, IZoomSDKService, IZoomSDKInitializeListener
     {
         private ZoomInitStatus zoomInitStatus;
 
@@ -41,6 +41,8 @@ namespace SampleApp.Platforms.Android
                 OnPropertyChanged();
             }
         }
+
+        public string ZoomVersion { get; set; }
 
         public void InitZoomLib(string token)
         {

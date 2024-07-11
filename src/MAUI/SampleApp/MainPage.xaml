@@ -28,6 +28,12 @@
                 FontSize="18"
                 HorizontalOptions="Center" />
 
+            <Label
+                x:Name="ZoomVersionLabel"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            
             <Button
                 IsEnabled="False"
                 x:Name="StartCallButton"
