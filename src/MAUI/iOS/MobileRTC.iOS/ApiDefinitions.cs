@@ -4154,10 +4154,6 @@ namespace Zoomios
 		[Export ("proximityMonitoringDisable")]
 		bool ProximityMonitoringDisable { get; set; }
 
-		// @property (assign, nonatomic) BOOL enableCustomMeeting;
-		[Export ("enableCustomMeeting")]
-		bool EnableCustomMeeting { get; set; }
-
 		// @property (assign, nonatomic) BOOL hideFeedbackButtonOnCloudWhiteboard;
 		[Export ("hideFeedbackButtonOnCloudWhiteboard")]
 		bool HideFeedbackButtonOnCloudWhiteboard { get; set; }
