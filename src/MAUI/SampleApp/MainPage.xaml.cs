@@ -1,6 +1,4 @@
-﻿using Android.Telephony.Data;
-using SampleApp.Helpers;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace SampleApp
 {
@@ -11,7 +9,7 @@ namespace SampleApp
         public MainPage()
         {
             InitializeComponent();
-            zoomSdkService = ((App)Application.Current).ZoomSDKService;
+            zoomSdkService = MauiProgram.ZoomSDKService;
             this.ZoomInitStatusLabel.Text = "ZOOM INIT STATUS: " + zoomSdkService.ZoomInitStatus;
             zoomSdkService.PropertyChanged += ZoomSdkServiceOnPropertyChanged;
         }
@@ -21,6 +19,7 @@ namespace SampleApp
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 this.ZoomInitStatusLabel.Text = "ZOOM INIT STATUS: " + zoomSdkService.ZoomInitStatus;
+                ZoomVersionLabel.Text = "Zoom Version: " + zoomSdkService.ZoomVersion;
                 StartCallButton.IsEnabled = zoomSdkService.ZoomInitStatus == ZoomInitStatus.Success;
             });
         }
@@ -38,11 +37,11 @@ namespace SampleApp
     {
       NotStarted, InProgress, Success, Failed, 
     }
-    public interface IZoomSDKService
+    public interface IZoomSDKService : INotifyPropertyChanged
     {
         ZoomInitStatus ZoomInitStatus { get; set; }
+        string ZoomVersion { get; }
 
-        event PropertyChangedEventHandler PropertyChanged;
         void InitZoomLib(string token);
         Task JoinMeeting(string meetingID, string meetingPassword, string displayName = "Zoom Demo");
     }

@@ -208,4 +208,17 @@
         <ID9 text="Pieptoon"></ID9>
         <ID10 text="Stil"></ID10>
     </Dutch>
+    <Swedish>
+        <ID0 text="Standard"></ID0>
+        <ID1 text="Porlande"></ID1>
+        <ID2 text="Diskotek"></ID2>
+        <ID3 text="Vakna"></ID3>
+        <ID4 text="Vårglädje"></ID4>
+        <ID5 text="I säven"></ID5>
+        <ID6 text="Middagssol"></ID6>
+        <ID7 text="Mjuk revelj"></ID7>
+        <ID8 text="Fred"></ID8>
+        <ID9 text="Pipande"></ID9>
+        <ID10 text="Ljudlös"></ID10>
+    </Swedish>
 </language>
