@@ -184,7 +184,6 @@ Refer to the Zoom Meeting SDK documentation on how to create a jwt
 
                 MobileRTCMeetingSettings settings = mobileRTC.GetMeetingSettings();
                 settings.DisableDriveMode(true);
-                settings.EnableCustomMeeting = false;
                 //Specify your meeting options here
 
                 Device.BeginInvokeOnMainThread(() =>
