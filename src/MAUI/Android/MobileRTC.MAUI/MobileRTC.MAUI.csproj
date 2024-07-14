@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android</TargetFramework>
+    <TargetFramework>net8.0-android</TargetFramework>
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>zoommeetingsdk.dotnet.android</PackageId>
-    <Version>5.15.10.15778</Version>
+    <Version>5.16.6.17198</Version>
     <Title>ZoomMeetingSDK Binding for MAUI Android</Title>
     <Authors>Visual Service, Adam Diament</Authors>
     <PackageProjectUrl>https://github.com/VisualService/dotnet-zoom-meeting-SDK</PackageProjectUrl>
@@ -32,19 +32,23 @@
     <PackageReference Include="Xamarin.Android.Glide" Version="4.15.1.2" />
     <PackageReference Include="Naxam.EventBus.Droid" Version="3.0.0-pre1" />
     <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.1" />
+    <!-- LOTTIE GOES HERE IN BUILD.GRADLE - WE RELY ON OUR CUSTOM PROJ-->
     <PackageReference Include="Xamarin.AndroidX.Window" Version="1.1.0.1" />
     <PackageReference Include="Xamarin.AndroidX.Window.WindowJava" Version="1.1.0.1" />
-    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.0.1" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.0.0.1" />
     <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.10.1.2" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel" Version="2.6.1.3" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel.Ktx" Version="2.6.1.3" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" Version="2.6.1.3" />
     <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.6.1" />
+    <PackageReference Include="Naxam.RxJava2.Droid" Version="2.1.2"/>
+    <PackageReference Include="Karamunting.AndroidX.DaveMorrissey.SubsamplingScaleImageView" Version="3.10.0"/>
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.11.0.3"/>
   </ItemGroup>
   <ItemGroup>
     <!-- Include the .aar files in the NuGet package output, placing them in the same directory as other package files -->
-    <None Pack="true" PackagePath="\lib\net7.0-android33.0" Include="../ZoomCommonLib.MAUI/commonlib.5.15.10.15778.aar" />
-    <None Pack="true" PackagePath="\lib\net7.0-android33.0" Include="../Lottie.Android/Jars/lottie-4.2.2.aar" />
+    <None Pack="true" PackagePath="\lib\net8.0-android34.0" Include="../ZoomCommonLib.MAUI/commonlib.5.16.6.1798.aar" />
+    <None Pack="true" PackagePath="\lib\net8.0-android34.0" Include="../Lottie.Android/Jars/lottie-4.2.2.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" PrivateAssets="all" />
