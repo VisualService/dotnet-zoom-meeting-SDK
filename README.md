@@ -1,6 +1,6 @@
 # MAUI
 
-* Android: Meeting SDK Version: 5.15.10.1778 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
+* Android: Meeting SDK Version: 5.16.6.17198 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
 
 * iOS: MobileRTC Version: 6.1.0.16235 [![iOSMAUINugetShield]][iOSMAUINugetLink]
 
