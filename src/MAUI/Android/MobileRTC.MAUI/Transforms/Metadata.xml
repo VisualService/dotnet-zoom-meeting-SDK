@@ -1,9 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
+  <remove-node path="/api/package[@name='us.zoom.proguard']/interface[@name='xz']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']"></remove-node>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingServiceListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='PhoneHelperListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='DialOutStatusListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InviteRoomSystemListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='NetworkConnectionListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='SmsListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKInitializeListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingBOControllerListener']/implements[@name='us.zoom.proguard.xz']" />
+  <!--<remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InviteRoomSystemHelper']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWebinarController']" />
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWaitingRoomController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWaitingRoomController']" />-->
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/method[@name='onSpotlightVideoChanged' and count(parameter)=1 and parameter[1][@type='java.util.List&lt;java.lang.Long&gt;']]"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='getInviteRoomSystemHelper']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='addDialOutListener']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='cancelDialOut']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='configDSCP']" />
@@ -174,7 +188,7 @@
   <remove-node path="/api/package[@name='us.zoom.zmsg.dataflow.viewbean']/class[@name='MMTextBean']"/>
   <remove-node path="/api/package[@name='us.zoom.zimmsg.mentions']/class[@name='MMMentionsListAdapter']"/>
   <remove-node path="/api/package[@name='us.zoom.zimmsg.filecontent']/class[@name='MMContentSearchFilesAdapter']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomUIService']/method[@name='setZoomUIDelegate']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomUIService']"/>
   <remove-node path="/api/package[@name='us.google.protobuf']/class[@name='LazyStringArrayList']"/>
   <remove-node path="/api/package[@name='us.google.protobuf']/class[@name='UnmodifiableLazyStringList']"/>
   <remove-node path="/api/package[@name='us.google.protobuf']/class[@name='GeneratedMessageLite']"/>
