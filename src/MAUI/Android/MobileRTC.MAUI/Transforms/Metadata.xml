@@ -1,22 +1,95 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
+
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/method[@name='onSpotlightVideoChanged' and count(parameter)=1 and parameter[1][@type='java.util.List&lt;java.lang.Long&gt;']]" name="managedName">OnSpotlightVideoChangedList</attr>
+  
+  <!-- Previous mappings -->
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']" name="managedName">IInMeetingService</attr>
+
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingRemoteController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingEncryptionController']"></remove-node>
+    <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveStreamController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveTranscriptionController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingQAController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingShareController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingSmartSummaryController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWaitingRoomController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWebinarController']"></remove-node>
+
+  <!-- <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingRemoteController']" name="managedName">IInMeetingRemoteController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationController']" name="managedName">IInMeetingAnnotationController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingEncryptionController']" name="managedName">IInMeetingEncryptionController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveStreamController']" name="managedName">IInMeetingLiveStreamController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveTranscriptionController']" name="managedName">IInMeetingLiveTranscriptionController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingQAController']" name="managedName">IInMeetingQAController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingShareController']" name="managedName">IInMeetingShareController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingSmartSummaryController']" name="managedName">IInMeetingSmartSummaryController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWaitingRoomController']" name="managedName">IInMeetingWaitingRoomController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWebinarController']" name="managedName">IInMeetingWebinarController</attr> -->
+
+  <!-- New mappings for nested interfaces -->
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationController.InMeetingAnnotationListener']" name="managedName">IInMeetingAnnotationControllerInMeetingAnnotationListener</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingEncryptionController.InMeetingEncryptionControllerListener']" name="managedName">IInMeetingEncryptionControllerInMeetingEncryptionControllerListener</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveStreamController.InMeetingLiveStreamListener']" name="managedName">IInMeetingLiveStreamControllerInMeetingLiveStreamListener</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveTranscriptionController.InMeetingLiveTranscriptionListener']" name="managedName">IInMeetingLiveTranscriptionControllerInMeetingLiveTranscriptionListener</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingQAController.InMeetingQAListener']" name="managedName">IInMeetingQAControllerInMeetingQAListener</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingRemoteController.InMeetingRemoteControlListener']" name="managedName">IInMeetingRemoteControllerInMeetingRemoteControlListener</attr>
+
+  <!-- Fix for invalid base interfaces -->
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationController.InMeetingAnnotationListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingEncryptionController.InMeetingEncryptionControllerListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveStreamController.InMeetingLiveStreamListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveTranscriptionController.InMeetingLiveTranscriptionListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingQAController.InMeetingQAListener']/implements[@name='us.zoom.proguard.xz']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingRemoteController.InMeetingRemoteControlListener']/implements[@name='us.zoom.proguard.xz']" />
+
+  <!-- Fix for invalid return types -->
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingAnnotationController']" name="managedReturn">US.Zoom.Sdk.IInMeetingAnnotationController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingEncryptionController']" name="managedReturn">US.Zoom.Sdk.IInMeetingEncryptionController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingLiveStreamController']" name="managedReturn">US.Zoom.Sdk.IInMeetingLiveStreamController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingLiveTranscriptionController']" name="managedReturn">US.Zoom.Sdk.IInMeetingLiveTranscriptionController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingQAController']" name="managedReturn">US.Zoom.Sdk.IInMeetingQAController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingRemoteController']" name="managedReturn">US.Zoom.Sdk.IInMeetingRemoteController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingWaitingRoomController']" name="managedReturn">US.Zoom.Sdk.IInMeetingWaitingRoomController</attr>
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='IInMeetingService']/method[@name='GetInMeetingWebinarController']" name="managedReturn">US.Zoom.Sdk.IInMeetingWebinarController</attr>
+
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingAnnotationController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingEncryptionController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingLiveStreamController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingLiveTranscriptionController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingQAController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingRemoteController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingShareController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingSmartSummaryController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingWaitingRoomController']" />
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingWebinarController']" />
+  
+  <!-- Fix for MeetingInviteMenuItem.IMeetingInviteAction -->
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingInviteMenuItem.IMeetingInviteAction']" name="managedName">IMeetingInviteAction</attr>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingInviteMenuItem.IMeetingInviteAction']/implements[@name='us.zoom.sdk.IMeetingInviteAction']" />
+
+  <attr path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']" name="visibility">public</attr>
+
+  <!-- Remove the duplicate OnNotificationServiceStatusHandler -->
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']/method[@name='onNotificationServiceStatus']" />
+  
   <remove-node path="/api/package[@name='us.zoom.proguard']/interface[@name='xz']"></remove-node>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.proguard']/class[@name='mh1']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWebinarController']"></remove-node>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWaitingRoomController']"></remove-node>
+  
+  <!--<remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']"></remove-node>-->
+  
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingServiceListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='PhoneHelperListener']/implements[@name='us.zoom.proguard.xz']" />
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='DialOutStatusListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InviteRoomSystemListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='NetworkConnectionListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='SmsListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKInitializeListener']/implements[@name='us.zoom.proguard.xz']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingBOControllerListener']/implements[@name='us.zoom.proguard.xz']" />
-  <!--<remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InviteRoomSystemHelper']" />
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWebinarController']" />
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWaitingRoomController']" />-->
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationListener']/implements[@name='us.zoom.proguard.xz']" />
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/method[@name='onSpotlightVideoChanged' and count(parameter)=1 and parameter[1][@type='java.util.List&lt;java.lang.Long&gt;']]"></remove-node>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='getInviteRoomSystemHelper']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='addDialOutListener']" />
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='cancelDialOut']" />
