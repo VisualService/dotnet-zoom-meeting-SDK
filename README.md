@@ -1,6 +1,6 @@
 # MAUI
 
-* Android: Meeting SDK Version: 5.15.10.1778 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
+* Android: Meeting SDK Version: 5.16.6.17198 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
 
 * iOS: MobileRTC Version: 6.1.0.16235 [![iOSMAUINugetShield]][iOSMAUINugetLink]
 
@@ -38,7 +38,23 @@ Refer to the Zoom Meeting SDK documentation on how to create a jwt
 ```
 
 ## Android Gotchas
-* Requires your android app to compile for Android 12
+
+* My consuming app required the following nuget versions
+```
+    <!-- Android Only Nuget Packages -->
+    <ItemGroup Condition="'$(IsAndroid)' AND '$(Configuration)'!='Test'">
+      <PackageReference Include="zoommeetingsdk.dotnet.android" Version="5.16.6.17198" />
+      <PackageReference Include="Xamarin.AndroidX.Security.SecurityCrypto" Version="1.1.0.1-alpha06" />
+      <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.1" />
+      <PackageReference Include="Xamarin.Google.Crypto.Tink.Android" Version="1.11.0.1" />
+      <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.1.1" />
+      <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.6"/>
+      <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5"/>
+
+    </ItemGroup>
+
+```
+* Requires your android app to compile for Android 13
 
 * The csproj of your android app needs a particular version of AndroidX.Core which is out of the bounds of the latest Xamarin.Forms version. It is likely to remain so with MAUI here now, and XF development at a minimum from Microsoft. I haven't noticed any negative consequences in my XF app, but it is something to watch out for in your implementation.
 
