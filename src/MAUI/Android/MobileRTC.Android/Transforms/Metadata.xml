@@ -196,20 +196,20 @@
   <remove-node path="/api/package[@name='us.zoom.presentmode.viewer.fragment.delegate']/class[@name='BaseLifecycleDelegate']"/>
   <remove-node path="/api/package[@name='us.zoom.proguard']/class[@name='mh1']"/>
   <remove-node path="/api/package[@name='us.zoom.proguard']/interface[@name='xz']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='DialOutStatusListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='DialOutStatusListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationController.InMeetingAnnotationListener']/implements[@name='us.zoom.proguard.xz']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingBOControllerListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingAnnotationController.InMeetingAnnotationListener']/implements[@name='us.zoom.proguard.y10']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingBOControllerListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingEncryptionController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingEncryptionController.InMeetingEncryptionControllerListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingEncryptionController.InMeetingEncryptionControllerListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveStreamController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveStreamController.InMeetingLiveStreamListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveStreamController.InMeetingLiveStreamListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveTranscriptionController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveTranscriptionController.InMeetingLiveTranscriptionListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingLiveTranscriptionController.InMeetingLiveTranscriptionListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingQAController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingQAController.InMeetingQAListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingQAController.InMeetingQAListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingRemoteController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingRemoteController.InMeetingRemoteControlListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingRemoteController.InMeetingRemoteControlListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingAnnotationController']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingEncryptionController']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingLiveStreamController']"/>
@@ -220,12 +220,12 @@
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingSmartSummaryController']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingWaitingRoomController']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingWebinarController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingShareController']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingSmartSummaryController']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWaitingRoomController']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingWebinarController']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InviteRoomSystemListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InviteRoomSystemListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/field[@name='USER_TYPE_API_USER']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/field[@name='USER_TYPE_FACEBOOK']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/field[@name='USER_TYPE_GOOGLE_OAUTH']"/>
@@ -243,12 +243,12 @@
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='isDialOutInProgress']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='isDialoutSupported']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingService']/method[@name='removeDialOutListener']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingServiceListener']/implements[@name='us.zoom.proguard.xz']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='NetworkConnectionListener']/implements[@name='us.zoom.proguard.xz']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='PhoneHelperListener']/implements[@name='us.zoom.proguard.xz']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='SmsListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='MeetingServiceListener']/implements[@name='us.zoom.proguard.y10']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='NetworkConnectionListener']/implements[@name='us.zoom.proguard.y10']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='PhoneHelperListener']/implements[@name='us.zoom.proguard.y10']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='SmsListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKAuthenticationListener']/method[@name='onNotificationServiceStatus']"/>
-  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKInitializeListener']/implements[@name='us.zoom.proguard.xz']"/>
+  <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomSDKInitializeListener']/implements[@name='us.zoom.proguard.y10']"/>
   <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='ZoomUIService']"/>
   <remove-node path="/api/package[@name='us.zoom.switchscene.datasource']/class[@name='BaseActivityLifecycleDataSorce']"/>
   <remove-node path="/api/package[@name='us.zoom.switchscene.notification']/class[@name='SceneSwitchedListenerManager']"/>
@@ -270,4 +270,20 @@
   <remove-node path="/api/package[@name='us.zoom.zmsg.view.adapter.composeBox.adapter']/class[@name='CustomizeShortcutsAdapter']"/>
   <remove-node path="/api/package[@name='us.zoom.zmsg.view.mm']/class[@name='MMMessageItem']"/>
   <remove-node path="/api/package[@name='us.zoom.zmsg.view.mm']/class[@name='MMThreadsRecyclerView']"/>
+  
+  
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@diname='DisclaimerUiDataSource']/method[@name='a' and count(parameter)=0]">NewA</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='b' and count(parameter)=0]">NewB</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='c' and count(parameter)=0]">NewC</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='d' and count(parameter)=0]">NewD</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='e' and count(parameter)=0]">NewE</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='f' and count(parameter)=0]">NewF</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='g' and count(parameter)=0]">NewG</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='h' and count(parameter)=0]">NewH</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='i' and count(parameter)=0]">NewI</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='j' and count(parameter)=0]">NewJ</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.meeting.advisory.datasource']/class[@name='DisclaimerUiDataSource']/method[@name='k' and count(parameter)=0]">NewK</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.captions.ui']/class[@name='ZmCaptionsSettingViewModel']/method[@name='f' and count(parameter)=0]">NewF</attr>
+  <attr name="managedName" path="/api/package[@name='us.zoom.captions.ui']/class[@name='ZmCaptionsSettingViewModel']/method[@name='v' and count(parameter)=0]">NewV</attr>
 </metadata>
+
