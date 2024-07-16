@@ -6,16 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>zoommeetingsdk.dotnet.android</PackageId>
-    <Version>5.16.6.17198</Version>
+    <Version>5.17.0.18337</Version>
     <Title>ZoomMeetingSDK Binding for MAUI Android</Title>
     <Authors>Visual Service, Adam Diament</Authors>
     <PackageProjectUrl>https://github.com/VisualService/dotnet-zoom-meeting-SDK</PackageProjectUrl>
+    <AndroidBoundInterfacesContainTypes>false</AndroidBoundInterfacesContainTypes>
+    <AndroidBoundInterfacesContainConstants>false</AndroidBoundInterfacesContainConstants>
+    <AndroidBoundInterfacesContainStaticAndDefaultInterfaceMethods>false</AndroidBoundInterfacesContainStaticAndDefaultInterfaceMethods>
+    <AndroidR8JarPath>../R8/r8.jar</AndroidR8JarPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>all</IncludeAssets>
-      <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.Security.SecurityCrypto" Version="1.1.0.1-alpha06" />
     <PackageReference Include="Xamarin.Google.Crypto.Tink.Android" Version="1.10.0" />
@@ -44,23 +47,13 @@
     <PackageReference Include="Naxam.RxJava2.Droid" Version="2.1.2"/>
     <PackageReference Include="Karamunting.AndroidX.DaveMorrissey.SubsamplingScaleImageView" Version="3.10.0"/>
     <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.11.0.3"/>
+    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.10"/>
   </ItemGroup>
   <ItemGroup>
-    <!-- Include the .aar files in the NuGet package output, placing them in the same directory as other package files -->
-    <None Pack="true" PackagePath="\lib\net8.0-android34.0" Include="../ZoomCommonLib.MAUI/commonlib.5.16.6.1798.aar" />
+    <!-- Include the .aar files from the referenced projects in the NuGet package output, placing them in the same directory as other package files -->
     <None Pack="true" PackagePath="\lib\net8.0-android34.0" Include="../Lottie.Android/Jars/lottie-4.2.2.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj" PrivateAssets="all" />
   </ItemGroup>
-<!-- The next two sections ensure that the dlls of the referenced projects are compiled into the nuget package -->
-  <!-- <PropertyGroup>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
-  </PropertyGroup>
-  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
-    <ItemGroup>
-      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
-    </ItemGroup>
-  </Target> -->
 </Project>

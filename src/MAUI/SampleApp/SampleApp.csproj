@@ -7,7 +7,7 @@
 		<OutputType>Exe</OutputType>
 		<RootNamespace>SampleApp</RootNamespace>
 		<UseMaui>true</UseMaui>
-		<MauiVersion>8.0.40</MauiVersion>
+		<MauiVersion>8.0.70</MauiVersion>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
@@ -55,36 +55,17 @@
 	</ItemGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-    <ProjectReference Include="..\Android\ZoomCommonLib.MAUI\ZoomCommonLib.MAUI.csproj" />
     <ProjectReference Include="..\Android\Lottie.Android\Lottie.Android.csproj" />
     <ProjectReference Include="..\Android\MobileRTC.MAUI\MobileRTC.MAUI.csproj" />
     <PackageReference Include="Xamarin.AndroidX.Security.SecurityCrypto" Version="1.1.0.1-alpha06" />
-    <PackageReference Include="Xamarin.Google.Crypto.Tink.Android" Version="1.10.0" />
-    <PackageReference Include="Xam.Plugins.Android.ExoPlayer.Core" Version="2.19.1" />
-    <PackageReference Include="Xam.Plugins.Android.ExoPlayer.UI" Version="2.19.1" />
-    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.14" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.3" />
-    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.6" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.9.0.2" />
-    <PackageReference Include="XAB.FlexboxLayout" Version="3.0.0.2" /> <!-- Check this one-->
-    <PackageReference Include="Xamarin.AndroidX.MultiDex" Version="2.0.1.19" />
-    <PackageReference Include="GoogleGson" Version="2.10.1.4" />
-    <PackageReference Include="Xamarin.Android.Glide.Annotations" Version="4.15.1.2" />
-    <PackageReference Include="Xamarin.Android.Glide" Version="4.15.1.2" />
-    <PackageReference Include="Naxam.EventBus.Droid" Version="3.0.0-pre1" />
-    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.1" />
-    <!--LOTTIE GOES HERE IN BUILD.GRADLE   -->
-    <PackageReference Include="Xamarin.AndroidX.Window" Version="1.1.0.1" />
-    <PackageReference Include="Xamarin.AndroidX.Window.WindowJava" Version="1.1.0.1" />
-    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.0.1" />
-    <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.10.1.2" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel" Version="2.6.1.3" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel.Ktx" Version="2.6.1.3" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" Version="2.6.1.3" />
-    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.1" />
+    <PackageReference Include="Xamarin.Google.Crypto.Tink.Android" Version="1.11.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.1.1" />
+    <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.6"/>
+    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5"/>
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-	<ProjectReference Include="..\iOS\MobileRTC.iOS\MobileRTC.iOS.csproj" />
+	  <ProjectReference Include="..\iOS\MobileRTC.iOS\MobileRTC.iOS.csproj" />
   </ItemGroup>
 
 </Project>
