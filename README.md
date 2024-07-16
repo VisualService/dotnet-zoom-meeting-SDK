@@ -26,23 +26,24 @@ PRs are no longer accepted since Microsoft no longer support Xamarin Forms as of
  
 ## SAMPLE APP (For both MAUI and XF)
 
-Uses the awesome [mobile.buildtools](https://mobilebuildtools.com/config/appsettings/configuration/) to load in secret values without having to commit them to source control.You need a file called appsettings.json at the root of your repo (in the sample app, at the route of either the XF or MAUI folder)
-Refer to the Zoom Meeting SDK documentation on how to create a jwt
+To join a call -fill in your app settings file with these zoom details - (do not commit your changes)*
 
-```json
+```c#
+public class AppSettings
 {
-    "ZOOM_JWT":"YOUR_JWT_HERE",
-    "ZOOM_MEETING_NUMBER":"YOUR_MEETING_NO_HERE",
-    "ZOOM_MEETING_PASSWORD":"YOUR_PW_HERE"
+    public const string ZOOM_MEETING_NUMBER = "";
+    public const string ZOOM_MEETING_PASSWORD = "";
+    public const string ZOOM_JWT = "";
 }
 ```
 
+* We used to use mobilebuildtools for this, and have these details in an appsettings.json file excluded from source control, but the lib does not work for .net 8 yet, so we have fallen back to this solution for now
+
 ## Android Gotchas
 
-* My consuming app required the following nuget versions
+* Your consuming app requires the following nuget versions to be explicitly set for android
 ```
     <!-- Android Only Nuget Packages -->
-    <ItemGroup Condition="'$(IsAndroid)' AND '$(Configuration)'!='Test'">
       <PackageReference Include="zoommeetingsdk.dotnet.android" Version="5.17.0.18337" />
       <PackageReference Include="Xamarin.AndroidX.Security.SecurityCrypto" Version="1.1.0.1-alpha06" />
       <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.1" />
@@ -50,9 +51,6 @@ Refer to the Zoom Meeting SDK documentation on how to create a jwt
       <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.1.1" />
       <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.6"/>
       <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.5"/>
-
-    </ItemGroup>
-
 ```
 * Requires your android app to compile for Android 14
 

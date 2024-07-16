@@ -2,7 +2,7 @@ namespace SampleApp;
 
 public class AppSettings
 {
-    internal const string ZOOM_MEETING_NUMBER = "";
-    internal const string ZOOM_MEETING_PASSWORD = "";
-    internal const string ZOOM_JWT = "";
+    public const string ZOOM_MEETING_NUMBER = "";
+    public const string ZOOM_MEETING_PASSWORD = "";
+    public const string ZOOM_JWT = "";
 }
