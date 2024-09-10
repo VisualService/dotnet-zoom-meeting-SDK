@@ -2,7 +2,7 @@ namespace SampleApp;
 
 public class AppSettings
 {
-    public const string ZOOM_MEETING_NUMBER = "81404827577";
-    public const string ZOOM_MEETING_PASSWORD = "qKWU3mSs0xZ99g1AOa7ZRDc7PWluar.1";
-    public const string ZOOM_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZGtLZXkiOiI5eFFIN3NDcWhHM1NoSUZ4STZhcTFmNHRDM21ZY1ZBcW9lWjciLCJhcHBLZXkiOiI5eFFIN3NDcWhHM1NoSUZ4STZhcTFmNHRDM21ZY1ZBcW9lWjciLCJyb2xlIjoiMCIsImlhdCI6MTcyMTE0MzE3MiwiZXhwIjoxNzIxMTUwMzcyLCJ0b2tlbkV4cCI6MTcyMTE1MDM3Mn0.CsBz2Z-7K4Y10B4ACNYf6eFwKAgy8wubbkwe0ErYav0";
+    public const string ZOOM_MEETING_NUMBER = "enter_meetingno";
+    public const string ZOOM_MEETING_PASSWORD = "enter_pw";
+    public const string ZOOM_JWT = "enter_jwt";
 }
