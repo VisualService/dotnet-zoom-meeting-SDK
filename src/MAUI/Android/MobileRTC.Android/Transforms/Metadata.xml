@@ -316,6 +316,8 @@
     <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingSmartSummaryController']"/>
     <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingWaitingRoomController']"/>
     <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingWebinarController']"/>
+    <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingCloudRecordController']"/>
+    <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingService']/method[@name='getInMeetingAICompanionController']"/>
     <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingServiceListener']/implements[@name='us.zoom.proguard.x60']"/>
     <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingShareController']"/>
     <remove-node path="/api/package[@name='us.zoom.sdk']/interface[@name='InMeetingSmartSummaryController']"/>
