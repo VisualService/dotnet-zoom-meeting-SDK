@@ -1,6 +1,6 @@
 # MAUI
 
-* Android: Meeting SDK Version: 5.17.0.18337 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
+* Android: Meeting SDK Version: 6.1.1.22760 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
 
 * iOS: MobileRTC Version: 6.1.0.16235 [![iOSMAUINugetShield]][iOSMAUINugetLink]
 
@@ -15,7 +15,7 @@ PRs are no longer accepted since Microsoft no longer support Xamarin Forms as of
  
 [AndroidXFNugetLink]: https://www.nuget.org/packages/VisualService.Xamarin.Android.ZoomSDK/5.15.10.15778
 [AndroidXFNugetShield]: https://img.shields.io/nuget/v/VisualService.Xamarin.Android.ZoomSDK.svg
-[AndroidMauiNugetLink]: https://www.nuget.org/packages/zoommeetingsdk.dotnet.android/5.15.10.15778
+[AndroidMauiNugetLink]: https://www.nuget.org/packages/zoommeetingsdk.dotnet.android/6.1.1.22761
 [AndroidMauiNugetShield]: https://img.shields.io/nuget/v/zoommeetingsdk.dotnet.android.svg
 [iOSMAUINugetLink]: https://www.nuget.org/packages/ZoomMeetingSDK.DotNet.iOS/5.15.7.9685
 [iOSMAUINugetShield]: https://img.shields.io/nuget/v/ZoomMeetingSDK.DotNet.iOS.svg
