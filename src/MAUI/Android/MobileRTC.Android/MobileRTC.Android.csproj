@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0-android;net9.0-android</TargetFrameworks>
+    <TargetFrameworks>net9.0-android</TargetFrameworks>
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>zoommeetingsdk.dotnet.android</PackageId>
-    <Version>6.1.1.22764</Version>
+    <Version>6.1.1.22770</Version>
     <Title>ZoomMeetingSDK Binding for MAUI Android</Title>
     <Authors>Visual Service, Adam Diament</Authors>
     <PackageProjectUrl>https://github.com/VisualService/dotnet-zoom-meeting-SDK</PackageProjectUrl>
@@ -69,18 +69,13 @@
   <Target Name="AddLottieAar" BeforeTargets="GenerateNuspec">
     <ItemGroup>
       <_PackageFiles Include="../Lottie.Android/Jars/lottie-4.2.2.aar">
-        <PackagePath>lib/net8.0-android34.0</PackagePath>
-        <Visible>false</Visible>
-        <BuildAction>None</BuildAction>
-      </_PackageFiles>
-      <_PackageFiles Include="../Lottie.Android/Jars/lottie-4.2.2.aar">
         <PackagePath>lib/net9.0-android35.0</PackagePath>
         <Visible>false</Visible>
         <BuildAction>None</BuildAction>
       </_PackageFiles>
     </ItemGroup>
   </Target>
-  <PropertyGroup>
+    <PropertyGroup>
     <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
 </Project>

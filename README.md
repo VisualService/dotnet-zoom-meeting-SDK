@@ -5,7 +5,9 @@ You can use this library to integrate the Zoom Meeting SDK into your MAUI app fo
 We try to keep the meeting SDK version above Zoom's [minimum supported version](https://developers.zoom.us/docs/meeting-sdk/minimum-version)
 
 ## Current Versions:
-MAUI Android: Meeting SDK Version: 6.1.1.22760 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
+MAUI Android: Meeting SDK Version: 6.1.1.22770 [![AndroidMauiNugetShield]][AndroidMauiNugetLink] 
+
+(Note - I had to drop .net 8 support in the latest version and go .net 9 only, because the nuget package got too big targetting both versions. I'm sure there is a way to use shared files in the package output, but I don't have the time to research it. A PR is welcome if someone needs .net 8 support)
 
 MAUI iOS: MobileRTC Version: 6.1.0.16235 [![iOSMAUINugetShield]][iOSMAUINugetLink]
 
@@ -44,7 +46,7 @@ There are hundreds of resource files, so I am including a replace utility consol
 
 </details>
 
-[AndroidMauiNugetLink]: https://www.nuget.org/packages/zoommeetingsdk.dotnet.android/6.1.1.22761
+[AndroidMauiNugetLink]: https://www.nuget.org/packages/zoommeetingsdk.dotnet.android/6.1.1.22750
 [AndroidMauiNugetShield]: https://img.shields.io/nuget/v/zoommeetingsdk.dotnet.android.svg
 [iOSMAUINugetLink]: https://www.nuget.org/packages/ZoomMeetingSDK.DotNet.iOS/5.15.7.9685
 [iOSMAUINugetShield]: https://img.shields.io/nuget/v/ZoomMeetingSDK.DotNet.iOS.svg
