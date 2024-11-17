@@ -19,7 +19,11 @@
     <!--<JavaSourceJar Include="JavaDocs\*.jar" />-->
     <TransformFile Include="Transforms\*.xml" />
     <Compile Include="Additions\*.cs" />
+    <None Include="Jars\lottie-4.2.2.aar" />
     <None Include="readme.txt" pack="true" PackagePath="." />
     <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Jars\AboutJars.txt" />
   </ItemGroup>
 </Project>
