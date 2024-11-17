@@ -64,12 +64,22 @@
     <PackageReference Include="Xamarin.AndroidX.DataBinding.ViewBinding" Version="8.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Include the .aar files from the referenced projects in the NuGet package output, placing them in the same directory as other package files -->
-    <None Pack="true" PackagePath="\lib\net9.0-android35.0" Include="../Lottie.Android/Jars/lottie-4.2.2.aar" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" PrivateAssets="all" />
   </ItemGroup>
+  <Target Name="AddLottieAar" BeforeTargets="GenerateNuspec">
+    <ItemGroup>
+      <_PackageFiles Include="../Lottie.Android/Jars/lottie-4.2.2.aar">
+        <PackagePath>lib/net8.0-android34.0</PackagePath>
+        <Visible>false</Visible>
+        <BuildAction>None</BuildAction>
+      </_PackageFiles>
+      <_PackageFiles Include="../Lottie.Android/Jars/lottie-4.2.2.aar">
+        <PackagePath>lib/net9.0-android35.0</PackagePath>
+        <Visible>false</Visible>
+        <BuildAction>None</BuildAction>
+      </_PackageFiles>
+    </ItemGroup>
+  </Target>
   <PropertyGroup>
     <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
